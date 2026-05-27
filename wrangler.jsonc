@@ -1,14 +1,17 @@
-// Cloudflare Pages configuration
-// Build command dikonfigurasi di dashboard Cloudflare Pages:
-//   Build command: bun run build
-//   Build output: dist
-//   Framework preset: Astro
+// Cloudflare Pages — static site deployment
 //
-// Manual deploy:
-//   bunx wrangler pages deploy dist/ --project-name=amalshalih-id
+// Build & deploy via Git (recommended):
+//   Push ke main → auto-deploy via Cloudflare dashboard
+//   (Connect GitHub repo di dashboard Cloudflare Pages)
+//
+// Manual deploy (cadangan):
+//   bunx wrangler pages deploy dist/ --project-name=amalshalih
+//
+// Jika suatu saat migrasi ke Workers + SSR:
+//   1. Install @astrojs/cloudflare adapter
+//   2. Ubah output ke 'server' di astro.config.mjs
+//   3. Ganti config ini dengan format Workers
 {
-	"$schema": "https://raw.githubusercontent.com/cloudflare/workers-sdk/main/packages/wrangler/config-schema.json",
 	"name": "amalshalih",
-	"compatibility_date": "2026-05-27",
 	"pages_build_output_dir": "dist"
 }
