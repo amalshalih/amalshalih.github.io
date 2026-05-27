@@ -4,7 +4,39 @@ import PageHeader from '../components/sections/PageHeader.astro';
 import Card from '../components/ui/Card.astro';
 import Button from '../components/ui/Button.astro';
 import Icon from '../components/ui/Icon.astro';
+import { getBankDonasi, getSiteSettings } from '../lib/sanity/client';
 import { DONATION, CONTACT } from '../data/site';
+
+// Hybrid: try Sanity first, fall back to local data
+let banks = DONATION.banks.map(b => ({ ...b }));
+let qrisImage = DONATION.qrisImage;
+let linktreeUrl = DONATION.linktree.url;
+let contactPhone = CONTACT.phone;
+let contactWhatsapp = CONTACT.whatsapp;
+
+try {
+  const [sanityBanks, sanitySettings] = await Promise.all([
+    getBankDonasi(),
+    getSiteSettings(),
+  ]);
+
+  if (sanityBanks && sanityBanks.length > 0) {
+    banks = sanityBanks.map(b => ({
+      name: b.bankName,
+      fullName: b.bankName,
+      accountNumber: b.accountNumber,
+      accountName: b.accountName,
+    }));
+  }
+
+  if (sanitySettings) {
+    if (sanitySettings.qrisImageUrl) qrisImage = sanitySettings.qrisImageUrl;
+    if (sanitySettings.linktree) linktreeUrl = sanitySettings.linktree;
+    if (sanitySettings.phone) contactPhone = sanitySettings.phone;
+  }
+} catch {
+  // Sanity unavailable — use local data silently
+}
 ---
 
 <BaseLayout
@@ -30,7 +62,7 @@ import { DONATION, CONTACT } from '../data/site';
 				<h2 class="text-xl font-bold text-warm-900">Transfer Bank</h2>
 				<p class="mt-2 text-sm text-warm-700">Salurkan donasi melalui rekening resmi Yayasan ASIB di bawah ini.</p>
 				<div class="mt-6 space-y-4">
-					{DONATION.banks.map((bank) => (
+					{banks.map((bank) => (
 						<div class="rounded-xl border border-primary-100 bg-white p-4 transition-colors hover:border-primary-300 hover:bg-primary-50/30">
 							<div class="mb-3 flex items-center gap-2">
 								<div class="rounded-lg bg-primary-600 px-3 py-1.5 text-xs font-bold text-white">{bank.name}</div>
@@ -43,7 +75,7 @@ import { DONATION, CONTACT } from '../data/site';
 				</div>
 				<div class="mt-4 rounded-lg bg-gold-50 p-4 text-sm text-gold-800">
 					<strong>Konfirmasi donasi:</strong> Setelah transfer, silakan kirim bukti
-					ke WhatsApp <strong>{CONTACT.phone}</strong>.
+					ke WhatsApp <strong>{contactPhone}</strong>.
 				</div>
 			</Card>
 
@@ -58,7 +90,7 @@ import { DONATION, CONTACT } from '../data/site';
 				</p>
 				<div class="mt-6 flex justify-center">
 					<img
-						src={DONATION.qrisImage}
+						src={qrisImage}
 						alt="QRIS Yayasan Amal Shalih Insan Bantul"
 						class="h-64 w-auto max-w-full rounded-xl border border-primary-100"
 						width="778"
@@ -82,7 +114,7 @@ import { DONATION, CONTACT } from '../data/site';
 				</p>
 				<div class="mt-6 space-y-4">
 					<a
-						href={DONATION.linktree.url}
+						href={linktreeUrl}
 						target="_blank"
 						rel="noopener noreferrer"
 						class="flex items-center gap-3 rounded-xl border border-primary-200 bg-white p-4 transition-colors hover:border-primary-400 hover:bg-primary-50"
@@ -91,7 +123,7 @@ import { DONATION, CONTACT } from '../data/site';
 							<Icon name="external-link" size={6} />
 						</div>
 						<div>
-							<p class="font-semibold text-warm-900">{DONATION.linktree.url.replace('https://', '')}</p>
+							<p class="font-semibold text-warm-900">{linktreeUrl.replace('https://', '')}</p>
 							<p class="text-xs text-warm-700">Semua program donasi dalam satu tautan</p>
 						</div>
 						<Icon name="external-link" size={5} class="ml-auto text-warm-500" />
