@@ -39,7 +39,7 @@
 	--color-warm-900: #1c1917;
 
 	--font-sans: 'Inter', 'Noto Sans', ui-sans-serif, system-ui, sans-serif;
-	--font-display: 'Inter', 'Noto Sans', ui-sans-serif, system-ui, sans-serif;
+	--font-display: 'Plus Jakarta Sans', 'Inter', 'Noto Sans', ui-sans-serif, system-ui, sans-serif;
 }
 
 @layer base {

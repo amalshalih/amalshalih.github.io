@@ -15,6 +15,7 @@ import Icon from '../components/ui/Icon.astro';
 		label="Program"
 		title="Program &amp; Kegiatan"
 		description="Tiga pilar pengabdian kami: Pendidikan Islam, Keagamaan, dan Sosial Kemanusiaan."
+		gradient="tr"
 	/>
 
 	<!-- Pendidikan -->
@@ -29,7 +30,7 @@ import Icon from '../components/ui/Icon.astro';
 			</div>
 		</div>
 
-		<div class="grid gap-6 lg:grid-cols-3">
+		<div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
 			<Card variant="default" class="p-6">
 				<h3 class="text-xl font-bold text-primary-700">PKBM Bina Insan Mulia</h3>
 				<span class="mt-2 inline-block rounded-full bg-primary-50 px-3 py-1 text-xs font-medium text-primary-600">Pendidikan Diniyah</span>
@@ -86,6 +87,15 @@ import Icon from '../components/ui/Icon.astro';
 					</div>
 				</div>
 			</Card>
+
+			<Card variant="default" class="p-6">
+				<h3 class="text-xl font-bold text-primary-700">Bimbel Proton</h3>
+				<span class="mt-2 inline-block rounded-full bg-primary-50 px-3 py-1 text-xs font-medium text-primary-600">Bimbingan Belajar</span>
+				<p class="mt-4 text-sm leading-relaxed text-warm-700">
+					Program bimbingan belajar untuk anak-anak binaan yayasan. Membantu
+					meningkatkan prestasi akademik dan pemahaman agama secara terpadu.
+				</p>
+			</Card>
 		</div>
 	</section>
 
@@ -119,9 +129,10 @@ import Icon from '../components/ui/Icon.astro';
 				</Card>
 				<Card variant="default" class="p-6">
 					<h3 class="font-bold text-warm-900">Zakat, Infaq &amp; Shadaqah</h3>
+					<span class="mt-2 inline-block rounded-full bg-primary-50 px-3 py-1 text-xs font-medium text-primary-600">LAZIS ASIB</span>
 					<p class="mt-2 text-sm leading-relaxed text-warm-700">
-						Menerima dan menyalurkan ZIS kepada mustahiq yang berhak. Termasuk zakat fitrah
-						pada bulan Ramadhan.
+						Dikelola oleh <strong>LAZIS ASIB</strong> (Lembaga Amil Zakat Infaq Shadaqah), menerima dan
+						menyalurkan ZIS kepada mustahiq yang berhak. Termasuk zakat fitrah pada bulan Ramadhan.
 					</p>
 				</Card>
 				<Card variant="default" class="p-6">
@@ -160,7 +171,7 @@ import Icon from '../components/ui/Icon.astro';
 			</div>
 		</div>
 
-		<div class="grid gap-6 lg:grid-cols-3">
+		<div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
 			<Card variant="overflow">
 				<div class="bg-primary-600 p-4 text-white">
 					<h3 class="text-lg font-bold text-white">Santunan Sembako Bulanan</h3>
@@ -201,6 +212,34 @@ import Icon from '../components/ui/Icon.astro';
 						Menerima sedekah berupa <strong>barang bekas layak jual</strong>.
 						Kami siap menjemput donasi atau Anda bisa menyetorkan langsung ke kantor.
 						Hasil penjualan untuk membiayai kegiatan yayasan.
+					</p>
+				</div>
+			</Card>
+
+			<Card variant="overflow">
+				<div class="bg-primary-600 p-4 text-white">
+					<h3 class="text-lg font-bold text-white">Panti Asuhan</h3>
+				</div>
+				<div class="p-6">
+					<div class="mb-3 text-3xl font-extrabold text-primary-600" aria-hidden="true">🏠</div>
+					<p class="mt-3 text-sm leading-relaxed text-warm-700">
+						Panti asuhan bagi <strong>anak yatim dan dhuafa</strong> yang dikelola secara profesional.
+						Program pembinaan meliputi pendidikan formal, tahfidz, dan life skills untuk
+						mempersiapkan masa depan mereka.
+					</p>
+				</div>
+			</Card>
+
+			<Card variant="overflow">
+				<div class="bg-primary-600 p-4 text-white">
+					<h3 class="text-lg font-bold text-white">Relawan AMMA</h3>
+				</div>
+				<div class="p-6">
+					<div class="mb-3 text-3xl font-extrabold text-primary-600" aria-hidden="true">🤝</div>
+					<p class="mt-3 text-sm leading-relaxed text-warm-700">
+						Jaringan relawan yang siap bergerak dalam setiap kegiatan sosial dan kemanusiaan
+						yayasan. Terbuka bagi masyarakat umum yang ingin berkontribusi langsung
+						dalam aksi-aksi kebaikan.
 					</p>
 				</div>
 			</Card>
