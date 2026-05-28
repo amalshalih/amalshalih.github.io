@@ -80,23 +80,23 @@
 }
 
 @utility icon-box-sm {
-	@apply inline-flex rounded-lg bg-primary-50 p-2 text-primary-600;
+	@apply inline-flex rounded-lg sm:rounded-xl bg-primary-50 p-2 sm:p-2.5 text-primary-600;
 }
 
 @utility section-container {
-	@apply mx-auto max-w-6xl px-4 py-16;
+	@apply mx-auto max-w-6xl px-4 py-8 sm:py-16;
 }
 
 @utility section-header {
-	@apply mb-12 text-center;
+	@apply mb-8 sm:mb-12 text-center;
 }
 
 @utility card-grid-3 {
-	@apply grid gap-6 sm:grid-cols-2 lg:grid-cols-3;
+	@apply grid gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3;
 }
 
 @utility card-grid-4 {
-	@apply grid gap-6 sm:grid-cols-2 lg:grid-cols-4;
+	@apply grid gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-4;
 }
 
 @utility stat-card {

@@ -3,14 +3,15 @@ interface Props {
 	variant?: 'primary' | 'gold' | 'whatsapp' | 'outline' | 'outline-light' | 'secondary' | 'ghost';
 	size?: 'sm' | 'md' | 'lg';
 	href?: string;
+	type?: 'submit' | 'button' | 'reset';
 	class?: string;
 	target?: string;
 	rel?: string;
 }
 
-const { variant = 'primary', size = 'md', href, class: className, target, rel } = Astro.props;
+const { variant = 'primary', size = 'md', href, type, class: className, target, rel } = Astro.props;
 
-const base = 'inline-flex items-center justify-center gap-2 font-semibold rounded-lg transition-colors duration-200, transform duration-200 hover:scale-[1.02] active:scale-95';
+const base = 'inline-flex items-center justify-center gap-2 font-semibold rounded-lg transition-colors duration-200 hover:scale-[1.02] active:scale-95';
 
 const variants: Record<string, string> = {
 	primary: 'bg-primary-700 text-white hover:bg-primary-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2',
@@ -37,7 +38,7 @@ const classes = [base, variants[variant], sizes[size], className];
 			<slot />
 		</a>
 	) : (
-		<button class:list={classes}>
+		<button type={type} class:list={classes}>
 			<slot />
 		</button>
 	)

@@ -39,15 +39,15 @@ const kategoriIcons = {
 
 	<Container class="py-8 sm:py-16">
 		<div class="flex flex-wrap gap-2 justify-center mb-8" data-filter-gallery>
-			<button class="filter-btn rounded-full bg-primary-700 px-5 py-2.5 text-sm font-semibold text-white shadow-md transition-colors duration-300, shadow duration-300" data-filter="all">Semua</button>
+			<button class="filter-btn rounded-full bg-primary-700 px-5 py-2.5 text-sm font-semibold text-white shadow-md transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2" data-filter="all">Semua</button>
 			{Object.entries(KATEGORI_LABELS).map(([key, label]) => (
-				<button class="filter-btn rounded-full bg-primary-50 px-5 py-2.5 text-sm font-semibold text-primary-700 transition-colors duration-300 hover:bg-primary-100" data-filter={key}>{label}</button>
+				<button class="filter-btn rounded-full bg-primary-50 px-5 py-2.5 text-sm font-semibold text-primary-700 transition-colors duration-300 hover:bg-primary-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2" data-filter={key}>{label}</button>
 			))}
 		</div>
 
 		<div class="grid gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3" id="gallery-grid">
 			{kegiatan.map((item) => (
-				<div class="gallery-item transition-opacity duration-500 ease-out, transform duration-500 ease-out" data-kategori={item.data.kategori}>
+				<div class="gallery-item transition-opacity duration-500 ease-out" data-kategori={item.data.kategori}>
 					<Card variant="hover" href={`/kegiatan/${item.id}`} class="group overflow-hidden">
 						<div class="relative aspect-video w-full overflow-hidden">
 							{item.data.image ? (
