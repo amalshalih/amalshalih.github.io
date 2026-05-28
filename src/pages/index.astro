@@ -62,7 +62,7 @@ try {
 		<div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
 			{stats.map((stat) => (
 				<div class="rounded-xl bg-white p-6 shadow-lg ring-1 ring-primary-100/50 text-center">
-					<p class="text-3xl font-extrabold text-primary-700">{stat.number}</p>
+					<p class="text-3xl font-extrabold text-primary-700 tabular-nums">{stat.number}</p>
 					<p class="mt-1 text-sm text-warm-700">{stat.label}</p>
 				</div>
 			))}
@@ -80,6 +80,8 @@ try {
 						alt="Dokumentasi Kegiatan Yayasan ASIB" 
 						class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
 						loading="lazy"
+						width="800"
+						height="600"
 					/>
 				</div>
 				<!-- Right: Content -->
@@ -93,11 +95,11 @@ try {
 					</p>
 					<div class="mt-8 grid gap-4 sm:grid-cols-2">
 						<div class="rounded-xl border border-primary-100 bg-white p-6 text-center shadow-sm">
-							<p class="text-3xl font-extrabold text-primary-700">110+</p>
+							<p class="text-3xl font-extrabold text-primary-700 tabular-nums">110+</p>
 							<p class="mt-1 text-sm text-warm-700">Penerima Manfaat</p>
 						</div>
 						<div class="rounded-xl border border-primary-100 bg-white p-6 text-center shadow-sm">
-							<p class="text-3xl font-extrabold text-primary-700">7</p>
+							<p class="text-3xl font-extrabold text-primary-700 tabular-nums">7</p>
 							<p class="mt-1 text-sm text-warm-700">Unit Program</p>
 						</div>
 					</div>
