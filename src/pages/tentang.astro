@@ -59,22 +59,22 @@ try {
 		gradient="tl"
 	/>
 
-	<Container class="py-12 sm:py-16">
+	<Container class="py-8 sm:py-16">
 		<div class="space-y-4">
 
 			<!-- Profil Yayasan (open by default) -->
-			<details open class="group rounded-2xl border border-primary-100 bg-white ring-1 ring-primary-50">
-				<summary class="flex cursor-pointer items-center gap-4 p-6 font-bold text-warm-900 select-none hover:bg-primary-50/50 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 rounded-2xl">
+			<details open class="group rounded-xl sm:rounded-2xl border border-primary-100 bg-white ring-1 ring-primary-50">
+				<summary class="flex cursor-pointer items-center gap-3 p-4 sm:p-6 font-bold text-warm-900 select-none hover:bg-primary-50/50 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 rounded-xl sm:rounded-2xl">
 					<div class="icon-box shrink-0">
 						<Icon name="book" size={7} aria-hidden="true" />
 					</div>
-					<span class="flex-1 text-xl">Profil Yayasan</span>
+					<span class="flex-1 text-lg sm:text-xl">Profil Yayasan</span>
 					<svg class="h-5 w-5 shrink-0 text-warm-500 transition-transform duration-200 group-open:rotate-180" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
 						<path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
 					</svg>
 				</summary>
-				<div class="px-6 pb-6">
-					<div class="grid gap-12 lg:grid-cols-3 pt-4">
+				<div class="px-4 sm:px-6 pb-4 sm:pb-6">
+					<div class="grid gap-8 lg:grid-cols-3 pt-3">
 						<div class="lg:col-span-2">
 							<div class="space-y-4 leading-relaxed text-warm-700">
 								<p>
@@ -95,7 +95,7 @@ try {
 							</div>
 						</div>
 						<div>
-							<div class="rounded-2xl bg-primary-50 p-8 ring-1 ring-primary-100/50">
+							<div class="rounded-xl sm:rounded-2xl bg-primary-50 p-5 sm:p-8 ring-1 ring-primary-100/50">
 								<h3 class="text-lg font-bold text-primary-800">Informasi Legal</h3>
 								<dl class="mt-4 space-y-3 text-sm">
 									<div>
@@ -122,34 +122,34 @@ try {
 			</details>
 
 			<!-- Visi & Misi -->
-			<details class="group rounded-2xl border border-primary-100 bg-white ring-1 ring-primary-50">
-				<summary class="flex cursor-pointer items-center gap-4 p-6 font-bold text-warm-900 select-none hover:bg-primary-50/50 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 rounded-2xl">
+			<details class="group rounded-xl sm:rounded-2xl border border-primary-100 bg-white ring-1 ring-primary-50">
+				<summary class="flex cursor-pointer items-center gap-3 p-4 sm:p-6 font-bold text-warm-900 select-none hover:bg-primary-50/50 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 rounded-xl sm:rounded-2xl">
 					<div class="icon-box shrink-0">
 						<Icon name="star" size={7} aria-hidden="true" />
 					</div>
-					<span class="flex-1 text-xl">Visi &amp; Misi</span>
+					<span class="flex-1 text-lg sm:text-xl">Visi &amp; Misi</span>
 					<svg class="h-5 w-5 shrink-0 text-warm-500 transition-transform duration-200 group-open:rotate-180" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
 						<path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
 					</svg>
 				</summary>
-				<div class="px-6 pb-6">
-					<div class="grid gap-8 pt-4 lg:grid-cols-2">
+				<div class="px-4 sm:px-6 pb-4 sm:pb-6">
+					<div class="grid gap-5 sm:gap-8 pt-3 lg:grid-cols-2">
 						<!-- Visi -->
-						<Card variant="hover" class="p-8">
-							<div class="mb-4 icon-box-sm">
+						<Card variant="hover" class="p-5 sm:p-8">
+							<div class="mb-3 icon-box-sm">
 								<Icon name="star" size={6} aria-hidden="true" />
 							</div>
-							<h3 class="text-2xl font-bold text-warm-900">Visi</h3>
-							<p class="mt-4 text-lg leading-relaxed text-warm-700" set:html={`&ldquo;${visi}&rdquo;`} />
+							<h3 class="text-xl sm:text-2xl font-bold text-warm-900">Visi</h3>
+							<p class="mt-3 text-base sm:text-lg leading-relaxed text-warm-700" set:html={`&ldquo;${visi}&rdquo;`} />
 						</Card>
 
 						<!-- Misi -->
-						<Card variant="hover" class="p-8">
-							<div class="mb-4 icon-box-sm">
+						<Card variant="hover" class="p-5 sm:p-8">
+							<div class="mb-3 icon-box-sm">
 								<Icon name="check-circle" size={6} aria-hidden="true" />
 							</div>
-							<h3 class="text-2xl font-bold text-warm-900">Misi</h3>
-							<ol class="mt-4 space-y-3 text-warm-700">
+							<h3 class="text-xl sm:text-2xl font-bold text-warm-900">Misi</h3>
+							<ol class="mt-3 space-y-2 sm:space-y-3 text-warm-700">
 								{misi.map((item, i) => (
 									<li class="flex gap-3">
 										<span class="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary-100 text-xs font-bold text-primary-700">{i + 1}</span>
@@ -163,20 +163,20 @@ try {
 			</details>
 
 			<!-- Struktur Pengurus -->
-			<details class="group rounded-2xl border border-primary-100 bg-white ring-1 ring-primary-50">
-				<summary class="flex cursor-pointer items-center gap-4 p-6 font-bold text-warm-900 select-none hover:bg-primary-50/50 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 rounded-2xl">
+			<details class="group rounded-xl sm:rounded-2xl border border-primary-100 bg-white ring-1 ring-primary-50">
+				<summary class="flex cursor-pointer items-center gap-3 p-4 sm:p-6 font-bold text-warm-900 select-none hover:bg-primary-50/50 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 rounded-xl sm:rounded-2xl">
 					<div class="icon-box shrink-0">
 						<Icon name="heart" size={7} aria-hidden="true" />
 					</div>
-					<span class="flex-1 text-xl">Struktur Pengurus</span>
+					<span class="flex-1 text-lg sm:text-xl">Struktur Pengurus</span>
 					<svg class="h-5 w-5 shrink-0 text-warm-500 transition-transform duration-200 group-open:rotate-180" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
 						<path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
 					</svg>
 				</summary>
-				<div class="px-6 pb-6">
-					<div class="pt-4">
-						<p class="mb-8 text-center text-warm-700">Kepengurusan Yayasan Amal Shalih Insan Bantul</p>
-						<div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 items-start">
+				<div class="px-4 sm:px-6 pb-4 sm:pb-6">
+					<div class="pt-3">
+						<p class="mb-5 text-center text-sm sm:text-base text-warm-700">Kepengurusan Yayasan Amal Shalih Insan Bantul</p>
+						<div class="grid gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-4 items-start">
 							{pengurus.length > 0 ? pengurus.map((p) => (
 								<Card variant="default" class="p-6 text-center">
 									{p.photoUrl ? (
@@ -249,12 +249,12 @@ try {
 		</div>
 
 		<!-- CTA: Hubungi Kami (replaces duplicate contact section) -->
-		<div class="mt-12 rounded-2xl bg-primary-50 p-8 text-center ring-1 ring-primary-100/50 sm:p-12">
-			<h2 class="text-2xl font-bold text-warm-900 sm:text-3xl">Ingin Tahu Lebih Lanjut?</h2>
-			<p class="mx-auto mt-3 max-w-lg text-warm-700">
+		<div class="mt-8 rounded-xl sm:rounded-2xl bg-primary-50 p-5 sm:p-8 text-center ring-1 ring-primary-100/50 sm:p-12">
+			<h2 class="text-xl sm:text-2xl font-bold text-warm-900 sm:text-3xl">Ingin Tahu Lebih Lanjut?</h2>
+			<p class="mx-auto mt-2 max-w-lg text-sm sm:text-base text-warm-700">
 				Hubungi kami untuk pertanyaan, konfirmasi donasi, atau informasi program Yayasan ASIB.
 			</p>
-			<div class="mt-6 flex flex-wrap justify-center gap-4">
+			<div class="mt-4 flex flex-wrap justify-center gap-3 sm:gap-4">
 				<Button variant="primary" href="/kontak">
 					<Icon name="phone" size={5} aria-hidden="true" />
 					Hubungi Kami
