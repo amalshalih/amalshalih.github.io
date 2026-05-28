@@ -8,19 +8,19 @@ interface Props {
 
 const { variant = 'default', padding = 'md', href, class: className } = Astro.props;
 
-const base = 'rounded-2xl border border-primary-100 bg-white transition-shadow duration-300, transform duration-300';
+const base = 'rounded-xl sm:rounded-2xl border border-primary-100 bg-white transition-shadow duration-300, transform duration-300';
 
 const variants: Record<string, string> = {
-	default: 'p-6 ring-1 ring-primary-50',
-	hover: 'p-6 transition-shadow duration-300, transform duration-300 hover:-translate-y-1 hover:shadow-xl',
+	default: 'p-4 sm:p-6 ring-1 ring-primary-50',
+	hover: 'p-4 sm:p-6 transition-shadow duration-300, transform duration-300 hover:-translate-y-1 hover:shadow-xl',
 	overflow: 'overflow-hidden border-0 ring-1 ring-primary-50',
-	plain: 'p-6',
+	plain: 'p-4 sm:p-6',
 };
 
 const paddingMap: Record<string, string> = {
-	sm: 'p-4',
-	md: 'p-6',
-	lg: 'p-8',
+	sm: 'p-3 sm:p-4',
+	md: 'p-4 sm:p-6',
+	lg: 'p-5 sm:p-8',
 };
 
 const classes = [base, variants[variant], (variant === 'default' || variant === 'overflow' || variant === 'hover') ? '' : paddingMap[padding], className];
