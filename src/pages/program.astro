@@ -100,8 +100,8 @@ const tabLabels: Record<string, string> = {
 	/>
 
 	<Container class="py-8 sm:py-16">
-		<!-- Tab List -->
-		<div role="tablist" aria-label="Pilar program" data-program-tabs class="flex gap-2 overflow-x-auto scrollbar-hide rounded-lg sm:rounded-xl bg-warm-100 p-1.5">
+		<!-- Tab List — edge-to-edge on mobile -->
+		<div role="tablist" aria-label="Pilar program" data-program-tabs class="-mx-4 sm:mx-0 flex gap-2 overflow-x-auto scrollbar-hide rounded-none sm:rounded-lg bg-warm-100 py-1.5 sm:px-1.5">
 			{sections.map((section, i) => (
 				<button
 					role="tab"
