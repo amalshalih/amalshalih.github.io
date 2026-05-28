@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Container from '../components/ui/Container.astro';
 import PageHeader from '../components/sections/PageHeader.astro';
 import Card from '../components/ui/Card.astro';
+import Button from '../components/ui/Button.astro';
 import Icon from '../components/ui/Icon.astro';
 import { getSiteSettings, getPengurus } from '../lib/sanity/client';
 import type { SanityPengurus } from '../lib/sanity/types';
@@ -15,7 +16,7 @@ let phone = CONTACT.phone;
 let phoneUrl = CONTACT.phoneUrl;
 let email = CONTACT.email;
 let visi = 'Menjadi Lembaga Yang Profesional dan Berkarakter Serta <strong class="text-primary-700">Maslahat Bagi Umat</strong>.';
-let misi: string[] = [
+let misi = [
   'Menyelenggarakan kegiatan keagamaan, sosial, dan kemanusiaan.',
   'Mewujudkan pembinaan yang fokus pada bidang pendidikan dan Tahfiz Al-Qur\'an.',
   'Melaksanakan penggalangan dan penyaluran donasi untuk semua bidang.',
@@ -58,202 +59,210 @@ try {
 		gradient="tl"
 	/>
 
-	<!-- Profil -->
 	<Container class="py-12 sm:py-16">
-		<div class="grid gap-12 lg:grid-cols-3">
-			<div class="lg:col-span-2">
-				<h2 class="text-2xl font-bold text-warm-900 sm:text-3xl">Profil Yayasan</h2>
-				<div class="mt-6 space-y-4 leading-relaxed text-warm-700">
-					<p>
-						Yayasan Amal Shalih Insan Bantul (ASIB) adalah organisasi nirlaba yang berdiri sejak
-						<strong>{SITE.foundedDate}</strong> berdasarkan SK Kemenkumham RI
-						No. {SITE.legal.sk}.
-					</p>
-					<p>
-						Kami memiliki tiga bidang utama: <strong>Pendidikan</strong>, <strong>Sosial Kemanusiaan</strong>, dan
-						<strong>Keagamaan</strong>. Untuk mewujudkan program di setiap bidang, kami melibatkan
-						seluruh komponen masyarakat sekitar.
-					</p>
-					<p>
-						Berlokasi di {addressFull},
-						kami hadir untuk membantu dan mendukung masyarakat kurang mampu, yatim piatu,
-						dan dhuafa sebagaimana diajarkan dalam Islam.
-					</p>
-				</div>
-			</div>
-			<div>
-				<div class="rounded-2xl bg-primary-50 p-8 ring-1 ring-primary-100/50">
-					<h3 class="text-lg font-bold text-primary-800">Informasi Legal</h3>
-					<dl class="mt-4 space-y-3 text-sm">
-						<div>
-							<dt class="font-semibold text-warm-800">SK Kemenkumham</dt>
-							<dd class="text-warm-700">{SITE.legal.sk}</dd>
-						</div>
-						<div>
-							<dt class="font-semibold text-warm-800">NIB</dt>
-							<dd class="text-warm-700">{SITE.legal.nib}</dd>
-						</div>
-						<div>
-							<dt class="font-semibold text-warm-800">NPWP</dt>
-							<dd class="text-warm-700">{SITE.legal.npwp}</dd>
-						</div>
-						<div>
-							<dt class="font-semibold text-warm-800">KBLI</dt>
-							<dd class="text-warm-700">{SITE.legal.kbli}</dd>
-						</div>
-					</dl>
-				</div>
-			</div>
-		</div>
-	</section>
+		<div class="space-y-4">
 
-	<!-- Visi Misi -->
-	<section class="bg-warm-50 py-12 sm:py-16 ring-1 ring-primary-100/30">
-		<Container as="div">
-			<div class="grid gap-12 lg:grid-cols-2">
-				<!-- Visi -->
-				<Card variant="hover" class="p-8">
-					<div class="mb-4 icon-box-sm">
-						<Icon name="star" size={6} />
+			<!-- Profil Yayasan (open by default) -->
+			<details open class="group rounded-2xl border border-primary-100 bg-white ring-1 ring-primary-50">
+				<summary class="flex cursor-pointer items-center gap-4 p-6 font-bold text-warm-900 select-none hover:bg-primary-50/50 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 rounded-2xl">
+					<div class="icon-box shrink-0">
+						<Icon name="book" size={7} aria-hidden="true" />
 					</div>
-					<h2 class="text-2xl font-bold text-warm-900">Visi</h2>
-					<p class="mt-4 text-lg leading-relaxed text-warm-700" set:html={`&ldquo;${visi}&rdquo;`} />
-				</Card>
-
-				<!-- Misi -->
-				<Card variant="hover" class="p-8">
-					<div class="mb-4 icon-box-sm">
-						<Icon name="check-circle" size={6} />
-					</div>
-					<h2 class="text-2xl font-bold text-warm-900">Misi</h2>
-					<ol class="mt-4 space-y-3 text-warm-700">
-						{misi.map((item, i) => (
-							<li class="flex gap-3">
-								<span class="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary-100 text-xs font-bold text-primary-700">{i + 1}</span>
-								<span>{item}</span>
-							</li>
-						))}
-					</ol>
-				</Card>
-			</div>
-		</div>
-	</section>
-
-	<!-- Struktur Pengurus -->
-	<section class="bg-warm-50 py-12 sm:py-16 ring-1 ring-primary-100/30">
-		<Container as="div">
-			<div class="mb-8 text-center">
-				<h2 class="text-3xl font-bold text-warm-900 sm:text-4xl">Struktur Pengurus</h2>
-				<p class="mt-3 text-warm-700">Kepengurusan Yayasan Amal Shalih Insan Bantul</p>
-			</div>
-			<div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 items-start">
-				{pengurus.length > 0 ? pengurus.map((p) => (
-					<Card variant="default" class="p-6 text-center">
-						{p.photoUrl ? (
-							<img src={p.photoUrl} alt={p.photoAlt ?? p.name} class="mx-auto mb-4 h-16 w-16 rounded-full object-cover" loading="lazy" />
-						) : (
-							<div class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary-100 text-primary-700">
-								<Icon name="star" size={8} />
+					<span class="flex-1 text-xl">Profil Yayasan</span>
+					<svg class="h-5 w-5 shrink-0 text-warm-500 transition-transform duration-200 group-open:rotate-180" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+						<path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+					</svg>
+				</summary>
+				<div class="px-6 pb-6">
+					<div class="grid gap-12 lg:grid-cols-3 pt-4">
+						<div class="lg:col-span-2">
+							<div class="space-y-4 leading-relaxed text-warm-700">
+								<p>
+									Yayasan Amal Shalih Insan Bantul (ASIB) adalah organisasi nirlaba yang berdiri sejak
+									<strong>{SITE.foundedDate}</strong> berdasarkan SK Kemenkumham RI
+									No. {SITE.legal.sk}.
+								</p>
+								<p>
+									Kami memiliki tiga bidang utama: <strong>Pendidikan</strong>, <strong>Sosial Kemanusiaan</strong>, dan
+									<strong>Keagamaan</strong>. Untuk mewujudkan program di setiap bidang, kami melibatkan
+									seluruh komponen masyarakat sekitar.
+								</p>
+								<p>
+									Berlokasi di {addressFull},
+									kami hadir untuk membantu dan mendukung masyarakat kurang mampu, yatim piatu,
+									dan dhuafa sebagaimana diajarkan dalam Islam.
+								</p>
 							</div>
+						</div>
+						<div>
+							<div class="rounded-2xl bg-primary-50 p-8 ring-1 ring-primary-100/50">
+								<h3 class="text-lg font-bold text-primary-800">Informasi Legal</h3>
+								<dl class="mt-4 space-y-3 text-sm">
+									<div>
+										<dt class="font-semibold text-warm-800">SK Kemenkumham</dt>
+										<dd class="text-warm-700">{SITE.legal.sk}</dd>
+									</div>
+									<div>
+										<dt class="font-semibold text-warm-800">NIB</dt>
+										<dd class="text-warm-700">{SITE.legal.nib}</dd>
+									</div>
+									<div>
+										<dt class="font-semibold text-warm-800">NPWP</dt>
+										<dd class="text-warm-700">{SITE.legal.npwp}</dd>
+									</div>
+									<div>
+										<dt class="font-semibold text-warm-800">KBLI</dt>
+										<dd class="text-warm-700">{SITE.legal.kbli}</dd>
+									</div>
+								</dl>
+							</div>
+						</div>
+					</div>
+				</div>
+			</details>
+
+			<!-- Visi & Misi -->
+			<details class="group rounded-2xl border border-primary-100 bg-white ring-1 ring-primary-50">
+				<summary class="flex cursor-pointer items-center gap-4 p-6 font-bold text-warm-900 select-none hover:bg-primary-50/50 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 rounded-2xl">
+					<div class="icon-box shrink-0">
+						<Icon name="star" size={7} aria-hidden="true" />
+					</div>
+					<span class="flex-1 text-xl">Visi &amp; Misi</span>
+					<svg class="h-5 w-5 shrink-0 text-warm-500 transition-transform duration-200 group-open:rotate-180" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+						<path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+					</svg>
+				</summary>
+				<div class="px-6 pb-6">
+					<div class="grid gap-8 pt-4 lg:grid-cols-2">
+						<!-- Visi -->
+						<Card variant="hover" class="p-8">
+							<div class="mb-4 icon-box-sm">
+								<Icon name="star" size={6} aria-hidden="true" />
+							</div>
+							<h3 class="text-2xl font-bold text-warm-900">Visi</h3>
+							<p class="mt-4 text-lg leading-relaxed text-warm-700" set:html={`&ldquo;${visi}&rdquo;`} />
+						</Card>
+
+						<!-- Misi -->
+						<Card variant="hover" class="p-8">
+							<div class="mb-4 icon-box-sm">
+								<Icon name="check-circle" size={6} aria-hidden="true" />
+							</div>
+							<h3 class="text-2xl font-bold text-warm-900">Misi</h3>
+							<ol class="mt-4 space-y-3 text-warm-700">
+								{misi.map((item, i) => (
+									<li class="flex gap-3">
+										<span class="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary-100 text-xs font-bold text-primary-700">{i + 1}</span>
+										<span>{item}</span>
+									</li>
+								))}
+							</ol>
+						</Card>
+					</div>
+				</div>
+			</details>
+
+			<!-- Struktur Pengurus -->
+			<details class="group rounded-2xl border border-primary-100 bg-white ring-1 ring-primary-50">
+				<summary class="flex cursor-pointer items-center gap-4 p-6 font-bold text-warm-900 select-none hover:bg-primary-50/50 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 rounded-2xl">
+					<div class="icon-box shrink-0">
+						<Icon name="heart" size={7} aria-hidden="true" />
+					</div>
+					<span class="flex-1 text-xl">Struktur Pengurus</span>
+					<svg class="h-5 w-5 shrink-0 text-warm-500 transition-transform duration-200 group-open:rotate-180" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+						<path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+					</svg>
+				</summary>
+				<div class="px-6 pb-6">
+					<div class="pt-4">
+						<p class="mb-8 text-center text-warm-700">Kepengurusan Yayasan Amal Shalih Insan Bantul</p>
+						<div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 items-start">
+							{pengurus.length > 0 ? pengurus.map((p) => (
+								<Card variant="default" class="p-6 text-center">
+									{p.photoUrl ? (
+										<img src={p.photoUrl} alt={p.photoAlt ?? p.name} class="mx-auto mb-4 h-16 w-16 rounded-full object-cover" loading="lazy" width="64" height="64" />
+									) : (
+										<div class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary-100 text-primary-700">
+											<Icon name="star" size={8} aria-hidden="true" />
+										</div>
+									)}
+									<h3 class="font-bold text-warm-900">{p.name}</h3>
+									<p class="mt-1 text-sm text-warm-700">{p.position}</p>
+									{p.description && <p class="mt-2 text-xs text-warm-500">{p.description}</p>}
+								</Card>
+							)) : (
+								<>
+									<Card variant="default" class="p-6 text-center">
+										<div class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary-100 text-primary-700">
+											<Icon name="star" size={8} aria-hidden="true" />
+										</div>
+										<h3 class="font-bold text-warm-900">Pembina</h3>
+										<p class="mt-1 text-sm text-warm-700">Dewan Pembina Yayasan</p>
+									</Card>
+									<Card variant="default" class="p-6 text-center">
+										<div class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary-100 text-primary-700">
+											<Icon name="star" size={8} aria-hidden="true" />
+										</div>
+										<h3 class="font-bold text-warm-900">Pengawas</h3>
+										<p class="mt-1 text-sm text-warm-700">Dewan Pengawas Yayasan</p>
+									</Card>
+									<Card variant="default" class="p-6 text-center">
+										<div class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary-100 text-primary-700">
+											<Icon name="heart" size={8} aria-hidden="true" />
+										</div>
+										<h3 class="font-bold text-warm-900">Ketua</h3>
+										<p class="mt-1 text-sm text-warm-700">Ketua Yayasan</p>
+									</Card>
+									<Card variant="default" class="p-6 text-center">
+										<div class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary-100 text-primary-700">
+											<Icon name="book" size={8} aria-hidden="true" />
+										</div>
+										<h3 class="font-bold text-warm-900">Sekretaris</h3>
+										<p class="mt-1 text-sm text-warm-700">Sekretaris Yayasan</p>
+									</Card>
+									<Card variant="default" class="p-6 text-center">
+										<div class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary-100 text-primary-700">
+											<Icon name="credit-card" size={8} aria-hidden="true" />
+										</div>
+										<h3 class="font-bold text-warm-900">Bendahara</h3>
+										<p class="mt-1 text-sm text-warm-700">Bendahara Yayasan</p>
+									</Card>
+									<Card variant="default" class="p-6 text-center">
+										<div class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary-100 text-primary-700">
+											<Icon name="book" size={8} aria-hidden="true" />
+										</div>
+										<h3 class="font-bold text-warm-900">Kepala Program</h3>
+										<p class="mt-1 text-sm text-warm-700">Koordinator Program Yayasan</p>
+									</Card>
+								</>
+							)}
+						</div>
+						{pengurus.length === 0 && (
+							<p class="mt-8 text-center text-sm text-warm-500">
+								Data nama pengurus akan dilengkapi oleh tim yayasan.
+							</p>
 						)}
-						<h3 class="font-bold text-warm-900">{p.name}</h3>
-						<p class="mt-1 text-sm text-warm-700">{p.position}</p>
-						{p.description && <p class="mt-2 text-xs text-warm-500">{p.description}</p>}
-					</Card>
-				)) : (
-					<>
-						<Card variant="default" class="p-6 text-center">
-							<div class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary-100 text-primary-700">
-								<Icon name="star" size={8} />
-							</div>
-							<h3 class="font-bold text-warm-900">Pembina</h3>
-							<p class="mt-1 text-sm text-warm-700">Dewan Pembina Yayasan</p>
-						</Card>
-						<Card variant="default" class="p-6 text-center">
-							<div class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary-100 text-primary-700">
-								<Icon name="star" size={8} />
-							</div>
-							<h3 class="font-bold text-warm-900">Pengawas</h3>
-							<p class="mt-1 text-sm text-warm-700">Dewan Pengawas Yayasan</p>
-						</Card>
-						<Card variant="default" class="p-6 text-center">
-							<div class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary-100 text-primary-700">
-								<Icon name="heart" size={8} />
-							</div>
-							<h3 class="font-bold text-warm-900">Ketua</h3>
-							<p class="mt-1 text-sm text-warm-700">Ketua Yayasan</p>
-						</Card>
-						<Card variant="default" class="p-6 text-center">
-							<div class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary-100 text-primary-700">
-								<Icon name="book" size={8} />
-							</div>
-							<h3 class="font-bold text-warm-900">Sekretaris</h3>
-							<p class="mt-1 text-sm text-warm-700">Sekretaris Yayasan</p>
-						</Card>
-						<Card variant="default" class="p-6 text-center">
-							<div class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary-100 text-primary-700">
-								<Icon name="credit-card" size={8} />
-							</div>
-							<h3 class="font-bold text-warm-900">Bendahara</h3>
-							<p class="mt-1 text-sm text-warm-700">Bendahara Yayasan</p>
-						</Card>
-						<Card variant="default" class="p-6 text-center">
-							<div class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary-100 text-primary-700">
-								<Icon name="book" size={8} />
-							</div>
-							<h3 class="font-bold text-warm-900">Kepala Program</h3>
-							<p class="mt-1 text-sm text-warm-700">Koordinator Program Yayasan</p>
-						</Card>
-					</>
-				)}
-			</div>
-			{pengurus.length === 0 && (
-				<p class="mt-8 text-center text-sm text-warm-500">
-					Data nama pengurus akan dilengkapi oleh tim yayasan.
-				</p>
-			)}
-		</Container>
-	</section>
+					</div>
+				</div>
+			</details>
 
-	<!-- Kontak -->
-	<Container class="py-12 sm:py-16">
-		<h2 class="text-2xl font-bold text-warm-900 sm:text-3xl">Hubungi Kami</h2>
-		<div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-			<div class="rounded-xl border border-primary-100 bg-white p-6">
-				<div class="mb-3 icon-box-sm">
-					<Icon name="location" size={5} />
-				</div>
-				<h3 class="font-semibold text-warm-900">Alamat</h3>
-				<p class="mt-1 text-sm text-warm-700">
-					Juron, Pendowoharjo, Sewon<br />Bantul, DIY 55185
-				</p>
-			</div>
-			<div class="rounded-xl border border-primary-100 bg-white p-6">
-				<div class="mb-3 icon-box-sm">
-					<Icon name="phone" size={5} />
-				</div>
-				<h3 class="font-semibold text-warm-900">Telepon/WA</h3>
-				<p class="mt-1 text-sm text-warm-700">
-					<a href={phoneUrl} class="text-primary-700 hover:underline">{phone}</a>
-				</p>
-			</div>
-			<div class="rounded-xl border border-primary-100 bg-white p-6">
-				<div class="mb-3 icon-box-sm">
-					<Icon name="email" size={5} />
-				</div>
-				<h3 class="font-semibold text-warm-900">Email</h3>
-				<p class="mt-1 text-sm text-warm-700">
-					<a href={`mailto:${email}`} class="text-primary-700 hover:underline break-all">{email}</a>
-				</p>
-			</div>
-			<div class="rounded-xl border border-primary-100 bg-white p-6">
-				<div class="mb-3 icon-box-sm">
-					<Icon name="globe" size={5} />
-				</div>
-				<h3 class="font-semibold text-warm-900">Website</h3>
-				<p class="mt-1 text-sm text-warm-700">
-					<a href={SITE.url} class="text-primary-700 hover:underline">{SITE.shortName}</a>
-				</p>
+		</div>
+
+		<!-- CTA: Hubungi Kami (replaces duplicate contact section) -->
+		<div class="mt-12 rounded-2xl bg-primary-50 p-8 text-center ring-1 ring-primary-100/50 sm:p-12">
+			<h2 class="text-2xl font-bold text-warm-900 sm:text-3xl">Ingin Tahu Lebih Lanjut?</h2>
+			<p class="mx-auto mt-3 max-w-lg text-warm-700">
+				Hubungi kami untuk pertanyaan, konfirmasi donasi, atau informasi program Yayasan ASIB.
+			</p>
+			<div class="mt-6 flex flex-wrap justify-center gap-4">
+				<Button variant="primary" href="/kontak">
+					<Icon name="phone" size={5} aria-hidden="true" />
+					Hubungi Kami
+				</Button>
+				<Button variant="outline" href="/donasi">
+					<Icon name="heart" size={5} aria-hidden="true" />
+					Donasi Sekarang
+				</Button>
 			</div>
 		</div>
 	</Container>
