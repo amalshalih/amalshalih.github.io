@@ -30,6 +30,9 @@ export const programListQuery = `*[_type == "program"] | order(order asc) {
   category,
   icon,
   shortDesc,
+  badge,
+  cardVariant,
+  stats[]{ number, label },
   "imageUrl": image.asset->url,
   "imageAlt": image.alt
 }`

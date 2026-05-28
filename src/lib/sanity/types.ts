@@ -19,6 +19,9 @@ export interface SanityProgram {
   shortDesc?: string
   imageUrl?: string
   imageAlt?: string
+  badge?: string
+  cardVariant?: 'default' | 'overflow'
+  stats?: { number: string; label: string }[]
 }
 
 export interface SanityBankDonasi {

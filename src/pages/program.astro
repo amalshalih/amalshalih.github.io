@@ -4,6 +4,81 @@ import PageHeader from '../components/sections/PageHeader.astro';
 import Card from '../components/ui/Card.astro';
 import Button from '../components/ui/Button.astro';
 import Icon from '../components/ui/Icon.astro';
+import { getProgramList } from '../lib/sanity/client';
+import type { SanityProgram } from '../lib/sanity/types';
+
+type Item = {
+  title: string;
+  badge?: string;
+  description: string;
+  variant: 'default' | 'overflow';
+  stats?: { number: string; label: string }[];
+};
+
+const FALLBACK: Record<string, Item[]> = {
+  pendidikan: [
+    { title: 'PKBM Bina Insan Mulia', badge: 'Pendidikan Diniyah', variant: 'default', description: 'Pusat Kegiatan Belajar Masyarakat dengan materi Diniyah untuk mempersiapkan generasi milenial yang beraqidah kuat dan berakhlak mulia.', stats: [{ number: '21', label: 'Ustadz/Ustadzah' }, { number: '70', label: 'Santri' }] },
+    { title: 'PAUD Bina Tunas Mulia', badge: 'Usia 1–6 Tahun', variant: 'default', description: 'Program pendidikan non-formal untuk taman pengasuhan anak dan kelompok bermain. Membuka layanan untuk anak usia 1 hingga 6 tahun.', stats: [{ number: '4', label: 'Guru' }, { number: '8', label: 'Siswa' }] },
+    { title: 'Rumah Tahfidz', badge: 'Tahfidz & Tahsin', variant: 'default', description: 'Pesantren tahfidz yang diselenggarakan di kantor yayasan. Program tahfidz dan tahsin Al-Qur\'an bagi para santriwati dengan bimbingan ustadzah berpengalaman.', stats: [{ number: '2', label: 'Ustadzah' }, { number: '25', label: 'Santriwati' }] },
+    { title: 'Bimbel Proton', badge: 'Bimbingan Belajar', variant: 'default', description: 'Program bimbingan belajar untuk anak-anak binaan yayasan. Membantu meningkatkan prestasi akademik dan pemahaman agama secara terpadu.' },
+  ],
+  keagamaan: [
+    { title: 'Wakaf Lahan Tahfidz', variant: 'default', description: 'Penggalangan wakaf jariyah untuk pengadaan lahan 2.000 m² guna pembangunan Pesantren Tahfidz dan Madrasah.' },
+    { title: 'Qurban', variant: 'default', description: 'Penerimaan dan penyaluran daging qurban kepada yatim, dhuafa, dan masyarakat yang membutuhkan di Bantul dan sekitarnya.' },
+    { title: 'Zakat, Infaq & Shadaqah', badge: 'LAZIS ASIB', variant: 'default', description: 'Dikelola oleh LAZIS ASIB (Lembaga Amil Zakat Infaq Shadaqah), menerima dan menyalurkan ZIS kepada mustahiq yang berhak. Termasuk zakat fitrah pada bulan Ramadhan.' },
+    { title: 'Kafarat', variant: 'default', description: 'Layanan pembayaran kafarat sesuai syariat Islam bagi masyarakat yang membutuhkan.' },
+    { title: 'Hari Besar Islam', variant: 'default', description: 'Maulid Bersedekah, Nuzulul Qur\'an, Syawalan, Bazar & Buka Puasa Bersama, serta berbagai peringatan hari besar Islam.' },
+    { title: 'Pesantren Ramadhan', variant: 'default', description: 'Program intensif bulan Ramadhan meliputi pengajian, buka puasa bersama, sholat berjamaah, tahfidz, dan wisuda Juz 30.' },
+  ],
+  sosial: [
+    { title: 'Santunan Sembako Bulanan', badge: 'Penerima Binaan', variant: 'overflow', description: 'Santunan untuk anak yatim, fakir miskin, dan dhuafa dalam bentuk sembako yang disalurkan setiap bulan. Program ini telah meringankan beban ekonomi masyarakat, terutama yang terdampak Covid-19.', stats: [{ number: '110', label: 'Penerima Binaan Tetap' }] },
+    { title: 'Jumat Bersedekah', badge: 'Setiap Hari Jumat', variant: 'overflow', description: 'Pembagian nasi kotak kepada dhuafa — tukang becak, pemulung, pengemis, dan kaum yang membutuhkan di sepanjang jalan wilayah Yogyakarta.' },
+    { title: 'Sedekah Barang Bekas', badge: 'Program Barkas', variant: 'overflow', description: 'Menerima sedekah berupa barang bekas layak jual. Kami siap menjemput donasi atau Anda bisa menyetorkan langsung ke kantor. Hasil penjualan untuk membiayai kegiatan yayasan.' },
+    { title: 'Panti Asuhan', badge: 'Yatim & Dhuafa', variant: 'overflow', description: 'Panti asuhan bagi anak yatim dan dhuafa yang dikelola secara profesional. Program pembinaan meliputi pendidikan formal, tahfidz, dan life skills untuk mempersiapkan masa depan mereka.' },
+    { title: 'Relawan AMMA', badge: 'Terbuka untuk Umum', variant: 'overflow', description: 'Jaringan relawan yang siap bergerak dalam setiap kegiatan sosial dan kemanusiaan yayasan. Terbuka bagi masyarakat umum yang ingin berkontribusi langsung dalam aksi-aksi kebaikan.' },
+  ],
+};
+
+let programsByCategory: Record<string, Item[]> = {};
+
+try {
+  const sanityData: SanityProgram[] = await getProgramList();
+  if (sanityData && sanityData.length > 0) {
+    programsByCategory = sanityData.reduce<Record<string, Item[]>>((acc, p) => {
+      const cat = p.category;
+      if (!acc[cat]) acc[cat] = [];
+      acc[cat].push({
+        title: p.title,
+        badge: p.badge,
+        description: p.shortDesc ?? '',
+        variant: (p.cardVariant as 'default' | 'overflow') || 'default',
+        stats: p.stats?.map((s: { number: string; label: string }) => ({ number: s.number, label: s.label })),
+      });
+      return acc;
+    }, {});
+  }
+} catch {
+  // Sanity unavailable
+}
+
+if (Object.keys(programsByCategory).length === 0) {
+  programsByCategory = FALLBACK;
+}
+
+type SectionConfig = {
+  id: string;
+  icon: 'book' | 'home' | 'heart';
+  title: string;
+  subtitle: string;
+  bgClass: string;
+  gridCols: string;
+};
+
+const sections: SectionConfig[] = [
+  { id: 'pendidikan', icon: 'book', title: 'Bidang Pendidikan', subtitle: 'Membangun generasi Qur\'ani sejak usia dini', bgClass: '', gridCols: 'sm:grid-cols-2 lg:grid-cols-4' },
+  { id: 'keagamaan', icon: 'home', title: 'Bidang Keagamaan', subtitle: 'Memperkuat iman dan ibadah umat', bgClass: 'bg-warm-50 ring-1 ring-primary-100/30', gridCols: 'sm:grid-cols-2 lg:grid-cols-3' },
+  { id: 'sosial', icon: 'heart', title: 'Bidang Sosial Kemanusiaan', subtitle: 'Meringankan beban saudara-saudara kita', bgClass: '', gridCols: 'sm:grid-cols-2 lg:grid-cols-3' },
+];
 ---
 
 <BaseLayout
@@ -31,7 +106,7 @@ import Icon from '../components/ui/Icon.astro';
 		</div>
 
 		<div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-			<Card variant="default" class="p-6">
+			<Card variant="default">
 				<h3 class="text-xl font-bold text-primary-700">PKBM Bina Insan Mulia</h3>
 				<span class="mt-2 inline-block rounded-full bg-primary-50 px-3 py-1 text-xs font-medium text-primary-600">Pendidikan Diniyah</span>
 				<p class="mt-4 text-sm leading-relaxed text-warm-700">
@@ -50,7 +125,7 @@ import Icon from '../components/ui/Icon.astro';
 				</div>
 			</Card>
 
-			<Card variant="default" class="p-6">
+			<Card variant="default">
 				<h3 class="text-xl font-bold text-primary-700">PAUD Bina Tunas Mulia</h3>
 				<span class="mt-2 inline-block rounded-full bg-primary-50 px-3 py-1 text-xs font-medium text-primary-600">Usia 1–6 Tahun</span>
 				<p class="mt-4 text-sm leading-relaxed text-warm-700">
@@ -69,7 +144,7 @@ import Icon from '../components/ui/Icon.astro';
 				</div>
 			</Card>
 
-			<Card variant="default" class="p-6">
+			<Card variant="default">
 				<h3 class="text-xl font-bold text-primary-700">Rumah Tahfidz</h3>
 				<span class="mt-2 inline-block rounded-full bg-primary-50 px-3 py-1 text-xs font-medium text-primary-600">Tahfidz &amp; Tahsin</span>
 				<p class="mt-4 text-sm leading-relaxed text-warm-700">
@@ -88,7 +163,7 @@ import Icon from '../components/ui/Icon.astro';
 				</div>
 			</Card>
 
-			<Card variant="default" class="p-6">
+			<Card variant="default">
 				<h3 class="text-xl font-bold text-primary-700">Bimbel Proton</h3>
 				<span class="mt-2 inline-block rounded-full bg-primary-50 px-3 py-1 text-xs font-medium text-primary-600">Bimbingan Belajar</span>
 				<p class="mt-4 text-sm leading-relaxed text-warm-700">
@@ -113,21 +188,21 @@ import Icon from '../components/ui/Icon.astro';
 			</div>
 
 			<div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-				<Card variant="default" class="p-6">
+				<Card variant="default">
 					<h3 class="font-bold text-warm-900">Wakaf Lahan Tahfidz</h3>
 					<p class="mt-2 text-sm leading-relaxed text-warm-700">
 						Penggalangan wakaf jariyah untuk pengadaan lahan 2.000 m² guna pembangunan
 						Pesantren Tahfidz dan Madrasah.
 					</p>
 				</Card>
-				<Card variant="default" class="p-6">
+				<Card variant="default">
 					<h3 class="font-bold text-warm-900">Qurban</h3>
 					<p class="mt-2 text-sm leading-relaxed text-warm-700">
 						Penerimaan dan penyaluran daging qurban kepada yatim, dhuafa, dan masyarakat
 						yang membutuhkan di Bantul dan sekitarnya.
 					</p>
 				</Card>
-				<Card variant="default" class="p-6">
+				<Card variant="default">
 					<h3 class="font-bold text-warm-900">Zakat, Infaq &amp; Shadaqah</h3>
 					<span class="mt-2 inline-block rounded-full bg-primary-50 px-3 py-1 text-xs font-medium text-primary-600">LAZIS ASIB</span>
 					<p class="mt-2 text-sm leading-relaxed text-warm-700">
@@ -135,20 +210,20 @@ import Icon from '../components/ui/Icon.astro';
 						menyalurkan ZIS kepada mustahiq yang berhak. Termasuk zakat fitrah pada bulan Ramadhan.
 					</p>
 				</Card>
-				<Card variant="default" class="p-6">
+				<Card variant="default">
 					<h3 class="font-bold text-warm-900">Kafarat</h3>
 					<p class="mt-2 text-sm leading-relaxed text-warm-700">
 						Layanan pembayaran kafarat sesuai syariat Islam bagi masyarakat yang membutuhkan.
 					</p>
 				</Card>
-				<Card variant="default" class="p-6">
+				<Card variant="default">
 					<h3 class="font-bold text-warm-900">Hari Besar Islam</h3>
 					<p class="mt-2 text-sm leading-relaxed text-warm-700">
 						Maulid Bersedekah, Nuzulul Qur'an, Syawalan, Bazar &amp; Buka Puasa Bersama,
 						serta berbagai peringatan hari besar Islam.
 					</p>
 				</Card>
-				<Card variant="default" class="p-6">
+				<Card variant="default">
 					<h3 class="font-bold text-warm-900">Pesantren Ramadhan</h3>
 					<p class="mt-2 text-sm leading-relaxed text-warm-700">
 						Program intensif bulan Ramadhan meliputi pengajian, buka puasa bersama,
@@ -247,17 +322,17 @@ import Icon from '../components/ui/Icon.astro';
 		</div>
 	</section>
 
-	<!-- CTA -->
-	<section class="bg-primary-800 text-white">
+<section class="bg-primary-800 text-white">
 		<div class="mx-auto max-w-6xl px-4 py-16 text-center">
 			<h2 class="text-3xl font-bold text-white sm:text-4xl">Dukung Program Kami</h2>
 			<p class="mx-auto mt-4 max-w-2xl text-lg text-primary-200">
 				Setiap donasi Anda, sekecil apapun, berarti besar bagi mereka yang membutuhkan.
 			</p>
-			<Button variant="gold" size="lg" href="/donasi" class="mt-8">
-				Donasi Sekarang
-				<Icon name="arrow-right" size={5} />
-			</Button>
+			<div class="mt-8 flex flex-wrap justify-center gap-4">
+				<Button variant="gold" size="lg" href="/donasi">Donasi Sekarang</Button>
+				<Button variant="outline" size="lg" href="/tentang">Tentang Kami</Button>
+			</div>
 		</div>
 	</section>
+
 </BaseLayout>

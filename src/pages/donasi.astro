@@ -21,9 +21,10 @@ try {
   ]);
 
   if (sanityBanks && sanityBanks.length > 0) {
+    const localFullNames = new Map(DONATION.banks.map(b => [b.name, b.fullName]));
     banks = sanityBanks.map(b => ({
       name: b.bankName,
-      fullName: b.bankName,
+      fullName: localFullNames.get(b.bankName) ?? b.bankName,
       accountNumber: b.accountNumber,
       accountName: b.accountName,
     }));
@@ -37,6 +38,8 @@ try {
 } catch {
   // Sanity unavailable — use local data silently
 }
+
+const firstBank = banks[0];
 ---
 
 <BaseLayout
@@ -61,21 +64,63 @@ try {
 				</div>
 				<h2 class="text-xl font-bold text-warm-900">Transfer Bank</h2>
 				<p class="mt-2 text-sm text-warm-700">Salurkan donasi melalui rekening resmi Yayasan ASIB di bawah ini.</p>
-				<div class="mt-6 space-y-4">
-					{banks.map((bank) => (
-						<div class="rounded-xl border border-primary-100 bg-white p-4 transition-colors hover:border-primary-300 hover:bg-primary-50/30">
-							<div class="mb-3 flex items-center gap-2">
-								<div class="rounded-lg bg-primary-600 px-3 py-1.5 text-xs font-bold text-white">{bank.name}</div>
-								<span class="text-sm font-medium text-warm-700">{bank.fullName}</span>
+
+				<!-- Pilih Bank via Dropdown -->
+				<div class="mt-5" data-bank-selector>
+					<label for="bank-select" class="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-warm-500">
+						Pilih Bank
+					</label>
+					<select
+						id="bank-select"
+						class="block w-full rounded-xl border border-primary-200 bg-white px-4 py-2.5 text-sm font-medium text-warm-900 shadow-sm transition-colors focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20"
+					>
+						{banks.map((bank, i) => (
+							<option value={i} selected={i === 0}>{bank.name}</option>
+						))}
+					</select>
+
+					<!-- Detail Rekening -->
+					<div class="mt-4">
+						{banks.map((bank, i) => (
+							<div class={`bank-detail ${i === 0 ? '' : 'hidden'}`} data-index={i}>
+								<div class="rounded-2xl border border-primary-100 bg-white p-5">
+									<div class="flex items-center justify-between mb-4">
+										<div class="flex items-center gap-2">
+											<div class="rounded-lg bg-primary-50 p-2 text-primary-600">
+												<Icon name="credit-card" size={5} />
+											</div>
+											<span class="text-sm font-semibold text-warm-900">{bank.fullName}</span>
+										</div>
+										<span class="text-[10px] font-semibold uppercase tracking-wider text-warm-400">Rekening Resmi</span>
+									</div>
+
+									<div class="flex items-center justify-between rounded-xl bg-warm-50 p-4">
+										<div>
+											<p class="text-[11px] font-semibold uppercase tracking-wide text-warm-500">Nomor Rekening</p>
+											<p class="mt-0.5 text-xl font-extrabold tracking-wider text-primary-700 font-mono">{bank.accountNumber}</p>
+										</div>
+										<button
+											type="button"
+											class="copy-btn inline-flex h-9 w-9 items-center justify-center rounded-lg bg-white text-primary-600 shadow-sm transition-all hover:bg-primary-50 active:scale-90"
+											data-copy={bank.accountNumber}
+											aria-label="Salin nomor rekening"
+										>
+											<Icon name="copy" size={4.5} class="copy-icon" />
+											<Icon name="check" size={4.5} class="check-icon hidden" />
+										</button>
+									</div>
+
+									<p class="mt-3 text-center text-sm text-warm-600">
+										a.n. <span class="font-semibold text-warm-900">{bank.accountName}</span>
+									</p>
+								</div>
 							</div>
-							<p class="text-xl font-bold tracking-wider text-warm-900 font-mono">{bank.accountNumber}</p>
-							<p class="mt-1 text-sm text-warm-700">a.n. <strong>{bank.accountName}</strong></p>
-						</div>
-					))}
+						))}
+					</div>
 				</div>
-				<div class="mt-4 rounded-lg bg-gold-50 p-4 text-sm text-gold-800">
-					<strong>Konfirmasi donasi:</strong> Setelah transfer, silakan kirim bukti
-					ke WhatsApp <strong>{contactPhone}</strong>.
+
+				<div class="mt-4 rounded-xl bg-gold-50 px-4 py-3 text-sm text-gold-800">
+					<strong>Konfirmasi donasi:</strong> Setelah transfer, kirim bukti ke WhatsApp <strong>{contactPhone}</strong>.
 				</div>
 			</Card>
 
@@ -117,7 +162,7 @@ try {
 						href={linktreeUrl}
 						target="_blank"
 						rel="noopener noreferrer"
-						class="flex items-center gap-3 rounded-xl border border-primary-200 bg-white p-4 transition-colors hover:border-primary-400 hover:bg-primary-50"
+						class="flex items-center gap-3 rounded-xl border border-primary-200 bg-white p-4 transition-all hover:border-primary-400 hover:bg-primary-50 hover:shadow-sm"
 					>
 						<div class="rounded-lg bg-primary-100 p-2 text-primary-600">
 							<Icon name="external-link" size={6} />
@@ -126,15 +171,15 @@ try {
 							<p class="font-semibold text-warm-900">{linktreeUrl.replace('https://', '')}</p>
 							<p class="text-xs text-warm-700">Semua program donasi dalam satu tautan</p>
 						</div>
-						<Icon name="external-link" size={5} class="ml-auto text-warm-500" />
+						<Icon name="external-link" size={5} class="ml-auto shrink-0 text-warm-400" />
 					</a>
 				</div>
 				<div class="mt-6 rounded-xl bg-warm-50 p-5">
 					<h3 class="font-semibold text-warm-800">Butuh bantuan?</h3>
-					<p class="mt-2 text-sm text-warm-700">
+					<p class="mt-1 text-sm text-warm-700">
 						Hubungi admin kami melalui WhatsApp:
 					</p>
-					<Button variant="whatsapp" href={CONTACT.whatsapp} class="mt-3" target="_blank">
+					<Button variant="whatsapp" href={contactWhatsapp} class="mt-3" target="_blank" rel="noopener noreferrer">
 						<Icon name="whatsapp" size={4} />
 						Chat WhatsApp
 					</Button>
@@ -160,3 +205,44 @@ try {
 		</div>
 	</section>
 </BaseLayout>
+
+<!-- Client-side: Dropdown bank switching + Clipboard -->
+<script is:inline>
+(() => {
+	const root = document.querySelector('[data-bank-selector]');
+	if (!root) return;
+
+	const select = root.querySelector('#bank-select');
+	const details = root.querySelectorAll('.bank-detail');
+
+	if (!select || details.length === 0) return;
+
+	// Show initial
+	select.dispatchEvent(new Event('change'));
+
+	select.addEventListener('change', () => {
+		const idx = select.value;
+		details.forEach((el) => {
+			el.classList.toggle('hidden', el.getAttribute('data-index') !== idx);
+		});
+	});
+
+	// Clipboard
+	root.querySelectorAll('.copy-btn').forEach((btn) => {
+		btn.addEventListener('click', () => {
+			const num = btn.getAttribute('data-copy');
+			const copyIcon = btn.querySelector('.copy-icon');
+			const checkIcon = btn.querySelector('.check-icon');
+			if (!navigator.clipboard || !num) return;
+			navigator.clipboard.writeText(num).then(() => {
+				copyIcon?.classList.add('hidden');
+				checkIcon?.classList.remove('hidden');
+				setTimeout(() => {
+					copyIcon?.classList.remove('hidden');
+					checkIcon?.classList.add('hidden');
+				}, 2000);
+			});
+		});
+	});
+})();
+</script>

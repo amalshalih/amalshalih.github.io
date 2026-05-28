@@ -43,6 +43,41 @@ export const programType = defineType({
       rows: 3,
     }),
     defineField({
+      name: 'badge',
+      title: 'Label / Badge',
+      type: 'string',
+      description: 'Label kecil di card, misal: "Pendidikan Diniyah", "Usia 1-6 Tahun"',
+    }),
+    defineField({
+      name: 'cardVariant',
+      title: 'Varian Card',
+      type: 'string',
+      options: {
+        list: [
+          {title: 'Default', value: 'default'},
+          {title: 'Overflow (header berwarna)', value: 'overflow'},
+        ],
+      },
+      initialValue: 'default',
+    }),
+    defineField({
+      name: 'stats',
+      title: 'Statistik',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            {name: 'number', type: 'string', title: 'Angka'},
+            {name: 'label', type: 'string', title: 'Label'},
+          ],
+          preview: {
+            select: {title: 'number', subtitle: 'label'},
+          },
+        },
+      ],
+    }),
+    defineField({
       name: 'image',
       title: 'Gambar',
       type: 'image',
