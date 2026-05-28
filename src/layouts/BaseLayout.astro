@@ -10,15 +10,16 @@ interface Props {
 	description: string;
 	image?: string;
 	currentPage?: string;
+	pageType?: 'website' | 'article';
 }
 
-const { title, description, image, currentPage } = Astro.props;
+const { title, description, image, currentPage, pageType } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="id">
 	<head>
-		<BaseHead title={title} description={description} image={image} />
+		<BaseHead title={title} description={description} image={image} pageType={pageType} />
 	</head>
 	<body class="flex min-h-screen flex-col">
 		<a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-primary-600 focus:px-4 focus:py-3 focus:text-sm focus:font-semibold focus:text-white focus:shadow-lg">

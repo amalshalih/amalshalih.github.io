@@ -166,15 +166,14 @@ const breadcrumbJsonLd = {
 <BaseLayout
 	title={`${title} — Kegiatan Yayasan ASIB`}
 	description={description}
+	image={image || '/logo-yayasan.webp'}
 	pageType="article"
 >
 	<!-- JSON-LD Structured Data -->
 	<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 	<script type="application/ld+json" set:html={JSON.stringify(breadcrumbJsonLd)} />
 
-	<!-- OG Image Meta -->
-	<meta property="og:image" content={image ? `${SITE.url}${image}` : `${SITE.url}/logo-yayasan.webp`} />
-	<meta property="og:type" content="article" />
+	<!-- Article-specific OG meta (og:type + og:image handled by BaseHead via pageType + image props) -->
 	<meta property="article:published_time" content={date.toISOString()} />
 	<meta property="article:section" content={KATEGORI_LABELS[kategori] || kategori} />
 
