@@ -60,13 +60,13 @@ const { title, description, image, currentPage } = Astro.props;
 				<button
 					id="mobile-menu-button"
 					type="button"
-					class="sm:hidden p-2 rounded-lg text-primary-800 hover:bg-primary-50 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+					class="sm:hidden p-2 rounded-lg text-primary-800 hover:bg-primary-50 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2"
 					aria-expanded="false"
 					aria-controls="mobile-menu"
 					aria-label="Buka menu navigasi"
 				>
-					<Icon name="menu" size={6} class="menu-icon" />
-					<Icon name="close" size={6} class="close-icon hidden" />
+					<Icon name="menu" size={6} class="menu-icon" aria-hidden="true" />
+					<Icon name="close" size={6} class="close-icon hidden" aria-hidden="true" />
 				</button>
 			</nav>
 
@@ -183,23 +183,23 @@ const { title, description, image, currentPage } = Astro.props;
 					<div>
 						<h3 class="mb-3 text-sm font-semibold uppercase tracking-wider text-primary-300">Ikuti Kami</h3>
 						<div class="flex flex-wrap gap-3 text-primary-300">
-							<a href={SOCIAL.facebook.url} target="_blank" rel="noopener noreferrer" class="p-2.5 hover:text-white transition-colors" aria-label={SOCIAL.facebook.ariaLabel}>
-								<Icon name="facebook" size={5} />
+							<a href={SOCIAL.facebook.url} target="_blank" rel="noopener noreferrer" class="p-2.5 rounded-lg hover:text-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-primary-950" aria-label={SOCIAL.facebook.ariaLabel}>
+								<Icon name="facebook" size={5} aria-hidden="true" />
 							</a>
-							<a href={SOCIAL.instagram.url} target="_blank" rel="noopener noreferrer" class="p-2.5 hover:text-white transition-colors" aria-label={SOCIAL.instagram.ariaLabel}>
-								<Icon name="instagram" size={5} />
+							<a href={SOCIAL.instagram.url} target="_blank" rel="noopener noreferrer" class="p-2.5 rounded-lg hover:text-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-primary-950" aria-label={SOCIAL.instagram.ariaLabel}>
+								<Icon name="instagram" size={5} aria-hidden="true" />
 							</a>
-							<a href={SOCIAL.tiktok.url} target="_blank" rel="noopener noreferrer" class="p-2.5 hover:text-white transition-colors" aria-label={SOCIAL.tiktok.ariaLabel}>
-								<Icon name="tiktok" size={5} />
+							<a href={SOCIAL.tiktok.url} target="_blank" rel="noopener noreferrer" class="p-2.5 rounded-lg hover:text-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-primary-950" aria-label={SOCIAL.tiktok.ariaLabel}>
+								<Icon name="tiktok" size={5} aria-hidden="true" />
 							</a>
-							<a href={SOCIAL.youtube.url} target="_blank" rel="noopener noreferrer" class="p-2.5 hover:text-white transition-colors" aria-label={SOCIAL.youtube.ariaLabel}>
-								<Icon name="youtube" size={5} />
+							<a href={SOCIAL.youtube.url} target="_blank" rel="noopener noreferrer" class="p-2.5 rounded-lg hover:text-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-primary-950" aria-label={SOCIAL.youtube.ariaLabel}>
+								<Icon name="youtube" size={5} aria-hidden="true" />
 							</a>
-							<a href={CONTACT.whatsapp} target="_blank" rel="noopener noreferrer" class="p-2.5 hover:text-white transition-colors" aria-label="WhatsApp">
-								<Icon name="whatsapp" size={5} />
+							<a href={CONTACT.whatsapp} target="_blank" rel="noopener noreferrer" class="p-2.5 rounded-lg hover:text-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-primary-950" aria-label="WhatsApp">
+								<Icon name="whatsapp" size={5} aria-hidden="true" />
 							</a>
-							<a href={SOCIAL.linktree.url} target="_blank" rel="noopener noreferrer" class="p-2.5 hover:text-white transition-colors" aria-label="Linktree">
-								<Icon name="external-link" size={5} />
+							<a href={SOCIAL.linktree.url} target="_blank" rel="noopener noreferrer" class="p-2.5 rounded-lg hover:text-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-primary-950" aria-label="Linktree">
+								<Icon name="external-link" size={5} aria-hidden="true" />
 							</a>
 						</div>
 					</div>

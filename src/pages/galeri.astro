@@ -59,7 +59,7 @@ const kategoriIcons = {
 								/>
 							) : (
 								<div class={`flex h-full w-full items-center justify-center bg-gradient-to-br ${kategoriGradients[item.data.kategori] || 'from-primary-400 to-primary-600'}`}>
-									<Icon name={(kategoriIcons[item.data.kategori] ?? 'book') as 'book' | 'home' | 'heart' | 'globe'} size={12} class="text-white/30" />
+									<Icon name={(kategoriIcons[item.data.kategori] ?? 'book') as 'book' | 'home' | 'heart' | 'globe'} size={12} class="text-white/30" aria-hidden="true" />
 								</div>
 							)}
 							
@@ -80,7 +80,7 @@ const kategoriIcons = {
 
 						<div class="p-6">
 							<div class="flex items-center gap-2 text-xs text-warm-500">
-								<Icon name="calendar" size={3.5} />
+								<Icon name="calendar" size={3.5} aria-hidden="true" />
 								<time datetime={item.data.date.toISOString()}>
 									{item.data.date.toLocaleDateString('id-ID', {
 										year: 'numeric',
@@ -101,7 +101,7 @@ const kategoriIcons = {
 		{kegiatan.length === 0 && (
 			<div class="flex flex-col items-center justify-center py-24 text-center">
 				<div class="mb-4 rounded-full bg-warm-50 p-6 text-warm-300">
-					<Icon name="image" size={16} />
+					<Icon name="image" size={16} aria-hidden="true" />
 				</div>
 				<h3 class="text-xl font-bold text-warm-900">Belum Ada Dokumentasi</h3>
 				<p class="mt-2 max-w-xs text-warm-600">Dokumentasi kegiatan akan diperbarui secara berkala oleh tim yayasan.</p>
