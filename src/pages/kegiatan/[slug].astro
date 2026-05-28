@@ -196,7 +196,7 @@ const breadcrumbJsonLd = {
 			<div class="mx-auto flex max-w-6xl items-center justify-center py-12 sm:py-20 px-4">
 				<div class="text-center">
 					<div class="mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-full border-2 border-primary-400/30 bg-primary-800/40 backdrop-blur-sm">
-						<Icon name="book" size={10} class="text-primary-300" />
+						<Icon name="book" size={10} class="text-primary-300" aria-hidden="true" />
 					</div>
 					<p class="text-sm font-medium uppercase tracking-widest text-primary-400">Arsip Kegiatan</p>
 					<p class="mt-2 text-lg font-semibold text-primary-100">{SITE.shortName}</p>
@@ -221,7 +221,7 @@ const breadcrumbJsonLd = {
 		<!-- Archival Metadata Bar -->
 		<div class="mb-8 flex flex-wrap items-center gap-x-4 gap-y-2 border-b border-warm-200 pb-6">
 			<span class="inline-flex items-center gap-1.5 rounded-full border border-primary-200 bg-primary-50 px-3 py-1 text-xs font-semibold text-primary-700">
-				<Icon name="check-circle" size={3} class="text-primary-500" />
+				<Icon name="check-circle" size={3} class="text-primary-500" aria-hidden="true" />
 				{KATEGORI_LABELS[kategori] || kategori}
 			</span>
 			<time datetime={date.toISOString()} class="text-sm text-warm-500" itemprop="datePublished">
@@ -264,32 +264,32 @@ const breadcrumbJsonLd = {
 		<div class="mt-12 flex flex-col items-start gap-4 border-t border-warm-200 pt-6 sm:flex-row sm:items-center sm:justify-between">
 			<div class="flex items-center gap-3">
 				<span class="text-sm font-medium text-warm-500">Bagikan arsip ini:</span>
-				<div class="flex gap-2">
+				<div class="flex gap-2" data-share-buttons>
 					<a
 						href={`https://wa.me/?text=${shareTitle}%20${shareUrl}`}
 						target="_blank"
 						rel="noopener noreferrer"
-						class="inline-flex items-center justify-center rounded-lg bg-green-600 p-2 text-white shadow-sm transition-colors duration-200, shadow duration-200 hover:bg-green-700 hover:shadow-md"
+						class="inline-flex items-center justify-center rounded-lg bg-green-600 p-3 text-white shadow-sm transition-colors duration-200, shadow duration-200 hover:bg-green-700 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2"
 						aria-label="Bagikan via WhatsApp"
 					>
-						<Icon name="whatsapp" size={5} />
+						<Icon name="whatsapp" size={5} aria-hidden="true" />
 					</a>
 					<a
 						href={`https://www.facebook.com/sharer/sharer.php?u=${shareUrl}`}
 						target="_blank"
 						rel="noopener noreferrer"
-						class="inline-flex items-center justify-center rounded-lg bg-blue-600 p-2 text-white shadow-sm transition-colors duration-200, shadow duration-200 hover:bg-blue-700 hover:shadow-md"
+						class="inline-flex items-center justify-center rounded-lg bg-blue-600 p-3 text-white shadow-sm transition-colors duration-200, shadow duration-200 hover:bg-blue-700 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
 						aria-label="Bagikan via Facebook"
 					>
-						<Icon name="facebook" size={5} />
+						<Icon name="facebook" size={5} aria-hidden="true" />
 					</a>
 					<button
 						type="button"
-						onclick={`navigator.clipboard.writeText(decodeURIComponent('${shareUrl}'))`}
-						class="inline-flex items-center justify-center rounded-lg bg-warm-600 p-2 text-white shadow-sm transition-colors duration-200, shadow duration-200 hover:bg-warm-700 hover:shadow-md"
+						data-copy-url={shareUrl}
+						class="copy-url-btn inline-flex items-center justify-center rounded-lg bg-warm-600 p-3 text-white shadow-sm transition-colors duration-200, shadow duration-200 hover:bg-warm-700 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-warm-400 focus-visible:ring-offset-2"
 						aria-label="Salin tautan"
 					>
-						<Icon name="external-link" size={5} />
+						<Icon name="external-link" size={5} aria-hidden="true" />
 					</button>
 				</div>
 			</div>
@@ -297,7 +297,7 @@ const breadcrumbJsonLd = {
 				href="/kegiatan"
 				class="inline-flex items-center gap-1.5 text-sm font-medium text-warm-500 hover:text-primary-700 transition-colors"
 			>
-				<Icon name="arrow-left" size={4} />
+				<Icon name="arrow-left" size={4} aria-hidden="true" />
 				Kembali ke Daftar Kegiatan
 			</a>
 		</div>
@@ -311,7 +311,7 @@ const breadcrumbJsonLd = {
 
 			<div class="relative z-10">
 				<div class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-white/15">
-					<Icon name="heart" size={7} class="text-gold-300" />
+					<Icon name="heart" size={7} class="text-gold-300" aria-hidden="true" />
 				</div>
 				<h2 class="text-2xl font-bold text-white sm:text-3xl">Dukung Program Kami</h2>
 				<p class="mx-auto mt-3 max-w-md text-base leading-relaxed text-primary-100">
@@ -323,7 +323,7 @@ const breadcrumbJsonLd = {
 						class="inline-flex items-center gap-2 rounded-lg bg-white px-6 py-3 text-sm font-semibold text-primary-700 shadow-lg transition-colors duration-200, transform duration-200 hover:bg-primary-50 hover:scale-[1.02] active:scale-95"
 					>
 						Donasi Sekarang
-						<Icon name="arrow-right" size={5} />
+						<Icon name="arrow-right" size={5} aria-hidden="true" />
 					</a>
 					<a
 						href={CONTACT.whatsapp}
@@ -331,7 +331,7 @@ const breadcrumbJsonLd = {
 						rel="noopener noreferrer"
 						class="inline-flex items-center gap-2 rounded-lg border border-white/30 px-5 py-2.5 text-sm font-medium text-white transition-colors duration-200, border-color duration-200 hover:bg-white/10 hover:border-white/50"
 					>
-						<Icon name="whatsapp" size={5} />
+						<Icon name="whatsapp" size={5} aria-hidden="true" />
 						Hubungi Kami
 					</a>
 				</div>
@@ -374,3 +374,15 @@ const breadcrumbJsonLd = {
 	<!-- Spacer before footer -->
 	<div class="h-16" />
 </BaseLayout>
+
+<script is:inline>
+(() => {
+	const btn = document.querySelector('.copy-url-btn');
+	if (!btn) return;
+	btn.addEventListener('click', () => {
+		const url = btn.getAttribute('data-copy-url');
+		if (!url || !navigator.clipboard) return;
+		navigator.clipboard.writeText(decodeURIComponent(url));
+	});
+})();
+</script>
