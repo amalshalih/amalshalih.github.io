@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Container from '../components/ui/Container.astro';
 import PageHeader from '../components/sections/PageHeader.astro';
 import Card from '../components/ui/Card.astro';
 import Button from '../components/ui/Button.astro';
@@ -55,7 +56,7 @@ const firstBank = banks[0];
 	/>
 
 	<!-- Donation Channels -->
-	<section class="mx-auto max-w-6xl px-4 py-16">
+	<Container>
 		<div class="grid gap-8 lg:grid-cols-3">
 			<!-- Bank Transfer -->
 			<Card variant="hover" class="p-8">
@@ -164,14 +165,14 @@ const firstBank = banks[0];
 						rel="noopener noreferrer"
 						class="flex items-center gap-3 rounded-xl border border-primary-200 bg-white p-4 transition-all hover:border-primary-400 hover:bg-primary-50 hover:shadow-sm"
 					>
-						<div class="rounded-lg bg-primary-100 p-2 text-primary-600">
+						<div class="rounded-lg bg-primary-100 p-2 text-primary-600 shrink-0">
 							<Icon name="external-link" size={6} />
 						</div>
-						<div>
-							<p class="font-semibold text-warm-900">{linktreeUrl.replace('https://', '')}</p>
+						<div class="min-w-0">
+							<p class="truncate font-semibold text-warm-900">{linktreeUrl.replace('https://', '')}</p>
 							<p class="text-xs text-warm-700">Semua program donasi dalam satu tautan</p>
 						</div>
-						<Icon name="external-link" size={5} class="ml-auto shrink-0 text-warm-400" />
+						<Icon name="external-link" size={5} class="shrink-0 text-warm-400" />
 					</a>
 				</div>
 				<div class="mt-6 rounded-xl bg-warm-50 p-5">
@@ -190,7 +191,7 @@ const firstBank = banks[0];
 
 	<!-- Ayat Motivasi -->
 	<section class="bg-gradient-to-r from-gold-50 to-primary-50">
-		<div class="mx-auto max-w-6xl px-4 py-16">
+		<Container as="div" class="py-16">
 			<div class="rounded-2xl bg-white p-8 shadow-md ring-1 ring-primary-100/50 text-center sm:p-12">
 				<Icon name="book" size={12} class="mx-auto text-gold-500" />
 				<blockquote class="mt-6">
@@ -202,7 +203,7 @@ const firstBank = banks[0];
 				</blockquote>
 				<p class="mt-4 text-sm font-medium text-primary-600">— QS. Al-Baqarah: 261</p>
 			</div>
-		</div>
+		</Container>
 	</section>
 </BaseLayout>
 
