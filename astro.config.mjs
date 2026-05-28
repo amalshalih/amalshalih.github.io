@@ -4,6 +4,7 @@ import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 import sanity from '@sanity/astro';
+import spotlightjs from '@spotlightjs/astro';
 import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
@@ -12,6 +13,7 @@ export default defineConfig({
 	integrations: [
 		mdx(),
 		sitemap(),
+		spotlightjs(),
 		sanity({
 			projectId: '9yj0dq9v',
 			dataset: 'production',
