@@ -7,7 +7,7 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "bunx --bun astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
@@ -20,6 +20,7 @@
     "@sanity/client": "^7.22.0",
     "@sanity/image-url": "^2.1.1",
     "@sentry/astro": "^10.54.0",
+    "@sentry/vite-plugin": "^5.3.0",
     "@spotlightjs/astro": "^3.2.6",
     "@tailwindcss/typography": "^0.5.19",
     "astro": "^6.3.8",
@@ -30,6 +31,8 @@
     "sanity": "^5.27.0"
   },
   "trustedDependencies": [
-    "@sentry/cli"
+    "@sentry/cli",
+    "esbuild",
+    "sharp"
   ]
 }

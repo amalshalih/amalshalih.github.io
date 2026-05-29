@@ -14,14 +14,16 @@ export default defineConfig({
 	integrations: [
 		mdx(),
 		sitemap(),
-		// Order matters: sentry() before spotlightjs()
+		spotlightjs(),
 		sentry({
 			project: 'amalshalih',
 			org: 'yayasan-amal-shalih-insan-bant',
 			authToken: process.env.SENTRY_AUTH_TOKEN,
 			telemetry: false,
+			sourcemaps: {
+				assets: './dist/**',
+			},
 		}),
-		spotlightjs(),
 		sanity({
 			projectId: '9yj0dq9v',
 			dataset: 'production',
@@ -29,6 +31,9 @@ export default defineConfig({
 		}),
 	],
 	vite: {
+		build: {
+			sourcemap: true,
+		},
 		plugins: [tailwindcss()],
 	},
 });
