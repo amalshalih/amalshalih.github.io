@@ -202,15 +202,18 @@ const { title, description, image, currentPage, pageType } = Astro.props;
 		<footer class="bg-primary-950 text-white">
 				<Container as="div" class="py-6 sm:py-8 lg:py-12">
 					<!-- Grid: mobile 1 col, tablet 2 paired cols, desktop 4 cols -->
-					<div class="grid gap-5 sm:gap-6 lg:gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+					<div class="grid gap-5 sm:gap-6 lg:gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 items-start justify-center">
 					<!-- Left Pair: About + Kontak (heavy content) -->
 					<div class="flex flex-col gap-5 sm:gap-6 lg:contents">
 						<!-- About -->
 						<div class="min-w-0">
 							<h3 class="mb-2 sm:mb-3 text-base sm:text-lg font-bold text-white">{SITE.shortName}</h3>
-							<p class="text-sm text-primary-200 leading-relaxed break-words">
+							<p class="text-sm text-primary-200 leading-relaxed break-words mb-3">
 								{SITE.description}
 							</p>
+							<a href={`mailto:${CONTACT.email}`} class="text-xs sm:text-sm text-primary-300 hover:text-white transition-colors block break-all">
+								{CONTACT.email}
+							</a>
 						</div>
 						<!-- Kontak -->
 						<div class="min-w-0">
@@ -231,12 +234,11 @@ const { title, description, image, currentPage, pageType } = Astro.props;
 										{SOCIAL.linktree.label}
 									</a>
 								</li>
-								<li><a href={`mailto:${CONTACT.email}`} class="break-all hover:text-white transition-colors">{CONTACT.email}</a></li>
 							</ul>
 						</div>
 					</div>
 					<!-- Right Pair: Navigasi + Social (light content) -->
-					<div class="flex flex-col gap-5 sm:grid sm:grid-cols-2 sm:gap-6 lg:contents">
+					<div class="flex flex-col gap-5 sm:grid sm:grid-cols-2 sm:gap-6 lg:contents justify-center">
 						<!-- Navigasi -->
 						<div class="min-w-0">
 							<h3 class="mb-2 sm:mb-3 text-xs sm:text-sm font-semibold uppercase tracking-wider text-primary-300">Navigasi</h3>
