@@ -240,11 +240,12 @@ const { title, description, image, currentPage, pageType } = Astro.props;
 						<!-- Navigasi -->
 						<div class="min-w-0">
 							<h3 class="mb-2 sm:mb-3 text-xs sm:text-sm font-semibold uppercase tracking-wider text-primary-300">Navigasi</h3>
-							<ul class="grid grid-cols-2 sm:grid-cols-1 gap-x-4 gap-y-1.5 sm:gap-0 sm:space-y-2 text-sm">
+							<ul class="grid grid-cols-3 sm:grid-cols-1 lg:grid-cols-2 gap-x-4 gap-y-1.5 text-sm">
 								<li><a href="/" aria-current={currentPage === '/' ? 'page' : undefined} class="text-primary-200 hover:text-white transition-colors">Beranda</a></li>
 								<li><a href="/tentang" aria-current={currentPage === '/tentang' ? 'page' : undefined} class="text-primary-200 hover:text-white transition-colors">Tentang Kami</a></li>
 								<li><a href="/program" aria-current={currentPage === '/program' ? 'page' : undefined} class="text-primary-200 hover:text-white transition-colors">Program</a></li>
 								<li><a href="/kegiatan" aria-current={currentPage === '/kegiatan' ? 'page' : undefined} class="text-primary-200 hover:text-white transition-colors">Kegiatan</a></li>
+								<li><a href="/blog" aria-current={currentPage === '/blog' ? 'page' : undefined} class="text-primary-200 hover:text-white transition-colors">Blog</a></li>
 								<li><a href="/donasi" aria-current={currentPage === '/donasi' ? 'page' : undefined} class="text-primary-200 hover:text-white transition-colors">Donasi</a></li>
 								<li><a href="/kontak" aria-current={currentPage === '/kontak' ? 'page' : undefined} class="text-primary-200 hover:text-white transition-colors">Kontak</a></li>
 							</ul>
@@ -265,9 +266,6 @@ const { title, description, image, currentPage, pageType } = Astro.props;
 								</a>
 								<a href={SOCIAL.youtube.url} target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg hover:text-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-primary-950" aria-label={SOCIAL.youtube.ariaLabel}>
 									<Icon name="youtube" size={4} aria-hidden="true" />
-								</a>
-								<a href={CONTACT.whatsapp} target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg hover:text-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-primary-950" aria-label="WhatsApp">
-									<Icon name="whatsapp" size={4} aria-hidden="true" />
 								</a>
 							</div>
 							<!-- Tablet+: vertical list with icon + label -->
@@ -294,12 +292,6 @@ const { title, description, image, currentPage, pageType } = Astro.props;
 									<a href={SOCIAL.youtube.url} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 hover:text-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-primary-950 rounded-md py-1">
 										<Icon name="youtube" size={4} class="shrink-0" aria-hidden="true" />
 										<span>{SOCIAL.youtube.label}</span>
-									</a>
-								</li>
-								<li>
-									<a href={CONTACT.whatsapp} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 hover:text-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-primary-950 rounded-md py-1">
-										<Icon name="whatsapp" size={4} class="shrink-0" aria-hidden="true" />
-										<span>WhatsApp</span>
 									</a>
 								</li>
 							</ul>
