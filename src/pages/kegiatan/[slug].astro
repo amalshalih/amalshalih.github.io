@@ -8,6 +8,8 @@ import { SITE, CONTACT } from '../../data/site';
 import { getKegiatanList, getKegiatanItem } from '../../lib/sanity/client';
 import { renderPortableText } from '../../lib/sanity/render';
 
+export const prerender = true;
+
 export async function getStaticPaths() {
 	const slugs = new Set<string>();
 
@@ -170,8 +172,8 @@ const breadcrumbJsonLd = {
 	pageType="article"
 >
 	<!-- JSON-LD Structured Data -->
-	<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
-	<script type="application/ld+json" set:html={JSON.stringify(breadcrumbJsonLd)} />
+<script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+<script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbJsonLd)} />
 
 	<!-- Article-specific OG meta (og:type + og:image handled by BaseHead via pageType + image props) -->
 	<meta property="article:published_time" content={date.toISOString()} />
@@ -219,24 +221,23 @@ const breadcrumbJsonLd = {
 			</ol>
 		</nav>
 
-		<!-- Archival Metadata Bar -->
-		<div class="mb-4 flex flex-wrap items-center gap-x-3 gap-y-2 border-b border-warm-200 pb-3">
-			<span class="inline-flex items-center gap-1.5 rounded-full border border-primary-200 bg-primary-50 px-2.5 py-0.5 text-xs font-semibold text-primary-700">
-				<Icon name="check-circle" size={3} class="text-primary-500" aria-hidden="true" />
-				{KATEGORI_LABELS[kategori] || kategori}
-			</span>
-			<time datetime={date.toISOString()} class="text-xs sm:text-sm text-warm-500" itemprop="datePublished">
-				{formattedDate}
-			</time>
-			<span class="text-[10px] sm:text-xs text-warm-400">
-				Arsip #{slug}
-			</span>
-		</div>
-
 		<!-- Title -->
-		<h1 class="mb-2 sm:mb-3 text-xl font-extrabold leading-tight tracking-tight text-warm-900 sm:text-2xl lg:text-3xl" itemprop="name">
+		<h1 class="mb-4 text-xl font-extrabold leading-tight tracking-tight text-warm-900 sm:text-2xl lg:text-3xl" itemprop="name">
 			{title}
 		</h1>
+
+		<!-- Compact Metadata Bar -->
+		<div class="mb-6 flex flex-wrap items-center justify-center sm:justify-start gap-x-3 gap-y-2 text-xs sm:text-sm text-warm-600 font-medium">
+			<span class="rounded-full bg-primary-50 px-2 py-0.5 text-[10px] sm:text-xs font-semibold text-primary-700 ring-1 ring-inset ring-primary-600/20">
+				{KATEGORI_LABELS[kategori] || kategori}
+			</span>
+			<span class="hidden sm:inline text-warm-300">•</span>
+			<time datetime={date.toISOString()} class="text-warm-500" itemprop="datePublished">
+				{formattedDate}
+			</time>
+			<span class="hidden sm:inline text-warm-300">•</span>
+			<span class="text-warm-400">Arsip #{slug}</span>
+		</div>
 
 		<!-- Lead / Description -->
 		<p class="mb-6 sm:mb-8 text-sm leading-relaxed text-warm-600 sm:text-base" itemprop="description">

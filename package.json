@@ -7,11 +7,15 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "bunx --bun astro build",
+    "build": "bun run scripts/discover-and-cache-galleries.ts && npx astro build",
+    "build:skip-gallery": "npx astro build",
+    "gallery:cache": "bun run scripts/discover-and-cache-galleries.ts",
     "preview": "astro preview",
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/check": "^0.9.9",
+    "@astrojs/cloudflare": "^13.6.0",
     "@astrojs/mdx": "^5.0.6",
     "@astrojs/rss": "^4.0.18",
     "@astrojs/sitemap": "^3.7.3",
@@ -20,11 +24,14 @@
     "@sanity/client": "^7.22.0",
     "@sanity/image-url": "^2.1.1",
     "@sentry/astro": "^10.54.0",
+    "@sentry/cloudflare": "^10.55.0",
     "@sentry/vite-plugin": "^5.3.0",
     "@spotlightjs/astro": "^3.2.6",
     "@tailwindcss/typography": "^0.5.19",
     "astro": "^6.3.8",
-    "sharp": "^0.34.3"
+    "googleapis": "^173.0.0",
+    "sharp": "^0.34.3",
+    "typescript": "^6.0.3"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.3.0",

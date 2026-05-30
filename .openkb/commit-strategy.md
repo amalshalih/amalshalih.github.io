@@ -2,16 +2,18 @@
 
 > **Dibuat:** 27 Mei 2026
 > **Tujuan:** Dokumen ini berisi strategi dan eksekusi commit untuk memudahkan tracking issue dan handover ke tim pengembang.
+> **Gaya:** Conventional Commits — `feat:`, `fix:`, `style:`, `refactor:`, `chore:`, `docs:`, `perf:`, `build:`
 
 ---
 
 ## Daftar Isi
 
 1. [Hasil Audit File — Tracked vs Ignored](#1-hasil-audit-file)
-2. [Struktur Commit](#2-struktur-commit)
-3. [Cara Eksekusi](#3-cara-eksekusi)
-4. [ Troubleshooting — Cara Lacak Issue](#4-troubleshooting)
-5. [Appendix: File Reference](#5-appendix)
+2. [Struktur Commit — Sesi 1 (Initial Setup)](#2-struktur-commit--sesi-1-initial-setup)
+3. [Cara Eksekusi Sesi 1](#3-cara-eksekusi-sesi-1)
+4. [Konvensi Branch](#4-konvensi-branch)
+5. [Troubleshooting — Cara Lacak Issue](#5-troubleshooting)
+6. [Appendix: File Reference](#6-appendix)
 
 ---
 
@@ -21,34 +23,46 @@
 
 | Kategori | File/Folder | Keterangan |
 |----------|-------------|------------|
-| Source code | `src/pages/*` | Semua halaman (index, tentang, program, kegiatan, donasi, kontak, 404) |
-| Source code | `src/components/*` | UI components (Button, Card, Icon), sections (PageHeader), BaseHead |
+| Source code | `src/pages/*` | Semua halaman (index, tentang, program, kegiatan, donasi, kontak, 404, blog, galeri) |
+| Source code | `src/components/*` | UI components (Button, Card, Icon), sections, gallery (Lightbox, MasonryGrid, LikeButton) |
 | Source code | `src/layouts/BaseLayout.astro` | Layout utama (header, nav, footer, sosial media) |
 | Source code | `src/lib/constants.ts` | Navigasi items, kategori labels |
+| Source code | `src/lib/google-drive.ts` | Google Drive API wrapper |
 | Source code | `src/data/site.ts` | Semua data konten (SITE, CONTACT, SOCIAL, STATS, DONATION) |
+| Source code | `src/data/galleries.ts` | Gallery data module |
 | Source code | `src/styles/global.css` | Tailwind theme, color palette, utilities |
 | Source code | `src/content.config.ts` | Konfigurasi content collection |
-| Source code | `src/content/kegiatan/*.md` | Artikel kegiatan (3 file) |
+| Source code | `src/content/kegiatan/*.md` | Artikel kegiatan |
+| Source code | `src/content/blog/*.md` | Artikel blog |
+| Source code | `src/pages/api/like/[slug].ts` | API endpoint like/unlike |
 | Config | `astro.config.mjs` | Konfigurasi Astro (site URL, integrations) |
 | Config | `package.json` | Dependencies & scripts |
 | Config | `bun.lock` | Lockfile (commit WAJIB untuk reproduksi) |
 | Config | `tsconfig.json` | TypeScript config |
 | Config | `.gitignore` | Rules gitignore |
-| Assets | `public/logo-yayasan.webp` | Logo utama (13KB, WebP) |
-| Assets | `public/logo-yayasan-sm.webp` | Logo kecil (6KB, WebP) |
-| Assets | `public/qris.webp` | QRIS (44KB, WebP) |
-| Assets | `public/favicon.svg` | Favicon |
-| Assets | `public/favicon.ico` | Favicon fallback |
+| Config | `wrangler.jsonc` | Cloudflare deployment config |
+| Config | `wrangler.build.jsonc` | Build-time compatibility config |
+| Config | `.env.example` | Contoh environment variables |
+| CI/CD | `.github/workflows/deploy.yml` | GitHub Actions auto-deploy |
+| Scripts | `scripts/*` | Build scripts (gallery cache, generate wrangler config) |
+| Assets | `public/` | Logo, favicon, images |
 | Docs | `.openkb/*.md` | Dokumentasi dan brainstorming (kecuali binary) |
-| Docs | `PROJECT_STATUS.md` | Status project terkini |
+| Docs | Root `*.md` | Dokumentasi galeri (GALERI_GOOGLE_DRIVE, KONVENSI, PANDUAN) |
 | Tools | `.sisyphus/` | Work plans dari Sisyphus agent |
 
 ### ❌ JANGAN di-track
 
 | Alasan | File/Folder | Keterangan |
 |--------|-------------|------------|
-| **Artifacts sementara** | `.playwright-mcp/` | Page snapshots, screenshot dari Playwright MCP — ephemeral |
-| **Binary mentah** | `.openkb/*.pdf` | Dokumen legal (Akta, NIB, NPWP, Proposal) — **sensitif, besar** |
+| **🔴 RAHASIA** | `amalshalih-fd1bd-firebase-adminsdk-fbsvc-624be20267.json` | Firebase Admin SDK key |
+| **🔴 RAHASIA** | `gen-lang-client-0412959743-42ff01c2a818.json` | Google Drive Service Account key |
+| **Artifacts sementara** | `.playwright-mcp/` | Page snapshots, screenshot dari Playwright MCP |
+| **Artifacts sementara** | `.wrangler/` | Wrangler local state (ephemeral) |
+| **Artifacts sementara** | `*.snapshot.yml` | Playwright snapshot files |
+| **Artifacts sementara** | `Screenshot *.png` | Screenshot development |
+| **Generated cache** | `src/data/cache/` | Gallery cache dari Google Drive |
+| **Generated cache** | `src/data/generated-galleries.json` | Generated gallery index |
+| **Binary mentah** | `.openkb/*.pdf` | Dokumen legal (Akta, NIB, NPWP, Proposal) — sensitif, besar |
 | **Binary mentah** | `.openkb/*.jpg` | Kop surat, logo mentah |
 | **Binary mentah** | `.openkb/*.jpeg` | WhatsApp image |
 | **Binary mentah** | `.openkb/*.png` | Logo mentah, qris mentah |
@@ -59,29 +73,11 @@
 | **Generated types** | `.astro/` | ✅ Sudah di .gitignore |
 | **Dependencies** | `node_modules/` | ✅ Sudah di .gitignore |
 
-### .gitignore — Update yang Diperlukan
-
-Tambahkan ini ke `.gitignore` sebelum commit pertama:
-
-```gitignore
-# Playwright MCP — ephemeral test artifacts
-.playwright-mcp/
-
-# OpenKB binary raw assets (dokumen legal, logo mentah, dll)
-.openkb/*.pdf
-.openkb/*.jpg
-.openkb/*.jpeg
-.openkb/*.png
-.openkb/*.PNG
-.openkb/*.docx
-.openkb/*.ai
-```
-
-> **Catatan:** File `.md` di dalam `.openkb/` tetap di-track. Hanya binary-nya yang di-ignore.
-
 ---
 
-## 2. Struktur Commit
+## 2. Struktur Commit — Sesi 1 (Initial Setup)
+
+> **Status:** ✅ SUDAH DIEKSEKUSI. Disimpan di sini untuk referensi historis dan tracing issue.
 
 ### Prinsip
 
@@ -94,211 +90,90 @@ Setiap commit bersifat **atomic**:
 ### Urutan Eksekusi
 
 ```
-Commit 1 ── Gitignore + Hapus template boilerplate
-Commit 2 ── Config & assets
-Commit 3 ── Data & content layer
-Commit 4 ── UI Components
-Commit 5 ── Layout & PageHeader
-Commit 6 ── Semua pages + dokumentasi
+Commit S1 ── Gitignore + Hapus template boilerplate
+Commit S2 ── Config & assets
+Commit S3 ── Data & content layer
+Commit S4 ── UI Components
+Commit S5 ── Layout & PageHeader
+Commit S6 ── Semua pages + dokumentasi
 ```
-
-> Urutan ini memastikan tidak ada dependency conflict. Config dulu, baru data, baru komponen, baru halaman.
 
 ---
 
-### Commit 1: `chore: clean up Astro template boilerplate`
+### Commit S1: `chore: clean up Astro template boilerplate`
 
 **Tujuan:** Membersihkan semua file bawaan template Astro yang tidak dipakai.
-
-**Perubahan:**
 
 | Action | Files |
 |--------|-------|
 | **Update** | `.gitignore` — tambah ignore rules untuk `.playwright-mcp/` dan binary `.openkb/` |
-| **Delete** | `README.md` — README template Astro (sudah dihapus dari disk) |
-| **Delete** | `src/content/blog/first-post.md` |
-| **Delete** | `src/content/blog/markdown-style-guide.md` |
-| **Delete** | `src/content/blog/second-post.md` |
-| **Delete** | `src/content/blog/third-post.md` |
-| **Delete** | `src/content/blog/using-mdx.mdx` |
-| **Delete** | `src/pages/blog/[...slug].astro` |
-| **Delete** | `src/pages/blog/index.astro` |
-| **Delete** | `src/pages/about.astro` |
-| **Delete** | `src/pages/rss.xml.js` |
-| **Delete** | `src/pages/index.astro` — *(file baru akan di-add di Commit 6)* |
-| **Delete** | `src/components/Footer.astro` |
-| **Delete** | `src/components/Header.astro` |
-| **Delete** | `src/components/HeaderLink.astro` |
-| **Delete** | `src/components/FormattedDate.astro` |
-| **Delete** | `src/consts.ts` |
-| **Delete** | `src/layouts/BlogPost.astro` |
-| **Delete** | `src/assets/blog-placeholder-1.jpg` |
-| **Delete** | `src/assets/blog-placeholder-2.jpg` |
-| **Delete** | `src/assets/blog-placeholder-3.jpg` |
-| **Delete** | `src/assets/blog-placeholder-4.jpg` |
-| **Delete** | `src/assets/blog-placeholder-5.jpg` |
-| **Delete** | `src/assets/blog-placeholder-about.jpg` |
-| **Delete** | `src/assets/fonts/atkinson-bold.woff` |
-| **Delete** | `src/assets/fonts/atkinson-regular.woff` |
-
-**Cara:**
-```bash
-git rm src/content/blog/*.md src/content/blog/*.mdx
-git rm src/pages/blog/[...slug].astro src/pages/blog/index.astro
-git rm src/pages/about.astro src/pages/rss.xml.js
-git rm src/components/Footer.astro src/components/Header.astro
-git rm src/components/HeaderLink.astro src/components/FormattedDate.astro
-git rm src/consts.ts src/layouts/BlogPost.astro
-git rm src/assets/blog-placeholder-*.jpg
-git rm src/assets/fonts/atkinson-*.woff
-git rm README.md
-# Hati-hati: jangan git rm src/pages/index.astro — karena file baru akan di-add nanti
-```
-
-> **Catatan:** `src/pages/index.astro` sudah berubah total (modified, bukan deleted). File ini tetap ada tapi isinya berbeda. Jadi kita **tidak** `git rm` index.astro — cukup commit perubahannya saja di Commit 6.
+| **Delete** | `README.md`, blog posts template, blog pages template, `src/pages/about.astro`, `rss.xml.js` |
+| **Delete** | Old components (Footer, Header, HeaderLink, FormattedDate), `src/consts.ts`, `BlogPost.astro` |
+| **Delete** | Placeholder images, font files |
 
 ---
 
-### Commit 2: `chore: configure project settings and assets`
-
-**Tujuan:** Menyimpan konfigurasi project dan aset statis.
-
-**Perubahan:**
-
-| Action | Files | Keterangan |
-|--------|-------|------------|
-| **Modified** | `astro.config.mjs` | Ubah site URL, tambah sitemap integration |
-| **Modified** | `package.json` | Tambah dependencies (astro, tailwind, dll) |
-| **Modified** | `bun.lock` | Update lockfile sesuai package.json |
-| **Kept** | `tsconfig.json` | Tidak berubah dari template |
-| **Add** | `public/logo-yayasan.webp` | Logo baru (WebP, 512px, 13KB) |
-| **Add** | `public/logo-yayasan-sm.webp` | Logo kecil (WebP, 256px, 6KB) |
-| **Add** | `public/qris.webp` | QRIS (WebP, 44KB) |
-
-**Cara:**
-```bash
-git add astro.config.mjs package.json bun.lock tsconfig.json
-git add public/logo-yayasan.webp public/logo-yayasan-sm.webp public/qris.webp
-git commit -m "chore: configure project settings and assets"
-```
-
----
-
-### Commit 3: `feat: add data layer and content`
-
-**Tujuan:** Menyimpan semua data konten dan konfigurasi content collection. Commit ini bisa di-blame kalo ada masalah dengan data yayasan (kontak salah, rekening salah, dll).
-
-**Perubahan:**
+### Commit S2: `chore: configure project settings and assets`
 
 | Action | Files |
 |--------|-------|
-| **Add** | `src/data/site.ts` — SITE, CONTACT, SOCIAL, STATS, DONATION |
-| **Add** | `src/lib/constants.ts` — NAV_ITEMS, KATEGORI_LABELS |
-| **Modified** | `src/content.config.ts` — Ubah dari blog ke kegiatan collection |
-| **Add** | `src/content/kegiatan/jumat-bersedekah.md` |
-| **Add** | `src/content/kegiatan/santunan-sembako-mei-2026.md` |
-| **Add** | `src/content/kegiatan/wisuda-juz30-milad-3.md` |
-
-**Cara:**
-```bash
-git add src/data/site.ts src/lib/constants.ts src/content.config.ts
-git add src/content/kegiatan/
-git commit -m "feat: add data layer and content"
-```
+| **Modified** | `astro.config.mjs` — site URL, integrations |
+| **Modified** | `package.json`, `bun.lock` — dependencies |
+| **Add** | `public/logo-yayasan.webp`, `logo-yayasan-sm.webp`, `qris.webp` |
 
 ---
 
-### Commit 4: `feat: add UI components`
-
-**Tujuan:** Menyimpan komponen UI yang reusable. Commit ini memudahkan tracking kalo ada issue di button style, card layout, atau icon rendering.
-
-**Perubahan:**
+### Commit S3: `feat: add data layer and content`
 
 | Action | Files |
 |--------|-------|
-| **Add** | `src/components/ui/Button.astro` — 5 varian (primary, gold, whatsapp, outline, outline-light) |
-| **Add** | `src/components/ui/Card.astro` — 4 varian (default, hover, overflow, plain) |
-| **Add** | `src/components/ui/Icon.astro` — SVG icons (18 icons, inline SVG) |
-
-**Catatan:** Icon.astro berisi fix Tailwind v4 dynamic class issue — size di-passing sebagai atribut `width`/`height` langsung ke SVG element (bukan hanya CSS class). File ini penting untuk referensi jika ada masalah icon tidak muncul.
-
-**Cara:**
-```bash
-git add src/components/ui/
-git commit -m "feat: add UI components"
-```
+| **Add** | `src/data/site.ts`, `src/lib/constants.ts` |
+| **Modified** | `src/content.config.ts` — kegiatan collection |
+| **Add** | `src/content/kegiatan/` — 3 artikel kegiatan |
 
 ---
 
-### Commit 5: `feat: add layout and navigation`
-
-**Tujuan:** Menyimpan layout utama dan komponen navigasi. Commit ini penting untuk issue terkait header, footer, nav, atau social icons.
-
-**Perubahan:**
+### Commit S4: `feat: add UI components`
 
 | Action | Files |
 |--------|-------|
-| **Add** | `src/layouts/BaseLayout.astro` — Layout utama dengan navbar sticky, footer, social icons |
-| **Add** | `src/components/sections/PageHeader.astro` — Gradient page header reusable |
-| **Modified** | `src/components/BaseHead.astro` — OG image default, meta tags |
+| **Add** | `src/components/ui/Button.astro` — 5 varian |
+| **Add** | `src/components/ui/Card.astro` — 4 varian |
+| **Add** | `src/components/ui/Icon.astro` — 18 icons, inline SVG |
 
-**BaseLayout terkena beberapa fix penting:**
-- Footer h3 "Yayasan ASIB" — pakai `text-white` eksplisit (override global h3 text-warm-900)
-- Social icons — pakai `width`/`height` eksplisit (fix Tailwind v4 dynamic class)
-- Social icons — `p-1.5` untuk memperbesar click area
-
-**Cara:**
-```bash
-git add src/layouts/BaseLayout.astro
-git add src/components/sections/PageHeader.astro
-git add src/components/BaseHead.astro
-git commit -m "feat: add layout and navigation"
-```
+**Catatan:** Icon.astro berisi fix Tailwind v4 dynamic class issue.
 
 ---
 
-### Commit 6: `feat: add all pages and documentation`
+### Commit S5: `feat: add layout and navigation`
 
-**Tujuan:** Menyimpan semua halaman, styling global, dan dokumentasi project. Commit terbesar — jadi yang paling mungkin mengandung issue.
-
-**Perubahan:**
-
-| Action | Files | Keterangan |
-|--------|-------|------------|
-| **Modified** | `src/pages/index.astro` | Beranda — hero, stats, program, CTA |
-| **Add** | `src/pages/tentang.astro` | Profil, visi-misi, legalitas, kontak |
-| **Add** | `src/pages/program.astro` | 3 bidang program + CTA |
-| **Add** | `src/pages/kegiatan/index.astro` | Daftar kegiatan (dynamic dari collection) |
-| **Add** | `src/pages/kegiatan/[slug].astro` | Detail kegiatan (dynamic routing) |
-| **Add** | `src/pages/donasi.astro` | Donasi channel, QRIS, Kitabisa |
-| **Add** | `src/pages/kontak.astro` | Kontak info + form contact |
-| **Add** | `src/pages/404.astro` | Halaman not found |
-| **Modified** | `src/styles/global.css` | Full custom theme (primary, gold, warm) + utilities |
-| **Add** | `.openkb/brainstorming.md` | Brainstorming fitur & design system |
-| **Add** | `.openkb/yayasan-profile.md` | Profil yayasan |
-| **Add** | `.openkb/audit-komprehensif.md` | Audit komprehensif |
-| **Add** | `.openkb/commit-strategy.md` | Dokumen ini |
-| **Add** | `PROJECT_STATUS.md` | Status project terkini |
-| **Add** | `.sisyphus/` | Work plans Sisyphus |
-
-**Cara:**
-```bash
-git add src/pages/ src/styles/global.css
-git add .openkb/*.md PROJECT_STATUS.md .sisyphus/
-git commit -m "feat: add all pages and documentation"
-```
+| Action | Files |
+|--------|-------|
+| **Add** | `src/layouts/BaseLayout.astro` — navbar sticky, footer, social icons |
+| **Add** | `src/components/sections/PageHeader.astro` — gradient header |
+| **Modified** | `src/components/BaseHead.astro` — OG image, meta tags |
 
 ---
 
-## 3. Cara Eksekusi
+### Commit S6: `feat: add all pages and documentation`
 
-### Step-by-step (urut)
+| Action | Files |
+|--------|-------|
+| **Modified** | `src/pages/index.astro` — Beranda |
+| **Add** | `src/pages/tentang.astro`, `program.astro`, `donasi.astro`, `kontak.astro`, `404.astro` |
+| **Add** | `src/pages/kegiatan/index.astro`, `kegiatan/[slug].astro` |
+| **Modified** | `src/styles/global.css` — Full custom theme |
+| **Add** | `.openkb/` docs, `PROJECT_STATUS.md`, `.sisyphus/` |
+
+---
+
+## 3. Cara Eksekusi Sesi 1
+
+### Step-by-step (sudah dieksekusi)
 
 ```bash
 # 1. Update .gitignore dulu
-#    Edit .gitignore — tambah rules untuk .playwright-mcp/ dan .openkb/ binary
-
-# 2. Commit 1 — Clean template
+# 2. Commit S1 — Clean template
 git rm src/content/blog/*.md src/content/blog/*.mdx
 git rm src/pages/blog/[...slug].astro src/pages/blog/index.astro
 git rm src/pages/about.astro src/pages/rss.xml.js
@@ -311,33 +186,33 @@ git rm README.md
 git add .gitignore
 git commit -m "chore: clean up Astro template boilerplate"
 
-# 3. Commit 2 — Config & assets
+# 3. Commit S2 — Config & assets
 git add astro.config.mjs package.json bun.lock tsconfig.json
 git add public/logo-yayasan.webp public/logo-yayasan-sm.webp public/qris.webp
 git commit -m "chore: configure project settings and assets"
 
-# 4. Commit 3 — Data & content
+# 4. Commit S3 — Data & content
 git add src/data/site.ts src/lib/constants.ts src/content.config.ts
 git add src/content/kegiatan/
 git commit -m "feat: add data layer and content"
 
-# 5. Commit 4 — Components
+# 5. Commit S4 — Components
 git add src/components/ui/
 git commit -m "feat: add UI components"
 
-# 6. Commit 5 — Layout & navigation
+# 6. Commit S5 — Layout & navigation
 git add src/layouts/BaseLayout.astro
 git add src/components/sections/PageHeader.astro
 git add src/components/BaseHead.astro
 git commit -m "feat: add layout and navigation"
 
-# 7. Commit 6 — Pages & documentation
+# 7. Commit S6 — Pages & documentation
 git add src/pages/ src/styles/global.css
 git add .openkb/*.md PROJECT_STATUS.md .sisyphus/
 git commit -m "feat: add all pages and documentation"
 ```
 
-### Verifikasi setelah semua commit
+### Verifikasi
 
 ```bash
 git log --oneline
@@ -355,93 +230,93 @@ git status
 
 ---
 
-## 4. Troubleshooting — Cara Lacak Issue
+## 4. Konvensi Branch
+
+### Branch Structure
+
+```
+main          → Production (auto-deploy ke Workers via GitHub Actions)
+└── feat/*    → Fitur baru (branch dari main, PR ke main)
+└── fix/*     → Bug fix
+└── refactor/*→ Perubahan struktur kode tanpa perubahan fungsi
+└── chore/*   → Tugas maintenance (dependencies, config)
+└── perf/*    → Performance improvements
+└── docs/*    → Dokumentasi
+└── build/*   → Build system, CI/CD
+```
+
+### Contoh
+
+```bash
+git checkout -b feat/gallery-lightbox-animation
+git commit -m "feat: add smooth animation to gallery lightbox"
+git push origin feat/gallery-lightbox-animation
+# Buat PR di GitHub → merge ke main
+```
+
+### Branch Protection (Recommended)
+
+| Aturan | Setting | Alasan |
+|--------|---------|--------|
+| **Require PR** | ✅ On | Jangan push langsung ke main |
+| **Require status check** | ✅ On | Build harus lulus dulu |
+| **Delete after merge** | ✅ On | Jaga branch tetap bersih |
+
+---
+
+## 5. Troubleshooting — Cara Lacak Issue
 
 ### Prinsip: `git blame` + `git log -- <file>`
 
-Setiap issue bisa dilacak ke commit spesifik:
-
 | Issue Yang Muncul | Cek Commit | File yang di-Blame |
 |---|---|---|
-| **Kontak/sosial media salah** | Commit 3 | `src/data/site.ts` |
-| **Button tidak muncul** | Commit 4 | `src/components/ui/Button.astro` |
-| **Icon tidak kelihatan** | Commit 4 | `src/components/ui/Icon.astro` |
-| **Header/footer layout rusak** | Commit 5 | `src/layouts/BaseLayout.astro` |
-| **Halaman error** | Commit 6 | `src/pages/<nama>.astro` |
-| **Warna/tema bermasalah** | Commit 6 | `src/styles/global.css` |
-| **Konten kegiatan salah** | Commit 3 | `src/content/kegiatan/<slug>.md` |
-| **Build gagal** | Commit 2 | `astro.config.mjs`, `package.json` |
-| **Tailwind class tidak jalan** | Commit 4 atau 6 | `global.css` atau komponen terkait |
+| **Kontak/sosial media salah** | S3 | `src/data/site.ts` |
+| **Button tidak muncul** | S4 | `src/components/ui/Button.astro` |
+| **Icon tidak kelihatan** | S4 | `src/components/ui/Icon.astro` |
+| **Header/footer layout rusak** | S5 | `src/layouts/BaseLayout.astro` |
+| **Halaman error** | S6 | `src/pages/<nama>.astro` |
+| **Warna/tema bermasalah** | S6 | `src/styles/global.css` |
+| **Konten kegiatan salah** | S3 | `src/content/kegiatan/<slug>.md` |
+| **Build gagal** | S2 | `astro.config.mjs`, `package.json` |
 
-### Git bisect (untuk bug regression)
+### Git bisect
 
 ```bash
-# Mulai bisect
 git bisect start
-
-# Tandai commit terakhir sebagai "bad"
-git bisect HEAD
-
-# Tandai commit sebelum fitur ditambahkan sebagai "good"
-git bisect good e51b209  # Initial commit dari Astro
-
-# Git akan checkout midpoint — test, lalu:
-git bisect good  # atau
-git bisect bad
-
-# Ulangi sampai ketemu commit pertama yang introduce bug
-# Output: first bad commit
+git bisect HEAD           # bad
+git bisect good e51b209  # good (initial astro commit)
+# test → git bisect good / bad → repeat
 ```
 
 ### Revert commit spesifik
 
 ```bash
-# Kalo commit 3 bermasalah (data layer):
-git revert <hash-commit-3>
-
-# Kalo butuh partial revert, pake:
-git revert --no-commit <hash>
-git reset  # Unstage semua
+git revert <hash-commit>
+git revert --no-commit <hash>  # partial revert
+git reset
 git add <file-spesifik>
 git commit -m "partial revert: fix <file>"
 ```
 
 ---
 
-## 5. Appendix: File Reference
+## 6. Appendix: File Reference
 
-### Status File Awal (sebelum commit)
+### Status File Awal (sebelum Sesi 1)
 
 ```
-Tracked (dari template Astro):
-  36 files
-
-Modified (perubahan dari template):
-  - astro.config.mjs
-  - bun.lock
-  - package.json
-  - src/components/BaseHead.astro
-  - src/content.config.ts
-  - src/pages/index.astro
-  - src/styles/global.css
-
-Deleted (dari template, file dihapus):
-  - README.md
-  - 5 blog posts
-  - 2 blog pages
-  - about page
-  - RSS page
-  - 3 old components
-  - consts.ts
-  - BlogPost layout
-  - 5 placeholder images
-  - 2 font files
-
-Untracked (file baru):
-  - 19+ file (pages, components, data, content, assets, docs)
+Tracked (dari template Astro):  36 files
+Modified:                       astro.config.mjs, bun.lock, package.json,
+                                BaseHead.astro, content.config.ts,
+                                index.astro, global.css
+Deleted:                        README.md, 5 blog posts, 2 blog pages,
+                                about page, RSS page, 3 components,
+                                consts.ts, BlogPost layout,
+                                5 placeholder images, 2 font files
+Untracked (file baru):          19+ files
 ```
 
-### File Baru — Detail
+### File Baru — Detail (Sesi 1)
 
 | Folder | Files |
 |--------|-------|
@@ -452,7 +327,7 @@ Untracked (file baru):
 | `src/components/sections/` | `PageHeader.astro` |
 | `src/data/` | `site.ts` |
 | `src/lib/` | `constants.ts` |
-| `src/content/kegiatan/` | `jumat-bersedekah.md`, `santunan-sembako-mei-2026.md`, `wisuda-juz30-milad-3.md` |
+| `src/content/kegiatan/` | 3 artikel kegiatan |
 | `public/` | `logo-yayasan.webp`, `logo-yayasan-sm.webp`, `qris.webp` |
 | `.openkb/` | `brainstorming.md`, `yayasan-profile.md`, `audit-komprehensif.md`, `commit-strategy.md` |
 | Root | `PROJECT_STATUS.md` |
@@ -461,4 +336,4 @@ Untracked (file baru):
 ---
 
 *Dokumen ini bisa langsung dipakai oleh siapapun di tim untuk mengeksekusi commit atau melacak issue.*
-*Terakhir diperbarui: 27 Mei 2026*
+*Terakhir diperbarui: 30 Mei 2026*

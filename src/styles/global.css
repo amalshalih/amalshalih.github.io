@@ -107,4 +107,14 @@
 	@apply rounded-lg sm:rounded-xl bg-white p-4 sm:p-6 shadow-sm;
 }
 
+@layer utilities {
+	.scrollbar-hide::-webkit-scrollbar {
+		display: none;
+	}
+	.scrollbar-hide {
+		-ms-overflow-style: none;
+		scrollbar-width: none;
+	}
+}
+
 

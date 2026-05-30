@@ -20,7 +20,7 @@ try {
     getBankDonasi(),
     getSiteSettings(),
   ]);
-
+  
   if (sanityBanks && sanityBanks.length > 0) {
     const localFullNames = new Map(DONATION.banks.map(b => [b.name, b.fullName]));
     banks = sanityBanks.map(b => ({
@@ -30,7 +30,7 @@ try {
       accountName: b.accountName,
     }));
   }
-
+  
   if (sanitySettings) {
     if (sanitySettings.qrisImageUrl) qrisImage = sanitySettings.qrisImageUrl;
     if (sanitySettings.linktree) linktreeUrl = sanitySettings.linktree;
@@ -39,8 +39,6 @@ try {
 } catch {
   // Sanity unavailable — use local data silently
 }
-
-const firstBank = banks[0];
 ---
 
 <BaseLayout

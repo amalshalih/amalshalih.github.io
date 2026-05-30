@@ -10,11 +10,7 @@ import type { SanityPengurus } from '../lib/sanity/types';
 import { SITE, CONTACT } from '../data/site';
 
 // Hybrid: try Sanity first, fall back to local data
-let addressFull = CONTACT.address.full;
 let addressStreet = CONTACT.address.street;
-let phone = CONTACT.phone;
-let phoneUrl = CONTACT.phoneUrl;
-let email = CONTACT.email;
 let visi = 'Menjadi Lembaga Yang Profesional dan Berkarakter Serta <strong class="text-gold-400">Maslahat Bagi Umat</strong>.';
 let misi = [
   'Menyelenggarakan kegiatan keagamaan, sosial, dan kemanusiaan.',
@@ -29,10 +25,7 @@ try {
   if (s) {
     if (s.address) {
       addressStreet = s.address.street ?? addressStreet;
-      addressFull = `${s.address.street ?? CONTACT.address.street}, ${s.address.village ?? CONTACT.address.village}, ${s.address.district ?? CONTACT.address.district}`;
     }
-    if (s.phone) phone = s.phone;
-    if (s.email) email = s.email;
     if (s.visi) visi = s.visi;
     if (s.misi && s.misi.length > 0) misi = s.misi;
   }

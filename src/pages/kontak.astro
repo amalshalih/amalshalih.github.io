@@ -5,7 +5,7 @@ import PageHeader from '../components/sections/PageHeader.astro';
 import Icon from '../components/ui/Icon.astro';
 import Button from '../components/ui/Button.astro';
 import { getSiteSettings } from '../lib/sanity/client';
-import { CONTACT, SITE } from '../data/site';
+import { CONTACT } from '../data/site';
 
 // Hybrid: try Sanity first, fall back to local data
 let address = { ...CONTACT.address };
