@@ -38,6 +38,13 @@ interface GeneratedGallery {
 }
 
 async function discoverAndCacheGalleries() {
+  if (!process.env.GOOGLE_DRIVE_SERVICE_ACCOUNT_KEY) {
+    console.log('⏭️  GOOGLE_DRIVE_SERVICE_ACCOUNT_KEY not set — skipping gallery cache generation');
+    mkdirSync(CACHE_DIR, { recursive: true });
+    writeFileSync(GALLERIES_FILE, JSON.stringify([], null, 2), 'utf-8');
+    return;
+  }
+
   mkdirSync(CACHE_DIR, { recursive: true });
 
   console.log('🔍 Discovering galleries from parent folder...');
