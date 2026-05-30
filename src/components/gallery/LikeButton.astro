@@ -1,0 +1,101 @@
+---
+interface Props {
+  gallerySlug: string;
+}
+
+const { gallerySlug } = Astro.props;
+---
+
+<div class="flex items-center gap-3" data-like-container data-gallery-slug={gallerySlug}>
+  <button
+    type="button"
+    data-like-button
+    class="group inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 shadow-sm ring-1 ring-warm-200 transition-all hover:shadow-md hover:ring-warm-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 disabled:opacity-60 disabled:cursor-not-allowed"
+    aria-label="Sukai galeri ini"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      class="h-5 w-5 text-warm-400 transition-colors group-hover:text-rose-500 group-data-[liked=true]:fill-rose-500 group-data-[liked=true]:text-rose-500 group-data-[liked=true]:animate-pulse"
+      data-heart-icon
+      aria-hidden="true"
+    >
+      <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
+    </svg>
+    <span class="text-sm font-medium text-warm-700">
+      <span data-like-count>0</span> suka
+    </span>
+  </button>
+</div>
+
+<script define:vars={{ gallerySlug }} is:inline>
+(function() {
+  const RTDB_URL = 'https://amalshalih-fd1bd-default-rtdb.firebaseio.com';
+  const container = document.querySelector('[data-like-container]');
+  if (!container) return;
+  
+  const button = container.querySelector('[data-like-button]');
+  const countEl = container.querySelector('[data-like-count]');
+  const storageKey = 'gallery-liked-' + gallerySlug;
+  
+  let hasLiked = localStorage.getItem(storageKey) === 'true';
+  
+  async function fetchLikes() {
+    try {
+      const response = await fetch(RTDB_URL + '/likes/' + gallerySlug + '.json');
+      const data = await response.json();
+      if (data !== null && typeof data === 'number') {
+        countEl.textContent = data.toLocaleString('id-ID');
+      } else {
+        countEl.textContent = '0';
+      }
+    } catch (err) {
+      console.error('Failed to fetch likes:', err);
+    }
+  }
+  
+  async function postLike() {
+    if (hasLiked) return;
+    
+    button.disabled = true;
+    
+    try {
+      const getResponse = await fetch(RTDB_URL + '/likes/' + gallerySlug + '.json');
+      const currentLikes = await getResponse.json() || 0;
+      const newLikes = currentLikes + 1;
+      
+      const updateResponse = await fetch(RTDB_URL + '/likes/' + gallerySlug + '.json', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newLikes)
+      });
+      
+      if (updateResponse.ok) {
+        countEl.textContent = newLikes.toLocaleString('id-ID');
+        hasLiked = true;
+        localStorage.setItem(storageKey, 'true');
+        button.setAttribute('data-liked', 'true');
+        container.setAttribute('data-liked', 'true');
+      }
+    } catch (err) {
+      console.error('Failed to post like:', err);
+      button.disabled = false;
+    }
+  }
+  
+  if (hasLiked) {
+    button.setAttribute('data-liked', 'true');
+    container.setAttribute('data-liked', 'true');
+    button.disabled = true;
+  }
+  
+  fetchLikes();
+  
+  button.addEventListener('click', postLike);
+})();
+</script>

@@ -1,0 +1,111 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Container from '../../components/ui/Container.astro';
+import PageHeader from '../../components/sections/PageHeader.astro';
+import Icon from '../../components/ui/Icon.astro';
+import MasonryGrid from '../../components/gallery/MasonryGrid.astro';
+import Lightbox from '../../components/gallery/Lightbox.astro';
+import LikeButton from '../../components/gallery/LikeButton.astro';
+import { getGalleryBySlug, getPublishedGalleries, type GalleryEntry } from '../../data/galleries';
+
+export const prerender = true;
+
+interface GalleryImage {
+  id: string;
+  name: string;
+  thumbnailUrl: string;
+  fullUrl: string;
+  width?: number;
+  height?: number;
+  createdTime?: string;
+}
+
+interface GalleryWithImages extends GalleryEntry {
+  images: GalleryImage[];
+  totalImages: number;
+}
+
+export async function getStaticPaths() {
+  const galleries = getPublishedGalleries();
+  return galleries.map((gallery: GalleryEntry) => ({
+    params: { slug: gallery.slug },
+    props: { gallery: gallery as GalleryWithImages },
+  }));
+}
+
+const { gallery } = Astro.props;
+const images: GalleryImage[] = gallery.images || [];
+
+// Group images by date (Google Photos style)
+const groupedImages: Record<string, GalleryImage[]> = {};
+images.forEach((img: GalleryImage) => {
+  const date = img.createdTime 
+    ? new Date(img.createdTime).toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' })
+    : 'Lainnya';
+  if (!groupedImages[date]) {
+    groupedImages[date] = [];
+  }
+  groupedImages[date].push(img);
+});
+
+const dateGroups = Object.entries(groupedImages).sort((a, b) => {
+  const dateA = a[1][0]?.createdTime ?? '';
+  const dateB = b[1][0]?.createdTime ?? '';
+  return dateB.localeCompare(dateA);
+});
+---
+
+<BaseLayout
+  title={`${gallery.title} — Galeri ASIB`}
+  description={gallery.description}
+  currentPage={`/galeri/${gallery.slug}`}
+>
+  <PageHeader
+    label={gallery.category.charAt(0).toUpperCase() + gallery.category.slice(1)}
+    title={gallery.title}
+    description={gallery.description}
+    gradient="r"
+  />
+
+  <Container class="pt-4 sm:pt-6 pb-8 sm:pb-16">
+    <!-- Like Button and Back to galleries link -->
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+      <LikeButton gallerySlug={gallery.slug} />
+      <a href="/galeri" class="inline-flex items-center gap-2 text-sm text-primary-700 hover:text-primary-800 transition-colors group">
+        <Icon name="arrow-left" size={4} class="transition-transform group-hover:-translate-x-1" aria-hidden="true" />
+        <span>Kembali ke Galeri</span>
+      </a>
+    </div>
+
+    {images.length > 0 ? (
+      <div class="space-y-8">
+        {dateGroups.map(([date, imgs]: [string, GalleryImage[]]) => (
+          <section>
+            <h2 class="text-lg font-semibold text-warm-900 mb-4 flex items-center gap-2">
+              <Icon name="calendar" size={4} aria-hidden="true" />
+              <time>{date}</time>
+              <span class="text-sm font-normal text-warm-500">({imgs.length} foto)</span>
+            </h2>
+            <MasonryGrid images={imgs} gallerySlug={gallery.slug} />
+          </section>
+        ))}
+      </div>
+    ) : (
+      <div class="flex flex-col items-center justify-center py-16 sm:py-24 text-center">
+        <div class="mb-3 rounded-full bg-warm-50 p-4 sm:p-6 text-warm-300">
+          <Icon name="image" size={10} class="sm:size-16" aria-hidden="true" />
+        </div>
+        <h2 class="text-lg sm:text-xl font-bold text-warm-900">Belum Ada Foto</h2>
+        <p class="mt-2 max-w-xs text-sm sm:text-base text-warm-600">
+          Foto dokumentasi untuk kegiatan ini akan segera ditambahkan oleh tim media.
+        </p>
+        <a href="/galeri" class="mt-6 inline-flex items-center gap-2 rounded-lg bg-primary-700 px-4 py-2 text-sm font-semibold text-white hover:bg-primary-800 transition-colors">
+          <Icon name="arrow-left" size={4} aria-hidden="true" />
+          <span>Lihat Galeri Lainnya</span>
+        </a>
+      </div>
+    )}
+  </Container>
+
+  <Lightbox images={images} />
+</BaseLayout>
