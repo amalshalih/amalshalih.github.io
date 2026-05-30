@@ -40,3 +40,21 @@ pnpm-debug.log*
 
 # Sentry Config File
 .env.sentry-build-plugin
+
+# 🔴 Service account keys — RAHASIA!
+# Firebase + Google Drive — jangan pernah commit!
+amalshalih-fd1bd-firebase-adminsdk-fbsvc-624be20267.json
+gen-lang-client-0412959743-42ff01c2a818.json
+
+# Wrangler local state (ephemeral)
+.wrangler/
+
+# Playwright snapshot artifacts
+*.snapshot.yml
+
+# Development screenshots
+Screenshot *.png
+
+# Generated gallery cache (dari Google Drive API)
+src/data/cache/
+src/data/generated-galleries.json
