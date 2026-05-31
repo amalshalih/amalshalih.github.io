@@ -17,10 +17,7 @@ Object.assign(process.env, env);
 export default defineConfig({
 	site: 'https://amalshalih.id',
 	output: 'server',
-	adapter: cloudflare({
-		prerenderEnvironment: 'node',
-		configPath: 'wrangler.build.jsonc',
-	}),
+	adapter: cloudflare(),
 	integrations: [
 		// Sentry disabled in dev to avoid CJS issues with Cloudflare Workerd runtime
 		// Sentry will still initialize from sentry.client.config.js and sentry.server.config.js
