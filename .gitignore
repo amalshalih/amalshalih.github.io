@@ -58,3 +58,4 @@ Screenshot *.png
 # Generated gallery cache (dari Google Drive API)
 src/data/cache/
 src/data/generated-galleries.json
+*.snapshot.yml
