@@ -6,9 +6,10 @@ import Icon from '../../components/ui/Icon.astro';
 import MasonryGrid from '../../components/gallery/MasonryGrid.astro';
 import Lightbox from '../../components/gallery/Lightbox.astro';
 import LikeButton from '../../components/gallery/LikeButton.astro';
-import { getGalleryBySlug, getPublishedGalleries, type GalleryEntry } from '../../data/galleries';
+import { fetchGalleryBySlug, type GalleryEntry } from '../../data/galleries';
 
-export const prerender = true;
+// SSR - Real-time data fetching
+export const prerender = false;
 
 interface GalleryImage {
   id: string;
@@ -25,15 +26,34 @@ interface GalleryWithImages extends GalleryEntry {
   totalImages: number;
 }
 
-export async function getStaticPaths() {
-  const galleries = getPublishedGalleries();
-  return galleries.map((gallery: GalleryEntry) => ({
-    params: { slug: gallery.slug },
-    props: { gallery: gallery as GalleryWithImages },
-  }));
+// Get slug from URL
+const { slug } = Astro.params;
+
+// Fetch gallery in real-time
+let gallery: GalleryWithImages | null = null;
+let error: string | null = null;
+
+if (slug) {
+  try {
+    const fetched = await fetchGalleryBySlug(slug);
+    if (fetched) {
+      gallery = fetched as GalleryWithImages;
+    } else {
+      error = 'Gallery not found';
+    }
+  } catch (e) {
+    error = 'Failed to load gallery';
+    console.error('Error fetching gallery:', e);
+  }
+} else {
+  error = 'Invalid gallery URL';
 }
 
-const { gallery } = Astro.props;
+// Return 404 if gallery not found
+if (!gallery) {
+  return Astro.redirect('/404');
+}
+
 const images: GalleryImage[] = gallery.images || [];
 
 // Group images by date (Google Photos style)
@@ -53,12 +73,18 @@ const dateGroups = Object.entries(groupedImages).sort((a, b) => {
   const dateB = b[1][0]?.createdTime ?? '';
   return dateB.localeCompare(dateA);
 });
+
+// SEO Meta Tags
+const pageTitle = `${gallery.title} — Galeri ASIB`;
+const pageDescription = gallery.description;
+const coverImage = images.length > 0 ? images[0].thumbnailUrl.replace('size=400', 'size=800') : undefined;
 ---
 
 <BaseLayout
-  title={`${gallery.title} — Galeri ASIB`}
-  description={gallery.description}
+  title={pageTitle}
+  description={pageDescription}
   currentPage={`/galeri/${gallery.slug}`}
+  image={coverImage}
 >
   <PageHeader
     label={gallery.category.charAt(0).toUpperCase() + gallery.category.slice(1)}
@@ -76,6 +102,27 @@ const dateGroups = Object.entries(groupedImages).sort((a, b) => {
         <span>Kembali ke Galeri</span>
       </a>
     </div>
+
+    <!-- Cover photo: most liked photo or latest added -->
+    {images.length > 0 && (
+      <div class="relative mb-8 overflow-hidden rounded-xl sm:rounded-2xl bg-warm-100" data-cover-container>
+        <img
+          src={images[images.length - 1].thumbnailUrl.replace('size=400', 'size=800')}
+          alt={images[images.length - 1].name}
+          class="w-full aspect-video sm:aspect-[21/9] object-cover"
+          data-cover-image
+          loading="eager"
+          fetchpriority="high"
+        />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+        <div class="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6">
+          <span class="inline-block rounded-md bg-white/90 px-3 py-1 text-xs font-bold uppercase tracking-wider text-primary-700 shadow-sm backdrop-blur-sm mb-2">
+            Foto Pilihan
+          </span>
+          <p class="text-white text-sm sm:text-base font-medium" data-cover-caption>{images[images.length - 1].name.replace(/\.[^/.]+$/, '').replace(/[_-]/g, ' ')}</p>
+        </div>
+      </div>
+    )}
 
     {images.length > 0 ? (
       <div class="space-y-8">
@@ -109,3 +156,57 @@ const dateGroups = Object.entries(groupedImages).sort((a, b) => {
 
   <Lightbox images={images} />
 </BaseLayout>
+
+<script define:vars={{ images, gallery }} is:inline>
+(function() {
+  const coverImg = document.querySelector('[data-cover-image]');
+  const coverCaption = document.querySelector('[data-cover-caption]');
+  if (!coverImg) return;
+
+  function updateCover(data) {
+    if (!data || typeof data !== 'object') return;
+
+    let maxLikes = -1;
+    let mostLikedId = '';
+
+    for (const [photoId, count] of Object.entries(data)) {
+      if (typeof count === 'number' && count > maxLikes) {
+        maxLikes = count;
+        mostLikedId = photoId;
+      }
+    }
+
+    if (maxLikes <= 0 || !mostLikedId) return;
+
+    const photo = images.find((img) => img.id === mostLikedId);
+    if (photo && photo.thumbnailUrl) {
+      coverImg.src = photo.thumbnailUrl.replace('size=400', 'size=800');
+      coverImg.alt = photo.name;
+      if (coverCaption) {
+        coverCaption.textContent = photo.name.replace(/\.[^/.]+$/, '').replace(/[_-]/g, ' ');
+      }
+    }
+  }
+
+  // Try to use data from MasonryGrid if already loaded
+  if (window.__galleryLikeDataReady && window.__galleryLikeData) {
+    updateCover(window.__galleryLikeData);
+    return;
+  }
+
+  // Wait for MasonryGrid to load data (avoids double fetch and race condition)
+  window.addEventListener('galleryLikesLoaded', function(e) {
+    updateCover(e.detail);
+  }, { once: true });
+
+  // Fallback: if no event after 100ms, fetch independently
+  setTimeout(function() {
+    if (!window.__galleryLikeDataReady) {
+      fetch(`/api/like?slug=${encodeURIComponent(gallery.slug)}`)
+        .then(res => res.json())
+        .then(data => updateCover(data))
+        .catch(err => console.error('Failed to load most liked photo:', err));
+    }
+  }, 100);
+})();
+</script>
