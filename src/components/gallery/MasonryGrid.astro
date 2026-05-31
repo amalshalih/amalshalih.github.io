@@ -41,6 +41,19 @@ interface Props {
         <div class="absolute bottom-2 left-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
           <p class="text-white text-xs sm:text-sm font-medium truncate">{image.name.replace(/\.[^/.]+$/, '').replace(/[_-]/g, ' ')}</p>
         </div>
+	<div
+		  class="absolute top-1.5 right-1.5 sm:top-2 sm:right-2 z-10 flex items-center gap-1 sm:gap-1 rounded-full px-2 py-1 sm:px-2.5 sm:py-1.5 text-white text-[11px] sm:text-xs font-medium backdrop-blur-sm
+		            bg-black/50 sm:bg-black/40
+		            opacity-80 sm:opacity-60 hover:opacity-100
+		            data-[liked=true]:opacity-100 data-[liked=true]:bg-rose-500/30
+		            transition-all duration-300"
+		  data-photo-like data-photo-id={image.id}
+		>
+		  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-[14px] w-[14px] sm:h-3.5 sm:w-3.5 transition-all duration-300" data-heart-icon aria-hidden="true">
+		    <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
+		  </svg>
+		  <span data-like-count class="tabular-nums">0</span>
+		</div>
       </button>
     );
   })}
@@ -51,9 +64,109 @@ interface Props {
   const grid = document.querySelector('[data-masonry-grid]');
   if (!grid) return;
 
+  const photoLikesEls = grid.querySelectorAll('[data-photo-like]');
+
+  // Fetch likes for all photos
+  async function fetchAllLikes() {
+    try {
+      const res = await fetch(`/api/like?slug=${encodeURIComponent(gallerySlug)}`);
+      const data = await res.json();
+
+      if (data && typeof data === 'object') {
+        // Store globally for other scripts (e.g., cover update) to use
+        window.__galleryLikeData = data;
+        window.__galleryLikeDataReady = true;
+
+        photoLikesEls.forEach((el) => {
+          const photoId = el.getAttribute('data-photo-id');
+          const count = data[photoId];
+          const storageKey = `photo-liked-${gallerySlug}-${photoId}`;
+          const isLikedInStorage = localStorage.getItem(storageKey) === 'true';
+
+          const countEl = el.querySelector('[data-like-count]');
+
+          // Update count display (show 0 if undefined)
+          const displayCount = (count !== undefined && typeof count === 'number') ? count : 0;
+          if (countEl) countEl.textContent = displayCount.toLocaleString('id-ID');
+
+          // Sync localStorage with backend: if count is 0 or undefined, clear the liked status
+          if ((count === 0 || count === undefined) && isLikedInStorage) {
+            localStorage.removeItem(storageKey);
+            el.setAttribute('data-liked', 'false');
+            const heartEl = el.querySelector('[data-heart-icon]');
+            if (heartEl) {
+              heartEl.classList.remove('fill-rose-500', 'text-rose-500');
+            }
+          }
+        });
+
+        // Notify cover script that data is ready
+        window.dispatchEvent(new CustomEvent('galleryLikesLoaded', { detail: data }));
+      }
+    } catch (err) {
+      console.error('Failed to fetch photo likes:', err);
+    }
+  }
+
+
+  // Like a specific photo
+  async function likePhoto(photoId, heartEl, countEl) {
+    const storageKey = `photo-liked-${gallerySlug}-${photoId}`;
+    if (localStorage.getItem(storageKey) === 'true') return;
+
+    try {
+      const updateRes = await fetch('/api/like', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ slug: gallerySlug, photoId })
+      });
+
+      if (updateRes.ok) {
+        const result = await updateRes.json();
+        countEl.textContent = result.likes.toLocaleString('id-ID');
+        localStorage.setItem(storageKey, 'true');
+        heartEl.closest('[data-photo-like]')?.setAttribute('data-liked', 'true');
+        heartEl.classList.add('fill-rose-500', 'text-rose-500');
+      }
+    } catch (err) {
+      console.error('Failed to like photo:', err);
+    }
+  }
+
+  // Init: mark already-liked photos from localStorage
+  photoLikesEls.forEach((el) => {
+    const photoId = el.getAttribute('data-photo-id');
+    const storageKey = `photo-liked-${gallerySlug}-${photoId}`;
+
+    if (localStorage.getItem(storageKey) === 'true') {
+      el.setAttribute('data-liked', 'true');
+      const heartEl = el.querySelector('[data-heart-icon]');
+      if (heartEl) {
+        heartEl.classList.add('fill-rose-500', 'text-rose-500');
+      }
+    }
+  });
+
+  fetchAllLikes();
+
+  // Like on click
+  photoLikesEls.forEach((el) => {
+    el.addEventListener('click', function(e) {
+      e.stopPropagation();
+      const photoId = el.getAttribute('data-photo-id');
+      const heartEl = el.querySelector('[data-heart-icon]');
+      const countEl = el.querySelector('[data-like-count]');
+      if (photoId && heartEl && countEl) {
+        likePhoto(photoId, heartEl, countEl);
+      }
+    });
+  });
+
+  // Open lightbox on image click (not like button)
   grid.addEventListener('click', function(e) {
     const button = e.target.closest('button[data-index]');
     if (!button) return;
+    if (e.target.closest('[data-photo-like]')) return;
     if (typeof window.openLightbox === 'function') {
       const index = parseInt(button.getAttribute('data-index') || '0', 10);
       window.openLightbox(index);

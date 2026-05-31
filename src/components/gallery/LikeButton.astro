@@ -10,7 +10,7 @@ const { gallerySlug } = Astro.props;
   <button
     type="button"
     data-like-button
-    class="group inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 shadow-sm ring-1 ring-warm-200 transition-all hover:shadow-md hover:ring-warm-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 disabled:opacity-60 disabled:cursor-not-allowed"
+    class="group inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 shadow-sm ring-1 ring-warm-200 transition-all hover:shadow-md hover:ring-warm-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2"
     aria-label="Sukai galeri ini"
   >
     <svg
@@ -35,67 +35,72 @@ const { gallerySlug } = Astro.props;
 
 <script define:vars={{ gallerySlug }} is:inline>
 (function() {
-  const RTDB_URL = 'https://amalshalih-fd1bd-default-rtdb.firebaseio.com';
   const container = document.querySelector('[data-like-container]');
   if (!container) return;
   
   const button = container.querySelector('[data-like-button]');
-  const countEl = container.querySelector('[data-like-count]');
-  const storageKey = 'gallery-liked-' + gallerySlug;
+  const countEl = container.querySelector("[data-like-count]");
   
-  let hasLiked = localStorage.getItem(storageKey) === 'true';
+  // Generate or retrieve user ID from localStorage
+  let userId = localStorage.getItem('like-user-id');
+  if (!userId) {
+    userId = 'user-' + Math.random().toString(36).substr(2, 9);
+    localStorage.setItem('like-user-id', userId);
+  }
+  
+  let currentLiked = false;
   
   async function fetchLikes() {
     try {
-      const response = await fetch(RTDB_URL + '/likes/' + gallerySlug + '.json');
+      const response = await fetch(`/api/gallery-like?slug=${encodeURIComponent(gallerySlug)}&userId=${userId}`);
       const data = await response.json();
-      if (data !== null && typeof data === 'number') {
-        countEl.textContent = data.toLocaleString('id-ID');
-      } else {
-        countEl.textContent = '0';
+      
+      if (data.count !== undefined) {
+        countEl.textContent = data.count.toLocaleString('id-ID');
       }
+      
+      currentLiked = data.liked;
+      updateUI();
     } catch (err) {
       console.error('Failed to fetch likes:', err);
     }
   }
   
-  async function postLike() {
-    if (hasLiked) return;
-    
+  function updateUI() {
+    button.setAttribute('data-liked', currentLiked ? 'true' : 'false');
+    container.setAttribute('data-liked', currentLiked ? 'true' : 'false');
+    button.setAttribute('aria-label', currentLiked ? 'Batal suka galeri ini' : 'Sukai galeri ini');
+  }
+  
+  async function toggleLike() {
     button.disabled = true;
     
     try {
-      const getResponse = await fetch(RTDB_URL + '/likes/' + gallerySlug + '.json');
-      const currentLikes = await getResponse.json() || 0;
-      const newLikes = currentLikes + 1;
-      
-      const updateResponse = await fetch(RTDB_URL + '/likes/' + gallerySlug + '.json', {
-        method: 'PUT',
+      const response = await fetch('/api/gallery-like', {
+        method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(newLikes)
+        body: JSON.stringify({ 
+          slug: gallerySlug,
+          userId: userId,
+          action: currentLiked ? 'unlike' : 'like'
+        })
       });
-      
-      if (updateResponse.ok) {
-        countEl.textContent = newLikes.toLocaleString('id-ID');
-        hasLiked = true;
-        localStorage.setItem(storageKey, 'true');
-        button.setAttribute('data-liked', 'true');
-        container.setAttribute('data-liked', 'true');
+
+      if (response.ok) {
+        const result = await response.json();
+        countEl.textContent = result.count.toLocaleString('id-ID');
+        currentLiked = result.liked;
+        updateUI();
       }
     } catch (err) {
-      console.error('Failed to post like:', err);
+      console.error('Failed to toggle like:', err);
+    } finally {
       button.disabled = false;
     }
   }
   
-  if (hasLiked) {
-    button.setAttribute('data-liked', 'true');
-    container.setAttribute('data-liked', 'true');
-    button.disabled = true;
-  }
-  
   fetchLikes();
   
-  button.addEventListener('click', postLike);
+  button.addEventListener('click', toggleLike);
 })();
 </script>
