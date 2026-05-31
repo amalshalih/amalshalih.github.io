@@ -1,22 +1,3 @@
-import { google, drive_v3 } from 'googleapis';
-
-const SCOPES = ['https://www.googleapis.com/auth/drive.readonly'];
-
-function getAuth() {
-  const credentials = process.env.GOOGLE_DRIVE_SERVICE_ACCOUNT_KEY;
-  if (!credentials) {
-    throw new Error('GOOGLE_DRIVE_SERVICE_ACCOUNT_KEY env var is not set');
-  }
-  return new google.auth.GoogleAuth({
-    credentials: JSON.parse(credentials),
-    scopes: SCOPES,
-  });
-}
-
-function getDrive(): drive_v3.Drive {
-  return google.drive({ version: 'v3', auth: getAuth() });
-}
-
 export interface DriveImage {
   id: string;
   name: string;
@@ -35,49 +16,159 @@ export interface DriveFolder {
   modifiedTime?: string;
 }
 
-export async function listImagesInFolder(folderId: string): Promise<DriveImage[]> {
-  const drive = getDrive();
-  const res = await drive.files.list({
-    q: `'${folderId}' in parents and mimeType contains 'image/' and trashed = false`,
-    fields: 'files(id, name, mimeType, webContentLink, createdTime, imageMediaMetadata)',
-    orderBy: 'name',
+interface GoogleDriveFile {
+  id: string;
+  name: string;
+  mimeType: string;
+  webContentLink?: string;
+  createdTime?: string;
+  modifiedTime?: string;
+  imageMediaMetadata?: {
+    width?: number;
+    height?: number;
+  };
+}
+
+interface GoogleDriveResponse {
+  files?: GoogleDriveFile[];
+}
+
+const SCOPES = ['https://www.googleapis.com/auth/drive.readonly'];
+const DRIVE_API_BASE = 'https://www.googleapis.com/drive/v3';
+
+async function getAccessToken(): Promise<string> {
+  const credentials = process.env.GOOGLE_DRIVE_SERVICE_ACCOUNT_KEY;
+  if (!credentials) {
+    throw new Error('GOOGLE_DRIVE_SERVICE_ACCOUNT_KEY env var is not set');
+  }
+
+  const creds = JSON.parse(credentials);
+  const now = Math.floor(Date.now() / 1000);
+  const expiry = now + 3600;
+
+  const header = { alg: 'RS256', typ: 'JWT' };
+  const claim = {
+    iss: creds.client_email,
+    scope: SCOPES.join(' '),
+    aud: 'https://oauth2.googleapis.com/token',
+    exp: expiry,
+    iat: now,
+  };
+
+  const encodeBase64 = (obj: object) =>
+    btoa(JSON.stringify(obj)).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+
+  const encodedHeader = encodeBase64(header);
+  const encodedClaim = encodeBase64(claim);
+  const signatureInput = `${encodedHeader}.${encodedClaim}`;
+
+  const keyData = creds.private_key
+    .replace('-----BEGIN PRIVATE KEY-----', '')
+    .replace('-----END PRIVATE KEY-----', '')
+    .replace(/\n/g, '');
+
+  const keyBuffer = Uint8Array.from(atob(keyData), (c) => c.charCodeAt(0));
+
+  const cryptoKey = await crypto.subtle.importKey(
+    'pkcs8',
+    keyBuffer,
+    { name: 'RSASSA-PKCS1-v1_5', hash: 'SHA-256' },
+    false,
+    ['sign']
+  );
+
+  const signatureBuffer = await crypto.subtle.sign(
+    'RSASSA-PKCS1-v1_5',
+    cryptoKey,
+    new TextEncoder().encode(signatureInput)
+  );
+
+  const signature = btoa(String.fromCharCode(...new Uint8Array(signatureBuffer)))
+    .replace(/\+/g, '-')
+    .replace(/\//g, '_')
+    .replace(/=+$/, '');
+
+  const jwt = `${signatureInput}.${signature}`;
+
+  const tokenResponse = await fetch('https://oauth2.googleapis.com/token', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams({
+      grant_type: 'urn:ietf:params:oauth:grant-type:jwt-bearer',
+      assertion: jwt,
+    }),
   });
 
-  const files: drive_v3.Schema$File[] = res.data.files ?? [];
-  return files.map((f) => ({
+  if (!tokenResponse.ok) {
+    const error = await tokenResponse.text();
+    throw new Error(`Failed to get access token: ${error}`);
+  }
+
+  const tokenData = await tokenResponse.json();
+  return tokenData.access_token;
+}
+
+export async function listImagesInFolder(folderId: string): Promise<DriveImage[]> {
+  const accessToken = await getAccessToken();
+
+  const query = `'${folderId}' in parents and mimeType contains 'image/' and trashed = false`;
+  const fields = 'files(id, name, mimeType, webContentLink, createdTime, imageMediaMetadata)';
+
+  const url = `${DRIVE_API_BASE}/files?q=${encodeURIComponent(query)}&fields=${encodeURIComponent(fields)}&orderBy=name`;
+
+  const response = await fetch(url, {
+    headers: { Authorization: `Bearer ${accessToken}` },
+  });
+
+  if (!response.ok) {
+    throw new Error(`Google Drive API error: ${response.status} ${response.statusText}`);
+  }
+
+  const data = (await response.json()) as GoogleDriveResponse;
+
+  return (data.files || []).map((f) => ({
     id: f.id ?? '',
     name: f.name ?? 'unknown',
     mimeType: f.mimeType ?? 'image/jpeg',
-    webContentLink: f.webContentLink ?? undefined,
-    createdTime: f.createdTime ?? undefined,
-    width: f.imageMediaMetadata?.width ? Number(f.imageMediaMetadata.width) : undefined,
-    height: f.imageMediaMetadata?.height ? Number(f.imageMediaMetadata.height) : undefined,
+    webContentLink: f.webContentLink,
+    createdTime: f.createdTime,
+    width: f.imageMediaMetadata?.width,
+    height: f.imageMediaMetadata?.height,
   }));
 }
 
 export async function listSubfolders(parentFolderId: string): Promise<DriveFolder[]> {
-  const drive = getDrive();
-  const res = await drive.files.list({
-    q: `'${parentFolderId}' in parents and mimeType = 'application/vnd.google-apps.folder' and trashed = false`,
-    fields: 'files(id, name, createdTime, modifiedTime)',
-    orderBy: 'name',
+  const accessToken = await getAccessToken();
+
+  const query = `'${parentFolderId}' in parents and mimeType = 'application/vnd.google-apps.folder' and trashed = false`;
+  const fields = 'files(id, name, createdTime, modifiedTime)';
+
+  const url = `${DRIVE_API_BASE}/files?q=${encodeURIComponent(query)}&fields=${encodeURIComponent(fields)}&orderBy=name`;
+
+  const response = await fetch(url, {
+    headers: { Authorization: `Bearer ${accessToken}` },
   });
 
-  const folders: drive_v3.Schema$File[] = res.data.files ?? [];
-  return folders.map((f) => ({
+  if (!response.ok) {
+    throw new Error(`Google Drive API error: ${response.status} ${response.statusText}`);
+  }
+
+  const data = (await response.json()) as GoogleDriveResponse;
+
+  return (data.files || []).map((f) => ({
     id: f.id ?? '',
     name: f.name ?? 'Untitled',
-    createdTime: f.createdTime ?? undefined,
-    modifiedTime: f.modifiedTime ?? undefined,
+    createdTime: f.createdTime,
+    modifiedTime: f.modifiedTime,
   }));
 }
 
 export function getThumbnailUrl(fileId: string, width = 400) {
-  return `https://drive.google.com/thumbnail?id=${fileId}&sz=w${width}`;
+  return `/api/drive-image/${fileId}?size=${width}`;
 }
 
 export function getFullImageUrl(fileId: string, width = 1600) {
-  return `https://drive.google.com/thumbnail?id=${fileId}&sz=w${width}`;
+  return `/api/drive-image/${fileId}?size=${width}`;
 }
 
 export function parseFolderName(folderName: string): {
