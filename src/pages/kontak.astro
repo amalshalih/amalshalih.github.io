@@ -25,8 +25,8 @@ try {
     if (sanitySettings.mapsUrl) mapsUrl = sanitySettings.mapsUrl;
     // Sanity doesn't store phoneUrl/whatsapp/hours — keep local fallbacks
   }
-} catch {
-  // Sanity unavailable — use local data silently
+} catch (error) {
+  console.error('[Kontak] Sanity siteSettings fetch failed:', error);
 }
 ---
 

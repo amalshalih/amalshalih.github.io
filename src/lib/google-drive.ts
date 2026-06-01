@@ -39,7 +39,7 @@ const SCOPES = ['https://www.googleapis.com/auth/drive.readonly'];
 const DRIVE_API_BASE = 'https://www.googleapis.com/drive/v3';
 
 function getCredentials(): string {
-  const creds = (env as any).GOOGLE_DRIVE_SERVICE_ACCOUNT_KEY;
+  const creds = env.GOOGLE_DRIVE_SERVICE_ACCOUNT_KEY;
   if (!creds) {
     throw new Error('GOOGLE_DRIVE_SERVICE_ACCOUNT_KEY env var is not set');
   }

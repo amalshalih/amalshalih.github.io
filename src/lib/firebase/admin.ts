@@ -14,7 +14,7 @@ interface ServiceAccount {
 }
 
 function getServiceAccount(): ServiceAccount {
-	const credentials = (env as any).FIREBASE_SERVICE_ACCOUNT_KEY;
+	const credentials = env.FIREBASE_SERVICE_ACCOUNT_KEY;
 	if (!credentials) {
 		throw new Error('FIREBASE_SERVICE_ACCOUNT_KEY env var is not set');
 	}

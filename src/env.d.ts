@@ -1,10 +1,16 @@
 /// <reference types="astro/client" />
 /// <reference types="@sanity/astro/module" />
 
-// Cloudflare Workers types for bindings
 interface Env {
   LIKES: KVNamespace;
   SESSION: KVNamespace;
+  GOOGLE_DRIVE_SERVICE_ACCOUNT_KEY: string;
+  FIREBASE_SERVICE_ACCOUNT_KEY: string;
+  FIREBASE_RTDB_URL: string;
+  SENTRY_AUTH_TOKEN: string;
+  SANITY_API_READ_TOKEN: string;
+  ASSETS: Fetcher;
+  IMAGES: ImagesBinding;
 }
 
 declare module "cloudflare:workers" {

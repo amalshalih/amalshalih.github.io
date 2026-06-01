@@ -4,7 +4,7 @@ import { env } from 'cloudflare:workers';
 export const prerender = false;
 
 function getCredentials(): string | undefined {
-  return (env as any).GOOGLE_DRIVE_SERVICE_ACCOUNT_KEY;
+  return env.GOOGLE_DRIVE_SERVICE_ACCOUNT_KEY;
 }
 
 const GOOGLE_TOKEN_URL = 'https://oauth2.googleapis.com/token';

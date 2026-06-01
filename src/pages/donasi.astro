@@ -36,8 +36,8 @@ try {
     if (sanitySettings.linktree) linktreeUrl = sanitySettings.linktree;
     if (sanitySettings.phone) contactPhone = sanitySettings.phone;
   }
-} catch {
-  // Sanity unavailable — use local data silently
+} catch (error) {
+  console.error('[Donasi] Sanity bankDonasi/siteSettings fetch failed:', error);
 }
 ---
 

@@ -10,7 +10,7 @@ import {
 } from '../lib/google-drive';
 
 function getGoogleDriveCredentials(): string | undefined {
-  return (env as any).GOOGLE_DRIVE_SERVICE_ACCOUNT_KEY;
+  return env.GOOGLE_DRIVE_SERVICE_ACCOUNT_KEY;
 }
 
 export interface GalleryImage {

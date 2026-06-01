@@ -41,8 +41,8 @@ try {
 			bodyHtml: renderPortableText(sanityItem.body),
 		};
 	}
-} catch {
-	// Sanity unavailable
+} catch (error) {
+	console.error(`[Kegiatan Detail] Sanity kegiatanItem fetch failed for slug "${slug}":`, error);
 }
 
 let Content = null;
@@ -85,7 +85,9 @@ const allSlugs = new Set<string>();
 try {
 	const sanityItems = await getKegiatanList();
 	for (const item of sanityItems) allSlugs.add(item.slug);
-} catch {}
+} catch (error) {
+	console.error('[Kegiatan Detail] Sanity kegiatanList fetch failed:', error);
+}
 const localAll = await getCollection('kegiatan');
 for (const item of localAll) allSlugs.add(item.id);
 

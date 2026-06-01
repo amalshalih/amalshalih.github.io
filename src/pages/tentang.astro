@@ -29,15 +29,15 @@ try {
     if (s.visi) visi = s.visi;
     if (s.misi && s.misi.length > 0) misi = s.misi;
   }
-} catch {
-  // Sanity unavailable — use local data silently
+} catch (error) {
+  console.error('[Tentang] Sanity siteSettings fetch failed:', error);
 }
 
 try {
   const p = await getPengurus();
   if (p && p.length > 0) pengurus = p;
-} catch {
-  // Sanity unavailable
+} catch (error) {
+  console.error('[Tentang] Sanity pengurus fetch failed:', error);
 }
 ---
 

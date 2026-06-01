@@ -58,8 +58,8 @@ try {
       return acc;
     }, {});
   }
-} catch {
-  // Sanity unavailable
+} catch (error) {
+  console.error('[Program] Sanity programList fetch failed:', error);
 }
 
 if (Object.keys(programsByCategory).length === 0) {

@@ -16,8 +16,8 @@ try {
   if (sanitySettings?.stats && sanitySettings.stats.length > 0) {
     stats = sanitySettings.stats;
   }
-} catch {
-  // Sanity unavailable — use local fallback
+} catch (error) {
+  console.error('[Home] Sanity siteSettings fetch failed:', error);
 }
 ---
 

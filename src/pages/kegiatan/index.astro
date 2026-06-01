@@ -32,8 +32,8 @@ try {
       },
     }));
   }
-} catch {
-  // Sanity unavailable
+} catch (error) {
+  console.error('[Kegiatan] Sanity kegiatanList fetch failed:', error);
 }
 
 if (kegiatan.length === 0) {
