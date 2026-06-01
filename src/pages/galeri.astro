@@ -5,21 +5,20 @@ import PageHeader from '../components/sections/PageHeader.astro';
 import Card from '../components/ui/Card.astro';
 import Icon from '../components/ui/Icon.astro';
 import { KATEGORI_LABELS } from '../lib/constants';
-import { fetchAllGalleries, filterPublishedGalleries, type GalleryEntry } from '../data/galleries';
+import type { GalleryEntry } from '../data/galleries';
+import { fetchAllGalleries, filterPublishedGalleries } from '../data/galleries';
 
-// SSR - Real-time data fetching
+// SSR - Real-time data fetching (Cloudflare Workers compatible)
 export const prerender = false;
 
-// Fetch galleries in real-time
+// Direct function call for Cloudflare Workers SSR compatibility
 let galleries: GalleryEntry[] = [];
-let error: string | null = null;
 
 try {
   const allGalleries = await fetchAllGalleries();
   galleries = filterPublishedGalleries(allGalleries);
-} catch (e) {
-  error = 'Failed to load galleries';
-  console.error('Error fetching galleries:', e);
+} catch (e: any) {
+  console.error('Error fetching galleries:', e?.message || e);
 }
 
 const kategoriGradients: Record<string, string> = {

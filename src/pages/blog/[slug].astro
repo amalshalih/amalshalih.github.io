@@ -4,17 +4,22 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Container from '../../components/ui/Container.astro';
 import Icon from '../../components/ui/Icon.astro';
 
-export const prerender = true;
+// SSR mode for Cloudflare Workers
+export const prerender = false;
 
-export async function getStaticPaths() {
-	const blogPosts = await getCollection('blog');
-	return blogPosts.map(post => ({
-		params: { slug: post.id },
-		props: { post },
-	}));
+const { slug } = Astro.params;
+if (!slug) {
+	return Astro.redirect('/blog');
 }
 
-const { post } = Astro.props;
+// Fetch the specific blog post
+const blogPosts = await getCollection('blog');
+const post = blogPosts.find(p => p.id === slug);
+
+if (!post) {
+	return Astro.redirect('/blog');
+}
+
 const { Content } = await render(post);
 
 const formattedDate = post.data.date.toLocaleDateString('id-ID', {

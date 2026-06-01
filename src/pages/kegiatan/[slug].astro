@@ -8,25 +8,13 @@ import { SITE, CONTACT } from '../../data/site';
 import { getKegiatanList, getKegiatanItem } from '../../lib/sanity/client';
 import { renderPortableText } from '../../lib/sanity/render';
 
-export const prerender = true;
-
-export async function getStaticPaths() {
-	const slugs = new Set<string>();
-
-	try {
-		const sanityItems = await getKegiatanList();
-		for (const item of sanityItems) slugs.add(item.slug);
-	} catch {
-		// Sanity unavailable
-	}
-
-	const localItems = await getCollection('kegiatan');
-	for (const item of localItems) slugs.add(item.id);
-
-	return Array.from(slugs).map((slug) => ({ params: { slug } }));
-}
+// SSR mode for Cloudflare Workers (not static prerender)
+export const prerender = false;
 
 const { slug } = Astro.params;
+if (!slug) {
+	return Astro.redirect('/kegiatan');
+}
 
 type PageData = {
 	title: string;
