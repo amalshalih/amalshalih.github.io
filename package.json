@@ -10,6 +10,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "deploy": "wrangler deploy"
+    "deploy": "wrangler deploy",
+    "wrangler:dev": "cd dist/server && wrangler dev",
+    "wrangler:deploy": "wrangler deploy"
   }
 }

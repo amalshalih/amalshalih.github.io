@@ -1,31 +1,26 @@
-// Cloudflare Pages — Astro SSR deployment
-//
-// Konfigurasi untuk deploy ke Cloudflare Pages (amalshalih.pages.dev)
-//
-// Deployment ke Pages:
-//   bun run build && npx wrangler pages deploy dist
-//
-// Atau via GitHub Actions (auto-deploy ke Pages):
-//   - Build output: dist/
-//   - Upload directory: dist/client (static assets)
-//   - Functions directory: dist/server (SSR functions)
-//
-// Perbedaan dengan Workers:
-//   - Workers: wrangler deploy --config dist/wrangler.json
-//   - Pages: wrangler pages deploy dist (auto-detect functions in dist/server)
-//
-// Setup di Cloudflare Dashboard:
-//   1. Buat project Pages baru
-//   2. Connect ke GitHub repo
-//   3. Build command: bun run build
-//   4. Output directory: dist
-//   5. Tambahkan secrets via Settings > Environment variables
-
 {
-	"name": "amalshalih",
-	"compatibility_date": "2026-05-30",
+	"name": "www",
+	"main": "@astrojs/cloudflare/entrypoints/server",
+	"compatibility_date": "2026-06-01",
 	"compatibility_flags": ["nodejs_compat"],
 	"vars": {
 		"NODE_ENV": "production"
+	},
+	"kv_namespaces": [
+		{
+			"binding": "SESSION",
+			"id": "1fcf5a834af8489790a5e55793205d2a"
+		},
+		{
+			"binding": "LIKES",
+			"id": "0525d17bcb8b43098ec8415b976e2dca"
+		}
+	],
+	"assets": {
+		"binding": "ASSETS",
+		"directory": "./dist"
+	},
+	"observability": {
+		"enabled": true
 	}
 }
