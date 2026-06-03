@@ -30,7 +30,14 @@ export const CONTACT = {
 	phone: '0821-3800-7102',
 	phoneUrl: 'tel:082138007102',
 	whatsapp: 'https://wa.me/6282138007102',
-	email: 'amalshalih.insanbantul@gmail.com',
+	email: 'info@amalshalih.or.id',
+	emails: {
+		info: 'info@amalshalih.or.id',
+		donasi: 'donasi@amalshalih.or.id',
+		admin: 'admin@amalshalih.or.id',
+		humas: 'humas@amalshalih.or.id',
+		gmail: 'amalshalih.insanbantul@gmail.com',
+	},
 	hours: {
 		weekdays: '08.00–16.00',
 		saturday: '08.00–12.00',
