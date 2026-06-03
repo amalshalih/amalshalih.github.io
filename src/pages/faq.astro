@@ -78,7 +78,7 @@ const faqData: FaqGroup[] = [
 	<Container class="py-12 sm:py-20">
 		<div class="mx-auto max-w-3xl">
 			{
-				faqData.map(function(group, gi) {
+				faqData.map(function(group) {
 					return (
 						<section class="mb-10 last:mb-0">
 							<div class="mb-6 flex items-center gap-3">
@@ -89,7 +89,7 @@ const faqData: FaqGroup[] = [
 							</div>
 							<div class="space-y-3">
 								{
-									group.items.map(function(item, ii) {
+									group.items.map(function(item) {
 										return (
 											<details class="group rounded-xl bg-white shadow-sm border border-warm-100 open:border-primary-200 transition-all duration-200">
 												<summary class="faq-summary flex cursor-pointer items-center justify-between gap-4 p-4 sm:p-5 font-medium text-warm-900 select-none">

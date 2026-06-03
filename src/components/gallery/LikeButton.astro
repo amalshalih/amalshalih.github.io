@@ -44,7 +44,7 @@ const { gallerySlug } = Astro.props;
   // Generate or retrieve user ID from localStorage
   let userId = localStorage.getItem('like-user-id');
   if (!userId) {
-    userId = 'user-' + Math.random().toString(36).substr(2, 9);
+    userId = 'user-' + Math.random().toString(36).substring(2, 11);
     localStorage.setItem('like-user-id', userId);
   }
   
