@@ -1,15 +1,19 @@
-import {kegiatanType} from './kegiatan'
-import {programType} from './program'
-import {bankDonasiType} from './bankDonasi'
-import {pengurusType} from './pengurus'
-import {siteSettingsType} from './siteSettings'
-import {blockContentType} from './blockContent'
+import { bankDonasiType } from './bankDonasi'
+import { blockContentType } from './blockContent'
+import { faqType } from './faq'
+import { kegiatanType } from './kegiatan'
+import { pengurusType } from './pengurus'
+import { programType } from './program'
+import { siteSettingsType } from './siteSettings'
 
 export const schemaTypes = [
-  kegiatanType,
-  programType,
-  bankDonasiType,
-  pengurusType,
-  siteSettingsType,
-  blockContentType,
+	// Existing schemas
+	kegiatanType,
+	programType,
+	bankDonasiType,
+	pengurusType,
+	siteSettingsType,
+	blockContentType,
+	// Add FAQ schema
+	faqType,
 ]
