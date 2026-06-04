@@ -1,5 +1,16 @@
 // GROQ queries for fetching ASIB content from Sanity
 
+export const faqListQuery = `*[_type == "faq" && isActive == true] | order(order asc) {
+  _id,
+  category,
+  items[] {
+    tanya,
+    jawab,
+    order
+  },
+  order
+}`
+
 export const kegiatanListQuery = `*[_type == "kegiatan"] | order(date desc) {
   _id,
   title,
@@ -58,15 +69,34 @@ export const siteSettingsQuery = `*[_type == "siteSettings"][0] {
   siteName,
   shortName,
   description,
+  footerCopyright,
   aboutContent,
   visi,
   misi,
   address,
   phone,
+  whatsapp,
   email,
+  emails,
+  operatingHours,
+  operatingHoursDetail,
+  legal,
   "qrisImageUrl": qrisImage.asset->url,
   mapsUrl,
   linktree,
   socialMedia,
-  stats[]{ number, label }
+  tagline,
+  heroTitle,
+  heroDescription,
+  heroCtaText,
+  heroCtaLink,
+  stats[]{ number, label },
+  breadcrumbLabels,
+  emptyStateTexts,
+  galleryCategoryGradients[]{ category, gradient },
+  galleryCategoryIcons[]{ category, icon },
+  kategoriLabels,
+  navItems[]{ label, href },
+  notFoundTitle,
+  notFoundDescription
 }`

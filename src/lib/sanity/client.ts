@@ -1,13 +1,21 @@
 import { sanityClient } from 'sanity:client'
-import type { SanityKegiatan, SanityProgram, SanityBankDonasi, SanityPengurus, SanitySiteSettings } from './types'
 import {
-	kegiatanListQuery,
-	kegiatanItemQuery,
-	programListQuery,
 	bankDonasiQuery,
+	faqListQuery,
+	kegiatanItemQuery,
+	kegiatanListQuery,
 	pengurusQuery,
+	programListQuery,
 	siteSettingsQuery,
 } from './queries'
+import type {
+	SanityBankDonasi,
+	SanityFaq,
+	SanityKegiatan,
+	SanityPengurus,
+	SanityProgram,
+	SanitySiteSettings,
+} from './types'
 
 export async function getKegiatanList(): Promise<SanityKegiatan[]> {
 	return sanityClient.fetch(kegiatanListQuery)
@@ -31,4 +39,14 @@ export async function getPengurus(): Promise<SanityPengurus[]> {
 
 export async function getSiteSettings(): Promise<SanitySiteSettings | null> {
 	return sanityClient.fetch(siteSettingsQuery)
+}
+
+export async function getFaqList(): Promise<SanityFaq[] | null> {
+	try {
+		const faqs = await sanityClient.fetch<SanityFaq[]>(faqListQuery)
+		return faqs || []
+	} catch (error) {
+		console.error('Failed to fetch FAQ from Sanity:', error)
+		return []
+	}
 }
