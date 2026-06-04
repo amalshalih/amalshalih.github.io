@@ -1,49 +1,64 @@
 {
-  "name": "yayasan-amal-shalih-insan-bantul",
-  "type": "module",
-  "version": "0.0.1",
-  "engines": {
-    "node": ">=22.12.0"
-  },
-  "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro",
-    "deploy": "wrangler deploy",
-    "wrangler:dev": "cd dist/server && wrangler dev",
-    "wrangler:deploy": "wrangler deploy",
-    "test": "vitest run",
-    "test:watch": "vitest",
-    "test:changed": "vitest run --changed",
-    "typecheck": "astro check",
-    "lint-staged": "lint-staged"
-  },
-  "lint-staged": {
-    "*.{ts,tsx,astro}": ["vitest run --changed --coverage=false"],
-    "*.{cjs,mjs,js}": ["vitest run --changed --coverage=false"]
-  },
-  "devDependencies": {
-    "@cloudflare/vitest-pool-workers": "^0.16.10",
-    "husky": "^9.1.7",
-    "lint-staged": "^17.0.7",
-    "vite": "^6.0.0",
-    "vitest": "2.1.8"
-  },
-  "dependencies": {
-    "@astrojs/cloudflare": "13.6.0",
-    "@astrojs/mdx": "6.0.1",
-    "@astrojs/rss": "^4.0.18",
-    "@astrojs/sitemap": "3.7.3",
-    "@portabletext/to-html": "^5.0.2",
-    "@sanity/astro": "3.4.0",
-    "@sentry/astro": "10.55.0",
-    "@sentry/cloudflare": "^10.56.0",
-    "@tailwindcss/typography": "^0.5.19",
-    "@tailwindcss/vite": "4.3.0",
-    "astro": "6.4.2",
-    "sanity": "^5.30.0",
-    "tailwindcss": "4.3.0",
-    "zod": "^4.0.0"
-  }
+	"name": "yayasan-amal-shalih-insan-bantul",
+	"type": "module",
+	"version": "0.0.1",
+	"engines": {
+		"node": ">=22.12.0"
+	},
+	"scripts": {
+		"dev": "astro dev",
+		"build": "astro build",
+		"preview": "astro preview",
+		"astro": "astro",
+		"deploy": "wrangler deploy",
+		"wrangler:dev": "cd dist/server && wrangler dev",
+		"wrangler:deploy": "wrangler deploy",
+		"test": "vitest run",
+		"test:watch": "vitest",
+		"test:changed": "vitest run --changed",
+		"typecheck": "astro check",
+		"lint": "biome check .",
+		"lint:fix": "biome check --write .",
+		"format": "biome format --write .",
+		"eslint": "eslint .",
+		"lint-staged": "lint-staged",
+		"prepare": "husky"
+	},
+	"lint-staged": {
+		"*.{ts,tsx,astro,js,cjs,mjs}": [
+			"biome check --write --no-errors-on-unmatched",
+			"vitest run --changed --coverage=false"
+		],
+		"*.{json,md,css}": [
+			"biome check --write --no-errors-on-unmatched"
+		]
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^2.4.16",
+		"@cloudflare/vitest-pool-workers": "^0.16.10",
+		"@eslint/js": "^10.0.1",
+		"eslint": "^10.4.1",
+		"eslint-plugin-astro": "^1.7.0",
+		"husky": "^9.1.7",
+		"lint-staged": "^17.0.7",
+		"typescript-eslint": "^8.60.1",
+		"vite": "^6.0.0",
+		"vitest": "2.1.8"
+	},
+	"dependencies": {
+		"@astrojs/cloudflare": "13.6.0",
+		"@astrojs/mdx": "6.0.1",
+		"@astrojs/rss": "^4.0.18",
+		"@astrojs/sitemap": "3.7.3",
+		"@portabletext/to-html": "^5.0.2",
+		"@sanity/astro": "3.4.0",
+		"@sentry/astro": "10.55.0",
+		"@sentry/cloudflare": "^10.56.0",
+		"@tailwindcss/typography": "^0.5.19",
+		"@tailwindcss/vite": "4.3.0",
+		"astro": "6.4.2",
+		"sanity": "^5.30.0",
+		"tailwindcss": "4.3.0",
+		"zod": "^4.0.0"
+	}
 }
