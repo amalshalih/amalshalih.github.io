@@ -56,6 +56,36 @@ try {
 } catch (error) {
 	console.error('[Tentang] Sanity pengurus fetch failed:', error)
 }
+
+// Local fallback if Sanity DB returns no board members
+if (pengurus.length === 0) {
+	pengurus = [
+		{
+			_id: 'fallback-1',
+			name: 'Haryadi',
+			position: 'Ketua Pembina',
+			description: 'Merumuskan arah kebijakan strategis yayasan.',
+		},
+		{
+			_id: 'fallback-2',
+			name: 'Fury Artanto',
+			position: 'Ketua Pengawas & Kepala PKBM',
+			description: 'Mengawasi pelaksanaan operasional dan memimpin unit pendidikan kesetaraan.',
+		},
+		{
+			_id: 'fallback-3',
+			name: 'Fat-han Kurnia Mubina',
+			position: 'Ketua Umum Pengurus',
+			description: 'Mengoordinasikan seluruh program kerja harian dan operasional yayasan.',
+		},
+		{
+			_id: 'fallback-4',
+			name: 'Muhammad Ilham Syaifudin',
+			position: 'Bendahara Umum',
+			description: 'Mengelola administrasi keuangan dan pelaporan amanah donatur.',
+		},
+	]
+}
 ---
 
 <BaseLayout
