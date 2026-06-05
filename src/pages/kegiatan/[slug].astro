@@ -44,30 +44,36 @@ try {
 
 let Content = null
 
-// Sanity CMS sebagai sumber utama, fallback ke static markdown jika body kosong
+// Sanity CMS sebagai sumber utama, fallback ke static markdown jika body/image kosong
 try {
 	const sanityItem = await getKegiatanItem(slug)
 	if (sanityItem) {
 		const bodyHtml = sanityItem.body ? renderPortableText(sanityItem.body) : ''
+		let image = sanityItem.imageUrl || undefined
+
+		// Jika Sanity body atau image kosong, coba fallback ke local markdown
+		if (!bodyHtml || !image) {
+			const localItems = await getCollection('kegiatan')
+			const localItem = localItems.find((item) => item.id === slug)
+			if (localItem) {
+				if (!bodyHtml) {
+					const rendered = await render(localItem)
+					Content = rendered.Content
+				}
+				if (!image && localItem.data.image) {
+					image = localItem.data.image
+				}
+			}
+		}
+
 		pageData = {
 			title: sanityItem.title,
 			description: sanityItem.excerpt ?? '',
 			date: new Date(sanityItem.date),
 			kategori: sanityItem.category,
-			image: undefined,
+			image,
 			fromSanity: true,
 			bodyHtml,
-		}
-
-		// Jika Sanity body kosong, coba fallback ke local markdown untuk body konten
-		if (!bodyHtml) {
-			const localItems = await getCollection('kegiatan')
-			const localItem = localItems.find((item) => item.id === slug)
-			if (localItem) {
-				const rendered = await render(localItem)
-				Content = rendered.Content
-				// Gunakan metadata dari Sanity, body dari markdown lokal
-			}
 		}
 	}
 } catch (error) {
