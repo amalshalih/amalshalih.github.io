@@ -1,43 +1,43 @@
 ---
-import { getCollection, render } from 'astro:content';
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import Container from '../../components/ui/Container.astro';
-import Icon from '../../components/ui/Icon.astro';
+import { getCollection, render } from 'astro:content'
+import Container from '../../components/ui/Container.astro'
+import Icon from '../../components/ui/Icon.astro'
+import BaseLayout from '../../layouts/BaseLayout.astro'
 
 // SSR mode for Cloudflare Workers
-export const prerender = false;
+export const prerender = false
 
-const { slug } = Astro.params;
+const { slug } = Astro.params
 if (!slug) {
-	return Astro.redirect('/blog');
+	return Astro.redirect('/blog')
 }
 
 // Fetch the specific blog post
-const blogPosts = await getCollection('blog');
-const post = blogPosts.find(p => p.id === slug);
+const blogPosts = await getCollection('blog')
+const post = blogPosts.find((p) => p.id === slug)
 
 if (!post) {
-	return Astro.redirect('/blog');
+	return Astro.redirect('/blog')
 }
 
-const { Content } = await render(post);
+const { Content } = await render(post)
 
 const formattedDate = post.data.date.toLocaleDateString('id-ID', {
 	weekday: 'long',
 	year: 'numeric',
 	month: 'long',
 	day: 'numeric',
-});
+})
 
 // Estimate reading time (avg 200 words per minute)
-const words = post.body?.split(/\s+/).length || 0;
-const readingTime = Math.ceil(words / 200);
+const words = post.body?.split(/\s+/).length || 0
+const readingTime = Math.ceil(words / 200)
 
 // Fetch related posts
-const allPosts = await getCollection('blog');
+const allPosts = await getCollection('blog')
 const relatedPosts = allPosts
-	.filter(p => p.id !== post.id && p.data.category === post.data.category)
-	.slice(0, 3);
+	.filter((p) => p.id !== post.id && p.data.category === post.data.category)
+	.slice(0, 3)
 ---
 
 <BaseLayout
@@ -131,12 +131,12 @@ const relatedPosts = allPosts
 					</div>
 				</div>
 			</div>
-		</Container>
+		</section>
 	</div>
 
 	<!-- Overlapping Article Content Card -->
-	<Container as="section" class="relative z-20 -mt-12 sm:-mt-16 md:-mt-20">
-		<div class="mx-auto max-w-3xl bg-gradient-to-b from-white/20 via-white/80 to-white/90 rounded-t-3xl shadow-2xl backdrop-blur-sm p-5 sm:p-6 lg:p-8">
+	<section class="mx-auto max-w-6xl sm:px-6 lg:px-8 relative z-20 -mt-12 sm:-mt-16 md:-mt-20">
+		<div class="mx-auto max-w-3xl bg-gradient-to-b from-white/20 via-white/80 to-white/90 rounded-t-3xl shadow-2xl backdrop-blur-sm px-4 py-5 sm:p-6 lg:p-8">
 			<!-- Article Body with Prose Typography -->
 			<div class="prose prose-slate max-w-none
 				prose-headings:text-warm-900 prose-headings:tracking-tight
@@ -176,9 +176,10 @@ const relatedPosts = allPosts
 							<span class="h-8 w-1 bg-primary-600 rounded-full"></span>
 							Artikel Terkait
 						</h3>
-						<div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+						<!-- Mobile: horizontal snap carousel dengan negatif margin agar full-bleed / Desktop: grid -->
+						<div class="-mx-4 px-4 flex gap-6 overflow-x-auto snap-x snap-mandatory scroll-pl-4 pb-4 sm:mx-0 sm:px-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:snap-none sm:pb-0 lg:grid-cols-3">
 							{relatedPosts.map(post => (
-								<a href={`/blog/${post.id}`} class="group block overflow-hidden rounded-2xl border border-warm-100 bg-white hover:border-primary-200 hover:shadow-md transition-all">
+								<a href={`/blog/${post.id}`} class="group block overflow-hidden rounded-2xl border border-warm-100 bg-white hover:border-primary-200 hover:shadow-md transition-all w-[75vw] min-w-[260px] sm:w-auto sm:min-w-0 snap-start shrink-0 sm:shrink">
 									<div class="aspect-video overflow-hidden">
 										<img src={post.data.image || '/logo-yayasan.webp'} alt={post.data.title} class="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500" />
 									</div>

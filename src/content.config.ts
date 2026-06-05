@@ -1,9 +1,9 @@
-import { defineCollection } from 'astro:content';
-import { z } from 'zod';
-import { glob } from 'astro/loaders';
+import { defineCollection } from 'astro:content'
+import { glob } from 'astro/loaders'
+import { z } from 'zod'
 
 const kegiatan = defineCollection({
-	loader: glob({ pattern: '**/*.md', base: './src/content/kegiatan' }),
+	loader: glob({ pattern: ['**/*.md', '!**/README.md'], base: './src/content/kegiatan' }),
 	schema: z.object({
 		title: z.string(),
 		description: z.string(),
@@ -11,10 +11,10 @@ const kegiatan = defineCollection({
 		image: z.string().optional(),
 		kategori: z.enum(['pendidikan', 'keagamaan', 'sosial', 'umum']),
 	}),
-});
+})
 
 const blog = defineCollection({
-	loader: glob({ pattern: '**/*.md', base: './src/content/blog' }),
+	loader: glob({ pattern: ['**/*.md', '!**/README.md'], base: './src/content/blog' }),
 	schema: z.object({
 		title: z.string(),
 		description: z.string(),
@@ -23,6 +23,6 @@ const blog = defineCollection({
 		category: z.string().optional(),
 		author: z.string().default('Admin Yayasan ASIB'),
 	}),
-});
+})
 
-export const collections = { kegiatan, blog };
+export const collections = { kegiatan, blog }

@@ -95,31 +95,99 @@ try {
 		<a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-primary-600 focus:px-4 focus:py-3 focus:text-sm focus:font-semibold focus:text-white focus:shadow-lg">
 			Langsung ke konten utama
 		</a>
-		<header class={`sticky top-0 z-50 transition-colors duration-300 ${
+		<header
+			id="main-header"
+			class={`sticky top-0 z-50 w-full transition-all duration-500 ease-in-out ${
 				currentPage === '/'
-					? 'bg-primary-900/20 backdrop-blur-md border-b border-white/10'
-					: 'bg-white/90 backdrop-blur border-b border-primary-100'
-			}`}>
-			<nav class="mx-auto flex max-w-6xl items-center justify-between px-4 py-2.5 sm:py-3">
-				<a href="/" class="flex items-center gap-2 sm:gap-3 shrink-0">
-					<img src="/logo-yayasan-sm.webp" alt="Logo Yayasan ASIB" class="h-10 w-10 sm:h-12 sm:w-12 rounded-full object-cover" width="48" height="48" fetchpriority="high" decoding="async" />
-					<div class="hidden sm:block whitespace-nowrap">
-						<p class={`text-sm font-bold leading-tight ${currentPage === '/' ? 'text-white' : 'text-primary-800'}`}>Yayasan Amal Shalih</p>
-						<p class={`text-xs ${currentPage === '/' ? 'text-white/70' : 'text-warm-700'}`}>Insan Bantul</p>
-					</div>
-					<div class="sm:hidden">
-						<p class={`text-sm font-bold ${currentPage === '/' ? 'text-white' : 'text-primary-800'}`}>Yayasan ASIB</p>
-					</div>
-				</a>
+					? 'pt-0 px-0'
+					: 'pt-0 px-0 bg-white border-b border-primary-100'
+			}`}
+			data-page={currentPage}
+		>
+			<!-- Floating Glassmorphism Capsule -->
+			<div
+				id="header-capsule"
+				class={`mx-auto w-full max-w-none rounded-none border border-transparent transition-all duration-500 ease-in-out ${
+					currentPage === '/'
+						? 'bg-transparent text-white'
+						: 'bg-transparent text-primary-800'
+				}`}
+			>
+				<nav id="header-nav" class="mx-auto flex items-center justify-between px-4 py-3.5 sm:py-4 sm:px-8 transition-all duration-500 ease-in-out">
+					<a href="/" class="flex items-center gap-2 sm:gap-3 shrink-0">
+						<img src="/logo-yayasan-sm.webp" alt="Logo Yayasan ASIB" class="h-10 w-10 sm:h-12 sm:w-12 rounded-full object-cover" width="48" height="48" fetchpriority="high" decoding="async" />
+						<div class="hidden sm:block whitespace-nowrap">
+							<p id="logo-text-1" class={`text-sm font-bold leading-tight transition-colors duration-300 ${currentPage === '/' ? 'text-white' : 'text-primary-800'}`}>Yayasan Amal Shalih</p>
+							<p id="logo-text-2" class={`text-xs transition-colors duration-300 ${currentPage === '/' ? 'text-white/70' : 'text-warm-700'}`}>Insan Bantul</p>
+						</div>
+						<div class="sm:hidden">
+							<p id="logo-text-mobile" class={`text-sm font-bold transition-colors duration-300 ${currentPage === '/' ? 'text-white' : 'text-primary-800'}`}>Yayasan ASIB</p>
+						</div>
+					</a>
 
-				<!-- Desktop Nav -->
-				<div class="hidden sm:flex items-center justify-end gap-1 overflow-hidden">
-					<div class="flex items-center gap-1 overflow-x-auto scrollbar-hide whitespace-nowrap snap-x snap-mandatory min-w-0 max-w-[320px] lg:max-w-none">
+					<!-- Desktop Nav -->
+					<div class="hidden sm:flex items-center justify-end gap-1 overflow-hidden">
+						<div class="flex items-center gap-1 overflow-x-auto scrollbar-hide whitespace-nowrap snap-x snap-mandatory min-w-0 max-w-[320px] lg:max-w-none">
+							{navItems.map((item) => (
+								<a
+								href={item.href}
+								aria-current={currentPage === item.href ? 'page' : undefined}
+								class={`desktop-nav-link rounded-lg px-3 py-2 text-sm font-medium transition-colors shrink-0 snap-start ${
+									currentPage === item.href
+										? currentPage === '/'
+											? 'bg-white/20 text-white'
+											: 'bg-primary-50 text-primary-700'
+										: currentPage === '/'
+											? 'text-white/80 hover:bg-white/10 hover:text-white'
+											: 'text-warm-700 hover:bg-warm-100 hover:text-warm-800'
+								}`}
+							>
+								{item.label}
+								</a>
+							))}
+						</div>
+						<a
+							href="/donasi"
+							class="ml-2 rounded-lg bg-primary-700 px-4 py-2 text-sm font-semibold text-white hover:bg-primary-800 transition-colors shrink-0"
+						>
+							Donasi
+						</a>
+					</div>
+
+					<!-- Mobile Menu Button -->
+					<button
+						id="mobile-menu-button"
+						type="button"
+						class={`sm:hidden p-1.5 rounded-lg transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ${
+							currentPage === '/'
+								? 'text-white hover:bg-white/10 focus-visible:ring-white focus-visible:ring-offset-primary-900'
+								: 'text-primary-800 hover:bg-primary-50 focus-visible:ring-primary-500 focus-visible:ring-offset-2'
+						}`}
+						aria-expanded="false"
+						aria-controls="mobile-menu"
+						aria-label="Buka menu navigasi"
+					>
+						<Icon name="menu" size={5} class="menu-icon" aria-hidden="true" />
+						<Icon name="close" size={5} class="close-icon hidden" aria-hidden="true" />
+					</button>
+				</nav>
+
+				<!-- Mobile Nav Drawer (Nested inside the capsule with absolute bottom border removed) -->
+				<div
+					id="mobile-menu"
+					class={`sm:hidden w-full transition-all duration-300 ease-in-out max-h-0 overflow-hidden opacity-0 rounded-b-2xl ${
+						currentPage === '/'
+							? 'bg-primary-950/95 backdrop-blur-lg'
+							: 'bg-white/95 backdrop-blur-lg'
+					}`}
+					aria-hidden="true"
+				>
+					<div class={`flex flex-col p-4 pt-0 space-y-1 border-t ${currentPage === '/' ? 'border-white/10' : 'border-warm-100'}`}>
 						{navItems.map((item) => (
 							<a
 							href={item.href}
 							aria-current={currentPage === item.href ? 'page' : undefined}
-							class={`rounded-lg px-3 py-2 text-sm font-medium transition-colors shrink-0 snap-start ${
+							class={`rounded-lg px-4 py-3 text-base font-medium transition-colors ${
 								currentPage === item.href
 									? currentPage === '/'
 										? 'bg-white/20 text-white'
@@ -132,60 +200,14 @@ try {
 							{item.label}
 							</a>
 						))}
-					</div>
-					<a
-						href="/donasi"
-						class="ml-2 rounded-lg bg-primary-700 px-4 py-2 text-sm font-semibold text-white hover:bg-primary-800 transition-colors shrink-0"
-					>
-						Donasi
-					</a>
-				</div>
-
-				<!-- Mobile Menu Button -->
-				<button
-					id="mobile-menu-button"
-					type="button"
-					class={`sm:hidden p-1.5 rounded-lg transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ${
-						currentPage === '/'
-							? 'text-white hover:bg-white/10 focus-visible:ring-white focus-visible:ring-offset-primary-900'
-							: 'text-primary-800 hover:bg-primary-50 focus-visible:ring-primary-500 focus-visible:ring-offset-2'
-					}`}
-					aria-expanded="false"
-					aria-controls="mobile-menu"
-					aria-label="Buka menu navigasi"
-				>
-					<Icon name="menu" size={5} class="menu-icon" aria-hidden="true" />
-					<Icon name="close" size={5} class="close-icon hidden" aria-hidden="true" />
-				</button>
-			</nav>
-
-			<!-- Mobile Nav Drawer -->
-			<div
-				id="mobile-menu"
-				class="sm:hidden absolute top-full left-0 w-full bg-white border-b border-primary-100 shadow-lg transition-max-height duration-300 ease-in-out, opacity duration-300 ease-in-out max-h-0 overflow-hidden opacity-0"
-				aria-hidden="true"
-			>
-				<div class="flex flex-col p-4 space-y-1">
-					{navItems.map((item) => (
-						<a
-						href={item.href}
-						aria-current={currentPage === item.href ? 'page' : undefined}
-						class={`rounded-lg px-4 py-3 text-base font-medium transition-colors ${
-							currentPage === item.href
-								? 'bg-primary-50 text-primary-700'
-								: 'text-warm-700 hover:bg-warm-100 hover:text-warm-800'
-						}`}
-					>
-						{item.label}
-						</a>
-					))}
-					<div class="pt-3 border-t border-primary-100">
-						<a
-							href="/donasi"
-							class="block w-full text-center rounded-lg bg-primary-700 px-4 py-3 text-base font-semibold text-white hover:bg-primary-800 transition-colors"
-						>
-							Donasi Sekarang
-						</a>
+						<div class={`pt-3 border-t ${currentPage === '/' ? 'border-white/10' : 'border-warm-100'}`}>
+							<a
+								href="/donasi"
+								class="block w-full text-center rounded-lg bg-primary-700 px-4 py-3 text-base font-semibold text-white hover:bg-primary-800 transition-colors"
+							>
+								Donasi Sekarang
+							</a>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -275,6 +297,88 @@ try {
 					toggleMenu();
 				}
 			});
+
+			// Scroll Header Transition
+			const header = document.getElementById('main-header');
+			const capsule = document.getElementById('header-capsule');
+			const nav = document.getElementById('header-nav');
+			const logoText1 = document.getElementById('logo-text-1');
+			const logoText2 = document.getElementById('logo-text-2');
+			const logoTextMobile = document.getElementById('logo-text-mobile');
+			const isHomepage = header?.dataset.page === '/';
+
+			let lastIsScrolled: boolean | undefined = undefined;
+
+			function handleScroll() {
+				if (!header || !capsule || !nav) return;
+				const isScrolled = window.scrollY > 40;
+
+				if (isScrolled === lastIsScrolled) return;
+				lastIsScrolled = isScrolled;
+
+				if (isScrolled) {
+					header.classList.remove('pt-0', 'px-0', 'bg-white', 'border-b', 'border-primary-100');
+					header.classList.add('pt-3', 'sm:pt-4', 'px-3', 'sm:px-4');
+
+					capsule.className = "mx-auto max-w-6xl rounded-2xl border border-warm-200/80 bg-white/90 backdrop-blur-md shadow-lg shadow-primary-900/5 text-primary-800 transition-all duration-500 ease-in-out";
+					nav.className = "flex items-center justify-between px-4 py-2.5 sm:py-3 sm:px-6 transition-all duration-500 ease-in-out";
+
+					if (isHomepage) {
+						if (logoText1) { logoText1.classList.remove('text-white'); logoText1.classList.add('text-primary-800'); }
+						if (logoText2) { logoText2.classList.remove('text-white/70'); logoText2.classList.add('text-warm-700'); }
+						if (logoTextMobile) { logoTextMobile.classList.remove('text-white'); logoTextMobile.classList.add('text-primary-800'); }
+						if (menuButton) {
+							menuButton.classList.remove('text-white', 'hover:bg-white/10', 'focus-visible:ring-white', 'focus-visible:ring-offset-primary-900');
+							menuButton.classList.add('text-primary-800', 'hover:bg-primary-50', 'focus-visible:ring-primary-500', 'focus-visible:ring-offset-2');
+						}
+
+						const links = document.querySelectorAll('.desktop-nav-link');
+						links.forEach(link => {
+							const isCurrent = link.getAttribute('aria-current') === 'page';
+							if (isCurrent) {
+								link.className = "desktop-nav-link rounded-lg px-3 py-2 text-sm font-medium transition-colors shrink-0 snap-start bg-primary-50 text-primary-700";
+							} else {
+								link.className = "desktop-nav-link rounded-lg px-3 py-2 text-sm font-medium transition-colors shrink-0 snap-start text-warm-700 hover:bg-warm-100 hover:text-warm-800";
+							}
+						});
+					}
+				} else {
+					header.classList.remove('pt-3', 'sm:pt-4', 'px-3', 'sm:px-4');
+					header.classList.add('pt-0', 'px-0');
+
+					if (isHomepage) {
+						header.classList.add('bg-transparent');
+						header.classList.remove('bg-white', 'border-b', 'border-primary-100');
+						capsule.className = "mx-auto w-full max-w-none rounded-none border border-transparent bg-transparent text-white transition-all duration-500 ease-in-out";
+						nav.className = "flex items-center justify-between px-4 py-3.5 sm:py-4 sm:px-8 transition-all duration-500 ease-in-out";
+
+						if (logoText1) { logoText1.classList.remove('text-primary-800'); logoText1.classList.add('text-white'); }
+						if (logoText2) { logoText2.classList.remove('text-warm-700'); logoText2.classList.add('text-white/70'); }
+						if (logoTextMobile) { logoTextMobile.classList.remove('text-primary-800'); logoTextMobile.classList.add('text-white'); }
+						if (menuButton) {
+							menuButton.classList.add('text-white', 'hover:bg-white/10', 'focus-visible:ring-white', 'focus-visible:ring-offset-primary-900');
+							menuButton.classList.remove('text-primary-800', 'hover:bg-primary-50', 'focus-visible:ring-primary-500', 'focus-visible:ring-offset-2');
+						}
+
+						const links = document.querySelectorAll('.desktop-nav-link');
+						links.forEach(link => {
+							const isCurrent = link.getAttribute('aria-current') === 'page';
+							if (isCurrent) {
+								link.className = "desktop-nav-link rounded-lg px-3 py-2 text-sm font-medium transition-colors shrink-0 snap-start bg-white/20 text-white";
+							} else {
+								link.className = "desktop-nav-link rounded-lg px-3 py-2 text-sm font-medium transition-colors shrink-0 snap-start text-white/80 hover:bg-white/10 hover:text-white";
+							}
+						});
+					} else {
+						header.classList.add('bg-white', 'border-b', 'border-primary-100');
+						capsule.className = "mx-auto w-full max-w-none rounded-none border border-transparent bg-transparent text-primary-800 transition-all duration-500 ease-in-out";
+						nav.className = "flex items-center justify-between px-4 py-3.5 sm:py-4 sm:px-8 transition-all duration-500 ease-in-out";
+					}
+				}
+			}
+
+			window.addEventListener('scroll', handleScroll, { passive: true });
+			handleScroll();
 		</script>
 
 		<main id="main-content" class="flex-1" tabindex="-1">
