@@ -19,6 +19,7 @@ const ROUTING: Record<string, { name: string; to: string }> = {
 	program: { name: 'Informasi Program', to: 'info@amalshalih.or.id' },
 	kerjasama: { name: 'Kerja Sama', to: 'humas@amalshalih.or.id' },
 	pendaftaran: { name: 'Pendaftaran Santri', to: 'info@amalshalih.or.id' },
+	kritik: { name: 'Kritik & Saran', to: 'info@amalshalih.or.id' },
 	lainnya: { name: 'Lainnya', to: 'info@amalshalih.or.id' },
 }
 
