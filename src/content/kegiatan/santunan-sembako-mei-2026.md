@@ -1,38 +1,57 @@
 ---
-title: 'Santunan Sembako Bulanan untuk 110 Penerima Manfaat'
-description: 'Penyaluran santunan sembako rutin bulanan kepada anak yatim, fakir miskin, dan dhuafa binaan Yayasan ASIB di wilayah Bantul.'
+title: 'Santunan Sembako Bulanan — Distribusi Mei 2026'
+description: 'Laporan distribusi santunan sembako bulanan Yayasan ASIB untuk 110 penerima manfaat di Kecamatan Sewon, Banguntapan, dan Jetis. Total 110 paket sembako disalurkan dengan nilai Rp5.500.000.'
 date: 2026-05-15
 kategori: 'sosial'
-image: 'https://images.unsplash.com/photo-1718677322593-037f769c9e40?auto=format&fit=crop&q=80&w=800'
+image: 'https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&q=80&w=800'
 ---
 
-Matahari belum begitu tinggi saat rombongan relawan Yayasan ASIB mulai berdatangan ke halaman sekretariat pada 15 Mei 2026. Dua mobil pikap terparkir di samping, baknya sudah penuh dengan karung beras, dus mi instan, dan kantong-kantong plastik berisi minyak goreng, gula, teh, serta susu. Di sudut halaman, para relawan sibuk mengecek daftar penerima—110 nama, 110 paket, 110 senyuman yang menunggu di 110 titik berbeda di Kecamatan Sewon dan sekitarnya.
+**Bantul, 15 Mei 2026** — Yayasan Amal Shalih Insan Bantul (ASIB) melaksanakan distribusi santunan sembako bulanan untuk 110 penerima manfaat di tiga kecamatan wilayah Kabupaten Bantul. Distribusi Mei 2026 ini merupakan pelaksanaan ke-63 sejak program dimulai pada tahun 2020.
 
-Santunan sembako bulanan bukan sekadar acara seremonial. Bagi kami, ia adalah manifestasi dari hadits Rasulullah ﷺ: *"Barang siapa yang memudahkan kesulitan seorang muslim di dunia, maka Allah akan memudahkan kesulitannya di akhirat."* Setiap paket sembako yang kami siapkan adalah jawaban atas doa-doa yang mungkin tidak pernah kami dengar: perut yang keroncongan di malam hari, anak yang menangis karena tidak bisa membeli susu, atau lansia yang hanya makan nasi dan garam selama seminggu.
+## Rincian Paket Sembako
 
-## Dari Pikap ke Rumah-Rumah Sederhana
+Setiap paket sembako bernilai Rp50.000 dan berisi:
 
-Tim ASIB berangkat pukul 08.30, dibagi menjadi tiga rute. Rute pertama mencakup Pedes, Jambon, dan sekitarnya—mayoritas penerima di sana adalah lansia yang tinggal sendiri. Rute kedua menuju wilayah Grogol dan Tegalrejo—konsentrasi anak yatim binaan. Rute ketiga meliputi Panggang dan sekitarnya—keluarga dhuafa dengan balita.
+| Item | Jumlah |
+|------|--------|
+| Beras | 5 kg |
+| Minyak goreng | 1 liter |
+| Gula pasir | 1 kg |
+| Mi instan | 2 bungkus |
+| Teh celup | 1 kotak (25 kantong) |
+| Susu kental manis | 1 kaleng |
 
-Saya ikut di rute pertama. Rumah pertama yang kami tuju adalah kediamaan Mbah Sari, 78 tahun. Ia tinggal di sebuah rumah papan berukuran 4x5 meter, tidak ada listrik, dan kamar mandinya masih berupa sungai kecil di belakang rumah. Saat melihat mobil pikap berhenti, Mbah Sari langsung keluar dengan langkah tertatih. "Ditengoki lagi sama yayasan. Matur nuwun, matur nuwun," ucapnya berulang kali sambil memegang tangan relawan. Matanya berkaca-kaca.
+**Total nilai distribusi: Rp5.500.000** — bersumber dari donasi umum Yayasan ASIB.
 
-Kami meninggalkan paket sembako untuk Mbah Sari, lalu melanjutkan ke rumah-rumah berikutnya. Ada yang menerima dengan senyum, ada yang menangis, ada yang hanya bisa mengucap syukur berkali-kali. Setiap cerita yang kami temui adalah pengingat bahwa di balik angka 110 penerima manfaat, ada 110 perjuangan hidup yang nyata.
+## Wilayah Distribusi
 
-![Sinergi para relawan dalam menyiapkan paket pangan untuk saudara dhuafa.](https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&q=80&w=800&h=600)
+Relawan ASIB berangkat pukul 08.30 WIB dalam tiga regu:
 
-## Sejarah Program
+1. **Regu A (Rute Sewon)** — Padukuhan Jambon, Pedes, dan Tegalrejo: 45 paket untuk lansia dan janda dhuafa
+2. **Regu B (Rute Banguntapan)** — Jagalan, Baturetno, dan Singosaren: 38 paket untuk keluarga dengan balita
+3. **Regu C (Rute Jetis)** — Canden, Patalan, dan Sumberagung: 27 paket untuk anak yatim binaan
 
-Program santunan sembako bulanan Yayasan ASIB telah berjalan sejak tahun 2020—tepatnya saat pandemi COVID-19 melanda Indonesia. Awalnya, program ini adalah respons darurat untuk membantu warga yang kehilangan mata pencaharian akibat pembatasan sosial. Namun, setelah pandemi mereda, Yayasan ASIB memutuskan untuk melanjutkan program ini sebagai kegiatan rutin. Karena ternyata, kebutuhan masyarakat tidak berhenti meskipun pandemi telah berlalu.
+Seluruh paket diantar langsung ke rumah penerima manfaat. Metode ini dipilih untuk menjangkau penerima yang sudah lanjut usia atau memiliki keterbatasan mobilitas.
 
-Setiap bulan, tim ASIB mengalokasikan dana dari donasi umum untuk membeli bahan pokok dalam jumlah grosir, mengemasnya, dan mendistribusikan langsung ke rumah penerima. Tidak ada titip di posko atau pengambilan di kantor—kami datang langsung. Kenapa? Karena beberapa penerima adalah lansia yang tidak bisa jalan jauh, atau ibu tunggal yang tidak bisa meninggalkan anaknya.
+## Data Penerima Manfaat
+
+Dari 110 penerima, komposisi penerima meliputi:
+- **Lansia** (≥ 65 tahun): 38 orang
+- **Janda/kepala keluarga tunggal**: 27 orang
+- **Anak yatim binaan**: 22 anak
+- **Keluarga dhuafa dengan balita**: 23 keluarga
+
+Program santunan sembako bulanan ASIB telah berjalan sejak April 2020 — awalnya sebagai respons darurat kemanusiaan di masa pandemi COVID-19. Hingga saat ini, program telah mendistribusikan lebih dari 6.900 paket sembako sejak pertama kali diluncurkan.
+
+![Relawan ASIB menyerahkan paket sembako kepada penerima manfaat di Padukuhan Jambon, Sewon.](https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&q=80&w=800&h=600)
 
 ## Partisipasi
 
-Seperti yang diungkapkan oleh Ketua Panitia, Haryadi: *"Kami berkomitmen untuk terus hadir membantu masyarakat yang membutuhkan. Setiap donasi yang masuk, sekecil apapun, akan kami salurkan dengan amanah."*
+Masyarakat dapat berpartisipasi dalam program ini melalui:
+- **Donasi langsung**: BSI 9515769570 a.n. Amal Shalih Insan Bantul
+- **QRIS**: Tersedia di halaman donasi website ASIB
+- **Bantuan barang**: Beras, minyak, sembako dapat dititipkan di Sekretariat ASIB
 
-Program santunan sembako bulanan selalu terbuka untuk partisipasi masyarakat. Donasi dapat disalurkan melalui:
-- **Transfer Bank**: BSI 9515769570 a.n. Amal Shalih Insan Bantul
-- **QRIS**: Scan kode QRIS yang tersedia di website kami
-- **Kitabisa**: linktr.ee/amalshalihinsan
+Satu paket sembako Rp50.000 dapat menopang kebutuhan pokok satu keluarga selama 5–7 hari. Distribusi bulan berikutnya dijadwalkan pada **Jumat, 12 Juni 2026**.
 
-Satu paket sembako seharga Rp50.000 bisa menopang kebutuhan pokok sebuah keluarga selama 5–7 hari. Satu donasi Rp100.000 bisa membiayai dua paket untuk dua keluarga berbeda. Ingatlah, kebaikan sekecil apa pun yang kita berikan, Allah tidak pernah menyia-nyiakannya.
+*Dokumen ini disusun oleh Divisi Sosial Yayasan ASIB.*

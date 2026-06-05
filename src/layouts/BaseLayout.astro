@@ -95,30 +95,38 @@ try {
 		<a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-primary-600 focus:px-4 focus:py-3 focus:text-sm focus:font-semibold focus:text-white focus:shadow-lg">
 			Langsung ke konten utama
 		</a>
-		<header class="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-primary-100">
+		<header class={`sticky top-0 z-50 transition-colors duration-300 ${
+				currentPage === '/'
+					? 'bg-primary-900/20 backdrop-blur-md border-b border-white/10'
+					: 'bg-white/90 backdrop-blur border-b border-primary-100'
+			}`}>
 			<nav class="mx-auto flex max-w-6xl items-center justify-between px-4 py-2.5 sm:py-3">
 				<a href="/" class="flex items-center gap-2 sm:gap-3 shrink-0">
 					<img src="/logo-yayasan-sm.webp" alt="Logo Yayasan ASIB" class="h-10 w-10 sm:h-12 sm:w-12 rounded-full object-cover" width="48" height="48" fetchpriority="high" decoding="async" />
 					<div class="hidden sm:block whitespace-nowrap">
-						<p class="text-sm font-bold leading-tight text-primary-800">Yayasan Amal Shalih</p>
-						<p class="text-xs text-warm-700">Insan Bantul</p>
+						<p class={`text-sm font-bold leading-tight ${currentPage === '/' ? 'text-white' : 'text-primary-800'}`}>Yayasan Amal Shalih</p>
+						<p class={`text-xs ${currentPage === '/' ? 'text-white/70' : 'text-warm-700'}`}>Insan Bantul</p>
 					</div>
 					<div class="sm:hidden">
-						<p class="text-sm font-bold text-primary-800">Yayasan ASIB</p>
+						<p class={`text-sm font-bold ${currentPage === '/' ? 'text-white' : 'text-primary-800'}`}>Yayasan ASIB</p>
 					</div>
 				</a>
 
 				<!-- Desktop Nav -->
 				<div class="hidden sm:flex items-center justify-end gap-1 overflow-hidden">
-					<div class="flex items-center gap-1 overflow-x-auto scrollbar-hide whitespace-nowrap snap-x snap-mandatory min-w-0 max-w-[280px] md:max-w-none">
+					<div class="flex items-center gap-1 overflow-x-auto scrollbar-hide whitespace-nowrap snap-x snap-mandatory min-w-0 max-w-[320px] lg:max-w-none">
 						{navItems.map((item) => (
 							<a
 							href={item.href}
 							aria-current={currentPage === item.href ? 'page' : undefined}
 							class={`rounded-lg px-3 py-2 text-sm font-medium transition-colors shrink-0 snap-start ${
 								currentPage === item.href
-									? 'bg-primary-50 text-primary-700'
-									: 'text-warm-700 hover:bg-warm-100 hover:text-warm-800'
+									? currentPage === '/'
+										? 'bg-white/20 text-white'
+										: 'bg-primary-50 text-primary-700'
+									: currentPage === '/'
+										? 'text-white/80 hover:bg-white/10 hover:text-white'
+										: 'text-warm-700 hover:bg-warm-100 hover:text-warm-800'
 							}`}
 						>
 							{item.label}
@@ -137,7 +145,11 @@ try {
 				<button
 					id="mobile-menu-button"
 					type="button"
-					class="sm:hidden p-1.5 rounded-lg text-primary-800 hover:bg-primary-50 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2"
+					class={`sm:hidden p-1.5 rounded-lg transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ${
+						currentPage === '/'
+							? 'text-white hover:bg-white/10 focus-visible:ring-white focus-visible:ring-offset-primary-900'
+							: 'text-primary-800 hover:bg-primary-50 focus-visible:ring-primary-500 focus-visible:ring-offset-2'
+					}`}
 					aria-expanded="false"
 					aria-controls="mobile-menu"
 					aria-label="Buka menu navigasi"

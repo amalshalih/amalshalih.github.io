@@ -1,51 +1,46 @@
 ---
-title: 'Wisuda Juz 30 dan Milad ke-5 Yayasan ASIB'
-description: 'Perayaan wisuda Juz 30 santri Rumah Tahfidz dan milad ke-5 Yayasan Amal Shalih Insan Bantul dalam rangkaian Semarak Ramadhan 1446 H.'
+title: 'Wisuda Juz 30 & Milad ke-5 Yayasan ASIB'
+description: 'Laporan acara Wisuda Juz 30 santri Rumah Tahfidz ASIB yang dirangkaikan dengan peringatan Milad ke-5 Yayasan. 25 santri diwisuda, 200+ hadirin, bertepatan dengan menyongsong Ramadhan 1446 H.'
 date: 2025-03-20
 kategori: 'keagamaan'
 image: 'https://images.unsplash.com/photo-1627790497727-41fb43f961be?auto=format&fit=crop&q=80&w=800'
 ---
 
-Halaman sekretariat Yayasan ASIB yang biasanya sepi mendadak berubah menjadi lautan manusia pada hari Kamis, 20 Maret 2025. Lebih dari 200 orang memadati tenda-tenda biru yang didirikan dari pagi buta. Ibu-ibu dengan baju busana muslim terbaik mereka duduk bersila di karpet, para bapak memenuhi kursi plastik di bagian belakang, dan di barisan paling depan—duduk rapi dengan peci hitam mungil—ada 25 santri Rumah Tahfidz ASIB yang hari itu akan diwisuda.
+**Bantul, 20 Maret 2025** — Yayasan Amal Shalih Insan Bantul (ASIB) menggelar acara Wisuda Juz 30 santri Rumah Tahfidz ASIB yang dirangkaikan dengan peringatan Milad ke-5 yayasan. Acara berlangsung di halaman Sekretariat ASIB, Pendowoharjo, Sewon, Bantul, mulai pukul 08.30 hingga 12.00 WIB.
 
-Acara **Wisuda Juz 30** bertepatan dengan **Milad ke-5 Yayasan ASIB**. Sebuah perayaan yang menggabungkan dua momen istimewa: kelulusan para penghafal Al-Qur'an termuda yayasan, dan syukur atas tiga tahun perjalanan yayasan dalam melayani umat.
+Sebanyak **25 santri** diwisuda setelah menyelesaikan hafalan Juz 30 Al-Qur'an. Para santri berasal dari program Rumah Tahfidz ASIB yang telah berjalan sejak tahun 2022. Rentang usia peserta wisuda adalah 7–14 tahun — terdiri dari 13 santri putra dan 12 santri putri.
 
-## Rangkaian Acara yang Sarat Makna
+## Rangkaian Acara
 
-Acara dimulai pukul 08.30 dengan pembacaan ayat suci Al-Qur'an oleh salah satu santri wisudawan—seorang anak kelas 5 SD bernama Hafidz. Suaranya yang masih jernih melantunkan surat Ad-Dhuha dengan tartil yang memukau. Beberapa ibu di barisan tengah terlihat menyeka air mata. Tidak berlebihan memang: menyaksikan anak seusia itu membaca Al-Qur'an dengan fasih adalah pemandangan yang menyentuh hati siapa pun.
+Acara dimulai dengan pembacaan ayat suci Al-Qur'an oleh Ananda Hafidz (11 tahun), salah satu wisudawan. Rangkaian acara meliputi:
 
-### Pengajian Menyongsong Ramadhan
+1. **Tausiyah Ramadhan** oleh Ustadz Ahmad, Lc. — alumni Universitas Islam Madinah, dengan tema *"Ramadhan: Bulan Transformasi dan Pembentukan Karakter Qur'ani"*
+2. **Prosesi Wisuda** — penyerahan sertifikat dan syahadah secara simbolis oleh Pembina Yayasan, Bapak Sunardi, S.Pd.I
+3. **Sambutan Milad ke-5** — refleksi perjalanan yayasan sejak berdiri tahun 2020
+4. **Doa dan Ramah Tamah**
 
-Sesi pertama diisi oleh tausiyah dari Ustadz Ahmad, Lc., yang membawakan tema "Ramadhan sebagai Momentum Muhasabah". Beliau mengingatkan bahwa Ramadhan adalah bulan transformasi—di dalamnya kita dilatih menahan lapar, haus, dan hawa nafsu. "Anak-anak ini," ujarnya menunjuk ke arah para santri, "telah melewati proses transformasi yang lebih dahsyat. Mereka tidak hanya menahan lapar, tetapi juga menahan diri dari godaan dunia untuk menghafal kalam Allah. Mereka adalah generasi istimewa."
+Total hadirin yang tercatat dalam daftar hadir: **237 orang**, terdiri dari orang tua/wali santri, donatur, tokoh masyarakat, dan jamaah binaan ASIB.
 
-Jamaah mendengarkan dengan khusyuk. Suasana hening hanya sesekali dipecah oleh suara "aamiin" yang menggema saat Ustadz Ahmad memimpin doa.
+## Anggaran dan Donasi
 
-### Wisuda Juz 30: Air Mata Haru dan Kebanggaan
+Acara terselenggara dari donasi khusus yang dihimpun selama bulan Januari–Maret 2025:
 
-Puncak acara adalah prosesi wisuda. Satu per satu, 25 santri dipanggil ke atas panggung. Mereka mengenakan toga mini berwarna hitam dengan jubah hijau tosca—warna khas ASIB. Setiap santri menerima sertifikat wisuda yang ditandatangani langsung oleh pembina yayasan.
+| Pos | Jumlah |
+|-----|--------|
+| Konsumsi (nasi kotak + snack) | Rp4.750.000 |
+| Sewa tenda + sound system | Rp1.200.000 |
+| Sertifikat + piagam | Rp375.000 |
+| Dokumentasi | Rp200.000 |
+| **Total** | **Rp6.525.000** |
 
-Saat nama "Aisyah" dipanggil, seorang gadis kecil dengan jilbab putih naik ke panggung dengan langkah malu-malu. Aisyah, 10 tahun, adalah santri termuda yang berhasil menyelesaikan hafalan Juz 30 dalam waktu 8 bulan. Ia memulai menghafal dari nol—tidak bisa membaca Al-Qur'an sama sekali saat pertama kali bergabung. Tangan mungilnya gemetar saat menerima sertifikat. Dari bawah panggung, ibunya menangis tersedu-sedu.
+Seluruh biaya berasal dari donatur tetap ASIB dan infak jamaah kajian pekanan. Surat pertanggungjawaban (LPJ) acara telah diserahkan kepada Pembina Yayasan pada 28 Maret 2025.
 
-"Nak, kamu hebat," bisik ibunya saat Aisyah turun dari panggung.
+![Prosesi wisuda dan penyerahan sertifikat kepada para santri Rumah Tahfidz ASIB.](https://images.unsplash.com/photo-1561715276-a2d2c60a02c0?auto=format&fit=crop&q=80&w=800&h=600)
 
-![Momen haru saat para penghafal cilik menyelesaikan target hafalan mereka.](https://images.unsplash.com/photo-1531058020387-3be344556be6?auto=format&fit=crop&q=80&w=800&h=600)
+## Dampak dan Tindak Lanjut
 
-### Milad ke-5: Syukur Atas Perjalanan
+Pasca-wisuda, 12 dari 25 santri telah terdaftar di program *Tahfidz Lanjutan* (target Juz 1–5) yang dimulai pada April 2025. Sementara 13 santri lainnya melanjutkan ke jenjang pendidikan formal dengan beasiswa dari Yayasan ASIB.
 
-Setelah wisuda, acara dilanjutkan dengan sambutan milad. Ketua Yayasan ASIB, Bapak Sunardi, S.Pd.I, menyampaikan refleksi singkat tentang lima tahun perjalanan yayasan. Dimulai dari sebuah ruang tamu rumah pribadi yang diubah menjadi sekretariat darurat, kini ASIB memiliki kantor sendiri, program tahfidz yang berjalan rutin, serta 200+ penerima manfaat setiap bulannya.
+Acara wisuda ini menjadi agenda tahunan Rumah Tahfidz ASIB. Wisuda berikutnya direncanakan pada Maret 2026 dengan target 35 santri. Bagi masyarakat yang ingin mendaftarkan putra-putrinya, pendaftaran santri baru dibuka setiap bulan Juli–Agustus melalui Sekretariat ASIB.
 
-"Lima tahun bukanlah waktu yang lama," ujar Pak Sunardi. "Tapi di dalam lima tahun ini, kami telah belajar satu hal: bahwa Allah tidak akan pernah meninggalkan hamba-Nya yang berjuang di jalan-Nya. Setiap kesulitan yang kami hadapi selalu diiringi kemudahan. Setiap kekurangan selalu ada donatur yang datang tanpa diminta."
-
-## Testimoni yang Membekas
-
-Aisyah, di sela-sela acara, ditanya oleh pembawa acara tentang perasaannya. Dengan suara lirih, ia menjawab:
-
-> "Alhamdulillah, saya senang sekali bisa menyelesaikan hafalan Juz 30. Terima kasih kepada ustadzah yang sudah sabar membimbing saya dan teman-teman. Saya ingin terus menghafal sampai 30 juz."
-
-Tepuk tangan riuh membalas pernyataan Aisyah. Di sudut ruangan, beberapa donatur terlihat tersenyum bangga. Inilah bukti bahwa donasi mereka tidak sia-sia: telah lahir generasi Qur'ani yang akan membawa Al-Qur'an dalam dada mereka.
-
-## Rencana ke Depan
-
-Momentum wisuda dan milad ini menjadi titik tolak bagi Yayasan ASIB untuk melangkah lebih jauh. Saat ini, yayasan sedang menggalang dana untuk pembangunan Rumah Tahfidz yang lebih representatif di atas lahan wakaf seluas 2.000 m² di Desa Jambon. Dengan fasilitas yang lebih memadai, kami berharap dapat menerima lebih banyak santri dan mencetak lebih banyak penghafal Al-Qur'an.
-
-Kami mengundang masyarakat untuk ikut serta dalam program wakaf pembangunan Rumah Tahfidz ini. Karena setiap bata yang terpasang, setiap santri yang lahir dari bangunan itu, akan menjadi amal jariyah yang pahalanya terus mengalir—bahkan setelah kita tiada.
+*Dokumen ini disusun oleh Tim Dokumentasi Yayasan ASIB dan disahkan pada 25 Maret 2025.*

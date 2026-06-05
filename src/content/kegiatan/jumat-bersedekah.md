@@ -1,44 +1,61 @@
 ---
-title: 'Jumat Bersedekah: Nasi Kotak untuk Dhuafa Jogja'
-description: 'Program Jumat Bersedekah Yayasan ASIB — membagikan nasi kotak kepada tukang becak, pemulung, dan pengemis di sepanjang jalan Yogyakarta setiap hari Jumat.'
+title: 'Jumat Berkah: Distribusi Nasi Kotak — Pekan Ke-128'
+description: 'Laporan kegiatan Jumat Berkah rutin Yayasan ASIB — 75 nasi kotak dibagikan kepada tukang becak, pemulung, dan lansia dhuafa di dua rute: Jalan Parangtritis dan Pasar Bantul.'
 date: 2026-05-22
 kategori: 'sosial'
-image: 'https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&q=80&w=800'
+image: 'https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?auto=format&fit=crop&q=80&w=800'
 ---
 
-Pukul 06.30 pagi, Jumat, 22 Mei 2026. Dapur sekretariat Yayasan ASIB sudah penuh dengan kepulan uap sejak satu jam sebelumnya. Dua panic raksasa mengeluarkan aroma nasi goreng yang menggoda, beberapa baskom besar berisi lauk pauk—ayam goreng, tempe orek, dan sambal goreng kentang. Di meja sebelah, para relawan—sekitar 10 orang—sedang sibuk menyusun nasi kotak: nasi, lauk, sambal, dan doa dikemas bersama dalam kotak styrofoam putih.
+**Bantul, 22 Mei 2026** — Yayasan Amal Shalih Insan Bantul (ASIB) melaksanakan program Jumat Berkah pekan ke-128. Sebanyak 75 nasi kotak dibagikan kepada tukang becak, pemulung, dan lansia dhuafa di dua rute distribusi wilayah Kabupaten Bantul dan Kota Yogyakarta.
 
-Ini adalah rutinitas setiap Jumat pagi di ASIB. **Jumat Bersedekah**, program unggulan Yayasan ASIB di bidang sosial, telah berjalan selama dua tahun tanpa putus—bahkan saat hujan deras sekalipun.
+## Rincian Kegiatan
 
-![Setiap butir nasi yang dibagikan membawa harapan dan senyum bagi saudara kita.](https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&q=80&w=800&h=600)
+| Pos | Detail |
+|-----|--------|
+| Hari/Tanggal | Jumat, 22 Mei 2026 (5 Zulqaidah 1447 H) |
+| Pekan ke- | 128 (program berjalan sejak Januari 2024) |
+| Jumlah nasi kotak | 75 kotak |
+| Biaya per kotak | Rp12.000 |
+| **Total biaya** | **Rp900.000** |
+| Relawan | 8 orang |
+| Dapur | Sekretariat ASIB, Pendowoharjo, Sewon |
 
-## Menyusuri Jalanan Yogya
+## Menu Nasi Kotak
 
-Jam 07.30, dua mobil berangkat dari sekretariat. Rute pertama: Jalan Parangtritis, dari arah timu ke selatan, menjangkau tukang becak yang mangkal di perempatan. Rute kedua: kawasan Pasar Bantul dan sekitarnya, tempat para pemulung dan pengamen biasa berkumpul.
+Nasi kotak pekan ini terdiri dari: nasi putih, ayam goreng, tempe orek, sambal goreng kentang, lalapan, dan doa — dikemas dalam kotak styrofoam putih. Memasak dimulai pukul 05.30 WIB oleh 3 relawan dapur.
 
-Pak Karto, 62 tahun, adalah tukang becak langganan yang sudah dua tahun menerima nasi kotak setiap Jumat. Ia duduk di atas becaknya yang butut, menunggu penumpang di pinggir jalan. Melihat mobil ASIB mendekat, ia tersenyum lebar. "Jumat lagi, Jumat lagi. Alhamdulillah."
+## Rute Distribusi
 
-Kami turun dan menyerahkan nasi kotak. Pak Karto menerimanya dengan tangan bergetar. "Ini kadang satu-satunya makanan enak dalam seminggu," katanya jujur. Ia bercerita bahwa penghasilannya sekarang hanya Rp15.000–25.000 per hari—kadang tidak sepeser pun jika sepi. Uang sebanyak itu harus cukup untuk makan, rokok murah, dan menyisihkan untuk istri di kampung.
+Relawan berangkat pukul 07.30 WIB dalam 2 regu:
 
-"Jumat itu hari yang saya tunggu-tunggu, Mbak. Nggak cuma karena nasinya, tapi karena ngerasa diperhatikan," katanya sebelum kami pamit.
+1. **Regu 1 (Rute Parangtritis)** — 40 kotak: menyusuri Jalan Parangtritis dari simpang tiga Bantul hingga perbatasan Kota Yogya, menyasar tukang becak dan pemulung
+2. **Regu 2 (Rute Pasar Bantul)** — 35 kotak: kawasan Pasar Bantul dan sekitarnya, menyasar lansia dhuafa dan pengemis jalanan
 
-Rute berikutnya: Pasar Bantul. Seorang pemulung paruh baya dengan gerobak penuh kardus bekas, seorang pengemis tua yang duduk di emperan toko, dan beberapa pekerja jalanan lain menyambut kami dengan senyum. Tidak ada yang menolak. Bagi mereka, sepaket nasi kotak bukan sekadar makanan—ia adalah pengingat bahwa ada orang-orang yang peduli di tengah kerasnya kehidupan.
+Rata-rata waktu distribusi: 2,5 jam (selesai pukul 10.00 WIB).
 
-## Kenapa Jumat?
+![Relawan ASIB membagikan nasi kotak di kawasan Pasar Bantul, Jumat pagi.](https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&q=80&w=800&h=600)
 
-Hari Jumat bukan sekadar hari libur atau hari terakhir pekan kerja. Dalam Islam, Jumat adalah *sayyidul ayyam*—pemimpin segala hari. Rasulullah ﷺ bersabda, *"Hari terbaik di mana matahari terbit adalah hari Jumat."* (HR. Muslim)
+## Data Penerima Manfaat (Pekan Ini)
 
-Di hari Jumat, pahala bersedekah dilipatgandakan. Para sahabat pun sering memilih hari Jumat untuk bersedekah, karena mereka paham betul keistimewaan hari ini. Dengan mengkhususkan program nasi kotak di hari Jumat, kami berharap keberkahan yang lebih besar, tidak hanya untuk penerima, tetapi juga untuk para donatur dan relawan.
+Kategori penerima nasi kotak:
+- Tukang becak: 28 orang
+- Pemulung: 22 orang
+- Lansia dhuafa: 17 orang
+- Pengemis/jalanan: 8 orang
 
-Ada satu hadits yang selalu saya sampaikan kepada para relawan sebelum berangkat: *"Setiap sendi tubuh manusia wajib bersedekat setiap harinya. Dan memberi senyuman kepada saudaranya adalah sedekah."* (HR. Bukhari). Bagi kami, Jumat Bersedekah adalah wujud dari sabda ini. Nasi kotak yang kami bagikan adalah senyuman dalam bentuk yang lebih nyata.
+Sejak program dimulai pada Januari 2024, total nasi kotak yang telah dibagikan mencapai **9.600 kotak** (128 pekan × 75 kotak). Program ini merupakan salah satu program unggulan Yayasan ASIB di bidang sosial yang berjalan secara konsisten tanpa putus — termasuk saat libur hari raya.
 
-## Ikut Menjadi Bagian dari Kebaikan
+## Pendanaan
 
-Program Jumat Bersedekah selalu terbuka bagi siapa pun yang ingin bergabung. Tidak harus dalam bentuk uang—bantuan tenaga, nasi kotak yang dimasak sendiri, atau doa yang dipanjatkan dari rumah pun sangat berarti.
+Program Jumat Berkah dibiayai dari **Donasi Nasi Kotak** — donatur dapat memesan nasi kotak mulai dari 1 kotak (Rp12.000). Pada pekan ini, donatur yang berpartisipasi: 23 orang (donasi terkumpul Rp982.000 — surplus Rp82.000 untuk cadangan pekan depan).
 
-Jika Anda ingin berpartisipasi:
-- **Sumbang nasi kotak**: satu kotak Rp12.000. Anda bisa memesan untuk 5, 10, atau 100 kotak.
-- **Ikut membagikan**: relawan berangkat setiap Jumat pukul 07.30 dari sekretariat ASIB.
-- **Donasi dana**: salurkan ke rekening BSI 9515769570 a.n. Amal Shalih Insan Bantul.
+## Partisipasi
 
-Hubungi kami di WhatsApp **0821-3800-7102** untuk koordinasi lebih lanjut. Karena satu nasi kotak yang Anda sumbangkan hari Jumat ini, bisa menjadi satu-satunya alasan seseorang untuk tersenyum di tengah perjuangan hidupnya.
+Masyarakat dapat ikut serta:
+- **Donasi nasi kotak**: Rp12.000/kotak, transfer ke BSI 9515769570 a.n. Amal Shalih Insan Bantul (konfirmasi ke WhatsApp 0821-3800-7102)
+- **Ikut membagikan**: Registrasi relawan melalui Sekretariat ASIB (kuota terbatas 10 orang/pekan)
+- **Donasi bahan pokok**: Beras, lauk, minyak dapat dititipkan di dapur ASIB pada Kamis sore
+
+Distribusi Jumat Berkah pekan depan: **Jumat, 29 Mei 2026** (rute: wilayah Jetis dan Imogiri).
+
+*Dokumen ini disusun oleh Divisi Sosial Yayasan ASIB.*

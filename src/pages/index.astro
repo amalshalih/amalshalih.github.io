@@ -49,12 +49,12 @@ const initialPhoto = heroPhotos.length > 0 ? heroPhotos[0] : null
 	currentPage="/"
 >
 	<!-- Hero -->
-	<section class="relative overflow-hidden text-white">
-		<!-- Slideshow Background -->
+	<section class="relative overflow-hidden text-white -mt-[60px] sm:-mt-[72px]">
+		<!-- Slideshow Background (extends behind sticky header) -->
 		<div class="absolute inset-0 bg-primary-900">
 			<div id="hero-bg-a" class="absolute inset-0 bg-cover bg-center transition-all duration-1000 ease-out"
-				style="background-image: url({initialPhoto?.thumbnailUrl || ''}); background-color: #166534;"
-				data-photos={JSON.stringify(heroPhotos.map(p => p.thumbnailUrl))}
+				style="background-image: url({initialPhoto?.fullUrl || ''}); background-color: #166534;"
+				data-photos={JSON.stringify(heroPhotos.map(p => p.fullUrl))}
 				data-current="0"
 			></div>
 			<div id="hero-bg-b" class="absolute inset-0 bg-cover bg-center opacity-0 transition-all duration-1000 ease-out"></div>
@@ -63,7 +63,7 @@ const initialPhoto = heroPhotos.length > 0 ? heroPhotos[0] : null
 		<div class="absolute inset-0 bg-gradient-to-br from-primary-900/85 via-primary-800/70 to-primary-950/90"></div>
 		<!-- Subtle dot pattern -->
 		<div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wMyI+PGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMiIvPjwvZz48L2c+PC9zdmc+')] opacity-50"></div>
-		<div class="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 pt-6 sm:pt-12 lg:pt-16 pb-12 sm:pb-24 lg:pb-32">
+		<div class="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 pt-[84px] sm:pt-[120px] lg:pt-[136px] pb-12 sm:pb-24 lg:pb-32">
 			<div class="max-w-3xl">
 				<p class="mb-2 sm:mb-4 text-sm font-semibold uppercase tracking-widest text-gold-300">
 					<span class="sm:hidden">{heroTagline}</span>
