@@ -1,15 +1,15 @@
 ---
-import Container from '../ui/Container.astro';
+import Container from '../ui/Container.astro'
 
 interface Props {
-	label: string;
-	title: string;
-	description?: string;
-	gradient?: 'br' | 'r' | 'b' | 'tl' | 'tr' | 'bl';
-	class?: string;
+	label: string
+	title: string
+	description?: string
+	gradient?: 'br' | 'r' | 'b' | 'tl' | 'tr' | 'bl'
+	class?: string
 }
 
-const { label, title, description, gradient = 'br', class: className } = Astro.props;
+const { label, title, description, gradient = 'br', class: className } = Astro.props
 
 const gradientMap: Record<string, string> = {
 	br: 'bg-gradient-to-br from-primary-800 to-primary-900',
@@ -18,7 +18,7 @@ const gradientMap: Record<string, string> = {
 	tl: 'bg-gradient-to-tl from-primary-800 to-primary-900',
 	tr: 'bg-gradient-to-tr from-primary-800 to-primary-900',
 	bl: 'bg-gradient-to-bl from-primary-800 to-primary-900',
-};
+}
 ---
 
 <section class:list={[gradientMap[gradient], 'text-white', className]}>

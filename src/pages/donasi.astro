@@ -1,43 +1,40 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Container from '../components/ui/Container.astro';
-import PageHeader from '../components/sections/PageHeader.astro';
-import Card from '../components/ui/Card.astro';
-import Button from '../components/ui/Button.astro';
-import Icon from '../components/ui/Icon.astro';
-import { getBankDonasi, getSiteSettings } from '../lib/sanity/client';
-import { DONATION, CONTACT } from '../data/site';
+import PageHeader from '../components/sections/PageHeader.astro'
+import Button from '../components/ui/Button.astro'
+import Card from '../components/ui/Card.astro'
+import Container from '../components/ui/Container.astro'
+import Icon from '../components/ui/Icon.astro'
+import { CONTACT, DONATION } from '../data/site'
+import BaseLayout from '../layouts/BaseLayout.astro'
+import { getBankDonasi, getSiteSettings } from '../lib/sanity/client'
 
 // Hybrid: try Sanity first, fall back to local data
-let banks = DONATION.banks.map(b => ({ ...b }));
-let qrisImage = DONATION.qrisImage;
-let linktreeUrl = DONATION.linktree.url;
-let contactPhone = CONTACT.phone;
-let contactWhatsapp = CONTACT.whatsapp;
+let banks = DONATION.banks.map((b) => ({ ...b }))
+let qrisImage = DONATION.qrisImage
+let linktreeUrl = DONATION.linktree.url
+let contactPhone = CONTACT.phone
+let contactWhatsapp = CONTACT.whatsapp
 
 try {
-  const [sanityBanks, sanitySettings] = await Promise.all([
-    getBankDonasi(),
-    getSiteSettings(),
-  ]);
-  
-  if (sanityBanks && sanityBanks.length > 0) {
-    const localFullNames = new Map(DONATION.banks.map(b => [b.name, b.fullName]));
-    banks = sanityBanks.map(b => ({
-      name: b.bankName,
-      fullName: localFullNames.get(b.bankName) ?? b.bankName,
-      accountNumber: b.accountNumber,
-      accountName: b.accountName,
-    }));
-  }
-  
-  if (sanitySettings) {
-    if (sanitySettings.qrisImageUrl) qrisImage = sanitySettings.qrisImageUrl;
-    if (sanitySettings.linktree) linktreeUrl = sanitySettings.linktree;
-    if (sanitySettings.phone) contactPhone = sanitySettings.phone;
-  }
+	const [sanityBanks, sanitySettings] = await Promise.all([getBankDonasi(), getSiteSettings()])
+
+	if (sanityBanks && sanityBanks.length > 0) {
+		const localFullNames = new Map(DONATION.banks.map((b) => [b.name, b.fullName]))
+		banks = sanityBanks.map((b) => ({
+			name: b.bankName,
+			fullName: localFullNames.get(b.bankName) ?? b.bankName,
+			accountNumber: b.accountNumber,
+			accountName: b.accountName,
+		}))
+	}
+
+	if (sanitySettings) {
+		if (sanitySettings.qrisImageUrl) qrisImage = sanitySettings.qrisImageUrl
+		if (sanitySettings.linktree) linktreeUrl = sanitySettings.linktree
+		if (sanitySettings.phone) contactPhone = sanitySettings.phone
+	}
 } catch (error) {
-  console.error('[Donasi] Sanity bankDonasi/siteSettings fetch failed:', error);
+	console.error('[Donasi] Sanity bankDonasi/siteSettings fetch failed:', error)
 }
 ---
 

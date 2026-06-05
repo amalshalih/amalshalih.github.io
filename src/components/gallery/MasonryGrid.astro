@@ -1,17 +1,18 @@
 ---
 interface Props {
-  images: Array<{
-    id: string;
-    name: string;
-    thumbnailUrl: string;
-    fullUrl: string;
-    width?: number;
-    height?: number;
-  }>;
-  gallerySlug: string;
+	images: Array<{
+		id: string
+		name: string
+		thumbnailUrl: string
+		fullUrl: string
+		width?: number
+		height?: number
+	}>
+	gallerySlug: string
+	startIndex?: number
 }
 
-  const { images, gallerySlug } = Astro.props;
+const { images, gallerySlug, startIndex = 0 } = Astro.props
 ---
 
 <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3 lg:gap-4" data-masonry-grid data-total-images={images.length}>
@@ -26,7 +27,7 @@ interface Props {
       <button
         class="gallery-item group relative overflow-hidden rounded-lg sm:rounded-xl bg-warm-100 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2"
         style={`aspect-ratio: ${aspectRatio};`}
-        data-index={index}
+        data-index={startIndex + index}
         aria-label={`View ${image.name}`}
       >
         <img

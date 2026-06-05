@@ -1,77 +1,84 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import Container from '../../components/ui/Container.astro';
-import PageHeader from '../../components/sections/PageHeader.astro';
-import Icon from '../../components/ui/Icon.astro';
-import MasonryGrid from '../../components/gallery/MasonryGrid.astro';
-import Lightbox from '../../components/gallery/Lightbox.astro';
-import LikeButton from '../../components/gallery/LikeButton.astro';
-import { fetchGalleryBySlug, type GalleryEntry } from '../../data/galleries';
+import Lightbox from '../../components/gallery/Lightbox.astro'
+import LikeButton from '../../components/gallery/LikeButton.astro'
+import MasonryGrid from '../../components/gallery/MasonryGrid.astro'
+import PageHeader from '../../components/sections/PageHeader.astro'
+import Container from '../../components/ui/Container.astro'
+import Icon from '../../components/ui/Icon.astro'
+import { fetchGalleryBySlug, type GalleryEntry } from '../../data/galleries'
+import BaseLayout from '../../layouts/BaseLayout.astro'
 
 // SSR - Real-time data fetching
-export const prerender = false;
+export const prerender = false
 
 interface GalleryImage {
-  id: string;
-  name: string;
-  thumbnailUrl: string;
-  fullUrl: string;
-  width?: number;
-  height?: number;
-  createdTime?: string;
+	id: string
+	name: string
+	thumbnailUrl: string
+	fullUrl: string
+	width?: number
+	height?: number
+	createdTime?: string
 }
 
 interface GalleryWithImages extends GalleryEntry {
-  images: GalleryImage[];
-  totalImages: number;
+	images: GalleryImage[]
+	totalImages: number
 }
 
 // Get slug from URL
-const { slug } = Astro.params;
+const { slug } = Astro.params
 
 // Fetch gallery in real-time
-let gallery: GalleryWithImages | null = null;
+let gallery: GalleryWithImages | null = null
 
 if (slug) {
-  try {
-    const fetched = await fetchGalleryBySlug(slug);
-    if (fetched) {
-      gallery = fetched as GalleryWithImages;
-    }
-  } catch (e) {
-    console.error('Error fetching gallery:', e);
-  }
+	try {
+		const fetched = await fetchGalleryBySlug(slug)
+		if (fetched) {
+			gallery = fetched as GalleryWithImages
+		}
+	} catch (e) {
+		console.error('Error fetching gallery:', e)
+	}
 }
 
 // Return 404 if gallery not found
 if (!gallery) {
-  return Astro.redirect('/404');
+	return Astro.redirect('/404')
 }
 
-const images: GalleryImage[] = gallery.images || [];
+const images: GalleryImage[] = gallery.images || []
 
 // Group images by date (Google Photos style)
-const groupedImages: Record<string, GalleryImage[]> = {};
+const groupedImages: Record<string, GalleryImage[]> = {}
 images.forEach((img: GalleryImage) => {
-  const date = img.createdTime 
-    ? new Date(img.createdTime).toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' })
-    : 'Lainnya';
-  if (!groupedImages[date]) {
-    groupedImages[date] = [];
-  }
-  groupedImages[date].push(img);
-});
+	const date = img.createdTime
+		? new Date(img.createdTime).toLocaleDateString('id-ID', {
+				year: 'numeric',
+				month: 'long',
+				day: 'numeric',
+			})
+		: 'Lainnya'
+	if (!groupedImages[date]) {
+		groupedImages[date] = []
+	}
+	groupedImages[date].push(img)
+})
 
 const dateGroups = Object.entries(groupedImages).sort((a, b) => {
-  const dateA = a[1][0]?.createdTime ?? '';
-  const dateB = b[1][0]?.createdTime ?? '';
-  return dateB.localeCompare(dateA);
-});
+	const dateA = a[1][0]?.createdTime ?? ''
+	const dateB = b[1][0]?.createdTime ?? ''
+	return dateB.localeCompare(dateA)
+})
+
+const displayImages = dateGroups.flatMap(([_, imgs]) => imgs)
 
 // SEO Meta Tags
-const pageTitle = `${gallery.title} — Galeri ASIB`;
-const pageDescription = gallery.description;
-const coverImage = images.length > 0 ? images[0].thumbnailUrl.replace('size=400', 'size=800') : undefined;
+const pageTitle = `${gallery.title} — Galeri ASIB`
+const pageDescription = gallery.description
+const coverImage =
+	images.length > 0 ? images[0].thumbnailUrl.replace('size=400', 'size=800') : undefined
 ---
 
 <BaseLayout
@@ -120,16 +127,22 @@ const coverImage = images.length > 0 ? images[0].thumbnailUrl.replace('size=400'
 
     {images.length > 0 ? (
       <div class="space-y-8">
-        {dateGroups.map(([date, imgs]: [string, GalleryImage[]]) => (
-          <section>
-            <h2 class="text-lg font-semibold text-warm-900 mb-4 flex items-center gap-2">
-              <Icon name="calendar" size={4} aria-hidden="true" />
-              <time>{date}</time>
-              <span class="text-sm font-normal text-warm-500">({imgs.length} foto)</span>
-            </h2>
-            <MasonryGrid images={imgs} gallerySlug={gallery.slug} />
-          </section>
-        ))}
+        {dateGroups.map(([date, imgs]: [string, GalleryImage[]], groupIndex) => {
+          let startIndex = 0;
+          for (let i = 0; i < groupIndex; i++) {
+            startIndex += dateGroups[i][1].length;
+          }
+          return (
+            <section>
+              <h2 class="text-lg font-semibold text-warm-900 mb-4 flex items-center gap-2">
+                <Icon name="calendar" size={4} aria-hidden="true" />
+                <time>{date}</time>
+                <span class="text-sm font-normal text-warm-500">({imgs.length} foto)</span>
+              </h2>
+              <MasonryGrid images={imgs} gallerySlug={gallery.slug} startIndex={startIndex} />
+            </section>
+          );
+        })}
       </div>
     ) : (
       <div class="flex flex-col items-center justify-center py-16 sm:py-24 text-center">
@@ -148,7 +161,7 @@ const coverImage = images.length > 0 ? images[0].thumbnailUrl.replace('size=400'
     )}
   </Container>
 
-  <Lightbox images={images} />
+  <Lightbox images={displayImages} />
 </BaseLayout>
 
 <script define:vars={{ images, gallery }} is:inline>

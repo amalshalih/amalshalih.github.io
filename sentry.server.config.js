@@ -1,7 +1,7 @@
 // This file configures Sentry for the server-side Astro application.
 // The @sentry/astro integration handles server-side error tracking automatically.
 
-import * as Sentry from '@sentry/astro';
+import * as Sentry from '@sentry/astro'
 
 // Only initialize Sentry in production builds, not in dev/preview
 if (import.meta.env.PROD) {
@@ -10,5 +10,5 @@ if (import.meta.env.PROD) {
 		environment: 'production',
 		tracesSampleRate: 1.0,
 		sendDefaultPii: false,
-	});
+	})
 }

@@ -1,11 +1,6 @@
 import { env } from 'cloudflare:workers'
 import type { DriveImage } from '../lib/google-drive'
-import {
-	getAccessToken,
-	getFullImageUrl,
-	getThumbnailUrl,
-	listItemsWithShortcuts,
-} from '../lib/google-drive'
+import { getFullImageUrl, getThumbnailUrl, listItemsWithShortcuts } from '../lib/google-drive'
 
 export interface HeroPhoto {
 	id: string

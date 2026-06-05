@@ -1,13 +1,13 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import PageHeader from '../../components/sections/PageHeader.astro';
-import Container from '../../components/ui/Container.astro';
-import Card from '../../components/ui/Card.astro';
-import Icon from '../../components/ui/Icon.astro';
-import { getCollection } from 'astro:content';
+import { getCollection } from 'astro:content'
+import PageHeader from '../../components/sections/PageHeader.astro'
+import Card from '../../components/ui/Card.astro'
+import Container from '../../components/ui/Container.astro'
+import Icon from '../../components/ui/Icon.astro'
+import BaseLayout from '../../layouts/BaseLayout.astro'
 
-const posts = await getCollection('blog');
-const sortedPosts = posts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const posts = await getCollection('blog')
+const sortedPosts = posts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
 ---
 
 <BaseLayout

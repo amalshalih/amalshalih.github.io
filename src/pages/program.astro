@@ -1,91 +1,210 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Container from '../components/ui/Container.astro';
-import PageHeader from '../components/sections/PageHeader.astro';
-import Card from '../components/ui/Card.astro';
-import Button from '../components/ui/Button.astro';
-import Icon from '../components/ui/Icon.astro';
-import { getProgramList } from '../lib/sanity/client';
-import type { SanityProgram } from '../lib/sanity/types';
+import PageHeader from '../components/sections/PageHeader.astro'
+import Button from '../components/ui/Button.astro'
+import Card from '../components/ui/Card.astro'
+import Container from '../components/ui/Container.astro'
+import Icon from '../components/ui/Icon.astro'
+import BaseLayout from '../layouts/BaseLayout.astro'
+import { getProgramList } from '../lib/sanity/client'
+import type { SanityProgram } from '../lib/sanity/types'
 
 type Item = {
-  title: string;
-  badge?: string;
-  description: string;
-  variant: 'default' | 'overflow';
-  stats?: { number: string; label: string }[];
-};
+	title: string
+	badge?: string
+	description: string
+	variant: 'default' | 'overflow'
+	stats?: { number: string; label: string }[]
+}
 
 const FALLBACK: Record<string, Item[]> = {
-  pendidikan: [
-    { title: 'PKBM Bina Insan Mulia', badge: 'Pendidikan Diniyah', variant: 'default', description: 'Pusat Kegiatan Belajar Masyarakat dengan materi Diniyah untuk mempersiapkan generasi milenial yang beraqidah kuat dan berakhlak mulia.', stats: [{ number: '21', label: 'Ustadz/Ustadzah' }, { number: '70', label: 'Santri' }] },
-    { title: 'PAUD Bina Tunas Mulia', badge: 'Usia 1–6 Tahun', variant: 'default', description: 'Program pendidikan non-formal untuk taman pengasuhan anak dan kelompok bermain. Membuka layanan untuk anak usia 1 hingga 6 tahun.', stats: [{ number: '4', label: 'Guru' }, { number: '8', label: 'Siswa' }] },
-    { title: 'Rumah Tahfidz', badge: 'Tahfidz & Tahsin', variant: 'default', description: 'Pesantren tahfidz yang diselenggarakan di kantor yayasan. Program tahfidz dan tahsin Al-Qur\'an bagi para santriwati dengan bimbingan ustadzah berpengalaman.', stats: [{ number: '2', label: 'Ustadzah' }, { number: '25', label: 'Santriwati' }] },
-    { title: 'Bimbel Proton', badge: 'Bimbingan Belajar', variant: 'default', description: 'Program bimbingan belajar untuk anak-anak binaan yayasan. Membantu meningkatkan prestasi akademik dan pemahaman agama secara terpadu.' },
-  ],
-  keagamaan: [
-    { title: 'Wakaf Lahan Tahfidz', variant: 'default', description: 'Penggalangan wakaf jariyah untuk pengadaan lahan 2.000 m² guna pembangunan Pesantren Tahfidz dan Madrasah.' },
-    { title: 'Qurban', variant: 'default', description: 'Penerimaan dan penyaluran daging qurban kepada yatim, dhuafa, dan masyarakat yang membutuhkan di Bantul dan sekitarnya.' },
-    { title: 'Zakat, Infaq & Shadaqah', badge: 'LAZIS ASIB', variant: 'default', description: 'Dikelola oleh LAZIS ASIB (Lembaga Amil Zakat Infaq Shadaqah), menerima dan menyalurkan ZIS kepada mustahiq yang berhak. Termasuk zakat fitrah pada bulan Ramadhan.' },
-    { title: 'Kafarat', variant: 'default', description: 'Layanan pembayaran kafarat sesuai syariat Islam bagi masyarakat yang membutuhkan.' },
-    { title: 'Hari Besar Islam', variant: 'default', description: 'Maulid Bersedekah, Nuzulul Qur\'an, Syawalan, Bazar & Buka Puasa Bersama, serta berbagai peringatan hari besar Islam.' },
-    { title: 'Pesantren Ramadhan', variant: 'default', description: 'Program intensif bulan Ramadhan meliputi pengajian, buka puasa bersama, sholat berjamaah, tahfidz, dan wisuda Juz 30.' },
-  ],
-  sosial: [
-    { title: 'Santunan Sembako Bulanan', badge: 'Penerima Binaan', variant: 'overflow', description: 'Santunan untuk anak yatim, fakir miskin, dan dhuafa dalam bentuk sembako yang disalurkan <strong>setiap bulan</strong>. Program ini telah meringankan beban ekonomi masyarakat, terutama yang terdampak Covid-19.', stats: [{ number: '110', label: 'Penerima Binaan Tetap' }] },
-    { title: 'Jumat Bersedekah', badge: 'Setiap Hari Jumat', variant: 'overflow', description: 'Pembagian <strong>nasi kotak</strong> kepada dhuafa — tukang becak, pemulung, pengemis, dan kaum yang membutuhkan di sepanjang jalan wilayah Yogyakarta.' },
-    { title: 'Sedekah Barang Bekas', badge: 'Program Barkas', variant: 'overflow', description: 'Menerima sedekah berupa <strong>barang bekas layak jual</strong>. Kami siap menjemput donasi atau Anda bisa menyetorkan langsung ke kantor. Hasil penjualan untuk membiayai kegiatan yayasan.' },
-    { title: 'Panti Asuhan', badge: 'Yatim & Dhuafa', variant: 'overflow', description: 'Panti asuhan bagi <strong>anak yatim dan dhuafa</strong> yang dikelola secara profesional. Program pembinaan meliputi pendidikan formal, tahfidz, dan life skills untuk mempersiapkan masa depan mereka.' },
-    { title: 'Relawan AMMA', badge: 'Terbuka untuk Umum', variant: 'overflow', description: 'Jaringan relawan yang siap bergerak dalam setiap kegiatan sosial dan kemanusiaan yayasan. Terbuka bagi masyarakat umum yang ingin berkontribusi langsung dalam aksi-aksi kebaikan.' },
-  ],
-};
+	pendidikan: [
+		{
+			title: 'PKBM Bina Insan Mulia',
+			badge: 'Pendidikan Diniyah',
+			variant: 'default',
+			description:
+				'Pusat Kegiatan Belajar Masyarakat dengan materi Diniyah untuk mempersiapkan generasi milenial yang beraqidah kuat dan berakhlak mulia.',
+			stats: [
+				{ number: '21', label: 'Ustadz/Ustadzah' },
+				{ number: '70', label: 'Santri' },
+			],
+		},
+		{
+			title: 'PAUD Bina Tunas Mulia',
+			badge: 'Usia 1–6 Tahun',
+			variant: 'default',
+			description:
+				'Program pendidikan non-formal untuk taman pengasuhan anak dan kelompok bermain. Membuka layanan untuk anak usia 1 hingga 6 tahun.',
+			stats: [
+				{ number: '4', label: 'Guru' },
+				{ number: '8', label: 'Siswa' },
+			],
+		},
+		{
+			title: 'Rumah Tahfidz',
+			badge: 'Tahfidz & Tahsin',
+			variant: 'default',
+			description:
+				"Pesantren tahfidz yang diselenggarakan di kantor yayasan. Program tahfidz dan tahsin Al-Qur'an bagi para santriwati dengan bimbingan ustadzah berpengalaman.",
+			stats: [
+				{ number: '2', label: 'Ustadzah' },
+				{ number: '25', label: 'Santriwati' },
+			],
+		},
+		{
+			title: 'Bimbel Proton',
+			badge: 'Bimbingan Belajar',
+			variant: 'default',
+			description:
+				'Program bimbingan belajar untuk anak-anak binaan yayasan. Membantu meningkatkan prestasi akademik dan pemahaman agama secara terpadu.',
+		},
+	],
+	keagamaan: [
+		{
+			title: 'Wakaf Lahan Tahfidz',
+			variant: 'default',
+			description:
+				'Penggalangan wakaf jariyah untuk pengadaan lahan 2.000 m² guna pembangunan Pesantren Tahfidz dan Madrasah.',
+		},
+		{
+			title: 'Qurban',
+			variant: 'default',
+			description:
+				'Penerimaan dan penyaluran daging qurban kepada yatim, dhuafa, dan masyarakat yang membutuhkan di Bantul dan sekitarnya.',
+		},
+		{
+			title: 'Zakat, Infaq & Shadaqah',
+			badge: 'LAZIS ASIB',
+			variant: 'default',
+			description:
+				'Dikelola oleh LAZIS ASIB (Lembaga Amil Zakat Infaq Shadaqah), menerima dan menyalurkan ZIS kepada mustahiq yang berhak. Termasuk zakat fitrah pada bulan Ramadhan.',
+		},
+		{
+			title: 'Kafarat',
+			variant: 'default',
+			description:
+				'Layanan pembayaran kafarat sesuai syariat Islam bagi masyarakat yang membutuhkan.',
+		},
+		{
+			title: 'Hari Besar Islam',
+			variant: 'default',
+			description:
+				"Maulid Bersedekah, Nuzulul Qur'an, Syawalan, Bazar & Buka Puasa Bersama, serta berbagai peringatan hari besar Islam.",
+		},
+		{
+			title: 'Pesantren Ramadhan',
+			variant: 'default',
+			description:
+				'Program intensif bulan Ramadhan meliputi pengajian, buka puasa bersama, sholat berjamaah, tahfidz, dan wisuda Juz 30.',
+		},
+	],
+	sosial: [
+		{
+			title: 'Santunan Sembako Bulanan',
+			badge: 'Penerima Binaan',
+			variant: 'overflow',
+			description:
+				'Santunan untuk anak yatim, fakir miskin, dan dhuafa dalam bentuk sembako yang disalurkan <strong>setiap bulan</strong>. Program ini telah meringankan beban ekonomi masyarakat, terutama yang terdampak Covid-19.',
+			stats: [{ number: '110', label: 'Penerima Binaan Tetap' }],
+		},
+		{
+			title: 'Jumat Bersedekah',
+			badge: 'Setiap Hari Jumat',
+			variant: 'overflow',
+			description:
+				'Pembagian <strong>nasi kotak</strong> kepada dhuafa — tukang becak, pemulung, pengemis, dan kaum yang membutuhkan di sepanjang jalan wilayah Yogyakarta.',
+		},
+		{
+			title: 'Sedekah Barang Bekas',
+			badge: 'Program Barkas',
+			variant: 'overflow',
+			description:
+				'Menerima sedekah berupa <strong>barang bekas layak jual</strong>. Kami siap menjemput donasi atau Anda bisa menyetorkan langsung ke kantor. Hasil penjualan untuk membiayai kegiatan yayasan.',
+		},
+		{
+			title: 'Panti Asuhan',
+			badge: 'Yatim & Dhuafa',
+			variant: 'overflow',
+			description:
+				'Panti asuhan bagi <strong>anak yatim dan dhuafa</strong> yang dikelola secara profesional. Program pembinaan meliputi pendidikan formal, tahfidz, dan life skills untuk mempersiapkan masa depan mereka.',
+		},
+		{
+			title: 'Relawan AMMA',
+			badge: 'Terbuka untuk Umum',
+			variant: 'overflow',
+			description:
+				'Jaringan relawan yang siap bergerak dalam setiap kegiatan sosial dan kemanusiaan yayasan. Terbuka bagi masyarakat umum yang ingin berkontribusi langsung dalam aksi-aksi kebaikan.',
+		},
+	],
+}
 
-let programsByCategory: Record<string, Item[]> = {};
+let programsByCategory: Record<string, Item[]> = {}
 
 try {
-  const sanityData: SanityProgram[] = await getProgramList();
-  if (sanityData && sanityData.length > 0) {
-    programsByCategory = sanityData.reduce<Record<string, Item[]>>((acc, p) => {
-      const cat = p.category;
-      if (!acc[cat]) acc[cat] = [];
-      acc[cat].push({
-        title: p.title,
-        badge: p.badge,
-        description: p.shortDesc ?? '',
-        variant: (p.cardVariant as 'default' | 'overflow') || 'default',
-        stats: p.stats?.map((s: { number: string; label: string }) => ({ number: s.number, label: s.label })),
-      });
-      return acc;
-    }, {});
-  }
+	const sanityData: SanityProgram[] = await getProgramList()
+	if (sanityData && sanityData.length > 0) {
+		programsByCategory = sanityData.reduce<Record<string, Item[]>>((acc, p) => {
+			const cat = p.category
+			if (!acc[cat]) acc[cat] = []
+			acc[cat].push({
+				title: p.title,
+				badge: p.badge,
+				description: p.shortDesc ?? '',
+				variant: (p.cardVariant as 'default' | 'overflow') || 'default',
+				stats: p.stats?.map((s: { number: string; label: string }) => ({
+					number: s.number,
+					label: s.label,
+				})),
+			})
+			return acc
+		}, {})
+	}
 } catch (error) {
-  console.error('[Program] Sanity programList fetch failed:', error);
+	console.error('[Program] Sanity programList fetch failed:', error)
 }
 
 if (Object.keys(programsByCategory).length === 0) {
-  programsByCategory = FALLBACK;
+	programsByCategory = FALLBACK
 }
 
 type SectionConfig = {
-  id: string;
-  icon: 'book' | 'home' | 'heart';
-  title: string;
-  subtitle: string;
-  gridCols: string;
-};
+	id: string
+	icon: 'book' | 'home' | 'heart'
+	title: string
+	subtitle: string
+	gridCols: string
+}
 
 // Optimasi Pendidikan: lg:grid-cols-3 xl:grid-cols-4 untuk ruang lapang laptop cilik (1024px)
 const sections: SectionConfig[] = [
-  { id: 'pendidikan', icon: 'book', title: 'Bidang Pendidikan', subtitle: 'Membangun generasi Qur\'ani sejak usia dini', gridCols: 'sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4' },
-  { id: 'keagamaan', icon: 'home', title: 'Bidang Keagamaan', subtitle: 'Memperkuat iman dan ibadah umat', gridCols: 'sm:grid-cols-2 lg:grid-cols-3' },
-  { id: 'sosial', icon: 'heart', title: 'Bidang Sosial Kemanusiaan', subtitle: 'Meringankan beban saudara-saudara kita', gridCols: 'sm:grid-cols-2 lg:grid-cols-3' },
-];
+	{
+		id: 'pendidikan',
+		icon: 'book',
+		title: 'Bidang Pendidikan',
+		subtitle: "Membangun generasi Qur'ani sejak usia dini",
+		gridCols: 'sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4',
+	},
+	{
+		id: 'keagamaan',
+		icon: 'home',
+		title: 'Bidang Keagamaan',
+		subtitle: 'Memperkuat iman dan ibadah umat',
+		gridCols: 'sm:grid-cols-2 lg:grid-cols-3',
+	},
+	{
+		id: 'sosial',
+		icon: 'heart',
+		title: 'Bidang Sosial Kemanusiaan',
+		subtitle: 'Meringankan beban saudara-saudara kita',
+		gridCols: 'sm:grid-cols-2 lg:grid-cols-3',
+	},
+]
 
 const tabLabels: Record<string, string> = {
-  pendidikan: 'Pendidikan',
-  keagamaan: 'Keagamaan',
-  sosial: 'Sosial',
-};
+	pendidikan: 'Pendidikan',
+	keagamaan: 'Keagamaan',
+	sosial: 'Sosial',
+}
 ---
 
 <BaseLayout

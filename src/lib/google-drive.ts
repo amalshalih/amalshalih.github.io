@@ -216,7 +216,7 @@ export async function listItemsWithShortcuts(folderId: string): Promise<DriveIma
 
 			if (tRes.ok) {
 				const tData = await tRes.json()
-				if (tData.mimeType && tData.mimeType.includes('image/')) {
+				if (tData.mimeType?.includes('image/')) {
 					results.push({
 						id: tData.id,
 						name: tData.name,
@@ -228,7 +228,7 @@ export async function listItemsWithShortcuts(folderId: string): Promise<DriveIma
 					})
 				}
 			}
-		} else if (item.mimeType && item.mimeType.includes('image/')) {
+		} else if (item.mimeType?.includes('image/')) {
 			results.push({
 				id: item.id,
 				name: item.name,

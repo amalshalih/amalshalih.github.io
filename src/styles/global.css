@@ -1,4 +1,4 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 @plugin '@tailwindcss/typography';
 
 @theme {
@@ -52,7 +52,10 @@
 		@apply bg-warm-50 text-warm-800 font-sans antialiased;
 	}
 
-	h1, h2, h3, h4 {
+	h1,
+	h2,
+	h3,
+	h4 {
 		@apply font-display font-bold tracking-tight text-warm-900;
 	}
 
@@ -61,12 +64,16 @@
 	}
 
 	/* Prevent iOS zoom on form inputs */
-	input, select, textarea {
+	input,
+	select,
+	textarea {
 		@apply text-base;
 	}
 
 	@media (prefers-reduced-motion: reduce) {
-		*, *::before, *::after {
+		*,
+		*::before,
+		*::after {
 			animation-duration: 0.01ms !important;
 			animation-iteration-count: 1 !important;
 			transition-duration: 0.01ms !important;
@@ -116,5 +123,3 @@
 		scrollbar-width: none;
 	}
 }
-
-

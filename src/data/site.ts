@@ -3,8 +3,7 @@ export const SITE = {
 	shortName: 'Yayasan ASIB',
 	abbreviation: 'ASIB',
 	tagline: 'Maslahat Bagi Umat',
-	description:
-		'Menjadi lembaga yang profesional dan berkarakter serta maslahat bagi umat.',
+	description: 'Menjadi lembaga yang profesional dan berkarakter serta maslahat bagi umat.',
 	url: 'https://amalshalih.id',
 	founded: '2020',
 	foundedDate: '27 Maret 2020',
@@ -14,39 +13,39 @@ export const SITE = {
 		npwp: '94.765.798.7-543.000',
 		kbli: '85495 — Pendidikan Bimbingan Belajar',
 	},
-};
+}
 
 interface ContactEmails {
-	info: string;
-	donasi: string;
-	admin: string;
-	humas: string;
-	gmail: string;
+	info: string
+	donasi: string
+	admin: string
+	humas: string
+	gmail: string
 }
 
 interface ContactAddress {
-	street: string;
-	village: string;
-	district: string;
-	city: string;
-	province: string;
-	postalCode: string;
-	full: string;
-	mapsUrl: string;
+	street: string
+	village: string
+	district: string
+	city: string
+	province: string
+	postalCode: string
+	full: string
+	mapsUrl: string
 }
 
 interface Contact {
-	address: ContactAddress;
-	phone: string;
-	phoneUrl: string;
-	whatsapp: string;
-	email: string;
-	emails: ContactEmails;
+	address: ContactAddress
+	phone: string
+	phoneUrl: string
+	whatsapp: string
+	email: string
+	emails: ContactEmails
 	hours: {
-		weekdays: string;
-		saturday: string;
-		sunday: string;
-	};
+		weekdays: string
+		saturday: string
+		sunday: string
+	}
 }
 
 export const CONTACT: Contact = {
@@ -76,7 +75,7 @@ export const CONTACT: Contact = {
 		saturday: '08.00–12.00',
 		sunday: 'Tutup',
 	},
-};
+}
 
 export const BANKS = [
 	{
@@ -109,7 +108,7 @@ export const BANKS = [
 		accountNumber: '7317108000',
 		accountName: 'Yayasan Amal Shalih Insan Bantul',
 	},
-];
+]
 
 export const SOCIAL = {
 	facebook: {
@@ -136,17 +135,17 @@ export const SOCIAL = {
 		label: 'Linktree',
 		url: 'https://linktr.ee/amalshalihinsan',
 	},
-};
+}
 
 export const STATS = [
 	{ number: '2020', label: 'Berdiri Sejak' },
 	{ number: '110+', label: 'Penerima Manfaat Bulanan' },
 	{ number: '7', label: 'Unit Program' },
 	{ number: '500+', label: 'Paket Sembako Disalurkan' },
-];
+]
 
 export const DONATION = {
 	banks: BANKS,
 	qrisImage: '/qris.webp',
 	linktree: SOCIAL.linktree,
-};
+}

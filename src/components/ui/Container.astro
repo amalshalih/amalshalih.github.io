@@ -1,6 +1,6 @@
 ---
 // Container component for consistent page widths
-const { as: Tag = 'div', class: className, id } = Astro.props;
+const { as: Tag = 'div', class: className, id } = Astro.props
 ---
 
 <Tag class:list={['mx-auto max-w-6xl px-4 sm:px-6 lg:px-8', className]} {...(id && { id })}>

@@ -1,29 +1,34 @@
 ---
 interface Props {
-	variant?: 'default' | 'hover' | 'overflow' | 'plain';
-	padding?: 'sm' | 'md' | 'lg';
-	class?: string;
-	href?: string;
+	variant?: 'default' | 'hover' | 'overflow' | 'plain'
+	padding?: 'sm' | 'md' | 'lg'
+	class?: string
+	href?: string
 }
 
-const { variant = 'default', padding = 'md', href, class: className } = Astro.props;
+const { variant = 'default', padding = 'md', href, class: className } = Astro.props
 
-const base = 'rounded-xl sm:rounded-2xl bg-white shadow-sm transition-shadow duration-300';
+const base = 'rounded-xl sm:rounded-2xl bg-white shadow-sm transition-shadow duration-300'
 
 const variants: Record<string, string> = {
 	default: 'p-4 sm:p-6',
 	hover: 'p-4 sm:p-6 transition-shadow duration-300 hover:-translate-y-0.5 hover:shadow-md',
 	overflow: 'overflow-hidden shadow-sm',
 	plain: 'p-4 sm:p-6',
-};
+}
 
 const paddingMap: Record<string, string> = {
 	sm: 'p-3 sm:p-4',
 	md: 'p-4 sm:p-6',
 	lg: 'p-5 sm:p-8',
-};
+}
 
-const classes = [base, variants[variant], (variant === 'default' || variant === 'overflow' || variant === 'hover') ? '' : paddingMap[padding], className];
+const classes = [
+	base,
+	variants[variant],
+	variant === 'default' || variant === 'overflow' || variant === 'hover' ? '' : paddingMap[padding],
+	className,
+]
 ---
 
 {

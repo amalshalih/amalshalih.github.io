@@ -5,6 +5,9 @@
 		"clientKind": "git",
 		"useIgnoreFile": true
 	},
+	"files": {
+		"includes": ["**", "!!**/*.css", "!!**/dist", "!!**/node_modules", "!!**/studio-amalshalih"]
+	},
 	"linter": {
 		"enabled": true,
 		"rules": {
@@ -29,11 +32,15 @@
 	},
 	"overrides": [
 		{
-			"includes": ["*.astro"],
+			"includes": ["**/*.astro"],
 			"linter": {
 				"rules": {
 					"style": {
 						"useConst": "off"
+					},
+					"correctness": {
+						"noUnusedVariables": "off",
+						"noUnusedImports": "off"
 					}
 				}
 			}
