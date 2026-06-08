@@ -1,7 +1,9 @@
 # Commit Strategy — Handover Tim
 
-> **Dibuat:** 27 Mei 2026
-> **Tujuan:** Dokumen ini berisi strategi dan eksekusi commit untuk memudahkan tracking issue dan handover ke tim pengembang.
+> **Dibuat:** 27 Mei 2026  
+> **Updated:** 7 Juni 2026  
+> **Status:** ✅ **HISTORIS** — Sesi 1 sudah dieksekusi, disimpan untuk referensi  
+> **Tujuan:** Dokumen ini berisi strategi dan eksekusi commit untuk memudahkan tracking issue dan handover ke tim pengembang.  
 > **Gaya:** Conventional Commits — `feat:`, `fix:`, `style:`, `refactor:`, `chore:`, `docs:`, `perf:`, `build:`
 
 ---
@@ -335,5 +337,18 @@ Untracked (file baru):          19+ files
 
 ---
 
+## Related Documentation
+
+| Document | Location |
+|----------|----------|
+| **Workspace Management** | `.openkb/workspace-management.md` |
+| **Deployment Guide** | `.openkb/deployment.md` |
+| **Brainstorming** | `.openkb/brainstorming.md` |
+
+**Last Updated:** 7 Juni 2026  
+**Maintained by:** timitasib@gmail.com (IT/Teknis)
+
+---
+
 *Dokumen ini bisa langsung dipakai oleh siapapun di tim untuk mengeksekusi commit atau melacak issue.*
-*Terakhir diperbarui: 30 Mei 2026*
+*Terakhir diperbarui: 7 Juni 2026*

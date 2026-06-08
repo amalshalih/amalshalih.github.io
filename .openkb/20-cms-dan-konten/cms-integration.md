@@ -3,6 +3,9 @@
 > **Tujuan dokumen:** Dokumentasi setup Sanity CMS sebagai content management system
 > untuk website Yayasan ASIB, termasuk panduan penggunaan untuk tim, deployment studio,
 > dan referensi teknis.
+> 
+> **Status:** ✅ **ACTIVE** — Production system
+> **Last Updated:** 7 Juni 2026
 
 ---
 
@@ -30,7 +33,7 @@
          │ (edit konten)                                 │ (fetch GROQ query)
          ▼                                              ▼
    Tim ASIB                                           Cloudflare Pages
-   (via browser)                                      (https://amalshalih.id)
+   (via browser)                                      (https://amalshalih.or.id)
 ```
 
 **Alur data:**
@@ -375,7 +378,7 @@ Atau untuk static build, pastikan kode tidak panggil `loadQuery` yang butuh toke
 
 **Solusi:** Buka sanity.io/manage → API → CORS → **Add CORS origin**:
 - `http://localhost:4321` (development)
-- `https://amalshalih.id` (production)
+- `https://amalshalih.or.id` (production)
 - `https://amalshalih.pages.dev` (production)
 - Centang **Allow credentials**
 
@@ -399,5 +402,5 @@ Atau untuk static build, pastikan kode tidak panggil `loadQuery` yang butuh toke
 ---
 
 > **Dokumen ini diperbarui secara berkala.**
-> **Terakhir diperbarui:** 27 Mei 2026
+> **Terakhir diperbarui:** 7 Juni 2026
 > **Oleh:** PT Koneksi Jaringan Indonesia

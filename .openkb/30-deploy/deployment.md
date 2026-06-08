@@ -3,8 +3,10 @@
 > **Tujuan dokumen:** Memberikan pemahaman menyeluruh tentang deployment website
 > kepada tim IT Yayasan ASIB — dari konsep dasar hingga praktik deployment di
 > berbagai platform hosting.
->
+> 
 > **Target pembaca:** Tim IT ASIB (developer, maintenance, tangan kedua/handover)
+> **Status:** ✅ **ACTIVE** — Production deployment guide
+> **Last Updated:** 7 Juni 2026
 
 ---
 
@@ -58,7 +60,7 @@ bisa dideploy ke **hosting manapun** tanpa persyaratan khusus.
 | **CDN** | Content Delivery Network — server tersebar di banyak lokasi biar akses cepat |
 | **CI/CD** | Continuous Integration / Continuous Deployment — auto-deploy tiap kali ada perubahan kode |
 | **Environment** | Lingkungan: `development` (local), `preview` (uji coba), `production` (live) |
-| **Domain** | Nama website (contoh: `amalshalih.id`) |
+| **Domain** | Nama website (contoh: `amalshalih.or.id`) |
 
 ---
 
@@ -154,7 +156,7 @@ Jika build error, cek:
 |------|--------|
 | **Project name** | `amalshalih` |
 | **Domain** | `https://amalshalih.pages.dev` |
-| **Custom domain** | `amalshalih.id` (belum diaktifkan) |
+| **Custom domain** | `amalshalih.or.id` (aktif) |
 | **Production branch** | `main` |
 | **Metode deploy** | **Sementara:** Manual via Wrangler CLI |
 | **Target:** | **Auto-deploy via Git** (setelah hubungkan GitHub) |
@@ -244,14 +246,11 @@ Setelah project terhubung ke Git dan auto-deploy berjalan:
 
 1. Dashboard Cloudflare → Pages → `amalshalih`
 2. **Custom domains** → **Set up a custom domain**
-3. Masukkan `amalshalih.id`
-4. Cloudflare akan otomatis:
-   - Scan DNS
-   - Buatkan CNAME record
-   - Aktifkan SSL/TLS otomatis
-5. Selesai. Website bisa diakses via `https://amalshalih.id`
+3. Masukkan `amalshalih.or.id`
 
-**Catatan penting:** Domain `amalshalih.id` harus sudah terdaftar terlebih dahulu
+5. Selesai. Website bisa diakses via `https://amalshalih.or.id`
+
+**Catatan penting:** Domain `amalshalih.or.id` adalah domain aktif. Domain `amalshalih.id` (legacy) di-redirect ke `amalshalih.or.id` untuk brand protection.
 (di registrar domain seperti Niagahoster, DomaiNesia, dll.) dan nameserver-nya
 diarahkan ke Cloudflare untuk bisa manage DNS.
 
@@ -340,7 +339,7 @@ Atau lebih simpel — tidak perlu config sama sekali, Vercel auto-detect.
 ### 5.4. Custom Domain di Vercel
 
 1. Dashboard Vercel → Project → **Settings** → **Domains**
-2. Masukkan `amalshalih.id`
+2. Masukkan `amalshalih.or.id`
 3. Ikuti instruksi DNS (arahkan domain ke Vercel)
 4. SSL otomatis aktif
 
@@ -619,5 +618,5 @@ git push origin main
 ---
 
 > **Dokumen ini diperbarui secara berkala.**
-> **Terakhir diperbarui:** 27 Mei 2026
+> **Terakhir diperbarui:** 7 Juni 2026
 > **Oleh:** PT Koneksi Jaringan Indonesia

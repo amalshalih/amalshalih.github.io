@@ -1,5 +1,9 @@
 # Konten Kegiatan — Arsitektur
 
+> **Status:** ✅ **ACTIVE** — Technical documentation  
+> **Last Updated:** 7 Juni 2026  
+> **See also:** `.openkb/sanity-strategi.md`, `.openkb/cms-integration.md`
+
 ## Alur Konten
 
 Halaman **Kegiatan** (`/kegiatan`) menggunakan **Sanity CMS sebagai sumber utama**.
@@ -49,3 +53,16 @@ File markdown berfungsi sebagai:
 - Sanity adalah **source of truth** — selalu update Sanity untuk perubahan konten
 - File markdown hanya backup — jangan edit Sanity dan markdown secara terpisah tanpa sinkronisasi
 - Untuk menambah kegiatan: **Priority 1 via Sanity Studio**, Priority 2 via file markdown
+
+---
+
+## Related Documentation
+
+| Document | Location |
+|----------|----------|
+| **Sanity Strategy** | `.openkb/sanity-strategi.md` |
+| **CMS Integration** | `.openkb/cms-integration.md` |
+| **Deployment** | `.openkb/deployment.md` |
+
+**Last Updated:** 7 Juni 2026  
+**Maintained by:** timitasib@gmail.com (IT/Teknis)

@@ -1,5 +1,9 @@
 # Brainstorming Website Yayasan ASIB
 
+> **Status:** 📝 **DESIGN DISCUSSION** — Brainstorming & ide development  
+> **Terakhir diperbarui:** 7 Juni 2026  
+> **Catatan:** Dokumen ini berisi diskusi design system & visual identity. Untuk informasi operasional terkini, baca `.openkb/workspace-management.md` dan `docs/10-organisasi/`.
+
 ## Struktur Halaman Website
 
 ### 1. Beranda (Home)
@@ -92,7 +96,13 @@ Mana yang paling penting untuk MVP (Minimum Viable Product)?
 
 ## Design System & Visual Identity
 
-*Diskusi: 27 Mei 2026*
+*Diskusi: 27 Mei 2026 — Updated 7 Juni 2026*
+
+**Catatan Konteks:**
+- Diskusi ini masih relevan untuk development website
+- Domain strategy sudah final: amalshalih.or.id (active), amalshalih.id (legacy/redirect)
+- Email routing sudah verified & active (lihat `.openkb/email-system.md`)
+- Untuk struktur organisasi terbaru, baca `docs/10-organisasi/struktur-dan-role.md`
 
 ### State Saat Ini
 
@@ -311,7 +321,13 @@ py-12  → section pendukung/kecil
 ---
 
 *Dokumen ini dibuat untuk keperluan brainstorming pengembangan website.*
-*Terakhir diperbarui: 27 Mei 2026*
+*Terakhir diperbarui: 7 Juni 2026*
+
+**Related Documentation:**
+- `.openkb/workspace-management.md` — Operational structure
+- `.openkb/email-system.md` — Email routing (verified & active)
+- `docs/10-organisasi/struktur-dan-role.md` — Org structure & roles
+- `docs/10-organisasi/humas-decision-analysis.md` — humas@ routing decision
 
 ---
 

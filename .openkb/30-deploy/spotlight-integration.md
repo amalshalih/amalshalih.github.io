@@ -1,8 +1,10 @@
 # Spotlight Debug Overlay — Integrasi & Panduan
 
 > **Dibuat:** 28 Mei 2026
+> **Updated:** 7 Juni 2026
 > **Package:** `@spotlightjs/astro` v3.2.6
 > **Tujuan:** Dokumen ini menjelaskan integrasi Spotlight debug overlay ke dalam project website Yayasan ASIB, untuk memudahkan debugging dan development oleh tim IT ASIB maupun tim teknis PT Koneksi Jaringan Indonesia.
+> **Status:** ✅ **ACTIVE** — Development tooling
 
 ---
 
@@ -110,7 +112,7 @@ import sanity from '@sanity/astro';
 import spotlightjs from '@spotlightjs/astro';
 
 export default defineConfig({
-	site: 'https://amalshalih.id',
+	site: 'https://amalshalih.or.id',
 	integrations: [
 		mdx(),
 		sitemap(),
@@ -387,4 +389,4 @@ bun run dev
 ---
 
 *Dokumen ini diperuntukkan bagi tim IT Yayasan ASIB dan tim teknis PT Koneksi Jaringan Indonesia.*
-*Terakhir diperbarui: 28 Mei 2026*
+*Terakhir diperbarui: 7 Juni 2026*

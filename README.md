@@ -6,9 +6,12 @@
 [![Cloudflare Workers](https://img.shields.io/badge/Cloudflare%20Workers-F38020?logo=cloudflare)](https://workers.cloudflare.com)
 [![WCAG AA](https://img.shields.io/badge/WCAG-AA-1a7f37)](https://www.w3.org/WAI/standards-guidelines/wcag/)
 
-> **Repository internal — PT Koneksi Jaringan Indonesia**
-> Website resmi Yayasan Amal Shalih Insan Bantul (ASIB), dibangun sebagai solusi digital
-> untuk menunjang visi dakwah, transparansi donasi, dan pelayanan publik yayasan.
+> **Repository:** [`amalshalih/amalshalih.github.io`](https://github.com/amalshalih/amalshalih.github.io)  
+> **Owner:** Yayasan Amal Shalih Insan Bantul  
+> **Maintained by:** PT Koneksi Jaringan Indonesia (Engineering) + Tim IT ASIB  
+> **Purpose:** Technical repository untuk website development & maintenance  
+> 
+> **📚 Knowledge Base (OpenKB):** [`amalshalih/amalshalih/.openkb/`](https://github.com/amalshalih/amalshalih/tree/main/.openkb) — Single source of truth untuk semua dokumentasi yayasan
 
 ---
 
@@ -18,6 +21,7 @@
 - [Tech Stack](#tech-stack)
 - [Fitur](#fitur)
 - [Struktur Project](#struktur-project)
+- [Documentation](#documentation)
 - [Persiapan Lingkungan](#persiapan-lingkungan)
 - [Development](#development)
 - [Build & Deploy](#build--deploy)
@@ -39,7 +43,8 @@ Pendidikan Islam, Sosial Kemanusiaan, dan Keagamaan. Website ini dibangun untuk:
 | **Dakwah Digital** | Menjangkau masyarakat luas dengan informasi keislaman dan laporan kegiatan |
 | **Profesionalitas** | Menunjukkan keseriusan yayasan sebagai lembaga yang modern dan terpercaya |
 
-**Domain:** [https://amalshalih.id](https://amalshalih.id)
+**Domain:** [https://amalshalih.or.id](https://amalshalih.or.id)  
+**Legacy Domain:** [https://amalshalih.id](https://amalshalih.id) → Redirects to amalshalih.or.id (brand protection)
 **Status:** 🟢 Production (Private Repository)
 
 ---
@@ -146,21 +151,37 @@ yayasan-amal-shalih-insan-bantul/
 │   │       └── [slug].astro         # Detail kegiatan (dynamic route)
 │   └── styles/
 │       └── global.css               # Tailwind theme, custom utilities
-├── .openkb/                         # Pengetahuan project (internal team)
-│   ├── brainstorming.md
-│   ├── yayasan-profile.md
-│   ├── audit-komprehensif.md
-│   └── commit-strategy.md
-├── .sisyphus/                       # Work plans Sisyphus AI agent
+├── docs/                            # Pointer ke OpenKB kanonikal
+│   └── README.md                    # Penjelasan migrasi dokumen
+├── .openkb/                         # Technical knowledge base (terstruktur)
+│   ├── README.md                    # Indeks utama KB teknis
+│   ├── 10-arsitektur/               # Arsitektur, konfigurasi, audit (9 file)
+│   ├── 20-cms-dan-konten/           # CMS, konten (4 file)
+│   └── 30-deploy/                   # Deployment & workflow (3 file)
+├── .sisyphus/                       # Work plans from Sisyphus AI agent
 ├── sentry.client.config.js          # Sentry client-side initialization
 ├── sentry.server.config.js          # Sentry server-side initialization
 ├── .env.example                     # Contoh environment variables
-├── wrangler.toml                    # Cloudflare Pages config
+├── wrangler.toml                    # Cloudflare Workers config
 ├── astro.config.mjs
 ├── package.json
 ├── tsconfig.json
 └── bun.lock
 ```
+
+## Documentation
+
+### **📚 OpenKB — Single Source of Truth**
+
+Seluruh dokumentasi yayasan (organisasi, SOP, template, IT teknis, legal, panduan AI agent) telah dipindahkan ke repository **OpenKB** yang terstruktur:
+
+> **[`amalshalih/amalshalih/.openkb/`](https://github.com/amalshalih/amalshalih/tree/main/.openkb)**
+
+Repository ini adalah kanonikal — akses oleh operator, konsumen, dan AI agent.  
+
+### **📘 Technical Knowledge Base (`.openkb/` — repo ini)**
+
+Folder `.openkb/` di repo ini berisi **16 file teknis** yang terorganisir dalam **3 subdirektori** (arsitektur, CMS/konten, deployment) — **hanya tentang website**. Untuk dokumentasi organisasi yayasan (SOP, template, legal, AI agent, panduan media), lihat OpenKB di atas.
 
 ---
 

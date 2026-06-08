@@ -3,7 +3,8 @@
 > **Untuk:** Tim Engineering PT Koneksi Jaringan Indonesia & Tim IT Yayasan ASIB
 > **Tujuan:** Dokumentasi komprehensif tentang Sanity CMS — dari keputusan strategis,
 > arsitektur teknis, pricing, self-hosting, hingga panduan operasional harian.
-> **Terakhir diperbarui:** 27 Mei 2026
+> **Status:** ✅ **ACTIVE** — Production system
+> **Last Updated:** 7 Juni 2026
 
 ---
 
@@ -121,7 +122,7 @@ Untuk kebutuhan ASIB (website profil yayasan, publikasi kegiatan, donasi) — **
           ▼
 ┌─────────────────────────────────────────────────────────────┐
 │                   CLOUDFLARE PAGES                           │
-│  https://amalshalih.id  (static hosting, CDN global)        │
+│  https://amalshalih.or.id  (static hosting, CDN global)        │
 │  HTML + CSS + Asset  →  delivered ke pengunjung             │
 └─────────────────────────────────────────────────────────────┘
 ```
@@ -386,7 +387,7 @@ Langkah 3: Update Frontend
 - **Struktur halaman** — tetap 10 halaman
 - **Design system** — tidak berubah
 - **Hosting (Cloudflare Pages)** — tetap sama
-- **Domain** — tetap `amalshalih.id`
+- **Domain** — tetap `amalshalih.or.id`
 
 ---
 
@@ -631,7 +632,7 @@ Hasil: **https://yayasan-asib.sanity.studio**
 
 ### 10.2. Deploy ke Vercel / Netlify (Self-Host Studio)
 
-Kalau ingin studio di domain sendiri (misal `cms.amalshalih.id`):
+Kalau ingin studio di domain sendiri (misal `cms.amalshalih.or.id`):
 
 ```bash
 cd studio-amalshalih
@@ -651,7 +652,7 @@ Agar studio bisa terhubung ke Content Lake, tambahkan CORS origins di
 |--------|------------|
 | `http://localhost:4321` | Development |
 | `https://yayasan-asib.sanity.studio` | Sanity hosting |
-| `https://amalshalih.id` | Production |
+| `https://amalshalih.or.id` | Production |
 | `https://amalshalih.pages.dev` | Cloudflare Pages |
 
 Centang **Allow credentials** untuk semua.
@@ -756,7 +757,7 @@ Untuk backup tambahan, bisa export via GROQ query ke JSON.
 
 **Q: Website ASIB di-host dimana?**
 A: **Cloudflare Pages** — CDN global, gratis untuk website statis.
-Domain: `amalshalih.id` (sudah terdaftar).
+Domain: `amalshalih.or.id` (sudah terdaftar).
 
 **Q: Kalau mau pindah hosting?**
 A: Karena website static (file HTML), bisa di-host di mana saja:
