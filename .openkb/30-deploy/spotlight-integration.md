@@ -367,7 +367,7 @@ Spotlight menambah overhead minimal saat development. Jika terasa lambat:
 | `package.json` | Dependency `@spotlightjs/astro@3.2.6` ditambahkan |
 | `bun.lock` | Lockfile updated |
 | `astro.config.mjs` | Import + integration `spotlightjs()` ditambahkan |
-| `.openkb/spotlight-integration.md` | Dokumen ini (baru) |
+| `.openkb/30-deploy/spotlight-integration.md` | Dokumen ini (baru) |
 
 ## Appendix B: Quick Start (untuk Developer Baru)
 

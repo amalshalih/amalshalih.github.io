@@ -1,7 +1,7 @@
 # Audit Komprehensif Yayasan Amal Shalih Insan Bantul (ASIB)
 
 > **Status:** ✅ **VERIFIED** — Current Reality (7 Juni 2026)  
-> **Audit ini bagian dari workspace management** — untuk konteks operasional lengkap, baca `.openkb/workspace-management.md` dan `docs/10-organisasi/`
+> **Audit ini bagian dari workspace management** — untuk konteks operasional lengkap, baca [workspace-management.md](https://github.com/amalshalih/amalshalih/blob/main/.openkb/10-organisasi/workspace-management.md) dan [10-organisasi/](https://github.com/amalshalih/amalshalih/tree/main/.openkb/10-organisasi/) di OpenKB repo
 
 ---
 
@@ -287,12 +287,12 @@ All critical services → Recovery: timitasib@gmail.com
 
 | Aset | Format | Location | Status |
 |------|--------|----------|--------|
-| Logo Yayasan | JPG | `.openkb/` | ✅ Available |
-| Logo PKBM | PNG, AI | `.openkb/` | ✅ Available |
-| Kop Surat ASIB | JPG, PNG | `.openkb/` | ✅ Available |
-| QRIS Donasi | PNG | `.openkb/` | ✅ Available |
-| QRIS Crop | PNG | `.openkb/` | ✅ Available |
-| Documentation | Markdown | `docs/` | ✅ 27 documents |
+| Logo Yayasan | JPG | `public/` | ✅ Available |
+| Logo PKBM | PNG, AI | `public/` | ✅ Available |
+| Kop Surat ASIB | JPG, PNG | `public/` | ✅ Available |
+| QRIS Donasi | PNG | `public/` | ✅ Available |
+| QRIS Crop | PNG | `public/` | ✅ Available |
+| Documentation | Markdown | `.openkb/` | ✅ Migrated to numbered subdirs |
 
 ---
 
@@ -300,11 +300,11 @@ All critical services → Recovery: timitasib@gmail.com
 
 | Document | Location | Purpose |
 |----------|----------|---------|
-| **Email System** | `.openkb/email-system.md` | Email routing setup & management |
-| **Workspace Management** | `.openkb/workspace-management.md` | Operational structure |
-| **Struktur & Role** | `docs/10-organisasi/struktur-dan-role.md` | Org structure, contacts |
-| **humas@ Decision** | `docs/10-organisasi/humas-decision-analysis.md` | Trade-off analysis |
-| **Security Guidelines** | `docs/40-it-teknis/security.md` | 2FA, passwords, access |
+| **Email System** | `.openkb/10-arsitektur/email-system.md` | Email routing setup & management |
+| **Workspace Management** | [OpenKB repo: 10-organisasi/workspace-management.md](https://github.com/amalshalih/amalshalih/blob/main/.openkb/10-organisasi/workspace-management.md) | Operational structure |
+| **Struktur & Role** | [OpenKB repo: 10-organisasi/struktur-dan-role.md](https://github.com/amalshalih/amalshalih/blob/main/.openkb/10-organisasi/struktur-dan-role.md) | Org structure, contacts |
+| **humas@ Decision** | [OpenKB repo: 10-organisasi/humas-decision-analysis.md](https://github.com/amalshalih/amalshalih/blob/main/.openkb/10-organisasi/humas-decision-analysis.md) | Trade-off analysis |
+| **Security Guidelines** | [OpenKB repo: 40-it-teknis/security.md](https://github.com/amalshalih/amalshalih/blob/main/.openkb/40-it-teknis/security.md) | 2FA, passwords, access |
 | **Credentials** | `docs/40-it-teknis/credentials.md` | Password manager |
 | **SOPs** | `docs/20-sop/` | Operational procedures |
 | **Templates** | `docs/30-templates/` | Reusable templates |

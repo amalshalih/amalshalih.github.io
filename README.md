@@ -181,7 +181,7 @@ Repository ini adalah kanonikal — akses oleh operator, konsumen, dan AI agent.
 
 ### **📘 Technical Knowledge Base (`.openkb/` — repo ini)**
 
-Folder `.openkb/` di repo ini berisi **16 file teknis** yang terorganisir dalam **3 subdirektori** (arsitektur, CMS/konten, deployment) — **hanya tentang website**. Untuk dokumentasi organisasi yayasan (SOP, template, legal, AI agent, panduan media), lihat OpenKB di atas.
+Folder `.openkb/` di repo ini berisi **16 file teknis** yang terorganisir dalam **3 subdirektori** (arsitektur, CMS/konten, deployment) + README.md — **hanya tentang website**. Untuk dokumentasi organisasi yayasan (SOP, template, legal, AI agent, panduan media), lihat OpenKB di atas.
 
 ---
 
@@ -356,7 +356,7 @@ sentry.server.config.js    # Inisialisasi Sentry untuk server
 ## Design System
 
 Dokumen design system lengkap tersedia di:
-📄 [`.openkb/brainstorming.md`](.openkb/brainstorming.md) — section **"Design System & Visual Identity"**
+📄 [`.openkb/10-arsitektur/brainstorming.md`](.openkb/10-arsitektur/brainstorming.md) — section **"Design System & Visual Identity"**
 
 ### Prinsip Desain
 
@@ -411,7 +411,7 @@ fix: resolve WCAG contrast on page header titles
 ```
 
 > **Referensi:** Dokumen commit strategy lengkap →
-> [`.openkb/commit-strategy.md`](.openkb/commit-strategy.md)
+> [`.openkb/30-deploy/commit-strategy.md`](.openkb/30-deploy/commit-strategy.md)
 
 ---
 

@@ -55,7 +55,7 @@ Bedanya dengan CMS tradisional (seperti WordPress):
 | Sanity Studio (`studio-amalshalih/`) | ✅ Siap (6 collections) |
 | Integrasi Astro (`astro.config.mjs`) | ✅ Terpasang |
 | Client library (`src/lib/sanity/`) | ✅ Siap pakai |
-| Dokumentasi CMS | ✅ `.openkb/cms-integration.md` |
+| Dokumentasi CMS | ✅ `.openkb/20-cms-dan-konten/cms-integration.md` |
 | Dokumentasi strategi | ✅ **(dokumen ini)** |
 | Studio deployed | ⏳ Butuh token |
 | Data terisi | ⏳ Butuh token |
@@ -809,14 +809,14 @@ A: **Hosting website** = Cloudflare Pages (tempat file HTML ASIB diakses publik)
 | **Sanity Pricing** | https://www.sanity.io/pricing |
 | **Sanity Astro Integration** | https://www.sanity.io/plugins/astro |
 | **Cloudflare Pages Dashboard** | https://dash.cloudflare.com/?to=pages |
-| **Cloudflare API Token** | (ada di `.openkb/deployment.md`) |
+| **Cloudflare API Token** | (ada di `.openkb/30-deploy/deployment.md`) |
 
 ### File Penting di Repo
 
 | File | Keterangan |
 |------|------------|
-| `.openkb/cms-integration.md` | Panduan teknis integrasi Sanity + Astro |
-| `.openkb/deployment.md` | Panduan deploy ke berbagai hosting |
+| `.openkb/20-cms-dan-konten/cms-integration.md` | Panduan teknis integrasi Sanity + Astro |
+| `.openkb/30-deploy/deployment.md` | Panduan deploy ke berbagai hosting |
 | `.env.example` | Template environment variables |
 | `studio-amalshalih/schemaTypes/` | Definisi semua tipe konten |
 | `src/lib/sanity/client.ts` | Fetch helpers |

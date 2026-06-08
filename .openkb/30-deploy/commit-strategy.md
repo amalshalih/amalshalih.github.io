@@ -48,8 +48,8 @@
 | CI/CD | `.github/workflows/deploy.yml` | GitHub Actions auto-deploy |
 | Scripts | `scripts/*` | Build scripts (gallery cache, generate wrangler config) |
 | Assets | `public/` | Logo, favicon, images |
-| Docs | `.openkb/*.md` | Dokumentasi dan brainstorming (kecuali binary) |
-| Docs | Root `*.md` | Dokumentasi galeri (GALERI_GOOGLE_DRIVE, KONVENSI, PANDUAN) |
+| Docs | `.openkb/**/*.md` | Dokumentasi teknis (subdirektori terstruktur) |
+| Docs | Root `*.md` | Project README (sudah ada di .openkb/) |
 | Tools | `.sisyphus/` | Work plans dari Sisyphus agent |
 
 ### ❌ JANGAN di-track
@@ -64,13 +64,13 @@
 | **Artifacts sementara** | `Screenshot *.png` | Screenshot development |
 | **Generated cache** | `src/data/cache/` | Gallery cache dari Google Drive |
 | **Generated cache** | `src/data/generated-galleries.json` | Generated gallery index |
-| **Binary mentah** | `.openkb/*.pdf` | Dokumen legal (Akta, NIB, NPWP, Proposal) — sensitif, besar |
-| **Binary mentah** | `.openkb/*.jpg` | Kop surat, logo mentah |
-| **Binary mentah** | `.openkb/*.jpeg` | WhatsApp image |
-| **Binary mentah** | `.openkb/*.png` | Logo mentah, qris mentah |
-| **Binary mentah** | `.openkb/*.docx` | Proposal, profil (binary format) |
-| **Binary mentah** | `.openkb/*.ai` | File Illustrator |
-| **Binary mentah** | `.openkb/*.PNG` | (case-sensitive) |
+| **Binary mentah** | `.openkb/**/*.pdf` | Dokumen legal (Akta, NIB, NPWP, Proposal) — sensitif, besar |
+| **Binary mentah** | `.openkb/**/*.jpg` | Kop surat, logo mentah |
+| **Binary mentah** | `.openkb/**/*.jpeg` | WhatsApp image |
+| **Binary mentah** | `.openkb/**/*.png` | Logo mentah, qris mentah |
+| **Binary mentah** | `.openkb/**/*.docx` | Proposal, profil (binary format) |
+| **Binary mentah** | `.openkb/**/*.ai` | File Illustrator |
+| **Binary mentah** | `.openkb/**/*.PNG` | (case-sensitive) |
 | **Build output** | `dist/` | ✅ Sudah di .gitignore |
 | **Generated types** | `.astro/` | ✅ Sudah di .gitignore |
 | **Dependencies** | `node_modules/` | ✅ Sudah di .gitignore |
@@ -108,7 +108,7 @@ Commit S6 ── Semua pages + dokumentasi
 
 | Action | Files |
 |--------|-------|
-| **Update** | `.gitignore` — tambah ignore rules untuk `.playwright-mcp/` dan binary `.openkb/` |
+| **Update** | `.gitignore` — tambah ignore rules untuk `.playwright-mcp/` dan binary `.openkb/**/*.pdf`, `.openkb/**/*.jpg`, dll |
 | **Delete** | `README.md`, blog posts template, blog pages template, `src/pages/about.astro`, `rss.xml.js` |
 | **Delete** | Old components (Footer, Header, HeaderLink, FormattedDate), `src/consts.ts`, `BlogPost.astro` |
 | **Delete** | Placeholder images, font files |
@@ -165,7 +165,7 @@ Commit S6 ── Semua pages + dokumentasi
 | **Add** | `src/pages/tentang.astro`, `program.astro`, `donasi.astro`, `kontak.astro`, `404.astro` |
 | **Add** | `src/pages/kegiatan/index.astro`, `kegiatan/[slug].astro` |
 | **Modified** | `src/styles/global.css` — Full custom theme |
-| **Add** | `.openkb/` docs, `PROJECT_STATUS.md`, `.sisyphus/` |
+| **Add** | `.openkb/` docs (structured subdirs), `PROJECT_STATUS.md` (now in OpenKB repo), `.sisyphus/` |
 
 ---
 
@@ -210,7 +210,7 @@ git commit -m "feat: add layout and navigation"
 
 # 7. Commit S6 — Pages & documentation
 git add src/pages/ src/styles/global.css
-git add .openkb/*.md PROJECT_STATUS.md .sisyphus/
+git add .openkb/**/*.md .sisyphus/
 git commit -m "feat: add all pages and documentation"
 ```
 
@@ -331,7 +331,7 @@ Untracked (file baru):          19+ files
 | `src/lib/` | `constants.ts` |
 | `src/content/kegiatan/` | 3 artikel kegiatan |
 | `public/` | `logo-yayasan.webp`, `logo-yayasan-sm.webp`, `qris.webp` |
-| `.openkb/` | `brainstorming.md`, `yayasan-profile.md`, `audit-komprehensif.md`, `commit-strategy.md` |
+| `.openkb/` | `10-arsitektur/brainstorming.md`, `10-arsitektur/audit-komprehensif.md`, `30-deploy/commit-strategy.md` |
 | Root | `PROJECT_STATUS.md` |
 | `.sisyphus/` | Work plan files |
 
@@ -341,9 +341,9 @@ Untracked (file baru):          19+ files
 
 | Document | Location |
 |----------|----------|
-| **Workspace Management** | `.openkb/workspace-management.md` |
-| **Deployment Guide** | `.openkb/deployment.md` |
-| **Brainstorming** | `.openkb/brainstorming.md` |
+| **Workspace Management** | [OpenKB repo: 10-organisasi/workspace-management.md](https://github.com/amalshalih/amalshalih/blob/main/.openkb/10-organisasi/workspace-management.md) |
+| **Deployment Guide** | `.openkb/30-deploy/deployment.md` |
+| **Brainstorming** | `.openkb/10-arsitektur/brainstorming.md` |
 
 **Last Updated:** 7 Juni 2026  
 **Maintained by:** timitasib@gmail.com (IT/Teknis)

@@ -2,7 +2,7 @@
 
 > **Status:** 📝 **DESIGN DISCUSSION** — Brainstorming & ide development  
 > **Terakhir diperbarui:** 7 Juni 2026  
-> **Catatan:** Dokumen ini berisi diskusi design system & visual identity. Untuk informasi operasional terkini, baca `.openkb/workspace-management.md` dan `docs/10-organisasi/`.
+> **Catatan:** Dokumen ini berisi diskusi design system & visual identity. Untuk informasi operasional terkini, baca [workspace-management.md](https://github.com/amalshalih/amalshalih/blob/main/.openkb/10-organisasi/workspace-management.md) dan [10-organisasi/](https://github.com/amalshalih/amalshalih/tree/main/.openkb/10-organisasi/) di OpenKB repo.
 
 ## Struktur Halaman Website
 
@@ -101,8 +101,8 @@ Mana yang paling penting untuk MVP (Minimum Viable Product)?
 **Catatan Konteks:**
 - Diskusi ini masih relevan untuk development website
 - Domain strategy sudah final: amalshalih.or.id (active), amalshalih.id (legacy/redirect)
-- Email routing sudah verified & active (lihat `.openkb/email-system.md`)
-- Untuk struktur organisasi terbaru, baca `docs/10-organisasi/struktur-dan-role.md`
+- Email routing sudah verified & active (lihat `.openkb/10-arsitektur/email-system.md`)
+- Untuk struktur organisasi terbaru, baca [struktur-dan-role.md](https://github.com/amalshalih/amalshalih/blob/main/.openkb/10-organisasi/struktur-dan-role.md) di OpenKB repo
 
 ### State Saat Ini
 
@@ -324,9 +324,9 @@ py-12  → section pendukung/kecil
 *Terakhir diperbarui: 7 Juni 2026*
 
 **Related Documentation:**
-- `.openkb/workspace-management.md` — Operational structure
-- `.openkb/email-system.md` — Email routing (verified & active)
-- `docs/10-organisasi/struktur-dan-role.md` — Org structure & roles
+- [workspace-management.md](https://github.com/amalshalih/amalshalih/blob/main/.openkb/10-organisasi/workspace-management.md) — Operational structure (OpenKB repo)
+- `.openkb/10-arsitektur/email-system.md` — Email routing (verified & active)
+- [struktur-dan-role.md](https://github.com/amalshalih/amalshalih/blob/main/.openkb/10-organisasi/struktur-dan-role.md) — Org structure & roles (OpenKB repo)
 - `docs/10-organisasi/humas-decision-analysis.md` — humas@ routing decision
 
 ---

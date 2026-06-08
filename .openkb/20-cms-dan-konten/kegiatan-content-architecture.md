@@ -2,7 +2,7 @@
 
 > **Status:** ✅ **ACTIVE** — Technical documentation  
 > **Last Updated:** 7 Juni 2026  
-> **See also:** `.openkb/sanity-strategi.md`, `.openkb/cms-integration.md`
+> **See also:** `.openkb/20-cms-dan-konten/sanity-strategi.md`, `.openkb/20-cms-dan-konten/cms-integration.md`
 
 ## Alur Konten
 
@@ -60,9 +60,9 @@ File markdown berfungsi sebagai:
 
 | Document | Location |
 |----------|----------|
-| **Sanity Strategy** | `.openkb/sanity-strategi.md` |
-| **CMS Integration** | `.openkb/cms-integration.md` |
-| **Deployment** | `.openkb/deployment.md` |
+| **Sanity Strategy** | `.openkb/20-cms-dan-konten/sanity-strategi.md` |
+| **CMS Integration** | `.openkb/20-cms-dan-konten/cms-integration.md` |
+| **Deployment** | `.openkb/30-deploy/deployment.md` |
 
 **Last Updated:** 7 Juni 2026  
 **Maintained by:** timitasib@gmail.com (IT/Teknis)
