@@ -48,6 +48,7 @@ pnpm-debug.log*
 # Firebase + Google Drive — jangan pernah commit!
 amalshalih-fd1bd-firebase-adminsdk-fbsvc-624be20267.json
 gen-lang-client-0412959743-42ff01c2a818.json
+generated-lang-client.json
 
 # Wrangler local state (ephemeral)
 .wrangler/
