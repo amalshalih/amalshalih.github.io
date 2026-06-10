@@ -32,15 +32,15 @@ export default defineConfig({
 					return undefined
 				}
 				if (item.url === 'https://amalshalih.or.id/') {
-					// @ts-expect-error
+					// @ts-expect-error - Sitemap item changefreq has strict literal type constraints
 					item.changefreq = 'daily'
 					item.priority = 1.0
 				} else if (/kegiatan/.test(item.url) || /blog/.test(item.url)) {
-					// @ts-expect-error
+					// @ts-expect-error - Sitemap item changefreq has strict literal type constraints
 					item.changefreq = 'weekly'
 					item.priority = 0.8
 				} else {
-					// @ts-expect-error
+					// @ts-expect-error - Sitemap item changefreq has strict literal type constraints
 					item.changefreq = 'monthly'
 					item.priority = 0.5
 				}

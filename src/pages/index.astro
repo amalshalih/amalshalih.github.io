@@ -53,7 +53,7 @@ const initialPhoto = heroPhotos.length > 0 ? heroPhotos[0] : null
 		<!-- Slideshow Background (extends behind sticky header) -->
 		<div class="absolute inset-0 bg-primary-900">
 			<div id="hero-bg-a" class="absolute inset-0 bg-cover bg-center transition-all duration-1000 ease-out"
-				style="background-image: url({initialPhoto?.fullUrl || ''}); background-color: #166534;"
+				style={`background-image: url('${initialPhoto?.fullUrl || ''}'); background-color: #166534;`}
 				data-photos={JSON.stringify(heroPhotos.map(p => p.fullUrl))}
 				data-current="0"
 			></div>
@@ -105,17 +105,17 @@ const initialPhoto = heroPhotos.length > 0 ? heroPhotos[0] : null
 
 		// Preload all images
 		photos.forEach(function(src) {
-			var img = new Image();
+			const img = new Image();
 			img.src = src;
 		});
 
-		var current = 0;
-		var active = 'a';
+		let current = 0;
+		let active = 'a';
 
 		setInterval(function() {
 			current = (current + 1) % photos.length;
-			var nextEl = active === 'a' ? bgB : bgA;
-			var currentEl = active === 'a' ? bgA : bgB;
+			const nextEl = active === 'a' ? bgB : bgA;
+			const currentEl = active === 'a' ? bgA : bgB;
 
 			nextEl.style.backgroundImage = 'url(' + photos[current] + ')';
 			nextEl.style.opacity = '';
@@ -280,8 +280,7 @@ const initialPhoto = heroPhotos.length > 0 ? heroPhotos[0] : null
 			</div>
 			<div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-primary-50/50"></div>
 		</div>
-			<div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-primary-50/50"></div>
-		</div>
+
 
 		<Container as="div" class="relative z-10">
 			<div class="overflow-hidden rounded-2xl bg-white shadow-2xl border border-primary-100/50 transition-all duration-500 hover:shadow-primary-900/10 animate-[fade-in-up_0.8s_ease-out]">

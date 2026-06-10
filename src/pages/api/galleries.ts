@@ -13,9 +13,10 @@ export const GET: APIRoute = async () => {
 				'Cache-Control': 'public, max-age=300',
 			},
 		})
-	} catch (error: any) {
+	} catch (error) {
 		console.error('Error fetching galleries:', error)
-		return new Response(JSON.stringify({ error: error.message || 'Failed to fetch galleries' }), {
+		const message = error instanceof Error ? error.message : String(error)
+		return new Response(JSON.stringify({ error: message || 'Failed to fetch galleries' }), {
 			status: 500,
 			headers: { 'Content-Type': 'application/json' },
 		})

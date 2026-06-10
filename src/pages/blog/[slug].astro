@@ -39,6 +39,7 @@ let post: {
 	body?: unknown
 } | null = null
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 let Content: any = null
 
 if (sanityPost) {
@@ -190,7 +191,7 @@ const relatedPosts = allPosts
 					</div>
 				</div>
 			</div>
-		</section>
+		</Container>
 	</div>
 
 	<!-- Overlapping Article Content Card -->
@@ -259,7 +260,6 @@ const relatedPosts = allPosts
 						</div>
 					</div>
 				)}
-			</div>
 		</div>
-	</Container>
+	</section>
 </BaseLayout>

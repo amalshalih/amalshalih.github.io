@@ -1,18 +1,26 @@
 import { env } from 'cloudflare:workers'
 import type { APIRoute } from 'astro'
+import { z } from 'zod'
+import { getResendApiKey } from '../../lib/config'
 
 const RESEND_API = 'https://api.resend.com/emails'
 const RATE_LIMIT_WINDOW = 5 * 60 * 1000
 const KV_PREFIX = 'kontak:ip:'
 
-interface FormData {
-	nama: string
-	telepon: string
-	email: string
-	subjek: string
-	pesan: string
-	_website?: string
-}
+const kontakSchema = z.object({
+	nama: z.string().trim().min(1, 'Nama harus diisi.'),
+	telepon: z.string().trim().optional().default(''),
+	email: z.string().trim().email('Format email tidak valid.'),
+	subjek: z.string().trim().optional().default('lainnya'),
+	pesan: z
+		.string()
+		.trim()
+		.min(1, 'Pesan harus diisi.')
+		.max(5000, 'Pesan terlalu panjang (maks. 5.000 karakter).'),
+	_website: z.string().trim().optional().default(''),
+})
+
+type FormData = z.infer<typeof kontakSchema>
 
 const ROUTING: Record<string, { name: string; to: string }> = {
 	donasi: { name: 'Konfirmasi Donasi', to: 'donasi@amalshalih.or.id' },
@@ -165,21 +173,7 @@ function getClientIp(request: Request): string {
 
 export const POST: APIRoute = async ({ request }) => {
 	try {
-		const apiKey = env.RESEND_API_KEY
-		if (!apiKey) {
-			console.error('[API /kontak] RESEND_API_KEY not configured')
-			return new Response(
-				JSON.stringify({ success: false, error: 'Konfigurasi email belum lengkap.' }),
-				{
-					status: 500,
-					headers: {
-						'Content-Type': 'application/json',
-						'X-Content-Type-Options': 'nosniff',
-						'X-Frame-Options': 'DENY',
-					},
-				},
-			)
-		}
+		const apiKey = getResendApiKey()
 
 		let raw: Record<string, string>
 		const contentType = request.headers.get('content-type') || ''
@@ -194,14 +188,25 @@ export const POST: APIRoute = async ({ request }) => {
 			}
 		}
 
-		const data: FormData = {
-			nama: (raw.nama || '').trim(),
-			telepon: (raw.telepon || '').trim(),
-			email: (raw.email || '').trim(),
-			subjek: (raw.subjek || '').trim(),
-			pesan: (raw.pesan || '').trim(),
-			_website: (raw._website || '').trim(),
+		const parsed = kontakSchema.safeParse(raw)
+		if (!parsed.success) {
+			return new Response(
+				JSON.stringify({
+					success: false,
+					errors: parsed.error.issues.map((e) => e.message),
+				}),
+				{
+					status: 400,
+					headers: {
+						'Content-Type': 'application/json',
+						'X-Content-Type-Options': 'nosniff',
+						'X-Frame-Options': 'DENY',
+					},
+				},
+			)
 		}
+
+		const data = parsed.data
 
 		// Honeypot: bot-filled hidden field — silently accept but don't process
 		if (data._website) {
@@ -235,25 +240,6 @@ export const POST: APIRoute = async ({ request }) => {
 					},
 				})
 			}
-		}
-
-		const errors: string[] = []
-		if (!data.nama) errors.push('Nama harus diisi.')
-		if (!data.email) errors.push('Email harus diisi.')
-		else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email))
-			errors.push('Format email tidak valid.')
-		if (!data.pesan) errors.push('Pesan harus diisi.')
-		if (data.pesan.length > 5000) errors.push('Pesan terlalu panjang (maks. 5.000 karakter).')
-
-		if (errors.length > 0) {
-			return new Response(JSON.stringify({ success: false, errors }), {
-				status: 400,
-				headers: {
-					'Content-Type': 'application/json',
-					'X-Content-Type-Options': 'nosniff',
-					'X-Frame-Options': 'DENY',
-				},
-			})
 		}
 
 		const clientIp = getClientIp(request)
@@ -310,7 +296,7 @@ export const POST: APIRoute = async ({ request }) => {
 				'X-Frame-Options': 'DENY',
 			},
 		})
-	} catch (error: any) {
+	} catch (error) {
 		console.error('[API /kontak] Error:', error)
 		return new Response(
 			JSON.stringify({ success: false, errors: ['Terjadi kesalahan. Silakan coba lagi.'] }),

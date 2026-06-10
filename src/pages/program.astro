@@ -432,7 +432,7 @@ const tabLabels: Record<string, string> = {
 	// Keyboard navigation (ArrowLeft/ArrowRight/Home/End)
 	tablist.addEventListener('keydown', (e) => {
 		const currentIdx = tabs.findIndex(t => t.getAttribute('aria-selected') === 'true');
-		let newIdx = currentIdx;
+		let newIdx;
 
 		if (e.key === 'ArrowRight') newIdx = (currentIdx + 1) % tabs.length;
 		else if (e.key === 'ArrowLeft') newIdx = (currentIdx - 1 + tabs.length) % tabs.length;

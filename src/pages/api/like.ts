@@ -1,63 +1,74 @@
-import { env } from 'cloudflare:workers'
 import type { APIRoute } from 'astro'
+import { z } from 'zod'
+import { getPhotoLikes, incrementPhotoLike } from '../../lib/likes'
 
-function getPhotoLikeKey(slug: string, photoId: string): string {
-	return `photo:${slug}:${photoId}`
-}
+const getQuerySchema = z.object({
+	slug: z.string().min(1, 'Slug cannot be empty'),
+})
 
 export const GET: APIRoute = async ({ request }) => {
-	const url = new URL(request.url)
-	const slug = url.searchParams.get('slug')
-
-	if (!slug) {
-		return new Response(JSON.stringify({ error: 'Missing slug' }), { status: 400 })
-	}
-
 	try {
-		const likes = env.LIKES
+		const url = new URL(request.url)
+		const parsed = getQuerySchema.safeParse({
+			slug: url.searchParams.get('slug') ?? undefined,
+		})
 
-		const prefix = `photo:${slug}:`
-		const keys = await likes.list({ prefix })
-
-		const result: Record<string, number> = {}
-		for (const key of keys.keys) {
-			const photoId = key.name.replace(prefix, '')
-			const count = await likes.get(key.name)
-			result[photoId] = parseInt(count || '0', 10)
+		if (!parsed.success) {
+			return new Response(JSON.stringify({ error: parsed.error.issues[0].message }), {
+				status: 400,
+				headers: { 'Content-Type': 'application/json' },
+			})
 		}
+
+		const { slug } = parsed.data
+		const result = await getPhotoLikes(slug)
 
 		return new Response(JSON.stringify(result), {
 			status: 200,
 			headers: { 'Content-Type': 'application/json' },
 		})
-	} catch (error: any) {
+	} catch (error) {
 		console.error('[API /like GET] Error:', error)
-		return new Response(JSON.stringify({ error: error.message }), { status: 500 })
+		const message = error instanceof Error ? error.message : String(error)
+		return new Response(JSON.stringify({ error: message }), { status: 500 })
 	}
 }
 
+const postBodySchema = z.object({
+	slug: z.string().min(1, 'Slug cannot be empty'),
+	photoId: z.string().min(1, 'PhotoId cannot be empty'),
+})
+
 export const POST: APIRoute = async ({ request }) => {
 	try {
-		const body = await request.json()
-		const { slug, photoId } = body
-
-		if (!slug || !photoId) {
-			return new Response(JSON.stringify({ error: 'Missing slug or photoId' }), { status: 400 })
+		let body: unknown
+		try {
+			body = await request.json()
+		} catch {
+			return new Response(JSON.stringify({ error: 'Invalid JSON payload' }), {
+				status: 400,
+				headers: { 'Content-Type': 'application/json' },
+			})
 		}
 
-		const likes = env.LIKES
-		const key = getPhotoLikeKey(slug, photoId)
-		const current = await likes.get(key)
-		const newLikes = parseInt(current || '0', 10) + 1
+		const parsed = postBodySchema.safeParse(body)
+		if (!parsed.success) {
+			return new Response(JSON.stringify({ error: parsed.error.issues[0].message }), {
+				status: 400,
+				headers: { 'Content-Type': 'application/json' },
+			})
+		}
 
-		await likes.put(key, newLikes.toString())
+		const { slug, photoId } = parsed.data
+		const newLikes = await incrementPhotoLike(slug, photoId)
 
 		return new Response(JSON.stringify({ likes: newLikes }), {
 			status: 200,
 			headers: { 'Content-Type': 'application/json' },
 		})
-	} catch (error: any) {
+	} catch (error) {
 		console.error('[API /like POST] Error:', error)
-		return new Response(JSON.stringify({ error: error.message }), { status: 500 })
+		const message = error instanceof Error ? error.message : String(error)
+		return new Response(JSON.stringify({ error: message }), { status: 500 })
 	}
 }

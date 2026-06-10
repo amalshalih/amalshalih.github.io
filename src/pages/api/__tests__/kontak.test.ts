@@ -34,7 +34,7 @@ describe('API /kontak', () => {
 
 		it('should validate required fields', () => {
 			const requiredFields = ['nama', 'email', 'pesan']
-			const testData: Record<string, any> = {
+			const testData: Record<string, string> = {
 				nama: '',
 				email: '',
 				pesan: '',

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 // @ts-nocheck
 // Build-time script to cache gallery photos from Google Drive.
 // Run with: npx tsx scripts/cache-gallery-photos.ts

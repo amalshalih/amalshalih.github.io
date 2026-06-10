@@ -1,4 +1,4 @@
-import { env } from 'cloudflare:workers'
+import { getGoogleDriveCredentials } from './config'
 
 export interface DriveImage {
 	id: string
@@ -38,17 +38,8 @@ interface GoogleDriveResponse {
 const SCOPES = ['https://www.googleapis.com/auth/drive.readonly']
 const DRIVE_API_BASE = 'https://www.googleapis.com/drive/v3'
 
-function getCredentials(): string {
-	const creds = env.GOOGLE_DRIVE_SERVICE_ACCOUNT_KEY
-	if (!creds) {
-		throw new Error('GOOGLE_DRIVE_SERVICE_ACCOUNT_KEY env var is not set')
-	}
-	return creds
-}
-
 export async function getAccessToken(): Promise<string> {
-	const credentials = getCredentials()
-	const creds = JSON.parse(credentials)
+	const creds = getGoogleDriveCredentials()
 	const now = Math.floor(Date.now() / 1000)
 	const expiry = now + 3600
 
@@ -193,7 +184,22 @@ export async function listItemsWithShortcuts(folderId: string): Promise<DriveIma
 		throw new Error(`Google Drive API error: ${listRes.status} ${listRes.statusText}`)
 	}
 
-	const listData = (await listRes.json()) as { files?: any[] }
+	const listData = (await listRes.json()) as {
+		files?: {
+			id?: string
+			name?: string
+			mimeType?: string
+			shortcutDetails?: {
+				targetId?: string
+			}
+			webContentLink?: string
+			createdTime?: string
+			imageMediaMetadata?: {
+				width?: number
+				height?: number
+			}
+		}[]
+	}
 	const items = listData.files || []
 
 	const results: DriveImage[] = []
@@ -224,9 +230,9 @@ export async function listItemsWithShortcuts(folderId: string): Promise<DriveIma
 			}
 		} else if (item.mimeType?.includes('image/')) {
 			results.push({
-				id: item.id,
-				name: item.name,
-				mimeType: item.mimeType,
+				id: item.id ?? '',
+				name: item.name ?? '',
+				mimeType: item.mimeType ?? 'image/jpeg',
 				webContentLink: item.webContentLink,
 				createdTime: item.createdTime,
 				width: item.imageMediaMetadata?.width,

@@ -1,40 +1,30 @@
-import { env } from 'cloudflare:workers'
 import type { APIRoute } from 'astro'
+import { z } from 'zod'
+import { getGalleryLikes, toggleGalleryLike } from '../../lib/likes'
 
-interface LikeData {
-	count: number
-	users: Record<string, number>
-}
-
-function getGalleryKey(slug: string): string {
-	return `gallery:${slug}`
-}
-
-async function getLikesFromKV(slug: string): Promise<LikeData> {
-	const key = getGalleryKey(slug)
-	const data = await env.LIKES.get(key)
-	if (data) {
-		return JSON.parse(data)
-	}
-	return { count: 0, users: {} }
-}
-
-async function saveLikesToKV(slug: string, data: LikeData): Promise<void> {
-	const key = getGalleryKey(slug)
-	await env.LIKES.put(key, JSON.stringify(data))
-}
+const getQuerySchema = z.object({
+	slug: z.string().min(1, 'Slug cannot be empty'),
+	userId: z.string().optional().default('anonymous'),
+})
 
 export const GET: APIRoute = async ({ request }) => {
-	const url = new URL(request.url)
-	const slug = url.searchParams.get('slug')
-	const userId = url.searchParams.get('userId') || 'anonymous'
-
-	if (!slug) {
-		return new Response(JSON.stringify({ error: 'Missing slug' }), { status: 400 })
-	}
-
 	try {
-		const data = await getLikesFromKV(slug)
+		const url = new URL(request.url)
+		const parsed = getQuerySchema.safeParse({
+			slug: url.searchParams.get('slug') ?? undefined,
+			userId: url.searchParams.get('userId') ?? undefined,
+		})
+
+		if (!parsed.success) {
+			return new Response(JSON.stringify({ error: parsed.error.issues[0].message }), {
+				status: 400,
+				headers: { 'Content-Type': 'application/json' },
+			})
+		}
+
+		const { slug, userId } = parsed.data
+		const data = await getGalleryLikes(slug)
+
 		return new Response(
 			JSON.stringify({
 				count: data.count,
@@ -45,46 +35,55 @@ export const GET: APIRoute = async ({ request }) => {
 				headers: { 'Content-Type': 'application/json' },
 			},
 		)
-	} catch (error: any) {
+	} catch (error) {
 		console.error('[API /gallery-like GET] Error:', error)
-		return new Response(JSON.stringify({ error: error.message }), { status: 500 })
+		const message = error instanceof Error ? error.message : String(error)
+		return new Response(JSON.stringify({ error: message }), { status: 500 })
 	}
 }
+
+const postBodySchema = z.object({
+	slug: z.string().min(1, 'Slug cannot be empty'),
+	userId: z.string().optional().default('anonymous'),
+	action: z.enum(['like', 'unlike']).optional(),
+})
 
 export const POST: APIRoute = async ({ request }) => {
 	try {
-		const body = await request.json()
-		const { slug, userId = 'anonymous', action } = body
-
-		if (!slug) {
-			return new Response(JSON.stringify({ error: 'Missing slug' }), { status: 400 })
+		let body: unknown
+		try {
+			body = await request.json()
+		} catch {
+			return new Response(JSON.stringify({ error: 'Invalid JSON payload' }), {
+				status: 400,
+				headers: { 'Content-Type': 'application/json' },
+			})
 		}
 
-		const data = await getLikesFromKV(slug)
-		const currentlyLiked = !!data.users[userId]
-
-		if (action === 'unlike' || currentlyLiked) {
-			delete data.users[userId]
-			data.count = Math.max(0, data.count - 1)
-		} else {
-			data.users[userId] = Date.now()
-			data.count = data.count + 1
+		const parsed = postBodySchema.safeParse(body)
+		if (!parsed.success) {
+			return new Response(JSON.stringify({ error: parsed.error.issues[0].message }), {
+				status: 400,
+				headers: { 'Content-Type': 'application/json' },
+			})
 		}
 
-		await saveLikesToKV(slug, data)
+		const { slug, userId, action } = parsed.data
+		const result = await toggleGalleryLike(slug, userId, action)
 
 		return new Response(
 			JSON.stringify({
-				count: data.count,
-				liked: !!data.users[userId],
+				count: result.count,
+				liked: result.liked,
 			}),
 			{
 				status: 200,
 				headers: { 'Content-Type': 'application/json' },
 			},
 		)
-	} catch (error: any) {
+	} catch (error) {
 		console.error('[API /gallery-like POST] Error:', error)
-		return new Response(JSON.stringify({ error: error.message }), { status: 500 })
+		const message = error instanceof Error ? error.message : String(error)
+		return new Response(JSON.stringify({ error: message }), { status: 500 })
 	}
 }

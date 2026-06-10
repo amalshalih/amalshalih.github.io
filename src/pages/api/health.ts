@@ -1,5 +1,6 @@
 import { env } from 'cloudflare:workers'
 import type { APIRoute } from 'astro'
+import { getGoogleDriveCredentials } from '../../lib/config'
 
 interface HealthCheckResult {
 	status: 'healthy' | 'degraded' | 'unhealthy'
@@ -27,28 +28,26 @@ export const GET: APIRoute = async () => {
 		const likes = env.LIKES
 		await likes.list({ limit: 1 })
 		checks.kv = { status: 'ok', latency: Date.now() - kvStart }
-	} catch (error: any) {
+	} catch (error) {
+		const message = error instanceof Error ? error.message : String(error)
 		checks.kv = {
 			status: 'error',
 			latency: Date.now() - kvStart,
-			message: error.message || 'KV connection failed',
+			message: message || 'KV connection failed',
 		}
 		console.error('[Health Check] KV Error:', error)
 	}
 
 	const gdStart = Date.now()
 	try {
-		const serviceAccountKey = env.GOOGLE_DRIVE_SERVICE_ACCOUNT_KEY
-		if (!serviceAccountKey) {
-			throw new Error('GOOGLE_DRIVE_SERVICE_ACCOUNT_KEY not configured')
-		}
-		JSON.parse(serviceAccountKey)
+		getGoogleDriveCredentials()
 		checks.googleDrive = { status: 'ok', latency: Date.now() - gdStart }
-	} catch (error: any) {
+	} catch (error) {
+		const message = error instanceof Error ? error.message : String(error)
 		checks.googleDrive = {
 			status: 'error',
 			latency: Date.now() - gdStart,
-			message: error.message || 'Google Drive config invalid',
+			message: message || 'Google Drive config invalid',
 		}
 		console.error('[Health Check] Google Drive Error:', error)
 	}
@@ -67,11 +66,12 @@ export const GET: APIRoute = async () => {
 			throw new Error('Unexpected Sanity response format')
 		}
 		checks.sanity = { status: 'ok', latency: Date.now() - sanityStart }
-	} catch (error: any) {
+	} catch (error) {
+		const message = error instanceof Error ? error.message : String(error)
 		checks.sanity = {
 			status: 'error',
 			latency: Date.now() - sanityStart,
-			message: error.message || 'Sanity API unreachable',
+			message: message || 'Sanity API unreachable',
 		}
 		console.error('[Health Check] Sanity Error:', error)
 	}

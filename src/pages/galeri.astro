@@ -1,4 +1,5 @@
 ---
+import { env } from 'cloudflare:workers'
 import PageHeader from '../components/sections/PageHeader.astro'
 import Card from '../components/ui/Card.astro'
 import Container from '../components/ui/Container.astro'
@@ -18,8 +19,51 @@ let galleries: GalleryEntry[] = []
 try {
 	const allGalleries = await fetchAllGalleries()
 	galleries = filterPublishedGalleries(allGalleries)
-} catch (e: any) {
-	console.error('Error fetching galleries:', e?.message || e)
+
+	// Server-side like pre-fetching to avoid client-side N+1 fetch
+	try {
+		const likes = env.LIKES
+		if (likes) {
+			const prefix = 'photo:'
+			const listed = await likes.list({ prefix })
+			const likesMap: Record<string, number> = {}
+
+			await Promise.all(
+				listed.keys.map(async (key: { name: string }) => {
+					const count = await likes.get(key.name)
+					likesMap[key.name] = parseInt(count || '0', 10)
+				}),
+			)
+
+			for (const gallery of galleries) {
+				if (gallery.images && gallery.images.length > 0) {
+					let maxLikes = 0
+					let bestImage = gallery.images[0]
+					for (const img of gallery.images) {
+						const likeKey = `photo:${gallery.slug}:${img.id}`
+						const count = likesMap[likeKey] || 0
+						if (count > maxLikes) {
+							maxLikes = count
+							bestImage = img
+						}
+					}
+					if (maxLikes > 0) {
+						// Swap the most liked image to the front so it is selected as the cover photo
+						const index = gallery.images.findIndex((img) => img.id === bestImage.id)
+						if (index > -1) {
+							gallery.images.splice(index, 1)
+							gallery.images.unshift(bestImage)
+						}
+					}
+				}
+			}
+		}
+	} catch (e) {
+		console.error('[Galeri] Failed to prefetch likes for covers:', e)
+	}
+} catch (error) {
+	const message = error instanceof Error ? error.message : String(error)
+	console.error('Error fetching galleries:', message)
 }
 
 const DEFAULT_GRADIENTS: Record<string, string> = {
@@ -243,34 +287,4 @@ try {
 	});
 })();
 
-// Update cover images to most liked photos
-(function() {
-	const covers = document.querySelectorAll('[data-cover-image]');
-	if (!covers.length) return;
-
-	covers.forEach((cover) => {
-		const slug = cover.getAttribute('data-cover-image');
-		if (!slug) return;
-
-		fetch(`/api/like?slug=${encodeURIComponent(slug)}`)
-			.then((res) => res.json())
-			.then((data) => {
-				if (!data || typeof data !== 'object') return;
-
-				let maxLikes = -1;
-				let mostLikedId = '';
-				for (const [photoId, count] of Object.entries(data)) {
-					if (typeof count === 'number' && count > maxLikes) {
-						maxLikes = count;
-						mostLikedId = photoId;
-					}
-				}
-
-				if (maxLikes > 0 && mostLikedId) {
-					cover.src = '/api/drive-image/' + mostLikedId + '?size=800';
-				}
-			})
-			.catch(() => {});
-	});
-})();
 </script>

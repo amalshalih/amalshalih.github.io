@@ -4,13 +4,11 @@ import Button from '../components/ui/Button.astro'
 import Card from '../components/ui/Card.astro'
 import Container from '../components/ui/Container.astro'
 import Icon from '../components/ui/Icon.astro'
-import { CONTACT, SITE } from '../data/site'
+import { SITE } from '../data/site'
 import BaseLayout from '../layouts/BaseLayout.astro'
 import { getPengurus, getSiteSettings } from '../lib/sanity/client'
 import type { SanityPengurus } from '../lib/sanity/types'
 
-// Hybrid: try Sanity first, fall back to local data
-let addressStreet = CONTACT.address.street
 let legalData = {
 	foundedDate: SITE.foundedDate,
 	sk: SITE.legal.sk,
@@ -31,9 +29,6 @@ let pengurus: SanityPengurus[] = []
 try {
 	const s = await getSiteSettings()
 	if (s) {
-		if (s.address) {
-			addressStreet = s.address.street ?? addressStreet
-		}
 		if (s.visi) visi = s.visi
 		if (s.misi && s.misi.length > 0) misi = s.misi
 		if (s.legal) {

@@ -81,7 +81,7 @@ async function discoverAndCacheGalleries() {
 
 		console.log(`📸 Processing "${folder.name}" (${metadata.slug})...`)
 
-		let images: Awaited<ReturnType<typeof listImagesInFolder>> = []
+		let images: Awaited<ReturnType<typeof listImagesInFolder>>
 		try {
 			images = await listImagesInFolder(folder.id)
 		} catch (error) {

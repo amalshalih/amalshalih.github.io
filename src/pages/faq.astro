@@ -7,38 +7,7 @@ import { CONTACT, SITE } from '../data/site'
 import BaseLayout from '../layouts/BaseLayout.astro'
 import { getFaqList } from '../lib/sanity/client'
 
-const ICON_NAMES = [
-	'heart',
-	'arrow-right',
-	'arrow-left',
-	'book',
-	'home',
-	'location',
-	'phone',
-	'email',
-	'globe',
-	'whatsapp',
-	'external-link',
-	'star',
-	'check-circle',
-	'credit-card',
-	'qrcode',
-	'facebook',
-	'instagram',
-	'tiktok',
-	'youtube',
-	'copy',
-	'check',
-	'camera',
-	'calendar',
-	'image',
-	'menu',
-	'clock',
-	'chevron-right',
-	'close',
-] as const
-
-type FaqIcon = (typeof ICON_NAMES)[number]
+type FaqIcon = 'heart' | 'star' | 'book' | 'globe' | 'external-link'
 
 interface FaqGroup {
 	category: string
