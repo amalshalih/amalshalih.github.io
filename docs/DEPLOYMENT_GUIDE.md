@@ -3,6 +3,11 @@
 **Last Updated:** 10 Juni 2026  
 **Status:** ✅ Production Ready
 
+> **💡 Looking for more details?**  
+> - **Comprehensive Guide:** [`.openkb/30-deploy/deployment.md`](../../.openkb/30-deploy/deployment.md) (622 baris - konsep dasar, troubleshooting, glossary)
+> - **Wrangler Configs:** [`docs/wrangler-configs.md`](wrangler-configs.md) (215 baris - config details)
+> - **README:** [`README.md#build--deploy`](../../README.md#build--deploy) (quick reference)
+
 ---
 
 ## 📋 Deployment Environments
