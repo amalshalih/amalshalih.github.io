@@ -2,9 +2,25 @@ import type { APIRoute } from 'astro'
 import { z } from 'zod'
 import { getGalleryLikes, toggleGalleryLike } from '../../lib/likes'
 
+// Helper to generate a consistent hash from IP + User Agent
+async function generateFingerprint(request: Request): Promise<string> {
+	const ip =
+		request.headers.get('cf-connecting-ip') ||
+		request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
+		'127.0.0.1'
+	const ua = request.headers.get('user-agent') || 'unknown'
+
+	const msgUint8 = new TextEncoder().encode(ip + ua)
+	const hashBuffer = await crypto.subtle.digest('SHA-256', msgUint8)
+	const hashArray = Array.from(new Uint8Array(hashBuffer))
+	return hashArray
+		.map((b) => b.toString(16).padStart(2, '0'))
+		.join('')
+		.substring(0, 16)
+}
+
 const getQuerySchema = z.object({
 	slug: z.string().min(1, 'Slug cannot be empty'),
-	userId: z.string().optional().default('anonymous'),
 })
 
 export const GET: APIRoute = async ({ request }) => {
@@ -12,7 +28,6 @@ export const GET: APIRoute = async ({ request }) => {
 		const url = new URL(request.url)
 		const parsed = getQuerySchema.safeParse({
 			slug: url.searchParams.get('slug') ?? undefined,
-			userId: url.searchParams.get('userId') ?? undefined,
 		})
 
 		if (!parsed.success) {
@@ -22,7 +37,8 @@ export const GET: APIRoute = async ({ request }) => {
 			})
 		}
 
-		const { slug, userId } = parsed.data
+		const { slug } = parsed.data
+		const userId = await generateFingerprint(request)
 		const data = await getGalleryLikes(slug)
 
 		return new Response(
@@ -44,7 +60,6 @@ export const GET: APIRoute = async ({ request }) => {
 
 const postBodySchema = z.object({
 	slug: z.string().min(1, 'Slug cannot be empty'),
-	userId: z.string().optional().default('anonymous'),
 	action: z.enum(['like', 'unlike']).optional(),
 })
 
@@ -68,7 +83,8 @@ export const POST: APIRoute = async ({ request }) => {
 			})
 		}
 
-		const { slug, userId, action } = parsed.data
+		const { slug, action } = parsed.data
+		const userId = await generateFingerprint(request)
 		const result = await toggleGalleryLike(slug, userId, action)
 
 		return new Response(

@@ -79,9 +79,13 @@ export async function cachedFetch<T>(options: {
 				// Fire-and-forget revalidation
 				fetcher()
 					.then((fresh) => {
-						kvSet(key, { data: fresh, cachedAt: Date.now() }, staleTtl).catch(() => {})
+						kvSet(key, { data: fresh, cachedAt: Date.now() }, staleTtl).catch((err) => {
+							console.error(`[KV Cache] Background set failed for key ${key}:`, err)
+						})
 					})
-					.catch(() => {})
+					.catch((err) => {
+						console.error(`[KV Cache] Background revalidation failed for key ${key}:`, err)
+					})
 
 				return cached.data
 			}

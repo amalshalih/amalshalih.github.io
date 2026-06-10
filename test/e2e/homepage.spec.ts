@@ -25,7 +25,7 @@ test.describe('Homepage', () => {
 		await page.goto('/')
 		const metaDescription = await page.locator('meta[name="description"]').getAttribute('content')
 		expect(metaDescription).toBeTruthy()
-		expect(metaDescription!.length).toBeGreaterThan(50)
+		expect(metaDescription?.length).toBeGreaterThan(50)
 	})
 
 	test('should display footer with contact info', async ({ page }) => {

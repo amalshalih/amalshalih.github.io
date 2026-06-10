@@ -41,18 +41,11 @@ const { gallerySlug } = Astro.props
   const button = container.querySelector('[data-like-button]');
   const countEl = container.querySelector("[data-like-count]");
   
-  // Generate or retrieve user ID from localStorage
-  let userId = localStorage.getItem('like-user-id');
-  if (!userId) {
-    userId = 'user-' + Math.random().toString(36).substring(2, 11);
-    localStorage.setItem('like-user-id', userId);
-  }
-  
   let currentLiked = false;
   
   async function fetchLikes() {
     try {
-      const response = await fetch(`/api/gallery-like?slug=${encodeURIComponent(gallerySlug)}&userId=${userId}`);
+      const response = await fetch(`/api/gallery-like?slug=${encodeURIComponent(gallerySlug)}`);
       const data = await response.json();
       
       if (data.count !== undefined) {
@@ -81,7 +74,6 @@ const { gallerySlug } = Astro.props
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
           slug: gallerySlug,
-          userId: userId,
           action: currentLiked ? 'unlike' : 'like'
         })
       });
