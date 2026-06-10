@@ -11,6 +11,7 @@ export default defineConfig({
 		exclude: [
 			'test/integration/**',
 			'test/e2e/**',
+			'test/lighthouse/**',
 			'node_modules/**',
 			'.opencode/**',
 			'studio-amalshalih/**',
