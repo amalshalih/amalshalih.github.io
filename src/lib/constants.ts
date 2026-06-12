@@ -2,6 +2,8 @@ export const NAV_ITEMS = [
 	{ label: 'Beranda', href: '/' },
 	{ label: 'Tentang', href: '/tentang' },
 	{ label: 'Program', href: '/program' },
+	{ label: 'Galeri', href: '/galeri' },
+	{ label: 'Blog', href: '/blog' },
 	{ label: 'Kegiatan', href: '/kegiatan' },
 	{ label: 'Kontak', href: '/kontak' },
 ]

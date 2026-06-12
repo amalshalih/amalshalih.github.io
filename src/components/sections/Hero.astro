@@ -1,0 +1,126 @@
+---
+/**
+ * Hero Section Component
+ *
+ * Main hero with slideshow background, tagline, title, description, and CTAs.
+ * Extracted from index.astro for reusability across pages.
+ *
+ * Props are passed from parent - all content is dynamic.
+ */
+import Button from '../ui/Button.astro'
+import Icon from '../ui/Icon.astro'
+
+interface Props {
+	tagline: string
+	title: string
+	highlight: string
+	description: string
+	ctaText: string
+	ctaLink: string
+	photos?: Array<{ fullUrl: string }>
+}
+
+const { tagline, title, highlight, description, ctaText, ctaLink, photos = [] } = Astro.props
+const initialPhoto = photos && photos.length > 0 ? photos[0] : null
+---
+
+<section class="relative overflow-hidden text-text-on-primary -mt-[70px] sm:-mt-[82px]" aria-label="Hero section with slideshow background">
+	<!-- Slideshow Background (extends behind sticky header) -->
+	<div class="absolute inset-0 bg-surface-primary" role="img" aria-label="Slideshow hero background featuring Yayasan ASIB activities">
+		<div
+			id="hero-bg-a"
+			class="absolute inset-0 bg-cover bg-center transition-all duration-1000 ease-out"
+			style={`background-image: url('${initialPhoto?.fullUrl || ''}'); background-color: var(--color-surface-primary, #14532d);`}
+			data-photos={JSON.stringify(photos?.map((p) => p.fullUrl) || [])}
+			data-current="0"
+			aria-hidden="true"
+		></div>
+		<div id="hero-bg-b" class="absolute inset-0 bg-cover bg-center opacity-0 transition-all duration-1000 ease-out" aria-hidden="true"></div>
+	</div>
+	<!-- Dark overlay for text readability -->
+	<div class="absolute inset-0 bg-gradient-to-br from-primary-900/30 via-primary-800/75 to-primary-950/90 dark:from-primary-950/40 dark:via-primary-900/85 dark:to-warm-950/95"></div>
+	<!-- Subtle dot pattern -->
+	<div
+		class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wMyI+PGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMiIvPjwvZz48L2c+PC9zdmc+')] opacity-50 dark:opacity-30"
+	></div>
+	<!-- Bottom fade gradient to blend into the next section -->
+	<div class="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-surface-secondary via-surface-primary/50 to-transparent pointer-events-none z-1"></div>
+
+	<div class="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 pt-[94px] sm:pt-[130px] lg:pt-[146px] pb-12 sm:pb-24 lg:pb-32">
+		<div class="max-w-3xl">
+			<p class="mb-2 sm:mb-4 text-sm font-semibold uppercase tracking-widest text-gold-400 dark:text-gold-300">
+				{tagline}
+			</p>
+			<div class="mb-3 sm:mb-6">
+				<h1 class="text-3xl font-extrabold leading-tight text-white sm:text-4xl lg:text-6xl">
+					{title}<br />
+					<span class="text-gold-400 dark:text-gold-300">{highlight}</span>
+				</h1>
+			</div>
+			<div class="mb-5 sm:mb-8">
+				<p class="max-w-xl text-base leading-relaxed text-primary-100/90 sm:text-lg">
+					{description}
+				</p>
+			</div>
+			<div class="flex flex-nowrap items-center gap-2 sm:gap-4">
+				<Button variant="gold" href={ctaLink}>
+					<Icon name="heart" size={5} aria-hidden="true" />
+					{ctaText}
+				</Button>
+				<Button variant="outline-light" href="/program">
+					Lihat Program
+					<Icon name="arrow-right" size={5} aria-hidden="true" />
+				</Button>
+			</div>
+		</div>
+	</div>
+</section>
+
+<script is:inline>
+	(function() {
+		const bgA = document.getElementById('hero-bg-a');
+		const bgB = document.getElementById('hero-bg-b');
+		if (!bgA || !bgB) return;
+
+		const photos = JSON.parse(bgA.dataset.photos || '[]');
+		if (photos.length < 2) return;
+
+		// Preload all images
+		photos.forEach(function(src) {
+			const img = new Image();
+			img.src = src;
+		});
+
+		let current = 0;
+		let active = 'a';
+
+		function advanceSlide() {
+			current = (current + 1) % photos.length;
+			const nextEl = active === 'a' ? bgB : bgA;
+			const currentEl = active === 'a' ? bgA : bgB;
+
+			nextEl.style.backgroundImage = 'url(' + photos[current] + ')';
+			nextEl.style.opacity = '';
+			requestAnimationFrame(function() {
+				nextEl.style.opacity = '1';
+				currentEl.style.opacity = '0';
+			});
+
+			active = active === 'a' ? 'b' : 'a';
+		}
+
+		let intervalId = setInterval(advanceSlide, 6000);
+
+		// Pause slideshow when tab is hidden, resume when visible
+		document.addEventListener('visibilitychange', function() {
+			if (document.hidden) {
+				clearInterval(intervalId);
+				intervalId = null;
+			} else {
+				if (!intervalId) {
+					intervalId = setInterval(advanceSlide, 6000);
+				}
+			}
+		});
+	})();
+</script>

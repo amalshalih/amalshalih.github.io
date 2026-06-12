@@ -1,0 +1,66 @@
+---
+/**
+ * Heading Component
+ *
+ * Consistent typography hierarchy across the site.
+ * Replaces manual text-3xl, text-2xl, etc. classes.
+ *
+ * @level - 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' - semantic heading level
+ * @size - 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' - visual size
+ * @variant - 'default' | 'accent' - adds gold accent to heading
+ * @srOnly - If true, makes heading screen-reader only (for accessibility)
+ */
+interface Props {
+	level?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
+	size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | '6xl'
+	variant?: 'default' | 'accent'
+	srOnly?: boolean
+	class?: string
+	id?: string
+}
+
+const {
+	level = 'h2',
+	size = '2xl',
+	variant = 'default',
+	srOnly = false,
+	class: className,
+	id,
+} = Astro.props
+
+// Semantic heading element
+const Tag = level
+
+// Base typography classes
+const base = 'font-display font-bold tracking-tight text-text-primary'
+
+// Size variants (responsive)
+const sizes: Record<string, string> = {
+	xs: 'text-xs sm:text-sm',
+	sm: 'text-sm sm:text-base',
+	md: 'text-base sm:text-lg',
+	lg: 'text-lg sm:text-xl',
+	xl: 'text-xl sm:text-2xl',
+	'2xl': 'text-2xl sm:text-3xl',
+	'3xl': 'text-3xl sm:text-4xl',
+	'4xl': 'text-4xl sm:text-5xl',
+	'5xl': 'text-5xl sm:text-6xl',
+	'6xl': 'text-6xl sm:text-7xl',
+}
+
+// Variant styles
+const variants: Record<string, string> = {
+	default: '',
+	accent: 'text-text-accent',
+}
+
+// Screen reader only class
+const srOnlyClass = 'sr-only'
+
+const classes = [base, sizes[size], variants[variant], srOnly ? srOnlyClass : '', className]
+---
+
+<Tag id={id} class:list={classes}>
+	<slot />
+	{variant === 'accent' && <span class="sr-only"> (accent)</span>}
+</Tag>

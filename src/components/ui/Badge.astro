@@ -1,0 +1,68 @@
+---
+/**
+ * Badge Component
+ *
+ * Status indicators and labels (e.g., "Mendesak", "Baru", "Populer").
+ * Replaces manual span + dot animation patterns.
+ *
+ * @variant - 'primary' | 'gold' | 'outline' | 'subtle' - controls color scheme
+ * @size - 'sm' | 'md' - controls text size and padding
+ * @dot - If true, shows animated dot indicator (for "live" or "urgent" badges)
+ */
+interface Props {
+	variant?: 'primary' | 'gold' | 'outline' | 'subtle'
+	size?: 'sm' | 'md'
+	dot?: boolean
+	class?: string
+}
+
+const { variant = 'primary', size = 'md', dot = false, class: className } = Astro.props
+
+// Base styles
+const base = 'inline-flex items-center gap-1.5 font-semibold rounded-full transition-all'
+
+// Size variants
+const sizes: Record<string, string> = {
+	sm: 'px-2.5 py-0.5 text-xs',
+	md: 'px-3 py-1 text-sm',
+}
+
+// Color variants (using semantic tokens)
+const variants: Record<string, string> = {
+	primary:
+		'bg-primary-100 dark:bg-primary-900/50 text-primary-800 dark:text-primary-300 border border-primary-200 dark:border-primary-800',
+	gold: 'bg-gold-100 dark:bg-gold-900/30 text-gold-800 dark:text-gold-300 border border-gold-300 dark:border-gold-700',
+	outline:
+		'bg-transparent text-warm-700 dark:text-warm-300 border border-warm-300 dark:border-warm-700',
+	subtle:
+		'bg-warm-100 dark:bg-warm-800/50 text-warm-700 dark:text-warm-300 border border-warm-200 dark:border-warm-700',
+}
+
+// Dot animation styles
+const dotStyles: Record<string, string> = {
+	sm: 'w-1.5 h-1.5',
+	md: 'w-2 h-2',
+}
+
+const classes = [base, sizes[size], variants[variant], className]
+---
+
+<span class:list={classes}>
+	{dot && (
+		<>
+			<span class={`relative flex ${dotStyles[size]}`}>
+				<span
+					class={`absolute inline-flex h-full w-full rounded-full opacity-75 animate-ping ${
+						variant === 'gold' ? 'bg-gold-500' : 'bg-primary-500'
+					}`}
+				></span>
+				<span
+					class={`relative inline-flex rounded-full ${
+						variant === 'gold' ? 'bg-gold-500' : 'bg-primary-500'
+					} ${dotStyles[size]}`}
+				></span>
+			</span>
+			<slot />
+		</>
+	) || <slot />}
+</span>

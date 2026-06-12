@@ -1,0 +1,88 @@
+---
+/**
+ * Dampak (Impact) Section Component
+ *
+ * Image + content split layout showcasing portfolio impact.
+ * Features architectural framing with decorative offset background.
+ */
+import Button from '../ui/Button.astro'
+import Container from '../ui/Container.astro'
+import Icon from '../ui/Icon.astro'
+
+interface Props {
+	label?: string
+	title: string
+	highlight?: string
+	description: string
+	ctaText?: string
+	ctaLink?: string
+	imageSrc?: string
+	imageAlt?: string
+}
+
+const {
+	label = 'Portofolio Kebaikan',
+	title = 'Dampak Nyata Kami',
+	highlight = 'Kami',
+	description = 'Lebih dari sekadar angka, kami menghadirkan perubahan nyata bagi masyarakat Bantul melalui program pendidikan, sosial, dan keagamaan yang terukur dan berkelanjutan.',
+	ctaText = 'Lihat Dokumentasi',
+	ctaLink = '/galeri',
+	imageSrc = '/dampak-nyata.webp',
+	imageAlt = 'Dokumentasi Kegiatan Yayasan ASIB',
+} = Astro.props
+---
+
+<section class="bg-surface-secondary py-8 sm:py-16 lg:py-24">
+	<Container as="div">
+		<div class="grid items-center gap-10 sm:gap-16 md:grid-cols-2">
+			<!-- Left: Image — with architectural framing -->
+			<div class="relative md:order-2 group">
+				<!-- Decorative offset background for architectural depth -->
+				<div
+					class="absolute -top-4 -right-4 w-full h-full bg-primary-200/30 dark:bg-primary-900/30 rounded-xl sm:rounded-2xl transition-transform duration-500 group-hover:translate-x-2 group-hover:-translate-y-2"
+					aria-hidden="true"
+				></div>
+
+				<div class="relative overflow-hidden rounded-xl sm:rounded-2xl shadow-2xl z-10">
+					<picture>
+						<source srcset={imageSrc.replace('.webp', '.avif')} type="image/avif" />
+						<source srcset={imageSrc} type="image/webp" />
+						<img
+							src={imageSrc.replace('.webp', '.png')}
+							alt={imageAlt}
+							class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105 animate-[img-breathe_20s_ease-in-out_infinite]"
+							loading="lazy"
+							decoding="async"
+							width="800"
+							height="600"
+						/>
+					</picture>
+					<!-- Soft gradient overlay to blend the image -->
+					<div class="absolute inset-0 bg-gradient-to-t from-primary-900/20 to-transparent pointer-events-none"></div>
+				</div>
+			</div>
+
+			<!-- Right: Content -->
+			<div class="md:order-1">
+				<div class="flex items-center gap-3 mb-4">
+					<div class="h-px w-8 bg-accent-gold"></div>
+					<span class="text-xs font-bold uppercase tracking-widest text-gold-600 dark:text-gold-400">{label}</span>
+				</div>
+				<h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-text-primary leading-tight">
+					{title} <span class="text-primary-700 dark:text-primary-400">{highlight}</span>
+				</h2>
+				<p class="mt-4 text-base sm:text-lg leading-relaxed text-text-secondary max-w-xl">
+					{description}
+				</p>
+				<div class="mt-8 flex justify-end sm:justify-start">
+					<Button variant="outline" href={ctaLink} class="group relative overflow-hidden">
+						<span class="relative z-10 flex items-center gap-2">
+							{ctaText}
+							<Icon name="arrow-right" size={5} class="transition-transform group-hover:translate-x-1" aria-hidden="true" />
+						</span>
+					</Button>
+				</div>
+			</div>
+		</div>
+	</Container>
+</section>

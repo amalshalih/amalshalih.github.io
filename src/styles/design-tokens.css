@@ -1,0 +1,184 @@
+/**
+ * Design Tokens - Semantic Color System
+ * 
+ * This file defines semantic color tokens that abstract away specific color values.
+ * Benefits:
+ * - One-place configuration: Change a token value → entire site updates
+ * - Theme flexibility: Easy to adjust dark mode brightness, white→green tint, etc.
+ * - Consistency: All components use the same semantic naming
+ * - Maintainability: No more hardcoded bg-white, text-primary-700 scattered across files
+ * 
+ * Usage:
+ *   In CSS: var(--color-surface)
+ *   In Tailwind: bg-surface, text-surface-inverse, etc. (via global.css @theme)
+ * 
+ * Naming Convention:
+ *   --color-{semantic-role}-{variant}
+ *   Roles: surface, text, border, accent
+ *   Variants: default, inverse, secondary, muted
+ */
+
+/* ========== LIGHT THEME (Default) ========== */
+:root {
+  /* =========================================
+     SURFACE COLORS (Backgrounds)
+     ========================================= */
+  
+  /** Main page background — slightly translucent for blossom show-through */
+  --color-surface: rgba(250, 250, 249, 0.88);
+  
+  /** Elevated surfaces (cards, panels) — nearly opaque */
+  --color-surface-elevated: rgba(255, 255, 255, 0.92);
+  
+  /** Primary brand surfaces (hero, feature sections) */
+  --color-surface-primary: var(--color-primary-900);
+  
+  /** Secondary/alternate surfaces (dampak sections) */
+  --color-surface-secondary: rgba(240, 253, 244, 0.88);
+  
+  /** Dark/-inverse surface for contrast */
+  --color-surface-inverse: var(--color-warm-950);
+  
+  /** Subtle surface variations (borders, dividers) */
+  --color-surface-subtle: color-mix(in srgb, rgba(240, 253, 244, 0.88) 50%, transparent);
+  
+
+  /* =========================================
+     TEXT COLORS
+     ========================================= */
+  
+  /** Primary text color - high contrast, warm-900 */
+  --color-text-primary: var(--color-warm-900);
+  
+  /** Secondary text (labels, descriptions) - warm-700 */
+  --color-text-secondary: var(--color-warm-700);
+  
+  /** Muted text (captions, disabled) - warm-500 */
+  --color-text-muted: var(--color-warm-500);
+  
+  /** Inverse text (on dark backgrounds) - warm-50 */
+  --color-text-inverse: var(--color-warm-50);
+  
+  /** Text on primary surfaces - white */
+  --color-text-on-primary: #ffffff;
+  
+  /** Accent text (gold highlights) */
+  --color-text-accent: var(--color-gold-500);
+  
+
+  /* =========================================
+     BORDER COLORS
+     ========================================= */
+  
+  /** Primary border color - subtle dividers */
+  --color-border-primary: var(--color-primary-200);
+  
+  /** Secondary border (cards, panels) */
+  --color-border-secondary: var(--color-warm-200);
+  
+  /** Border on dark surfaces */
+  --color-border-inverse: var(--color-warm-800);
+  
+  /** Accent borders (focus states, highlights) */
+  --color-border-accent: var(--color-gold-500);
+  
+
+  /* =========================================
+     ACCENT COLORS (Brand & Highlights)
+     ========================================= */
+  
+  /** Primary brand accent - Islamic green */
+  --color-accent-primary: var(--color-primary-600);
+  
+  /** Gold accent for highlights, badges, CTAs */
+  --color-accent-gold: var(--color-gold-500);
+  
+  /** Light gold for subtle highlights */
+  --color-accent-gold-light: var(--color-gold-300);
+}
+
+
+/* ========== DARK THEME (prefers-color-scheme: dark) ========== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* =========================================
+       SURFACE COLORS (Dark Mode)
+       ========================================= */
+    
+     /** Main page background — slightly translucent for blossom show-through */
+    --color-surface: rgba(12, 10, 9, 0.88);
+    
+    /** Elevated surfaces (cards) — nearly opaque */
+    --color-surface-elevated: rgba(28, 25, 23, 0.92);
+    
+    /** Primary brand surfaces - adjusted for dark mode */
+    --color-surface-primary: var(--color-primary-950);
+    
+    /** Secondary surfaces */
+    --color-surface-secondary: rgba(12, 10, 9, 0.88);
+    
+    /** Inverse surface (for contrast elements) */
+    --color-surface-inverse: var(--color-warm-50);
+    
+    /** Subtle surface variations */
+    --color-surface-subtle: color-mix(in srgb, rgba(20, 83, 45, 0.88) 50%, transparent);
+    
+
+    /* =========================================
+       TEXT COLORS (Dark Mode)
+       ========================================= */
+    
+    /** Primary text - warm-50 (off-white) */
+    --color-text-primary: var(--color-warm-50);
+    
+    /** Secondary text - warm-300 */
+    --color-text-secondary: var(--color-warm-300);
+    
+    /** Muted text - warm-400 */
+    --color-text-muted: var(--color-warm-400);
+    
+    /** Inverse text (on light surfaces) - warm-900 */
+    --color-text-inverse: var(--color-warm-900);
+    
+    /** Text on primary surfaces - still white */
+    --color-text-on-primary: #ffffff;
+    
+    /** Accent text - brighter gold for dark mode */
+    --color-text-accent: var(--color-gold-400);
+    
+
+    /* =========================================
+       BORDER COLORS (Dark Mode)
+       ========================================= */
+    
+    /** Primary border - warm-800 */
+    --color-border-primary: var(--color-warm-800);
+    
+    /** Secondary border - warm-700 */
+    --color-border-secondary: var(--color-warm-700);
+    
+    /** Border on light surfaces */
+    --color-border-inverse: var(--color-primary-200);
+    
+    /** Accent borders - gold */
+    --color-border-accent: var(--color-gold-400);
+  }
+}
+
+
+/* ========== TAILWIND INTEGRATION ==========
+ * 
+ * These CSS variables are automatically available in Tailwind CSS v4
+ * via the @theme block in global.css.
+ * 
+ * Usage examples:
+ *   CSS: background-color: var(--color-surface);
+ *   Tailwind: bg-surface
+ *   Tailwind: text-primary
+ *   Tailwind: border-accent
+ * 
+ * To customize colors:
+ * 1. Change the var() reference above (e.g., --color-surface: var(--color-primary-50))
+ * 2. Or change the base color value in global.css @theme
+ * 3. Rebuild - entire site updates automatically
+ */

@@ -33,6 +33,8 @@ const { images, gallerySlug, startIndex = 0 } = Astro.props
         <img
           src={image.thumbnailUrl}
           alt={image.name}
+          width={image.width}
+          height={image.height}
           loading={isPriority ? "eager" : "lazy"}
           decoding="async"
           fetchpriority={isPriority ? "high" : "low"}

@@ -84,7 +84,7 @@ Pendidikan Islam, Sosial Kemanusiaan, dan Keagamaan. Website ini dibangun untuk:
 | **Kegiatan** | `/kegiatan` | Daftar kegiatan & berita (dinamis dari content collection) |
 | **Detail Kegiatan** | `/kegiatan/:slug` | Konten lengkap kegiatan |
 | **Donasi** | `/donasi` | Channel donasi (BSI, QRIS, Kitabisa) |
-| **Kontak** | `/kontak` | Alamat, telepon, email, form kontak (Formspree) |
+| **Kontak** | `/kontak` | Alamat, telepon, email, form kontak (Resend) |
 | **404** | `/*` | Halaman tidak ditemukan |
 
 ### Aksesibilitas

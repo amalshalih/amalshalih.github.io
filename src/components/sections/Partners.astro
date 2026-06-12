@@ -1,0 +1,135 @@
+---
+import Button from '../ui/Button.astro'
+/**
+ * Partner Logo Carousel Component
+ *
+ * Displays logos of partner organizations, donors, and collaborators.
+ * Features infinite horizontal scroll animation.
+ */
+import Icon from '../ui/Icon.astro'
+
+interface Partner {
+	name: string
+	logo: string
+	url?: string
+}
+
+interface Props {
+	partners?: Partner[]
+	title?: string
+}
+
+const {
+	title = 'Mitra & Donatur Kami',
+	partners = [
+		{
+			name: 'Kementerian Sosial RI',
+			logo: '/partners/kemensos.png',
+			url: 'https://kemensos.go.id',
+		},
+		{ name: 'Baznas', logo: '/partners/baznas.png', url: 'https://baznas.go.id' },
+		{ name: 'Dompet Dhuafa', logo: '/partners/dompet-dhuafa.png', url: 'https://dompetdhuafa.org' },
+		{ name: 'Rumah Zakat', logo: '/partners/rumah-zakat.png', url: 'https://rumahzakat.org' },
+		{ name: 'Kitabisa.com', logo: '/partners/kitabisa.png', url: 'https://kitabisa.com' },
+		{ name: 'Pemkab Bantul', logo: '/partners/pemkab-bantul.png', url: 'https://bantulkab.go.id' },
+	],
+} = Astro.props
+---
+
+<section class="bg-surface py-12 sm:py-16">
+	<div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+		<!-- Title -->
+		<div class="text-center mb-8">
+			<div class="flex items-center justify-center gap-2 mb-4">
+				<div class="h-px w-8 bg-accent-gold"></div>
+				<span class="text-xs font-bold uppercase tracking-widest text-gold-600 dark:text-gold-400">Mitra & Donatur</span>
+				<div class="h-px w-8 bg-accent-gold"></div>
+			</div>
+			<h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-text-primary leading-tight">
+				{title}
+			</h2>
+		</div>
+		
+		<!-- Logo Carousel -->
+		<div class="relative overflow-hidden">
+			<!-- Gradient Fade Edges -->
+			<div class="absolute left-0 top-0 bottom-0 w-16 sm:w-24 bg-gradient-to-r from-surface to-transparent z-10 pointer-events-none"></div>
+			<div class="absolute right-0 top-0 bottom-0 w-16 sm:w-24 bg-gradient-to-l from-surface to-transparent z-10 pointer-events-none"></div>
+			
+			<!-- Scrolling Logos -->
+			<div class="flex animate-[partner-scroll_30s_linear_infinite] gap-8 sm:gap-12">
+				<!-- First Set -->
+				{partners.map((partner) => (
+					<a
+						href={partner.url || '#'}
+						target={partner.url ? '_blank' : undefined}
+						rel={partner.url ? 'noopener noreferrer' : undefined}
+						class="flex items-center justify-center shrink-0 w-32 sm:w-40 h-20 sm:h-24 bg-surface-elevated dark:bg-surface-secondary rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300"
+						aria-label={partner.name}
+						title={partner.name}
+					>
+						{partner.logo ? (
+							<img
+								src={partner.logo}
+								alt={partner.name}
+								class="max-h-12 sm:max-h-16 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity duration-300"
+								loading="lazy"
+							/>
+						) : (
+							<span class="text-xs sm:text-sm font-semibold text-text-muted text-center px-2">
+								{partner.name}
+							</span>
+						)}
+					</a>
+				))}
+				
+				<!-- Duplicate Set for Seamless Loop -->
+				{partners.map((partner) => (
+					<a
+						href={partner.url || '#'}
+						target={partner.url ? '_blank' : undefined}
+						rel={partner.url ? 'noopener noreferrer' : undefined}
+						class="flex items-center justify-center shrink-0 w-32 sm:w-40 h-20 sm:h-24 bg-surface-elevated dark:bg-surface-secondary rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300"
+						aria-label={partner.name}
+						title={partner.name}
+					>
+						{partner.logo ? (
+							<img
+								src={partner.logo}
+								alt={partner.name}
+								class="max-h-12 sm:max-h-16 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity duration-300"
+								loading="lazy"
+							/>
+						) : (
+							<span class="text-xs sm:text-sm font-semibold text-text-muted text-center px-2">
+								{partner.name}
+							</span>
+						)}
+					</a>
+				))}
+			</div>
+		</div>
+		
+		<!-- CTA for Partners -->
+		<div class="text-center mt-8">
+			<p class="text-text-secondary mb-4 text-sm sm:text-base">
+				Tertarik menjadi mitra strategis Yayasan ASIB?
+			</p>
+			<Button variant="outline" href="/kontak" class="group">
+				Hubungi Kami
+				<Icon name="arrow-right" size={5} aria-hidden="true" class="transition-transform group-hover:translate-x-1" />
+			</Button>
+		</div>
+	</div>
+</section>
+
+<style is:global>
+	@keyframes partner-scroll {
+		0% {
+			transform: translateX(0);
+		}
+		100% {
+			transform: translateX(-50%);
+		}
+	}
+</style>

@@ -1,6 +1,7 @@
 import { env } from 'cloudflare:workers'
 import type { APIRoute } from 'astro'
 import { getAccessToken } from '../../../lib/google-drive'
+import { cachedFetch, driveCacheKey } from '../../../lib/kv-cache'
 
 export const prerender = false
 
@@ -27,23 +28,29 @@ export const GET: APIRoute = async ({ params, request }) => {
 	try {
 		const token = await getAccessToken()
 
-		// Thumbnail: use Drive API thumbnailLink (a small Google CDN image)
 		if (size <= 800) {
-			const metaRes = await fetch(`${GOOGLE_DRIVE_API_URL}/${id}?fields=thumbnailLink`, {
-				headers: { Authorization: `Bearer ${token}` },
+			const meta = await cachedFetch<{ thumbnailLink?: string }>({
+				key: driveCacheKey(`meta:${id}`),
+				fetcher: async () => {
+					const res = await fetch(`${GOOGLE_DRIVE_API_URL}/${id}?fields=thumbnailLink`, {
+						headers: { Authorization: `Bearer ${token}` },
+					})
+					if (!res.ok) throw new Error(`Drive API meta: ${res.status}`)
+					return res.json()
+				},
+				freshTtl: 86_400 * 7,
+				staleTtl: 86_400 * 30,
 			})
-			if (metaRes.ok) {
-				const meta: { thumbnailLink?: string } = await metaRes.json()
-				if (meta.thumbnailLink) {
-					const thumbRes = await fetch(meta.thumbnailLink)
-					if (thumbRes.ok) {
-						return new Response(thumbRes.body, {
-							headers: {
-								'Content-Type': thumbRes.headers.get('Content-Type') || 'image/jpeg',
-								'Cache-Control': 'public, max-age=86400',
-							},
-						})
-					}
+
+			if (meta.thumbnailLink) {
+				const thumbRes = await fetch(meta.thumbnailLink)
+				if (thumbRes.ok) {
+					return new Response(thumbRes.body, {
+						headers: {
+							'Content-Type': thumbRes.headers.get('Content-Type') || 'image/jpeg',
+							'Cache-Control': 'public, max-age=86400, s-maxage=604800',
+						},
+					})
 				}
 			}
 		}
@@ -56,7 +63,7 @@ export const GET: APIRoute = async ({ params, request }) => {
 			return new Response(apiRes.body, {
 				headers: {
 					'Content-Type': apiRes.headers.get('Content-Type') || 'image/jpeg',
-					'Cache-Control': 'public, max-age=86400',
+					'Cache-Control': 'public, max-age=86400, s-maxage=604800',
 				},
 			})
 		}

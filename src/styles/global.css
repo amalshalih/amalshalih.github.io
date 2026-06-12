@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @plugin '@tailwindcss/typography';
+@import "./design-tokens.css";
 
 @theme {
 	/* Islamic Green palette */
@@ -38,6 +39,28 @@
 	--color-warm-700: #44403c;
 	--color-warm-800: #292524;
 	--color-warm-900: #1c1917;
+	--color-warm-950: #0c0a09;
+
+	/* Semantic color tokens (mapped from design-tokens.css) */
+	--color-surface: var(--color-surface);
+	--color-surface-elevated: var(--color-surface-elevated);
+	--color-surface-primary: var(--color-surface-primary);
+	--color-surface-secondary: var(--color-surface-secondary);
+	--color-surface-inverse: var(--color-surface-inverse);
+	--color-surface-subtle: var(--color-surface-subtle);
+	--color-text-primary: var(--color-text-primary);
+	--color-text-secondary: var(--color-text-secondary);
+	--color-text-muted: var(--color-text-muted);
+	--color-text-inverse: var(--color-text-inverse);
+	--color-text-on-primary: var(--color-text-on-primary);
+	--color-text-accent: var(--color-text-accent);
+	--color-border-primary: var(--color-border-primary);
+	--color-border-secondary: var(--color-border-secondary);
+	--color-border-inverse: var(--color-border-inverse);
+	--color-border-accent: var(--color-border-accent);
+	--color-accent-primary: var(--color-accent-primary);
+	--color-accent-gold: var(--color-accent-gold);
+	--color-accent-gold-light: var(--color-accent-gold-light);
 
 	--font-sans: 'Inter', 'Noto Sans', ui-sans-serif, system-ui, sans-serif;
 	--font-display: 'Plus Jakarta Sans', 'Inter', 'Noto Sans', ui-sans-serif, system-ui, sans-serif;
@@ -46,10 +69,15 @@
 @layer base {
 	html {
 		scroll-behavior: smooth;
+		overflow-x: hidden;
 	}
 
 	body {
-		@apply bg-warm-50 text-warm-800 font-sans antialiased;
+		background-color: #fafaf9;
+		background-image:
+			radial-gradient(ellipse 900px 700px at 12% 8%, rgba(74, 222, 128, 0.06) 0%, transparent 65%),
+			radial-gradient(ellipse 700px 800px at 88% 65%, rgba(251, 191, 36, 0.05) 0%, transparent 60%);
+		@apply text-warm-800 font-sans antialiased;
 	}
 
 	h1,
@@ -68,6 +96,25 @@
 	select,
 	textarea {
 		@apply text-base;
+	}
+
+	@media (prefers-color-scheme: dark) {
+		body {
+			background-color: #0c0a09;
+			background-image:
+				radial-gradient(ellipse 800px 600px at 12% 8%, rgba(74, 222, 128, 0.08) 0%, transparent 60%),
+				radial-gradient(ellipse 600px 700px at 88% 65%, rgba(251, 191, 36, 0.06) 0%, transparent 55%),
+				radial-gradient(circle at 50% 0%, #171412 0%, transparent 100%);
+			background-attachment: fixed;
+			color: var(--color-warm-200, #e7e5e4);
+		}
+
+		h1,
+		h2,
+		h3,
+		h4 {
+			color: var(--color-warm-50, #fafaf9);
+		}
 	}
 
 	@media (prefers-reduced-motion: reduce) {
@@ -113,13 +160,88 @@
 @utility contact-card {
 	@apply rounded-lg sm:rounded-xl bg-white p-4 sm:p-6 shadow-sm;
 }
-
-@layer utilities {
-	.scrollbar-hide::-webkit-scrollbar {
+@utility scrollbar-hide {
+	scrollbar-width: none;
+	-ms-overflow-style: none;
+	&::-webkit-scrollbar {
 		display: none;
 	}
-	.scrollbar-hide {
-		-ms-overflow-style: none;
-		scrollbar-width: none;
+}
+
+/* ---------- Blossom Breath — slow organic pulse ---------- */
+@keyframes blossom-breath-1 {
+	0%, 100% { transform: scale(1); }
+	50% { transform: scale(1.06); }
+}
+@keyframes blossom-breath-2 {
+	0%, 100% { transform: scale(1); }
+	33% { transform: scale(1.04); }
+	66% { transform: scale(0.97); }
+}
+@keyframes blossom-breath-3 {
+	0%, 100% { transform: scale(1); }
+	50% { transform: scale(0.95); }
+}
+@keyframes blossom-breath-4 {
+	0%, 100% { transform: scale(1); }
+	50% { transform: scale(1.08); }
+}
+
+/* Dampak image slow zoom */
+@keyframes img-breathe {
+	0%, 100% { transform: scale(1); }
+	50% { transform: scale(1.03); }
+}
+
+/* ---------- Print Styles ---------- */
+@media print {
+	body {
+		background: white !important;
+		color: black !important;
+		font-size: 12pt;
+	}
+
+	/* Hide non-essential chrome */
+	header,
+	footer,
+	nav,
+	button,
+	#mobile-menu,
+	#mobile-menu-button,
+	.skip-to-content {
+		display: none !important;
+	}
+
+	/* Ensure links show their URL */
+	a[href^="http"]::after {
+		content: " (" attr(href) ")";
+		font-size: 0.8em;
+		color: #555;
+	}
+
+	/* Prevent page break inside cards/sections */
+	section,
+	article,
+	.card {
+		break-inside: avoid;
+	}
+
+	/* Ensure all text contrasts */
+	h1, h2, h3, h4, h5, h6,
+	p, span, div {
+		color: black !important;
+	}
+
+	/* Reset backgrounds & shadows */
+	* {
+		background: transparent !important;
+		box-shadow: none !important;
+		text-shadow: none !important;
+	}
+
+	/* Keep images contained */
+	img {
+		max-width: 100% !important;
+		page-break-inside: avoid;
 	}
 }

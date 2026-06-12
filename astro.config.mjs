@@ -18,13 +18,6 @@ export default defineConfig({
 	output: 'server',
 	adapter: cloudflare(),
 	integrations: [
-		process.env.NODE_ENV !== 'development' &&
-			sentry({
-				authToken: process.env.SENTRY_AUTH_TOKEN,
-				org: 'yayasan-amal-shalih-insan-bant',
-				project: 'amalshalih',
-				telemetry: false,
-			}),
 		mdx(),
 		sitemap({
 			serialize(item) {
@@ -32,19 +25,24 @@ export default defineConfig({
 					return undefined
 				}
 				if (item.url === 'https://amalshalih.or.id/') {
-					// @ts-expect-error - Sitemap item changefreq has strict literal type constraints
-					item.changefreq = 'daily'
-					item.priority = 1.0
-				} else if (/kegiatan/.test(item.url) || /blog/.test(item.url)) {
-					// @ts-expect-error - Sitemap item changefreq has strict literal type constraints
-					item.changefreq = 'weekly'
-					item.priority = 0.8
-				} else {
-					// @ts-expect-error - Sitemap item changefreq has strict literal type constraints
-					item.changefreq = 'monthly'
-					item.priority = 0.5
+					return /** @type {import('@astrojs/sitemap').SitemapItem} */ ({
+						...item,
+						changefreq: 'daily',
+						priority: 1.0,
+					})
 				}
-				return item
+				if (/kegiatan/.test(item.url) || /blog/.test(item.url)) {
+					return /** @type {import('@astrojs/sitemap').SitemapItem} */ ({
+						...item,
+						changefreq: 'weekly',
+						priority: 0.8,
+					})
+				}
+				return /** @type {import('@astrojs/sitemap').SitemapItem} */ ({
+					...item,
+					changefreq: 'monthly',
+					priority: 0.5,
+				})
 			},
 		}),
 		sanity({
@@ -52,6 +50,14 @@ export default defineConfig({
 			dataset: 'production',
 			useCdn: false,
 		}),
+		// Sentry integration - must be LAST in the array
+		// Docs: https://docs.sentry.io/platforms/javascript/guides/astro/
+		process.env.NODE_ENV !== 'development' &&
+			sentry({
+				org: 'yayasan-amal-shalih-insan-bant',
+				project: 'amalshalih',
+				authToken: process.env.SENTRY_AUTH_TOKEN,
+			}),
 	].filter(Boolean),
 	vite: {
 		build: {
@@ -59,5 +65,9 @@ export default defineConfig({
 		},
 		// @ts-expect-error — Vite version mismatch between Astro bundled & project dep
 		plugins: [tailwindcss()],
+		// Exclude Sanity client from Vite optimization - incompatible with SSR dep optimizer
+		optimizeDeps: {
+			exclude: ['@sanity/client'],
+		},
 	},
 })

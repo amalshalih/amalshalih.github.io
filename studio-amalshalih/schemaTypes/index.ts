@@ -1,5 +1,6 @@
 import { bankDonasiType } from './bankDonasi'
 import { blockContentType } from './blockContent'
+import { blogPostType } from './blogPost'
 import { faqType } from './faq'
 import { kegiatanType } from './kegiatan'
 import { pengurusType } from './pengurus'
@@ -16,4 +17,6 @@ export const schemaTypes = [
 	blockContentType,
 	// Add FAQ schema
 	faqType,
+	// Blog post schema
+	blogPostType,
 ]

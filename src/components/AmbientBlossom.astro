@@ -1,0 +1,45 @@
+---
+/**
+ * AmbientBlossom — Fixed viewport blossom layer
+ *
+ * Creates continuous, fixed-position colored glows that persist across
+ * all sections as the user scrolls. Each section's semi-transparent
+ * background lets the blossom subtly show through, creating a cohesive
+ * "living" background without breaking per-section color context.
+ *
+ * The blossoms simulate natural light sources:
+ *   - Top-left:    Primary green (soft, like canopy-filtered light)
+ *   - Right-mid:   Gold (warm, like afternoon sun)
+ *   - Left-below:  Deeper green (ground reflection / depth)
+ *   - Bottom-right: Warm amber (closing light)
+ *
+ * Layer structure (back → front):
+ *   <html> → Blossom (fixed) → Body → Section bg → Content
+ */
+---
+
+<div aria-hidden="true" class="fixed inset-0 pointer-events-none -z-10 overflow-hidden">
+	<!-- Top-left: soft primary green — like sunlight through leaves -->
+	<div
+		class="absolute -top-[15%] -left-[10%] w-[70vw] h-[70vw] rounded-full opacity-90 animate-[blossom-breath-1_14s_ease-in-out_infinite]"
+		style="background: radial-gradient(circle, rgba(74,222,128,0.12) 0%, transparent 60%); filter: blur(120px); will-change: transform;"
+	></div>
+
+	<!-- Right-mid: warm gold — like late afternoon glow -->
+	<div
+		class="absolute top-[20%] -right-[10%] w-[55vw] h-[55vw] rounded-full opacity-85 animate-[blossom-breath-2_18s_ease-in-out_infinite]"
+		style="background: radial-gradient(circle, rgba(251,191,36,0.09) 0%, transparent 55%); filter: blur(140px); will-change: transform;"
+	></div>
+
+	<!-- Left-below: deeper green — subtle depth reflection -->
+	<div
+		class="absolute top-[55%] -left-[15%] w-[45vw] h-[45vw] rounded-full opacity-80 animate-[blossom-breath-3_16s_ease-in-out_infinite]"
+		style="background: radial-gradient(circle, rgba(22,163,74,0.07) 0%, transparent 60%); filter: blur(100px); will-change: transform;"
+	></div>
+
+	<!-- Bottom-right: warm amber — closing light / earth tone -->
+	<div
+		class="absolute bottom-[-10%] -right-[5%] w-[50vw] h-[50vw] rounded-full opacity-80 animate-[blossom-breath-4_20s_ease-in-out_infinite]"
+		style="background: radial-gradient(circle, rgba(217,119,6,0.08) 0%, transparent 55%); filter: blur(130px); will-change: transform;"
+	></div>
+</div>

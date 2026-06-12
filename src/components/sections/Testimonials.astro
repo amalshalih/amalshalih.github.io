@@ -1,0 +1,260 @@
+---
+import Button from '../ui/Button.astro'
+/**
+ * Testimonial Section Component
+ *
+ * Social proof section displaying testimonials from beneficiaries, donors, and partners.
+ * Features carousel-style layout with quotes, photos, and ratings.
+ */
+import Icon from '../ui/Icon.astro'
+
+interface Testimonial {
+	quote: string
+	author: string
+	role: string
+	photo?: string
+	rating?: number
+}
+
+interface Props {
+	testimonials?: Testimonial[]
+	title?: string
+	subtitle?: string
+}
+
+const {
+	title = 'Kata Mereka Tentang Kami',
+	subtitle = 'Cerita dampak nyata dari para penerima manfaat, donatur, dan mitra kami',
+	testimonials = [
+		{
+			quote:
+				'Alhamdulillah, berkat bantuan beasiswa dari Yayasan ASIB, anak saya bisa melanjutkan pendidikan ke perguruan tinggi. Sekarang dia sudah menjadi guru dan mengabdi di kampung halaman.',
+			author: 'Ibu Siti Maimunah',
+			role: 'Orang Tua Penerima Manfaat Beasiswa',
+			rating: 5,
+		},
+		{
+			quote:
+				'Program santunan sembako bulanan sangat membantu kami para lansia yang sudah tidak mampu bekerja lagi. Semoga Yayasan ASIB semakin berjaya dan bisa membantu lebih banyak lagi.',
+			author: 'Bapak Suharto',
+			role: 'Penerima Santunan Lansia',
+			rating: 5,
+		},
+		{
+			quote:
+				'Saya rutin berdonasi melalui Yayasan ASIB karena transparan dan laporan kegiatannya jelas. Alhamdulillah, donasi saya tersalurkan dengan baik untuk yang membutuhkan.',
+			author: 'Ahmad Rizki Pratama',
+			role: 'Donatur Tetap',
+			rating: 5,
+		},
+		{
+			quote:
+				"Kegiatan wisuda Tahfidz yang diselenggarakan Yayasan ASIB sangat menginspirasi. Anak-anak tidak hanya hafal Qur'an tapi juga mendapat pendidikan karakter yang baik.",
+			author: 'Ustadzah Hj. Nur Aisyah',
+			role: 'Pengajar TPQ',
+			rating: 5,
+		},
+	],
+} = Astro.props
+---
+
+<section class="bg-surface py-16 sm:py-24">
+	<div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+		<!-- Section Header -->
+		<div class="text-center mb-12 sm:mb-16">
+			<div class="flex items-center justify-center gap-2 mb-4">
+				<div class="h-px w-8 bg-accent-gold"></div>
+				<span class="text-xs font-bold uppercase tracking-widest text-gold-600 dark:text-gold-400">Testimoni</span>
+				<div class="h-px w-8 bg-accent-gold"></div>
+			</div>
+			<h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-text-primary leading-tight">
+				{title}
+			</h2>
+			<p class="mt-4 text-lg text-text-secondary max-w-2xl mx-auto">
+				{subtitle}
+			</p>
+		</div>
+
+		<!-- Testimonials Carousel Wrapper -->
+		<div class="relative group">
+			<!-- Prev Button -->
+			<button
+				id="testimonial-prev"
+				class="hidden md:flex absolute -left-6 lg:-left-12 xl:-left-16 top-1/2 -translate-y-1/2 z-20 h-10 w-10 items-center justify-center rounded-full bg-surface-elevated dark:bg-surface-secondary shadow-md border border-border-primary dark:border-border-inverse text-text-primary hover:bg-primary-50 dark:hover:bg-primary-950 transition-all opacity-0 group-hover:opacity-100 focus:opacity-100 pointer-events-auto"
+				aria-label="Sebelumnya"
+			>
+				<Icon name="chevron-left" size={4} />
+			</button>
+
+			<!-- Testimonials Carousel -->
+			<div
+				id="testimonial-carousel"
+				class="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8 scrollbar-hide scroll-smooth scroll-pl-6 scroll-pr-6 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 md:mx-0 md:px-0"
+			>
+				{testimonials.map((testimonial) => (
+					<div class="snap-start shrink-0 w-[85vw] xs:w-[80vw] sm:w-[500px] bg-surface-elevated dark:bg-surface-secondary rounded-2xl p-6 sm:p-8 shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col justify-between border border-border-primary/50 dark:border-border-inverse/50">
+						<div>
+							<!-- Rating Stars -->
+							{testimonial.rating && (
+								<div class="flex gap-1 mb-4" aria-label={`Rating: ${testimonial.rating} out of 5 stars`}>
+									{Array.from({ length: testimonial.rating }).map(() => (
+										<Icon name="star" size={4} class="text-gold-500 fill-gold-500" aria-hidden="true" />
+									))}
+								</div>
+							)}
+							
+							<!-- Quote Icon -->
+							<div class="mb-4">
+								<svg class="h-8 w-8 text-primary-200 dark:text-primary-800" fill="currentColor" viewBox="0 0 32 32" aria-hidden="true">
+									<path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
+								</svg>
+							</div>
+							
+							<!-- Quote Text -->
+							<blockquote class="mb-6">
+								<p class="text-text-secondary leading-relaxed italic text-base sm:text-lg">
+									"{testimonial.quote}"
+								</p>
+							</blockquote>
+						</div>
+						
+						<!-- Author Info -->
+						<div class="flex items-center gap-3 pt-4 border-t border-border-primary/30 dark:border-border-inverse/30">
+							{testimonial.photo ? (
+								<img
+									src={testimonial.photo}
+									alt={testimonial.author}
+									class="h-12 w-12 rounded-full object-cover"
+									loading="lazy"
+									width={48}
+									height={48}
+								/>
+							) : (
+								<div class="h-12 w-12 rounded-full bg-primary-100 dark:bg-primary-900 flex items-center justify-center shrink-0">
+									<span class="text-sm font-bold text-primary-700 dark:text-primary-300">
+										{testimonial.author.charAt(0)}
+									</span>
+								</div>
+							)}
+							<div>
+								<p class="font-semibold text-text-primary">{testimonial.author}</p>
+								<p class="text-sm text-text-muted">{testimonial.role}</p>
+							</div>
+						</div>
+					</div>
+				))}
+			</div>
+
+			<!-- Next Button -->
+			<button
+				id="testimonial-next"
+				class="hidden md:flex absolute -right-6 lg:-right-12 xl:-right-16 top-1/2 -translate-y-1/2 z-20 h-10 w-10 items-center justify-center rounded-full bg-surface-elevated dark:bg-surface-secondary shadow-md border border-border-primary dark:border-border-inverse text-text-primary hover:bg-primary-50 dark:hover:bg-primary-950 transition-all opacity-0 group-hover:opacity-100 focus:opacity-100 pointer-events-auto"
+				aria-label="Selanjutnya"
+			>
+				<Icon name="chevron-right" size={4} />
+			</button>
+		</div>
+
+		<!-- Indicator Dots -->
+		<div class="flex justify-center items-center gap-1.5 mt-4" id="testimonial-indicators">
+			{testimonials.map((_, index) => (
+				<button
+					class="h-5 w-5 sm:h-3.5 sm:w-3.5 flex items-center justify-center rounded-full transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500"
+					data-index={index}
+					aria-label={`Lihat testimonial ke-${index + 1}`}
+				>
+					<span
+						class="block h-2.5 w-2.5 sm:h-2 sm:w-2 rounded-full bg-border-primary dark:bg-border-inverse transition-all duration-300"
+						data-dot={index}
+					></span>
+				</button>
+			))}
+		</div>
+
+		<!-- CTA -->
+		<div class="text-center mt-12">
+			<p class="text-text-secondary mb-4">
+				Punya cerita dampak dari Yayasan ASIB? Bagikan pengalaman Anda kepada kami.
+			</p>
+			<Button variant="outline" href="/kontak" class="group">
+				Hubungi Kami
+				<Icon name="arrow-right" size={5} aria-hidden="true" class="transition-transform group-hover:translate-x-1" />
+			</Button>
+		</div>
+	</div>
+</section>
+
+<script>
+	const carousel = document.getElementById('testimonial-carousel');
+	const prevBtn = document.getElementById('testimonial-prev');
+	const nextBtn = document.getElementById('testimonial-next');
+	const indicators = document.querySelectorAll('#testimonial-indicators button');
+
+	if (carousel) {
+		const getScrollAmount = () => {
+			const card = carousel.firstElementChild;
+			if (card) {
+				const cardWidth = card.getBoundingClientRect().width;
+				const style = window.getComputedStyle(carousel);
+				const gap = parseFloat(style.gap) || 24;
+				return cardWidth + gap;
+			}
+			return 300;
+		};
+
+		prevBtn?.addEventListener('click', () => {
+			carousel.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
+		});
+
+		nextBtn?.addEventListener('click', () => {
+			carousel.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
+		});
+
+		const updateIndicators = () => {
+			const scrollLeft = carousel.scrollLeft;
+			const card = carousel.firstElementChild;
+			if (!card) return;
+			const cardWidth = card.getBoundingClientRect().width;
+			const style = window.getComputedStyle(carousel);
+			const gap = parseFloat(style.gap) || 24;
+			const index = Math.round(scrollLeft / (cardWidth + gap));
+
+			indicators.forEach((dot, idx) => {
+				const inner = dot.querySelector('[data-dot]');
+				if (!inner) return;
+				if (idx === index) {
+					inner.classList.remove('bg-border-primary', 'dark:bg-border-inverse');
+					inner.classList.add('bg-primary-600', 'dark:bg-primary-400');
+					dot.classList.add('bg-primary-100', 'dark:bg-primary-900/50');
+				} else {
+					inner.classList.remove('bg-primary-600', 'dark:bg-primary-400');
+					inner.classList.add('bg-border-primary', 'dark:bg-border-inverse');
+					dot.classList.remove('bg-primary-100', 'dark:bg-primary-900/50');
+				}
+			});
+		};
+
+		// Run initially
+		setTimeout(updateIndicators, 100);
+
+		carousel.addEventListener('scroll', updateIndicators, { passive: true });
+
+		indicators.forEach((dot) => {
+			dot.addEventListener('click', () => {
+				const index = parseInt(dot.getAttribute('data-index') || '0', 10);
+				const card = carousel.firstElementChild;
+				if (!card) return;
+				const cardWidth = card.getBoundingClientRect().width;
+				const style = window.getComputedStyle(carousel);
+				const gap = parseFloat(style.gap) || 24;
+				carousel.scrollTo({
+					left: index * (cardWidth + gap),
+					behavior: 'smooth'
+				});
+			});
+		});
+
+		// Handle window resize
+		window.addEventListener('resize', updateIndicators, { passive: true });
+	}
+</script>

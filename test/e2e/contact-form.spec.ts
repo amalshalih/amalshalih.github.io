@@ -34,7 +34,7 @@ test.describe('Contact Form', () => {
 		await page.getByLabel(/Nama/i).fill('Test User')
 		await page.getByLabel(/Telepon/i).fill('081234567890')
 		await page.getByLabel(/Email/i).fill('test@example.com')
-		await page.getByLabel(/Subjek/i).selectOption('lainnya')
+		await page.getByRole('radio', { name: /Lainnya/i }).click()
 		await page.getByLabel(/Pesan/i).fill('This is a test message')
 
 		await page.getByRole('button', { name: /Kirim/i }).click()

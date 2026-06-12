@@ -66,7 +66,7 @@ try {
 }
 ---
 
-<footer class="bg-primary-950 text-white">
+<footer class="bg-primary-950 dark:bg-warm-950 text-white">
 	<Container as="div" class="py-6 sm:py-8 lg:py-12">
 		<!-- Grid: mobile 1 col, tablet 2 paired cols, desktop 4 cols -->
 		<div class="grid gap-5 sm:gap-6 lg:gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 items-start justify-center">
@@ -75,33 +75,33 @@ try {
 				<!-- About -->
 				<div class="min-w-0">
 					<h3 class="mb-2 sm:mb-3 text-base sm:text-lg font-bold text-white">{footerShortName}</h3>
-					<p class="text-sm text-primary-200 leading-relaxed break-words mb-3">
+					<p class="text-sm text-primary-200 dark:text-warm-300 leading-relaxed break-words mb-3">
 						{footerDescription}
 					</p>
 					<div class="space-y-1.5 mt-3">
-						<a href={`mailto:${footerEmailInfo}`} class="text-xs sm:text-sm text-primary-300 hover:text-white transition-colors block break-all">
+						<a href={`mailto:${footerEmailInfo}`} class="text-xs sm:text-sm text-primary-300 dark:text-warm-400 hover:text-white transition-colors block break-all">
 							{footerEmailInfo}
 						</a>
-						<a href={`mailto:${footerEmailDonasi}`} class="text-xs sm:text-sm text-primary-300 hover:text-white transition-colors block break-all">
+						<a href={`mailto:${footerEmailDonasi}`} class="text-xs sm:text-sm text-primary-300 dark:text-warm-400 hover:text-white transition-colors block break-all">
 							{footerEmailDonasi}
 						</a>
 					</div>
 				</div>
 				<!-- Kontak -->
 				<div class="min-w-0">
-					<h3 class="mb-2 sm:mb-3 text-xs sm:text-sm font-semibold uppercase tracking-wider text-primary-300">Kontak</h3>
-					<ul class="space-y-2 text-sm text-primary-200 break-words">
+					<h3 class="mb-2 sm:mb-3 text-xs sm:text-sm font-semibold uppercase tracking-wider text-primary-300 dark:text-warm-400">Kontak</h3>
+					<ul class="space-y-2 text-sm text-primary-200 dark:text-warm-300 break-words">
 						<li class="break-words">{footerAddress}</li>
 						<li class="flex flex-wrap gap-2">
-							<a href={footerPhoneUrl} class="inline-flex items-center gap-1.5 rounded-md bg-primary-900 px-2.5 py-1.5 text-xs sm:text-sm font-medium text-white hover:bg-primary-800 transition-colors">
+							<a href={footerPhoneUrl} class="inline-flex items-center gap-1.5 rounded-md bg-primary-900 dark:bg-warm-800 px-2.5 py-1.5 text-xs sm:text-sm font-medium text-white hover:bg-primary-800 dark:hover:bg-warm-700 transition-colors">
 								<Icon name="phone" size={4} aria-hidden="true" />
 								{footerPhone}
 							</a>
-							<a href={footerWhatsapp} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 rounded-md bg-primary-900 px-2.5 py-1.5 text-xs sm:text-sm font-medium text-white hover:bg-primary-800 transition-colors">
+							<a href={footerWhatsapp} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 rounded-md bg-primary-900 dark:bg-warm-800 px-2.5 py-1.5 text-xs sm:text-sm font-medium text-white hover:bg-primary-800 dark:hover:bg-warm-700 transition-colors">
 								<Icon name="whatsapp" size={4} aria-hidden="true" />
 								WhatsApp
 							</a>
-							<a href={footerLinktreeUrl} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 rounded-md bg-primary-900 px-2.5 py-1.5 text-xs sm:text-sm font-medium text-white hover:bg-primary-800 transition-colors">
+							<a href={footerLinktreeUrl} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 rounded-md bg-primary-900 dark:bg-warm-800 px-2.5 py-1.5 text-xs sm:text-sm font-medium text-white hover:bg-primary-800 dark:hover:bg-warm-700 transition-colors">
 								<Icon name="external-link" size={4} aria-hidden="true" />
 								{footerLinktreeLabel}
 							</a>
@@ -113,61 +113,59 @@ try {
 			<div class="flex flex-col gap-5 sm:grid sm:grid-cols-2 sm:gap-6 lg:contents justify-center">
 				<!-- Navigasi -->
 				<div class="min-w-0">
-					<h3 class="mb-2 sm:mb-3 text-xs sm:text-sm font-semibold uppercase tracking-wider text-primary-300">Navigasi</h3>
+					<h3 class="mb-2 sm:mb-3 text-xs sm:text-sm font-semibold uppercase tracking-wider text-primary-300 dark:text-warm-400">Navigasi</h3>
 					<ul class="grid grid-cols-3 sm:grid-cols-1 lg:grid-cols-2 gap-x-4 gap-y-1.5 text-sm">
-						<li><a href="/" aria-current={currentPage === '/' ? 'page' : undefined} class="text-primary-200 hover:text-white transition-colors">Beranda</a></li>
-						<li><a href="/tentang" aria-current={currentPage === '/tentang' ? 'page' : undefined} class="text-primary-200 hover:text-white transition-colors">Tentang Kami</a></li>
-						<li><a href="/program" aria-current={currentPage === '/program' ? 'page' : undefined} class="text-primary-200 hover:text-white transition-colors">Program</a></li>
-						<li><a href="/kegiatan" aria-current={currentPage === '/kegiatan' ? 'page' : undefined} class="text-primary-200 hover:text-white transition-colors">Kegiatan</a></li>
-						<li><a href="/blog" aria-current={currentPage === '/blog' ? 'page' : undefined} class="text-primary-200 hover:text-white transition-colors">Blog</a></li>
-						<li><a href="/galeri" aria-current={currentPage === '/galeri' ? 'page' : undefined} class="text-primary-200 hover:text-white transition-colors">Galeri</a></li>
-						<li><a href="/donasi" aria-current={currentPage === '/donasi' ? 'page' : undefined} class="text-primary-200 hover:text-white transition-colors">Donasi</a></li>
-						<li><a href="/kontak" aria-current={currentPage === '/kontak' ? 'page' : undefined} class="text-primary-200 hover:text-white transition-colors">Kontak</a></li>
-						<li><a href="/faq" aria-current={currentPage === '/faq' ? 'page' : undefined} class="text-primary-200 hover:text-white transition-colors">FAQ</a></li>
-						<li><a href="/kebijakan-privasi" aria-current={currentPage === '/kebijakan-privasi' ? 'page' : undefined} class="text-primary-200 hover:text-white transition-colors">Kebijakan Privasi</a></li>
-						<li><a href="/syarat-ketentuan" aria-current={currentPage === '/syarat-ketentuan' ? 'page' : undefined} class="text-primary-200 hover:text-white transition-colors">Syarat &amp; Ketentuan</a></li>
+						<li><a href="/" aria-current={currentPage === '/' ? 'page' : undefined} class="text-primary-200 dark:text-warm-300 hover:text-white transition-colors">Beranda</a></li>
+						<li><a href="/tentang" aria-current={currentPage === '/tentang' ? 'page' : undefined} class="text-primary-200 dark:text-warm-300 hover:text-white transition-colors">Tentang Kami</a></li>
+						<li><a href="/program" aria-current={currentPage === '/program' ? 'page' : undefined} class="text-primary-200 dark:text-warm-300 hover:text-white transition-colors">Program</a></li>
+						<li><a href="/kegiatan" aria-current={currentPage === '/kegiatan' ? 'page' : undefined} class="text-primary-200 dark:text-warm-300 hover:text-white transition-colors">Kegiatan</a></li>
+						<li><a href="/blog" aria-current={currentPage === '/blog' ? 'page' : undefined} class="text-primary-200 dark:text-warm-300 hover:text-white transition-colors">Blog</a></li>
+						<li><a href="/galeri" aria-current={currentPage === '/galeri' ? 'page' : undefined} class="text-primary-200 dark:text-warm-300 hover:text-white transition-colors">Galeri</a></li>
+<li><a href="/donasi" aria-current={currentPage === '/donasi' ? 'page' : undefined} class="text-primary-200 dark:text-warm-300 hover:text-white transition-colors">Donasi</a></li>
+<li><a href="/kontak" aria-current={currentPage === '/kontak' ? 'page' : undefined} class="text-primary-200 dark:text-warm-300 hover:text-white transition-colors">Kontak</a></li>
+<li><a href="/faq" aria-current={currentPage === '/faq' ? 'page' : undefined} class="text-primary-200 dark:text-warm-300 hover:text-white transition-colors">FAQ</a></li>
 					</ul>
 				</div>
 				<!-- Social -->
 				<div class="min-w-0">
-					<h3 class="mb-2 sm:mb-3 text-xs sm:text-sm font-semibold uppercase tracking-wider text-primary-300 text-center sm:text-left">Ikuti Kami</h3>
+					<h3 class="mb-2 sm:mb-3 text-xs sm:text-sm font-semibold uppercase tracking-wider text-primary-300 dark:text-warm-400 text-center sm:text-left">Ikuti Kami</h3>
 					<!-- Mobile: icon-only horizontal row -->
-					<div class="flex flex-wrap justify-center gap-2 text-primary-300 sm:hidden">
-						<a href={footerSocialFacebook.url} target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg hover:text-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-primary-950" aria-label={footerSocialFacebook.ariaLabel}>
+					<div class="flex flex-wrap justify-center gap-2 text-primary-300 dark:text-warm-400 sm:hidden">
+						<a href={footerSocialFacebook.url} target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg hover:text-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-primary-950 dark:focus-visible:ring-offset-warm-950" aria-label={footerSocialFacebook.ariaLabel}>
 							<Icon name="facebook" size={4} aria-hidden="true" />
 						</a>
-						<a href={footerSocialInstagram.url} target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg hover:text-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-primary-950" aria-label={footerSocialInstagram.ariaLabel}>
+						<a href={footerSocialInstagram.url} target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg hover:text-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-primary-950 dark:focus-visible:ring-offset-warm-950" aria-label={footerSocialInstagram.ariaLabel}>
 							<Icon name="instagram" size={4} aria-hidden="true" />
 						</a>
-						<a href={footerSocialTiktok.url} target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg hover:text-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-primary-950" aria-label={footerSocialTiktok.ariaLabel}>
+						<a href={footerSocialTiktok.url} target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg hover:text-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-primary-950 dark:focus-visible:ring-offset-warm-950" aria-label={footerSocialTiktok.ariaLabel}>
 							<Icon name="tiktok" size={4} aria-hidden="true" />
 						</a>
-						<a href={footerSocialYoutube.url} target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg hover:text-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-primary-950" aria-label={footerSocialYoutube.ariaLabel}>
+						<a href={footerSocialYoutube.url} target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg hover:text-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-primary-950 dark:focus-visible:ring-offset-warm-950" aria-label={footerSocialYoutube.ariaLabel}>
 							<Icon name="youtube" size={4} aria-hidden="true" />
 						</a>
 					</div>
 					<!-- Tablet+: vertical list with icon + label -->
-					<ul class="hidden sm:flex flex-col gap-2 text-sm text-primary-200">
+					<ul class="hidden sm:flex flex-col gap-2 text-sm text-primary-200 dark:text-warm-300">
 						<li>
-							<a href={footerSocialFacebook.url} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 hover:text-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-primary-950 rounded-md py-1">
+							<a href={footerSocialFacebook.url} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 hover:text-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-primary-950 dark:focus-visible:ring-offset-warm-950 rounded-md py-1">
 								<Icon name="facebook" size={4} class="shrink-0" aria-hidden="true" />
 								<span>{footerSocialFacebook.label}</span>
 							</a>
 						</li>
 						<li>
-							<a href={footerSocialInstagram.url} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 hover:text-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-primary-950 rounded-md py-1">
+							<a href={footerSocialInstagram.url} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 hover:text-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-primary-950 dark:focus-visible:ring-offset-warm-950 rounded-md py-1">
 								<Icon name="instagram" size={4} class="shrink-0" aria-hidden="true" />
 								<span>{footerSocialInstagram.label}</span>
 							</a>
 						</li>
 						<li>
-							<a href={footerSocialTiktok.url} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 hover:text-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-primary-950 rounded-md py-1">
+							<a href={footerSocialTiktok.url} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 hover:text-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-primary-950 dark:focus-visible:ring-offset-warm-950 rounded-md py-1">
 								<Icon name="tiktok" size={4} class="shrink-0" aria-hidden="true" />
 								<span>{footerSocialTiktok.label}</span>
 							</a>
 						</li>
 						<li>
-							<a href={footerSocialYoutube.url} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 hover:text-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-primary-950 rounded-md py-1">
+							<a href={footerSocialYoutube.url} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 hover:text-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-primary-950 dark:focus-visible:ring-offset-warm-950 rounded-md py-1">
 								<Icon name="youtube" size={4} class="shrink-0" aria-hidden="true" />
 								<span>{footerSocialYoutube.label}</span>
 							</a>
@@ -176,8 +174,19 @@ try {
 				</div>
 			</div>
 		</div>
-		<div class="mt-6 sm:mt-8 border-t border-primary-800 pt-4 sm:pt-5 text-center text-xs sm:text-sm text-primary-400">
-			{footerCopyright}
+		<div class="mt-6 sm:mt-8 border-t border-primary-800 dark:border-warm-800 pt-4 sm:pt-5">
+			<div class="text-center text-xs sm:text-sm text-primary-400 dark:text-warm-500 mb-3">
+				{footerCopyright}
+			</div>
+			<div class="flex flex-wrap justify-center gap-x-4 gap-y-2 text-xs sm:text-sm">
+				<a href="/kebijakan-privasi" class="text-primary-300 dark:text-warm-400 hover:text-white transition-colors">
+					Kebijakan Privasi
+				</a>
+				<span class="text-primary-500 dark:text-warm-600" aria-hidden="true">&bull;</span>
+				<a href="/syarat-ketentuan" class="text-primary-300 dark:text-warm-400 hover:text-white transition-colors">
+					Syarat & Ketentuan
+				</a>
+			</div>
 		</div>
 	</Container>
 </footer>

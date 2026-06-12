@@ -1,0 +1,172 @@
+---
+/**
+ * Wakaf Appeal Section Component
+ *
+ * Urgent appeal card for Wakaf Lahan Rumah Tahfidz.
+ * Features "Mendesak" badge, verse card, and kinetic Islamic frieze animation.
+ */
+import Button from '../ui/Button.astro'
+import Container from '../ui/Container.astro'
+import Icon from '../ui/Icon.astro'
+
+interface Props {
+	title?: string
+	description?: string
+	targetArea?: string
+	ctaText?: string
+	ctaLink?: string
+	verse?: string
+	verseReference?: string
+}
+
+const {
+	title = 'Wakaf Lahan Rumah Tahfidz',
+	description = "Saat ini kegiatan Tahfidz, Taman Anak, dan Kantor Yayasan masih bergabung di rumah kontrakan sempit. Kami membutuhkan lahan seluas 2.000 m² untuk mewujudkan Rumah Tahfidz Al-Qur'an yang layak bagi para santri.",
+	targetArea = '2.000 m²',
+	ctaText = 'Bantu Wakaf Sekarang',
+	ctaLink = '/donasi',
+	verse = 'Perumpamaan orang yang menginfakkan hartanya di jalan Allah seperti sebutir biji yang menumbuhkan tujuh bulir.',
+	verseReference = 'QS. Al-Baqarah: 261',
+} = Astro.props
+---
+
+<section class="relative bg-[radial-gradient(circle_at_center,_var(--color-gold-50)_0%,_var(--color-surface)_100%)] dark:bg-[radial-gradient(circle_at_center,_var(--color-warm-900)_0%,_var(--color-surface)_100%)] overflow-hidden py-16 sm:py-24">
+	<!-- Smooth Transition Fades (to blend with sections above & below) -->
+	<div class="absolute top-0 left-0 right-0 h-16 sm:h-24 bg-gradient-to-b from-surface to-transparent pointer-events-none z-10" aria-hidden="true"></div>
+	<div class="absolute bottom-0 left-0 right-0 h-16 sm:h-24 bg-gradient-to-t from-surface to-transparent pointer-events-none z-10" aria-hidden="true"></div>
+
+	<!-- Atmospheric Islamic Background -->
+	<div class="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
+		<div
+			class="absolute inset-0 opacity-40 animate-[bg-breath_10s_ease-in-out_infinite] dark:opacity-20"
+			style="background-image: url('data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'60\' height=\'60\' viewBox=\'0 0 60 60\'%3E%3Cg fill=\'%23166534\' fill-opacity=\'1\'%3E%3Cpath d=\'M30 0l7 22 22 7-22 7-7 22-7-22-22-7 22-7z\'/%3E%3C/g%3E%3C/svg%3E'); background-size: 60px 60px;"
+		></div>
+	</div>
+
+	<Container as="div" class="relative z-10">
+		<div
+			class="overflow-hidden rounded-2xl bg-surface-elevated dark:bg-surface-secondary shadow-2xl border border-border-primary/50 dark:border-border-inverse/50 transition-all duration-500 hover:shadow-primary-900/10 dark:hover:shadow-warm-900/20 animate-[fade-in-up_0.8s_ease-out]"
+		>
+			<!-- Mobile-only: "The Living Frieze" — Kinetic structural ornament -->
+			<div class="md:hidden relative h-12 bg-surface-primary dark:bg-surface-inverse overflow-hidden" aria-hidden="true">
+				<!-- Kinetic Structural Pattern: Looping geometric ribbon -->
+				<div class="absolute inset-0 opacity-40 flex" aria-hidden="true">
+					<div class="animate-[frieze-slide_10s_linear_infinite] shrink-0 flex" style="width: 200%;">
+						<svg
+							width="100%"
+							height="100%"
+							class="shrink-0"
+							preserveAspectRatio="none"
+							viewBox="0 0 100 20"
+							fill="none"
+							xmlns="http://www.w3.org/2000/svg"
+						>
+							<path
+								d="M0 20L5 10L10 20L15 10L20 20L25 10L30 20L35 10L40 20L45 10L50 20L55 10L60 20L65 10L70 20L75 10L80 20L85 10L90 20L95 10L100 20V0H0V20Z"
+								fill="url(#frieze-grad)"
+							/>
+							<defs>
+								<linearGradient id="frieze-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+									<stop offset="0%" stop-color="var(--color-gold-300, #fcd34d)" />
+									<stop offset="100%" stop-color="var(--color-gold-400, #fbbf24)" />
+								</linearGradient>
+							</defs>
+						</svg>
+						<svg
+							width="100%"
+							height="100%"
+							class="shrink-0"
+							preserveAspectRatio="none"
+							viewBox="0 0 100 20"
+							fill="none"
+							xmlns="http://www.w3.org/2000/svg"
+						>
+							<path
+								d="M0 20L5 10L10 20L15 10L20 20L25 10L30 20L35 10L40 20L45 10L50 20L55 10L60 20L65 10L70 20L75 10L80 20L85 10L90 20L95 10L100 20V0H0V20Z"
+								fill="url(#frieze-grad)"
+							/>
+						</svg>
+					</div>
+				</div>
+
+				<!-- Material Sheen: High-contrast metallic light sweep -->
+				<div class="absolute inset-0 pointer-events-none">
+					<div
+						class="absolute top-0 bottom-0 w-24 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-[-20deg] animate-[frieze-sheen_4s_infinite] ease-in-out"
+					></div>
+				</div>
+				<!-- Asymmetric Accent: A single, sharp geometric focal point -->
+				<div class="absolute top-0 right-0 w-16 h-full bg-gold-500/10 skew-x-[-20deg] translate-x-8"></div>
+				<div class="absolute top-0 right-4 w-4 h-4 rotate-45 bg-gold-400/40 rounded-sm"></div>
+				<!-- Bottom Edge: Sharp gold hairline -->
+				<div class="absolute bottom-0 left-0 right-0 h-px bg-gold-400/50"></div>
+			</div>
+
+			<div class="grid md:grid-cols-2">
+				<!-- Left: Content -->
+				<div class="relative p-5 sm:p-6 lg:p-8">
+					<!-- Status Badge -->
+					<div class="flex items-center gap-2 mb-4">
+						<span class="relative flex h-2 w-2">
+							<span
+								class="animate-ping absolute inline-flex h-full w-full rounded-full bg-gold-400 opacity-75"
+							></span>
+							<span class="relative inline-flex rounded-full h-2 w-2 bg-gold-500"></span>
+						</span>
+						<span class="text-xs font-bold text-gold-700 dark:text-gold-400 uppercase tracking-widest">Mendesak</span>
+					</div>
+					<h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-text-primary tracking-tight font-display leading-tight">
+						{title}
+					</h2>
+					<p class="mt-4 leading-relaxed text-text-secondary text-sm sm:text-base max-w-lg">
+						{description}
+					</p>
+					<div class="mt-8 flex justify-end sm:justify-start">
+						<Button
+							variant="gold"
+							href={ctaLink}
+							class="relative px-8 py-4 rounded-full overflow-hidden group transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary-600/30"
+						>
+							<span class="relative z-10 flex items-center gap-2 font-bold">
+								{ctaText}
+								<Icon name="arrow-right" size={5} class="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
+							</span>
+							<div class="absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+								<div
+									class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent w-1/2 h-full animate-[wakaf-shimmer_0.9s_ease-out]"
+								></div>
+							</div>
+						</Button>
+					</div>
+				</div>
+
+				<!-- Right: Visual — refined verse card -->
+				<div
+					class="hidden md:flex relative items-center justify-center overflow-hidden p-12 bg-gradient-to-br from-surface-primary via-primary-950 to-surface-primary"
+				>
+					<!-- Subtle Islamic Texture: Dot Grid -->
+					<div
+						class="absolute inset-0 opacity-10"
+						style="background-image: radial-gradient(circle, #fcd34d 1px, transparent 1px); background-size: 24px 24px;"
+					></div>
+
+					<div class="relative z-10 text-center text-white max-w-sm">
+						<div class="relative inline-block mb-6">
+							<div class="absolute inset-0 blur-xl bg-gold-400/30 rounded-full animate-pulse"></div>
+							<Icon
+								name="book"
+								size={24}
+								class="relative mx-auto text-gold-400 animate-[wakaf-float_6s_ease-in-out_infinite]"
+								aria-hidden="true"
+							/>
+						</div>
+						<p class="text-xl italic leading-relaxed text-gold-50/90 font-serif mb-4 drop-shadow-md">
+							&ldquo;{verse}&rdquo;
+						</p>
+						<p class="text-sm text-primary-300 font-medium tracking-wide uppercase opacity-80">— {verseReference}</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</Container>
+</section>

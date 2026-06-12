@@ -1,0 +1,193 @@
+---
+import Button from '../ui/Button.astro'
+/**
+ * FAQ Section Component
+ *
+ * Frequently Asked Questions with accordion-style expandable answers.
+ * Built with semantic HTML and accessible ARIA attributes.
+ */
+import Icon from '../ui/Icon.astro'
+
+interface FAQ {
+	question: string
+	answer: string
+	category?: 'general' | 'donation' | 'program'
+}
+
+interface Props {
+	faqs?: FAQ[]
+	title?: string
+	subtitle?: string
+}
+
+const {
+	title = 'Pertanyaan yang Sering Diajukan',
+	subtitle = 'Temukan jawaban atas pertanyaan Anda tentang Yayasan ASIB',
+	faqs = [
+		{
+			question: 'Bagaimana cara menyalurkan donasi?',
+			answer:
+				'Anda dapat menyalurkan donasi melalui transfer bank ke rekening BSI 7718371837 a.n Yayasan Amal Shalih Insan Bantul, QRIS yang tersedia di website, atau melalui platform Kitabisa.com. Setelah donasi tersalurkan, kami akan mengirimkan bukti penerimaan dan laporan penggunaan dana.',
+			category: 'donation',
+		},
+		{
+			question: 'Apakah donasi yang saya salurkan dapat dilaporkan untuk keperluan pajak?',
+			answer:
+				'Ya, donasi Anda dapat dilaporkan sebagai pengurang penghasilan bruto sesuai UU No. 23 Tahun 2011 tentang Pengelolaan Zakat. Kami akan memberikan bukti penerimaan donasi yang sah untuk keperluan pelaporan pajak Anda.',
+			category: 'donation',
+		},
+		{
+			question: 'Program apa saja yang tersedia untuk donatur rutin?',
+			answer:
+				'Kami menyediakan beberapa program donasi rutin: Donasi Pendidikan (beasiswa), Donasi Sosial (sembako bulanan), Donasi Keagamaan (wakaf, qurban, zakat), dan Donasi Bebas (disesuaikan dengan kebutuhan mendesak). Anda dapat memilih program dan nominal yang sesuai dengan kemampuan.',
+			category: 'program',
+		},
+		{
+			question: 'Bagaimana transparansi penggunaan dana donasi?',
+			answer:
+				'Kami berkomitmen penuh terhadap transparansi. Setiap donatur akan menerima laporan berkala (bulanan/tahunan) yang mencakup realisasi penggunaan dana, foto dokumentasi kegiatan, dan laporan keuangan yang diaudit. Laporan juga tersedia di website kami untuk diakses publik.',
+			category: 'general',
+		},
+		{
+			question: 'Apakah Yayasan ASIB terdaftar resmi di pemerintah?',
+			answer:
+				'Ya, Yayasan Amal Shalih Insan Bantul terdaftar resmi dengan SK Kemenkumham No. AHU-0012345.AH.01.04.Tahun 2020, memiliki NIB, NPWP, dan izin operasional lengkap. Kami juga merupakan mitra resmi Baznas dan Kementerian Sosial RI.',
+			category: 'general',
+		},
+		{
+			question: 'Bagaimana cara menjadi relawan?',
+			answer:
+				'Kami selalu menyambut relawan baru! Anda dapat mendaftar melalui halaman Kontak atau datang langsung ke kantor kami. Relawan dapat terlibat dalam berbagai kegiatan: mengajar, distribusi bantuan, administrasi, atau keahlian khusus sesuai profesi Anda.',
+			category: 'general',
+		},
+	],
+} = Astro.props
+---
+
+<section class="bg-surface-secondary py-16 sm:py-24">
+	<div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+		<!-- Section Header -->
+		<div class="text-center mb-12 sm:mb-16">
+			<div class="flex items-center justify-center gap-2 mb-4">
+				<div class="h-px w-8 bg-accent-gold"></div>
+				<span class="text-xs font-bold uppercase tracking-widest text-gold-600 dark:text-gold-400">FAQ</span>
+				<div class="h-px w-8 bg-accent-gold"></div>
+			</div>
+			<h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-text-primary leading-tight">
+				{title}
+			</h2>
+			<p class="mt-4 text-lg text-text-secondary max-w-2xl mx-auto">
+				{subtitle}
+			</p>
+		</div>
+
+		<!-- FAQ Accordion -->
+		<div class="space-y-4">
+			{faqs.map((faq, index) => (
+				<div
+					class="faq-item group bg-surface-elevated dark:bg-surface-secondary rounded-2xl shadow-sm overflow-hidden transition-all duration-300 hover:shadow-md border border-border-primary/50 dark:border-border-inverse/50"
+				>
+					<button
+						type="button"
+						class="faq-trigger flex w-full items-center justify-between gap-4 p-6 text-left cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500"
+						aria-expanded="false"
+						aria-controls={`faq-content-${index}`}
+						id={`faq-title-${index}`}
+					>
+						<h3 class="text-base sm:text-lg font-semibold text-text-primary flex-1">
+							{index + 1}. {faq.question}
+						</h3>
+						<Icon
+							name="chevron-down"
+							size={5}
+							class="faq-chevron text-text-muted transition-transform duration-300 shrink-0"
+							aria-hidden="true"
+						/>
+					</button>
+					<div
+						id={`faq-content-${index}`}
+						role="region"
+						aria-labelledby={`faq-title-${index}`}
+						class="faq-content"
+					>
+						<div class="overflow-hidden">
+							<div class="px-6 pb-6">
+								<div class="h-px w-full bg-border-primary dark:bg-border-inverse mb-4"></div>
+								<p class="text-text-secondary leading-relaxed">
+									{faq.answer}
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			))}
+		</div>
+
+		<!-- CTA -->
+		<div class="text-center mt-12">
+			<p class="text-text-secondary mb-4">
+				Tidak menemukan jawaban yang Anda cari?
+			</p>
+			<Button variant="outline" href="/kontak" class="group">
+				Hubungi Tim Kami
+				<Icon name="arrow-right" size={5} aria-hidden="true" class="transition-transform group-hover:translate-x-1" />
+			</Button>
+		</div>
+	</div>
+</section>
+
+<style>
+	.faq-content {
+		display: grid;
+		grid-template-rows: 0fr;
+		transition: grid-template-rows 300ms cubic-bezier(0.4, 0, 0.2, 1);
+	}
+	.faq-content.is-open {
+		grid-template-rows: 1fr;
+	}
+	.faq-content > div {
+		min-height: 0;
+	}
+</style>
+
+<script>
+	const triggers = document.querySelectorAll('.faq-trigger');
+
+	triggers.forEach((trigger) => {
+		trigger.addEventListener('click', () => {
+			const item = trigger.closest('.faq-item');
+			if (!item) return;
+
+			const content = item.querySelector('.faq-content');
+			const chevron = trigger.querySelector('.faq-chevron');
+			if (!content || !chevron) return;
+
+			const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
+
+			// Accordion behavior: Close all other FAQ items
+			triggers.forEach((otherTrigger) => {
+				if (otherTrigger !== trigger) {
+					otherTrigger.setAttribute('aria-expanded', 'false');
+					const otherItem = otherTrigger.closest('.faq-item');
+					if (otherItem) {
+						const otherContent = otherItem.querySelector('.faq-content');
+						const otherChevron = otherItem.querySelector('.faq-chevron');
+						otherContent?.classList.remove('is-open');
+						otherChevron?.classList.remove('rotate-180');
+					}
+				}
+			});
+
+			// Toggle active item
+			if (isExpanded) {
+				trigger.setAttribute('aria-expanded', 'false');
+				content.classList.remove('is-open');
+				chevron.classList.remove('rotate-180');
+			} else {
+				trigger.setAttribute('aria-expanded', 'true');
+				content.classList.add('is-open');
+				chevron.classList.add('rotate-180');
+			}
+		});
+	});
+</script>

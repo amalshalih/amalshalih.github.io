@@ -4,15 +4,24 @@ interface Props {
 	padding?: 'sm' | 'md' | 'lg'
 	class?: string
 	href?: string
+	'aria-label'?: string
 }
 
-const { variant = 'default', padding = 'md', href, class: className } = Astro.props
+const {
+	variant = 'default',
+	padding = 'md',
+	href,
+	class: className,
+	['aria-label']: ariaLabel,
+} = Astro.props
 
-const base = 'rounded-xl sm:rounded-2xl bg-white shadow-sm transition-shadow duration-300'
+const base =
+	'rounded-xl sm:rounded-2xl bg-surface-elevated shadow-sm dark:shadow-surface-inverse/20 transition-all duration-300 ease-out border border-border-secondary/60 dark:border-white/5'
 
 const variants: Record<string, string> = {
 	default: 'p-4 sm:p-6',
-	hover: 'p-4 sm:p-6 transition-shadow duration-300 hover:-translate-y-0.5 hover:shadow-md',
+	hover:
+		'p-4 sm:p-6 hover:-translate-y-1.5 hover:shadow-lg hover:shadow-primary-500/5 dark:hover:shadow-primary-500/5 hover:border-primary-500/30 dark:hover:border-primary-400/20',
 	overflow: 'overflow-hidden shadow-sm',
 	plain: 'p-4 sm:p-6',
 }
@@ -33,7 +42,7 @@ const classes = [
 
 {
 	href ? (
-		<a href={href} class:list={classes}>
+		<a href={href} class:list={classes} aria-label={ariaLabel}>
 			<slot />
 		</a>
 	) : (
