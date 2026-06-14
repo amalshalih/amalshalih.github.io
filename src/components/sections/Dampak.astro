@@ -32,7 +32,8 @@ const {
 } = Astro.props
 ---
 
-<section class="relative bg-gradient-to-b from-surface via-surface to-surface py-8 sm:py-16 lg:py-24 overflow-hidden">
+<section class="relative bg-gradient-to-b from-surface via-surface to-surface py-8 sm:py-16 lg:py-24 overflow-hidden"
+	style="-webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%); mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);">
 	<!-- Subtle ambient gradient for depth -->
 	<div 
 		class="absolute inset-0 pointer-events-none" 
@@ -47,9 +48,7 @@ const {
 		style="background-image: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2280%22 height=%2280%22 viewBox=%220 0 80 80%22%3E%3Cg fill=%22none%22 fill-rule=%22evenodd%22%3E%3Cpath fill=%22%23166534%22 fill-opacity=%221%22 d=%22M40 0l5 16l16l5l-16 5l-5 16l-5-16L0 21l16-5L40 0z%22/%3E%3C/g%3E%3C/svg%3E'); background-size: 80px 80px;"
 	></div>
 	
-	<!-- Smooth fade edges for seamless transition -->
-	<div class="absolute top-0 left-0 right-0 h-8 sm:h-16 bg-gradient-to-b from-surface to-transparent pointer-events-none z-10" aria-hidden="true"></div>
-	<div class="absolute bottom-0 left-0 right-0 h-8 sm:h-16 bg-gradient-to-t from-surface to-transparent pointer-events-none z-10" aria-hidden="true"></div>
+	<!-- Smooth fade edges for seamless transition (replaced by mask-image) -->
 	<Container as="div">
 		<div class="grid items-center gap-10 sm:gap-16 md:grid-cols-2">
 			<!-- Left: Image — with architectural framing -->
