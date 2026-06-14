@@ -2,6 +2,7 @@
 
 import cloudflare from '@astrojs/cloudflare'
 import mdx from '@astrojs/mdx'
+import partytown from '@astrojs/partytown'
 import sitemap from '@astrojs/sitemap'
 import sanity from '@sanity/astro'
 import sentry from '@sentry/astro'
@@ -49,6 +50,16 @@ export default defineConfig({
 			projectId: '9yj0dq9v',
 			dataset: 'production',
 			useCdn: false,
+		}),
+		// Partytown - offload third-party scripts to Web Worker for better performance
+		// Docs: https://docs.astro.build/en/guides/integrations-guide/partytown/
+		partytown({
+			config: {
+				// Forward dataLayer.push from Web Worker to main thread (required for GA4)
+				forward: ['dataLayer.push'],
+				// Enable debug mode in development
+				debug: process.env.NODE_ENV === 'development',
+			},
 		}),
 		// Sentry integration - must be LAST in the array
 		// Docs: https://docs.sentry.io/platforms/javascript/guides/astro/

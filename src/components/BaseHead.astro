@@ -85,7 +85,7 @@ const ogImageType = image.endsWith('.png') ? 'image/png' : 'image/webp'
 <!-- Content Security Policy -->
 <meta
   http-equiv="Content-Security-Policy"
-  content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.sentry.io; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://cdn.sanity.io https://images.unsplash.com https://unsplash.com; connect-src 'self' https://*.ingest.us.sentry.io; base-uri 'self'; form-action 'self'"
+  content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.sentry.io https://www.googletagmanager.com https://www.google-analytics.com https://www.google.com; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://cdn.sanity.io https://images.unsplash.com https://unsplash.com https://www.google-analytics.com https://www.google.com; connect-src 'self' https://*.ingest.us.sentry.io https://www.google-analytics.com https://stats.g.doubleclick.net; base-uri 'self'; form-action 'self'"
 />
 
 <!-- Critical @font-face — inlined to eliminate render-blocking external CSS -->
@@ -335,3 +335,44 @@ const ogImageType = image.endsWith('.png') ? 'image/png' : 'image/webp'
     });
   }
 </script>
+
+<!-- Google Analytics 4 with Partytown & Consent Mode v2 -->
+<!-- Only load in production to avoid contaminating analytics with dev traffic -->
+{import.meta.env.PROD && (
+  <>
+    <!-- GA4 via Partytown - runs in Web Worker for better performance -->
+    <script type="text/partytown" src="https://www.googletagmanager.com/gtag/js?id=G-L3WQTPSJGN"></script>
+    
+    <script type="text/partytown">
+      // Initialize dataLayer
+      window.dataLayer = window.dataLayer || [];
+      
+      // Define gtag function - must use window.gtag for Partytown compatibility
+      window.gtag = function() {
+        window.dataLayer.push(arguments);
+      };
+      
+      // Load GA4
+      gtag('js', new Date());
+      
+      // Consent Mode v2 - GDPR compliant (default: DENIED until user accepts)
+      // This allows anonymous data collection while being privacy-friendly
+      gtag('consent', 'default', {
+        'analytics_storage': 'denied',
+        'ad_storage': 'denied',
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied',
+        'functionality_storage': 'granted',
+        'security_storage': 'granted',
+        'wait_for_update': 2000
+      });
+      
+      // Configure GA4 property
+      gtag('config', 'G-L3WQTPSJGN', {
+        // Enhanced Measurement features
+        'anonymize_ip': true, // Privacy-friendly IP anonymization
+        'send_page_view': true
+      });
+    </script>
+  </>
+)}
