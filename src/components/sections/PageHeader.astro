@@ -21,14 +21,14 @@ const gradientMap: Record<string, string> = {
 }
 ---
 
-<section class:list={[gradientMap[gradient], 'text-white', className]}>
+<section class:list={[gradientMap[gradient], 'text-white dark:text-white', className]}>
 	<Container as="div" class="py-6 sm:py-8 lg:py-12">
-		<p class="mb-2 text-xs sm:text-sm font-semibold uppercase tracking-widest text-gold-300">
+		<p class="mb-2 text-xs sm:text-sm font-semibold uppercase tracking-widest text-gold-300 dark:text-gold-300">
 			{label}
 		</p>
-		<h1 class="text-2xl sm:text-3xl lg:text-5xl font-extrabold text-white">{title}</h1>
+		<h1 class="text-2xl sm:text-3xl lg:text-5xl font-extrabold text-white dark:text-white">{title}</h1>
 		{description && (
-			<p class="mt-2 sm:mt-3 max-w-2xl text-sm sm:text-base lg:text-lg text-primary-100">{description}</p>
+			<p class="mt-2 sm:mt-3 max-w-2xl text-sm sm:text-base lg:text-lg text-primary-100 dark:text-primary-200">{description}</p>
 		)}
 		<slot name="after" />
 	</Container>
