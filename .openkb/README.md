@@ -39,6 +39,10 @@
 ### 🔧 10-arsitektur/
 Dokumen teknis tentang fondasi website — arsitektur sistem, konfigurasi Astro + Cloudflare, audit kompatibilitas, design system, dan troubleshooting error. Target: **IT engineers & maintainers.**
 
+**📋 Audit & Planning:**
+- **`00-COMPREHENSIVE-AUDIT-BRIEF.md`** — Audit UI/UX, Accessibility, Performance, SEO, Security lengkap (14 kategori, 64+ jam)
+- **`audit-komprehensif.md`** — Audit komprehensif project (dokumen sebelumnya)
+
 ### 📝 20-cms-dan-konten/
 Panduan integrasi Sanity CMS, strategi konten, dan arsitektur data kegiatan. Target: **IT engineers.**
 
