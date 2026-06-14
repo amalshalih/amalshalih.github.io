@@ -1,0 +1,53 @@
+---
+/**
+ * Section Wrapper Component
+ *
+ * Provides consistent section padding, max-width, and responsive behavior.
+ * Replaces manual `max-w-6xl px-4 py-8 sm:py-16` classes throughout the site.
+ *
+ * @variant - 'default' | 'primary' | 'secondary' | 'inverse' - controls background color
+ * @spacing - 'sm' | 'md' | 'lg' | 'xl' - controls vertical padding
+ * @fullWidth - If true, removes max-width constraint
+ */
+interface Props {
+	variant?: 'default' | 'primary' | 'secondary' | 'inverse' | 'subtle'
+	spacing?: 'sm' | 'md' | 'lg' | 'xl'
+	fullWidth?: boolean
+	class?: string
+	id?: string
+}
+
+const { variant = 'default', spacing = 'lg', fullWidth = false, class: className, id } = Astro.props
+
+// Base layout classes
+const base = 'mx-auto px-4'
+
+// Max-width variants
+const widths: Record<string, string> = {
+	default: fullWidth ? '' : 'max-w-6xl',
+	full: 'max-w-full',
+}
+
+// Spacing variants (vertical padding)
+const spacings: Record<string, string> = {
+	sm: 'py-8 sm:py-12',
+	md: 'py-12 sm:py-16',
+	lg: 'py-16 sm:py-20',
+	xl: 'py-20 sm:py-24',
+}
+
+// Background color variants (using semantic tokens)
+const variants: Record<string, string> = {
+	default: 'bg-surface',
+	primary: 'bg-surface-primary text-text-on-primary',
+	secondary: 'bg-surface-secondary',
+	inverse: 'bg-surface-inverse text-text-inverse',
+	subtle: 'bg-surface-subtle',
+}
+
+const classes = [base, widths.default, spacings[spacing], variants[variant], className]
+---
+
+<section id={id} class:list={classes}>
+	<slot />
+</section>

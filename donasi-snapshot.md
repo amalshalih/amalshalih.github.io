@@ -1,0 +1,70 @@
+- generic [active] [ref=e1]:
+  - link "Langsung ke konten utama" [ref=e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - banner [ref=e3]:
+    - navigation [ref=e5]:
+      - link "Logo Yayasan ASIB Yayasan Amal Shalih Insan Bantul" [ref=e6] [cursor=pointer]:
+        - /url: /
+        - img "Logo Yayasan ASIB" [ref=e7]
+        - generic [ref=e8]
+      - generic [ref=e11]:
+        - generic [ref=e12]
+        - link "Donasi" [ref=e18] [cursor=pointer]:
+          - /url: /donasi
+  - main [ref=e19]:
+    - generic [ref=e21]:
+      - paragraph [ref=e22]: Donasi
+      - heading "Salurkan Donasi Anda" [level=1] [ref=e23]
+      - paragraph [ref=e24]: Setiap rupiah yang Anda donasikan akan menjadi amal jariyah yang pahalanya terus mengalir.
+    - generic [ref=e26]:
+      - generic [ref=e27]:
+        - img [ref=e29]
+        - heading "QRIS" [level=2] [ref=e31]
+        - paragraph [ref=e32]: Scan kode QRIS berikut menggunakan aplikasi mobile banking atau e-wallet Anda.
+        - img "QRIS Yayasan Amal Shalih Insan Bantul" [ref=e34]
+        - generic [ref=e35]
+      - generic [ref=e37]:
+        - img [ref=e39]
+        - heading "Transfer Bank" [level=2] [ref=e41]
+        - paragraph [ref=e42]: Salurkan donasi melalui rekening resmi Yayasan ASIB di bawah ini.
+        - generic [ref=e43]
+        - generic [ref=e64]
+      - generic [ref=e67]:
+        - img [ref=e69]
+        - heading "Donasi Online" [level=2] [ref=e71]
+        - paragraph [ref=e72]: Kunjungi platform donasi online kami melalui link berikut.
+        - link "linktr.ee/amalshalihinsan Semua program donasi dalam satu tautan" [ref=e74] [cursor=pointer]:
+          - /url: https://linktr.ee/amalshalihinsan
+        - generic [ref=e83]
+  - generic [ref=e90]:
+    - img [ref=e108]
+    - img [ref=e111]
+    - img [ref=e114]
+    - generic [ref=e121]:
+      - generic: “
+      - blockquote [ref=e122]:
+        - paragraph [ref=e123]: Perumpamaan orang yang menginfakkan hartanya di jalan Allah seperti sebutir biji yang menumbuhkan tujuh bulir, pada tiap-tiap bulir terdapat seratus biji.
+      - paragraph [ref=e125]: "— QS. Al-Baqarah: 261"
+  - contentinfo [ref=e126]:
+    - generic [ref=e127]:
+      - generic [ref=e128]:
+        - generic [ref=e129]
+        - generic [ref=e150]
+      - generic [ref=e195]:
+        - generic [ref=e196]: © 2026 Yayasan Amal Shalih Insan Bantul. Seluruh hak cipta dilindungi.
+        - generic [ref=e197]
+  - generic [ref=e203]:
+    - button "Menu" [ref=e204]:
+      - img [ref=e206]
+      - generic: Menu
+    - button "Inspect" [ref=e210]:
+      - img [ref=e212]
+      - generic: Inspect
+    - button "Audit" [ref=e214]:
+      - generic [ref=e215]:
+        - img [ref=e216]
+        - img [ref=e225]
+      - generic: Audit
+    - button "Settings" [ref=e219]:
+      - img [ref=e221]
+      - generic: Settings

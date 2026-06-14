@@ -52,6 +52,12 @@ try {
 	console.error('[Tentang] Sanity pengurus fetch failed:', error)
 }
 
+function getInitials(name: string): string {
+	const parts = name.trim().split(/\s+/)
+	if (parts.length === 1) return parts[0][0]?.toUpperCase() ?? '?'
+	return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase()
+}
+
 // Local fallback if Sanity DB returns no board members
 if (pengurus.length === 0) {
 	pengurus = [
@@ -98,22 +104,22 @@ if (pengurus.length === 0) {
 		<!-- Profil Yayasan -->
 		<section>
 			<!-- Mobile Accordion -->
-			<details open class="md:hidden group rounded-2xl bg-white shadow-sm border border-warm-100 open:border-primary-200 transition-all duration-200">
-				<summary class="accordion-summary flex cursor-pointer items-center justify-between p-5 sm:p-6 font-semibold text-warm-900 select-none">
+			<details open class="md:hidden group rounded-2xl bg-surface-elevated dark:bg-surface-secondary shadow-sm border border-border-secondary/60 dark:border-white/5 open:border-primary-200 dark:open:border-primary-600 transition-all duration-200">
+				<summary class="accordion-summary flex cursor-pointer items-center justify-between p-5 sm:p-6 font-semibold text-text-primary select-none">
 					<span class="flex items-center gap-3">
-						<span class="flex h-10 w-10 items-center justify-center rounded-lg bg-primary-50 text-primary-700 shrink-0">
+						<span class="flex h-10 w-10 items-center justify-center rounded-lg bg-primary-50 dark:bg-primary-900/40 text-primary-700 dark:text-primary-400 shrink-0">
 							<Icon name="book" size={5} />
 						</span>
-						<span class="text-base">Profil Yayasan</span>
+						<span class="text-base text-text-primary">Profil Yayasan</span>
 					</span>
-					<svg class="w-5 h-5 text-warm-400 shrink-0 transition-transform duration-300 group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+					<svg class="w-5 h-5 text-text-muted shrink-0 transition-transform duration-300 group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
 						<path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
 					</svg>
 				</summary>
-				<div class="accordion-reveal px-5 sm:px-6 pb-5 sm:pb-6 space-y-5 text-warm-700 text-sm">
+				<div class="accordion-reveal px-5 sm:px-6 pb-5 sm:pb-6 space-y-5 text-text-secondary text-sm">
 					<p>Yayasan Amal Shalih Insan Bantul (ASIB) adalah organisasi nirlaba yang berdiri sejak <strong>{legalData.foundedDate}</strong> berdasarkan SK Kemenkumham RI No. {legalData.sk}.</p>
 					<p>Kami memiliki tiga bidang utama: <strong>Pendidikan</strong>, <strong>Sosial Kemanusiaan</strong>, dan <strong>Keagamaan</strong>.</p>
-					<div class="bg-primary-50 p-4 rounded-xl space-y-2">
+					<div class="bg-primary-50 dark:bg-primary-900/40 p-4 rounded-xl space-y-2">
 						<p><strong>SK:</strong> {legalData.sk}</p>
 						<p><strong>NIB:</strong> {legalData.nib}</p>
 						<p><strong>NPWP:</strong> {legalData.npwp}</p>
@@ -123,13 +129,13 @@ if (pengurus.length === 0) {
 			</details>
 
 			<!-- Desktop Expanded -->
-			<div class="hidden md:grid lg:grid-cols-3 gap-12 items-start">
-				<div class="lg:col-span-2 space-y-6">
-					<div class="flex items-center gap-3 mb-2">
-						<Icon name="book" size={6} class="text-primary-700" />
-						<h2 class="text-3xl sm:text-4xl font-bold text-warm-900 tracking-tight">Profil Yayasan</h2>
-					</div>
-					<div class="space-y-4 leading-relaxed text-warm-700 text-lg">
+			<div class="hidden md:block">
+				<div class="flex items-center gap-3 mb-10">
+					<Icon name="book" size={6} class="text-primary-700 dark:text-primary-400" />
+					<h2 class="text-3xl sm:text-4xl font-bold text-text-primary tracking-tight">Profil Yayasan</h2>
+				</div>
+				<div class="grid lg:grid-cols-3 gap-12 items-start">
+					<div class="lg:col-span-2 space-y-4 leading-relaxed text-text-secondary text-lg">
 						<p>
 							Yayasan Amal Shalih Insan Bantul (ASIB) adalah organisasi nirlaba yang berdiri sejak
 							<strong>{legalData.foundedDate}</strong> berdasarkan SK Kemenkumham RI
@@ -139,16 +145,16 @@ if (pengurus.length === 0) {
 							Kami memiliki tiga bidang utama: <strong>Pendidikan</strong>, <strong>Sosial Kemanusiaan</strong>, dan <strong>Keagamaan</strong>. Untuk mewujudkan program di setiap bidang, kami melibatkan seluruh komponen masyarakat sekitar.
 						</p>
 					</div>
-				</div>
-				
-				<div class="bg-primary-900 text-white rounded-2xl p-6 sm:p-8 shadow-xl">
-					<h3 class="text-xl font-bold text-gold-400 mb-6">Informasi Legal</h3>
-					<dl class="space-y-4 text-sm">
-						<div><dt class="text-primary-300">SK Kemenkumham</dt><dd class="font-semibold text-white">{legalData.sk}</dd></div>
-						<div><dt class="text-primary-300">NIB</dt><dd class="font-semibold text-white">{legalData.nib}</dd></div>
-						<div><dt class="text-primary-300">NPWP</dt><dd class="font-semibold text-white">{legalData.npwp}</dd></div>
-						<div><dt class="text-primary-300">KBLI</dt><dd class="font-semibold text-white">{legalData.kbli}</dd></div>
-					</dl>
+					
+					<div class="bg-primary-900 text-white rounded-2xl p-6 sm:p-8 shadow-xl">
+						<h3 class="text-xl font-bold text-gold-400 mb-6">Informasi Legal</h3>
+						<dl class="space-y-4 text-sm">
+							<div><dt class="text-primary-300">SK Kemenkumham</dt><dd class="font-semibold text-white">{legalData.sk}</dd></div>
+							<div><dt class="text-primary-300">NIB</dt><dd class="font-semibold text-white">{legalData.nib}</dd></div>
+							<div><dt class="text-primary-300">NPWP</dt><dd class="font-semibold text-white">{legalData.npwp}</dd></div>
+							<div><dt class="text-primary-300">KBLI</dt><dd class="font-semibold text-white">{legalData.kbli}</dd></div>
+						</dl>
+					</div>
 				</div>
 			</div>
 		</section>
@@ -156,35 +162,35 @@ if (pengurus.length === 0) {
 		<!-- Visi & Misi -->
 		<section>
 			<!-- Mobile Accordion -->
-			<details class="md:hidden group rounded-2xl bg-white shadow-sm border border-warm-100 open:border-primary-200 transition-all duration-200">
-				<summary class="accordion-summary flex cursor-pointer items-center justify-between p-5 sm:p-6 font-semibold text-warm-900 select-none">
+			<details class="md:hidden group rounded-2xl bg-surface-elevated dark:bg-surface-secondary shadow-sm border border-border-secondary/60 dark:border-white/5 open:border-primary-200 dark:open:border-primary-600 transition-all duration-200">
+				<summary class="accordion-summary flex cursor-pointer items-center justify-between p-5 sm:p-6 font-semibold text-text-primary select-none">
 					<span class="flex items-center gap-3">
-						<span class="flex h-10 w-10 items-center justify-center rounded-lg bg-gold-50 text-gold-600 shrink-0">
+						<span class="flex h-10 w-10 items-center justify-center rounded-lg bg-gold-50 dark:bg-gold-900/40 text-gold-600 dark:text-gold-400 shrink-0">
 							<Icon name="star" size={5} />
 						</span>
 						<span class="text-base">Visi & Misi</span>
 					</span>
-					<svg class="w-5 h-5 text-warm-400 shrink-0 transition-transform duration-300 group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+					<svg class="w-5 h-5 text-text-muted shrink-0 transition-transform duration-300 group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
 						<path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
 					</svg>
 				</summary>
 				<div class="accordion-reveal px-5 sm:px-6 pb-5 sm:pb-6 space-y-6">
-					<div class="bg-primary-50 rounded-xl p-5">
-						<h3 class="font-bold text-primary-800 mb-2 flex items-center gap-2">
-							<span class="flex h-6 w-6 items-center justify-center rounded-full bg-primary-200 text-primary-800 text-xs font-bold">V</span>
+					<div class="bg-primary-50 dark:bg-primary-900/40 rounded-xl p-5">
+						<h3 class="font-bold text-primary-800 dark:text-primary-200 mb-2 flex items-center gap-2">
+							<span class="flex h-6 w-6 items-center justify-center rounded-full bg-primary-200 dark:bg-primary-800 text-primary-800 dark:text-primary-200 text-xs font-bold">V</span>
 							Visi
 						</h3>
-						<p class="text-warm-700 italic leading-relaxed" set:html={`&ldquo;${visi}&rdquo;`} />
+						<p class="text-text-secondary italic leading-relaxed" set:html={`&ldquo;${visi}&rdquo;`} />
 					</div>
 					<div>
-						<h3 class="font-bold text-primary-800 mb-3 flex items-center gap-2">
-							<span class="flex h-6 w-6 items-center justify-center rounded-full bg-gold-200 text-gold-800 text-xs font-bold">M</span>
+						<h3 class="font-bold text-primary-800 dark:text-primary-200 mb-3 flex items-center gap-2">
+							<span class="flex h-6 w-6 items-center justify-center rounded-full bg-gold-200 dark:bg-gold-800/50 text-gold-800 dark:text-gold-200 text-xs font-bold">M</span>
 							Misi
 						</h3>
-						<ul class="text-warm-700 space-y-2 text-sm">
+						<ul class="text-text-secondary space-y-2 text-sm">
 							{misi.map((item, i) => (
 								<li class="flex gap-2">
-									<span class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary-100 text-primary-700 text-xs font-bold mt-0.5">{i + 1}</span>
+									<span class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary-100 dark:bg-primary-900/50 text-primary-700 dark:text-primary-400 text-xs font-bold mt-0.5">{i + 1}</span>
 									{item}
 								</li>
 							))}
@@ -197,19 +203,19 @@ if (pengurus.length === 0) {
 			<div class="hidden md:block">
 				<div class="flex items-center gap-3 mb-10">
 					<Icon name="star" size={6} class="text-gold-500" />
-					<h2 class="text-3xl sm:text-4xl font-bold text-warm-900 tracking-tight">Visi & Misi</h2>
+					<h2 class="text-3xl sm:text-4xl font-bold text-text-primary tracking-tight">Visi & Misi</h2>
 				</div>
 				<div class="grid lg:grid-cols-2 gap-8">
 					<div class="rounded-xl sm:rounded-2xl p-8 sm:p-10 bg-primary-700 text-white shadow-lg">
 						<h3 class="text-2xl font-bold mb-4 text-gold-400">Visi</h3>
 						<p class="text-xl italic leading-relaxed" set:html={`&ldquo;${visi}&rdquo;`} />
 					</div>
-					<Card variant="default" class="p-8 sm:p-10 border-warm-200">
-						<h3 class="text-2xl font-bold mb-6 text-primary-800">Misi</h3>
-						<ol class="space-y-4 text-warm-700">
+					<Card variant="default" class="p-8 sm:p-10 border-border-secondary/60 dark:border-white/5">
+						<h3 class="text-2xl font-bold mb-6 text-primary-800 dark:text-primary-200">Misi</h3>
+						<ol class="space-y-4 text-text-secondary">
 							{misi.map((item, i) => (
 								<li class="flex gap-4">
-									<span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary-100 font-bold text-primary-800">{i + 1}</span>
+									<span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary-100 dark:bg-primary-900/50 font-bold text-primary-800 dark:text-primary-200">{i + 1}</span>
 									<span class="text-lg">{item}</span>
 								</li>
 							))}
@@ -222,31 +228,31 @@ if (pengurus.length === 0) {
 		<!-- Struktur Pengurus -->
 		<section>
 			<!-- Mobile Accordion -->
-			<details class="md:hidden group rounded-2xl bg-white shadow-sm border border-warm-100 open:border-primary-200 transition-all duration-200">
-				<summary class="accordion-summary flex cursor-pointer items-center justify-between p-5 sm:p-6 font-semibold text-warm-900 select-none">
+			<details class="md:hidden group rounded-2xl bg-surface-elevated dark:bg-surface-secondary shadow-sm border border-border-secondary/60 dark:border-white/5 open:border-primary-200 dark:open:border-primary-600 transition-all duration-200">
+				<summary class="accordion-summary flex cursor-pointer items-center justify-between p-5 sm:p-6 font-semibold text-text-primary select-none">
 					<span class="flex items-center gap-3">
-						<span class="flex h-10 w-10 items-center justify-center rounded-lg bg-red-50 text-red-500 shrink-0">
+						<span class="flex h-10 w-10 items-center justify-center rounded-lg bg-red-50 dark:bg-red-900/30 text-red-500 dark:text-red-400 shrink-0">
 							<Icon name="heart" size={5} />
 						</span>
 						<span class="text-base">Struktur Pengurus</span>
 					</span>
-					<svg class="w-5 h-5 text-warm-400 shrink-0 transition-transform duration-300 group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+					<svg class="w-5 h-5 text-text-muted shrink-0 transition-transform duration-300 group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
 						<path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
 					</svg>
 				</summary>
-				<div class="accordion-reveal px-5 sm:px-6 pb-5 sm:pb-6 space-y-3 text-sm text-warm-700">
+				<div class="accordion-reveal px-5 sm:px-6 pb-5 sm:pb-6 space-y-3 text-sm text-text-secondary">
 					{pengurus.length > 0 ? (
-						<div class="divide-y divide-warm-100">
+						<div class="divide-y divide-warm-100 dark:divide-warm-800">
 							{pengurus.map(p => 
 								<div class="py-3 first:pt-0 last:pb-0">
-									<p class="font-bold text-warm-900">{p.name}</p>
-									<p class="text-primary-700 text-xs font-medium mt-0.5">{p.position}</p>
-									{p.description && <p class="text-xs text-warm-500 mt-1">{p.description}</p>}
+									<p class="font-bold text-text-primary">{p.name}</p>
+									<p class="text-primary-700 dark:text-primary-400 text-xs font-medium mt-0.5">{p.position}</p>
+									{p.description && <p class="text-xs text-text-muted mt-1">{p.description}</p>}
 								</div>
 							)}
 						</div>
 					) : (
-						<p class="italic text-warm-500 text-center py-4">Struktur pengurus akan segera diperbarui.</p>
+						<p class="italic text-text-muted text-center py-4">Struktur pengurus akan segera diperbarui.</p>
 					)}
 				</div>
 			</details>
@@ -254,25 +260,25 @@ if (pengurus.length === 0) {
 			<!-- Desktop Expanded -->
 			<div class="hidden md:block">
 				<div class="flex items-center gap-3 mb-10">
-					<Icon name="heart" size={6} class="text-primary-700" />
-					<h2 class="text-3xl sm:text-4xl font-bold text-warm-900 tracking-tight">Struktur Pengurus</h2>
+					<Icon name="heart" size={6} class="text-primary-700 dark:text-primary-400" />
+					<h2 class="text-3xl sm:text-4xl font-bold text-text-primary tracking-tight">Struktur Pengurus</h2>
 				</div>
 				<div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
 					{pengurus.length > 0 ? pengurus.map((p) => (
-						<Card variant="default" class="p-6 text-center border-warm-100 hover:shadow-lg transition-shadow">
+						<Card variant="default" class="p-6 text-center border-border-secondary/60 dark:border-white/5 hover:shadow-lg transition-shadow">
 							{p.photoUrl ? (
-								<img src={p.photoUrl} alt={p.photoAlt ?? p.name} class="mx-auto mb-4 h-20 w-20 rounded-full object-cover border-2 border-primary-100" />
+								<img src={p.photoUrl} alt={p.photoAlt ?? p.name} class="mx-auto mb-4 h-20 w-20 rounded-full object-cover border-2 border-primary-100 dark:border-primary-800" />
 							) : (
-								<div class="mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-primary-50 text-primary-700">
-									<Icon name="star" size={10} />
+								<div class="mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-primary-50 dark:bg-primary-900/40 text-primary-700 dark:text-primary-400 text-lg sm:text-xl font-bold">
+									<span>{getInitials(p.name)}</span>
 								</div>
 							)}
-							<h3 class="text-lg font-bold text-warm-900">{p.name}</h3>
-							<p class="mt-1 text-sm text-primary-700 font-semibold">{p.position}</p>
-							{p.description && <p class="mt-2 text-xs text-warm-500">{p.description}</p>}
+							<h3 class="text-lg font-bold text-text-primary">{p.name}</h3>
+							<p class="mt-1 text-sm text-primary-700 dark:text-primary-400 font-semibold">{p.position}</p>
+							{p.description && <p class="mt-2 text-xs text-text-muted">{p.description}</p>}
 						</Card>
 					)) : (
-						<p class="col-span-full text-center text-warm-500 italic">Struktur pengurus akan segera diperbarui.</p>
+						<p class="col-span-full text-center text-text-muted italic">Struktur pengurus akan segera diperbarui.</p>
 					)}
 				</div>
 			</div>

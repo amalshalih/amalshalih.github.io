@@ -1,0 +1,296 @@
+---
+// Test page untuk hero image fade effect
+layout: null
+---
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test Hero Image Fade Effect</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 2rem;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      color: white;
+      text-align: center;
+      margin-bottom: 3rem;
+      font-size: 2.5rem;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .test-section {
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    }
+
+    .test-section.bg-white { background: white; }
+    .test-section.bg-black { background: black; color: white; }
+    .test-section.bg-blue { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; }
+
+    .test-section h2 {
+      color: #1a1a1a;
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+    }
+
+    .test-section p {
+      color: #666;
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+
+    .hero-container {
+      position: relative;
+      height: 500px;
+      overflow: hidden;
+      border-radius: 12px;
+      background: #f0f0f0;
+    }
+
+    /* TECHNIQUE 1: CSS Mask-Image (RECOMMENDED) */
+    .hero-mask img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%) !important;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%) !important;
+      -webkit-mask-size: 100% 100% !important;
+      mask-size: 100% 100% !important;
+      -webkit-mask-repeat: no-repeat !important;
+      mask-repeat: no-repeat !important;
+    }
+
+    .code-block {
+      background: #1e1e1e;
+      color: #d4d4d4;
+      padding: 1.5rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      margin-top: 1rem;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      white-space: pre-wrap;
+    }
+
+    .comparison {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .comparison-item {
+      background: #f8f9fa;
+      padding: 1rem;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .comparison-item h3 {
+      color: #333;
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .comparison-item p {
+      color: #666;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .badge-success { background: #10b981; color: white; }
+    .badge-warning { background: #f59e0b; color: white; }
+    .badge-info { background: #3b82f6; color: white; }
+
+    button {
+      padding: 0.75rem 1.5rem;
+      background: #4f46e5;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      margin-right: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+
+    #current-setting {
+      margin-top: 1rem;
+      padding: 1rem;
+      background: #f3f4f6;
+      border-radius: 8px;
+      font-family: monospace;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎨 Test Hero Image Fade Effect</h1>
+
+    <!-- TECHNIQUE 1: CSS Mask-Image -->
+    <div class="test-section bg-white">
+      <h2>Technique 1: CSS Mask-Image ⭐ RECOMMENDED</h2>
+      <p>
+        Teknik modern menggunakan <code>mask-image</code> dengan gradient. 
+        Gambar itu sendiri yang menjadi transparan, bukan ditutupi overlay.
+        <strong>Ini yang kita gunakan di production!</strong>
+      </p>
+      
+      <div class="hero-container hero-mask">
+        <img src="https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?auto=format&fit=crop&q=80&w=1200" alt="Hero test image">
+      </div>
+
+      <p style="margin-top: 1rem; color: #666; font-size: 0.9rem;">
+        <strong>Code example:</strong> Gunakan CSS <code>mask-image</code> dengan gradient dari <code>rgba(0,0,0,1)</code> ke <code>rgba(0,0,0,0)</code>
+      </p>
+
+      <div class="comparison">
+        <div class="comparison-item">
+          <h3>0-40%</h3>
+          <p>Gambar 100% visible</p>
+          <span class="badge badge-success">Solid</span>
+        </div>
+        <div class="comparison-item">
+          <h3>40-70%</h3>
+          <p>Fade out gradual</p>
+          <span class="badge badge-warning">Fading</span>
+        </div>
+        <div class="comparison-item">
+          <h3>70-100%</h3>
+          <p>Transparent total</p>
+          <span class="badge badge-info">Invisible</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Explanation -->
+    <div class="test-section bg-white">
+      <h2>📚 Cara Kerja Mask-Image</h2>
+      
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-top: 1rem;">
+        <div style="background: #e0e7ff; padding: 1.5rem; border-radius: 8px;">
+          <h3 style="color: #4338ca; margin-bottom: 0.5rem;">🎭 Alpha Channel</h3>
+          <p style="color: #3730a3; font-size: 0.9rem; line-height: 1.6;">
+            Di CSS masking, warna tidak penting. Yang penting adalah <strong>alpha channel</strong> (opacity).
+            <code>rgba(0,0,0,1)</code> = visible, <code>rgba(0,0,0,0)</code> = transparent.
+          </p>
+        </div>
+
+        <div style="background: #dbeafe; padding: 1.5rem; border-radius: 8px;">
+          <h3 style="color: #1d4ed8; margin-bottom: 0.5rem;">📊 Gradient Stops</h3>
+          <p style="color: #1e40af; font-size: 0.9rem; line-height: 1.6;">
+            <code>0% → 40%</code>: Solid black (gambar visible)<br>
+            <code>40% → 100%</code>: Black to transparent (gambar fade out)<br>
+            <code>100%</code>: Fully transparent (gambar hilang)
+          </p>
+        </div>
+
+        <div style="background: #ddd6fe; padding: 1.5rem; border-radius: 8px;">
+          <h3 style="color: #6d28d9; margin-bottom: 0.5rem;">🌐 Browser Support</h3>
+          <p style="color: #5b21b6; font-size: 0.9rem; line-height: 1.6;">
+            ✅ Chrome 90+<br>
+            ✅ Firefox 104+<br>
+            ✅ Safari 15.4+<br>
+            ✅ Edge 90+
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Visual Diagram -->
+    <div class="test-section bg-white">
+      <h2>📐 Visual Diagram</h2>
+      <div style="background: #1e1e1e; padding: 2rem; border-radius: 8px; color: #d4d4d4; font-family: monospace;">
+        <pre style="margin: 0; line-height: 1.8;">
+┌─────────────────────────────────────────────┐
+│  ████████████████████████████████████████   │ ← 0%: rgba(0,0,0,1)
+│  ████████████████████████████████████████   │   Gambar 100% visible
+│  ████████████████████████████████████████   │
+│  ████████████████████████████████████████   │ ← 40%: rgba(0,0,0,1)
+│  ░░░░░░░░████████████████████░░░░░░░░░░░░   │   Mulai fade out
+│      ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░       │ ← 70%: Gradient
+│          ░░░░░░░░░░░░░░░░░░░░░░░░░░         │   Transparent
+│              ░░░░░░░░░░░░░░░░░░░░░░         │
+│                  ░░░░░░░░░░░░░░░░░░         │ ← 100%: rgba(0,0,0,0)
+│                      ░░░░░░░░░░░░░░         │   Gambar 0% visible
+│                          ░░░░░░░░░░         │   Body background terlihat
+└─────────────────────────────────────────────┘
+        </pre>
+      </div>
+    </div>
+
+    <!-- Test Controls -->
+    <div class="test-section bg-white">
+      <h2>🎛️ Test Controls</h2>
+      <p>Coba adjust gradient stops untuk melihat efek yang berbeda:</p>
+      
+      <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1rem;">
+        <button type="button" onclick="setFade(20, 80)">
+          Fade Agresif (20% → 80%)
+        </button>
+        <button type="button" onclick="setFade(40, 100)">
+          Fade Balanced (40% → 100%)
+        </button>
+        <button type="button" onclick="setFade(60, 100)">
+          Fade Halus (60% → 100%)
+        </button>
+      </div>
+
+      <div id="current-setting">
+        Current: <strong>rgba(0,0,0,1) 0%, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%</strong>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function setFade(start: number, end: number) {
+      const img = document.querySelector('.hero-mask img') as HTMLImageElement | null;
+      const setting = document.getElementById('current-setting') as HTMLElement | null;
+      
+      if (img && setting) {
+        img.style.webkitMaskImage = `linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) ${start}%, rgba(0,0,0,0) ${end}%)`;
+        img.style.maskImage = `linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) ${start}%, rgba(0,0,0,0) ${end}%)`;
+        
+        setting.innerHTML = `Current: <strong>rgba(0,0,0,1) 0%, rgba(0,0,0,1) ${start}%, rgba(0,0,0,0) ${end}%)</strong>`;
+        
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+name: Monthly Front-End Checklist Audit
+
+on:
+  schedule:
+    # Run at 06:00 UTC (13:00 WIB) on the 1st of every month
+    - cron: '0 6 1 * *'
+  workflow_dispatch:
+    description: 'Manual trigger for on-demand audit'
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+jobs:
+  audit:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 10
+    steps:
+    - uses: actions/checkout@v6
+
+    - uses: oven-sh/setup-bun@v2
+      with:
+        bun-version: "1.2"
+
+    - name: Install dependencies
+      run: bun install
+
+    - name: Front-End Checklist Audit
+      run: bun run audit
+
+    - name: Upload Audit Report
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: audit-report
+        path: .sisyphus/AUDIT_RESULTS.md
+        retention-days: 90
+
+    - name: Check Audit Score
+      run: |
+        # Parse audit result for trend tracking
+        bun run audit 2>&1 | tee audit-output.txt
+        SCORE=$(grep -oP '\d+\.\d+%' audit-output.txt | head -1)
+        echo "## 📊 Monthly Audit Report" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "**Score:** $SCORE" >> $GITHUB_STEP_SUMMARY
+        echo "**Date:** $(date -u '+%Y-%m-%d %H:%M UTC')" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        grep -A50 'FAILED' audit-output.txt >> $GITHUB_STEP_SUMMARY

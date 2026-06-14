@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content'
 import PageHeader from '../../components/sections/PageHeader.astro'
+import Testimonials from '../../components/sections/Testimonials.astro'
 import Card from '../../components/ui/Card.astro'
 import Container from '../../components/ui/Container.astro'
 import BaseLayout from '../../layouts/BaseLayout.astro'
@@ -76,17 +77,17 @@ if (kegiatan.length === 0) {
 		{
 			kegiatan.length === 0 ? (
 				<div class="text-center py-8 sm:py-16">
-					<p class="text-warm-700">{emptyText}</p>
+					<p class="text-text-secondary">{emptyText}</p>
 				</div>
 			) : (
 				<div class="grid gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3 items-start">
 					{kegiatan.map((item) => (
 						<Card variant="hover" href={`/kegiatan/${item.id}`}>
 								<div class="mb-3 flex items-center gap-3">
-									<span class="inline-block rounded-full bg-primary-50 px-2.5 py-0.5 text-xs font-medium text-primary-700">
+									<span class="inline-block rounded-full bg-primary-50 dark:bg-primary-900/40 px-2.5 py-0.5 text-xs font-medium text-primary-700 dark:text-primary-200">
 										{kategoriLabels[item.data.kategori] || item.data.kategori}
 									</span>
-									<time datetime={item.data.date.toISOString()} class="text-xs text-warm-500">
+									<time datetime={item.data.date.toISOString()} class="text-xs text-text-muted">
 										{item.data.date.toLocaleDateString('id-ID', {
 											year: 'numeric',
 											month: 'long',
@@ -94,10 +95,10 @@ if (kegiatan.length === 0) {
 										})}
 									</time>
 								</div>
-								<h2 class="text-lg font-bold leading-snug text-warm-900 group-hover:text-primary-700 transition-colors">
+								<h2 class="text-lg font-bold leading-snug text-text-primary group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
 									{item.data.title}
 								</h2>
-								<p class="mt-2 text-sm leading-relaxed text-warm-700 line-clamp-2 sm:line-clamp-3">
+								<p class="mt-2 text-sm leading-relaxed text-text-secondary line-clamp-2 sm:line-clamp-3">
 									{item.data.description}
 								</p>
 						</Card>
@@ -106,4 +107,6 @@ if (kegiatan.length === 0) {
 			)
 		}
 	</Container>
+
+	<Testimonials />
 </BaseLayout>

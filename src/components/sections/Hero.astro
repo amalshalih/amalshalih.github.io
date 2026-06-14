@@ -25,44 +25,87 @@ const initialPhoto = photos && photos.length > 0 ? photos[0] : null
 ---
 
 <section class="relative overflow-hidden text-text-on-primary -mt-[70px] sm:-mt-[82px]" aria-label="Hero section with slideshow background">
-	<!-- Slideshow Background (extends behind sticky header) -->
-	<div class="absolute inset-0 bg-surface-primary" role="img" aria-label="Slideshow hero background featuring Yayasan ASIB activities">
+<!-- Slideshow Background (extends behind sticky header with smooth bottom fade-out) -->
+	<div 
+		class="absolute inset-0 bg-surface-primary" 
+		role="img" 
+		aria-label="Slideshow hero background featuring Yayasan ASIB activities"
+		style="-webkit-mask-image: linear-gradient(to bottom, black 0%, black 60%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, black 60%, transparent 100%);"
+	>
+		{photos && photos.length > 0 ? (
+			<>
+				<div
+					id="hero-bg-a"
+					class="absolute inset-0 bg-cover bg-center transition-all duration-1000 ease-out"
+					style={`background-image: url('${initialPhoto?.fullUrl || ''}'); background-color: var(--color-surface-primary, #14532d);`}
+					data-photos={JSON.stringify(photos?.map((p) => p.fullUrl) || [])}
+					data-current="0"
+					aria-hidden="true"
+				></div>
+				<div id="hero-bg-b" class="absolute inset-0 bg-cover bg-center opacity-0 transition-all duration-1000 ease-out" aria-hidden="true"></div>
+			</>
+		) : (
+			<!-- Fallback: Logo + dot pattern when Google Drive photos unavailable -->
+			<div class="absolute inset-0 flex items-center justify-center">
+				<img src="/logo-yayasan.webp" alt="" class="h-32 w-32 sm:h-40 sm:w-40 opacity-10" loading="eager" />
+			</div>
+		)}
+		<!-- Subtle dot pattern (always visible for texture) -->
 		<div
-			id="hero-bg-a"
-			class="absolute inset-0 bg-cover bg-center transition-all duration-1000 ease-out"
-			style={`background-image: url('${initialPhoto?.fullUrl || ''}'); background-color: var(--color-surface-primary, #14532d);`}
-			data-photos={JSON.stringify(photos?.map((p) => p.fullUrl) || [])}
-			data-current="0"
+			class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wMyI+PGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMiIvPjwvZz48L2c+PC9zdmc+')] opacity-50 dark:opacity-30"
 			aria-hidden="true"
 		></div>
-		<div id="hero-bg-b" class="absolute inset-0 bg-cover bg-center opacity-0 transition-all duration-1000 ease-out" aria-hidden="true"></div>
 	</div>
-	<!-- Dark overlay for text readability -->
-	<div class="absolute inset-0 bg-gradient-to-br from-primary-900/30 via-primary-800/75 to-primary-950/90 dark:from-primary-950/40 dark:via-primary-900/85 dark:to-warm-950/95"></div>
-	<!-- Subtle dot pattern -->
-	<div
-		class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wMyI+PGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMiIvPjwvZz48L2c+PC9zdmc+')] opacity-50 dark:opacity-30"
-	></div>
-	<!-- Bottom fade gradient to blend into the next section -->
-	<div class="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-surface-secondary via-surface-primary/50 to-transparent pointer-events-none z-1"></div>
+	<!-- Gradient overlay with mask-image for smooth fade effect -->
+	<div class="absolute inset-0 z-0 overflow-hidden pointer-events-none" aria-hidden="true">
+		<div class="absolute inset-0 bg-gradient-to-br from-primary-900/40 via-primary-800/80 to-primary-950/90 dark:from-primary-950/50 dark:via-primary-900/90 dark:to-warm-950/95" 
+			style="-webkit-mask-image: linear-gradient(to bottom, black 0%, black 60%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, black 60%, transparent 100%);"></div>
+	</div>
 
-	<div class="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 pt-[94px] sm:pt-[130px] lg:pt-[146px] pb-12 sm:pb-24 lg:pb-32">
+	<!-- Left-Edge Vignette Blur (Nested divs for cross-browser mask intersection to prevent cutoffs in dark/light modes) -->
+	<div 
+		class="absolute inset-y-0 left-0 w-full sm:w-[75%] md:w-[65%] lg:w-[55%] pointer-events-none z-10 overflow-hidden"
+		style="
+			-webkit-mask-image: linear-gradient(to bottom, black 0%, black 60%, transparent 100%);
+			mask-image: linear-gradient(to bottom, black 0%, black 60%, transparent 100%);
+		"
+	>
+		<div
+			class="absolute inset-0"
+			style="
+				background: linear-gradient(to right, rgba(5, 46, 22, 0.5) 0%, rgba(5, 46, 22, 0.25) 50%, rgba(5, 46, 22, 0) 100%);
+				backdrop-filter: blur(16px);
+				-webkit-backdrop-filter: blur(16px);
+				-webkit-mask-image: radial-gradient(ellipse at 0% 50%, black 40%, transparent 100%);
+				mask-image: radial-gradient(ellipse at 0% 50%, black 40%, transparent 100%);
+			"
+		></div>
+	</div>
+
+	<div class="relative z-20 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 pt-[94px] sm:pt-[130px] lg:pt-[146px] pb-12 sm:pb-24 lg:pb-32">
 		<div class="max-w-3xl">
-			<p class="mb-2 sm:mb-4 text-sm font-semibold uppercase tracking-widest text-gold-400 dark:text-gold-300">
+			<!-- Tagline with backdrop blur -->
+			<p class="mb-2 sm:mb-4 text-sm font-semibold uppercase tracking-widest text-gold-300 dark:text-gold-300 backdrop-blur-[2px] rounded-md px-2 py-0.5 inline-block -mx-2 -my-0.5">
 				{tagline}
 			</p>
+
+			<!-- Title + Highlight with backdrop blur -->
 			<div class="mb-3 sm:mb-6">
-				<h1 class="text-3xl font-extrabold leading-tight text-white sm:text-4xl lg:text-6xl">
+				<h1 class="text-3xl font-extrabold leading-tight text-white sm:text-4xl lg:text-6xl backdrop-blur-[2px] rounded-xl px-4 py-2 inline-block -mx-4 -my-2">
 					{title}<br />
-					<span class="text-gold-400 dark:text-gold-300">{highlight}</span>
+					<span class="text-gold-300 dark:text-gold-300">{highlight}</span>
 				</h1>
 			</div>
+
+			<!-- Description with backdrop blur -->
 			<div class="mb-5 sm:mb-8">
-				<p class="max-w-xl text-base leading-relaxed text-primary-100/90 sm:text-lg">
+				<p class="max-w-xl text-base leading-relaxed text-primary-100/90 sm:text-lg backdrop-blur-[2px] rounded-lg px-3 py-1.5 inline-block -mx-3 -my-1.5">
 					{description}
 				</p>
 			</div>
-			<div class="flex flex-nowrap items-center gap-2 sm:gap-4">
+
+			<!-- Buttons with backdrop blur -->
+			<div class="flex flex-nowrap items-center gap-2 sm:gap-4 backdrop-blur-[2px] rounded-xl px-3 py-2 inline-flex -mx-3 -my-2">
 				<Button variant="gold" href={ctaLink}>
 					<Icon name="heart" size={5} aria-hidden="true" />
 					{ctaText}

@@ -170,3 +170,22 @@ const {
 		</div>
 	</Container>
 </section>
+
+<style is:global>
+	/* Accessibility: Reduce motion for users with vestibular disorders */
+	@media (prefers-reduced-motion: reduce) {
+		.animate-\[bg-breath\],
+		.animate-\[frieze-slide\],
+		.animate-\[frieze-sheen\],
+		.animate-\[wakaf-float\],
+		.animate-\[wakaf-shimmer\],
+		.animate-\[wakaf-pulse-glow\],
+		.animate-\[wakaf-gold-shine\] {
+			animation: none !important;
+		}
+		
+		.animate-pulse {
+			animation: none !important;
+		}
+	}
+</style>

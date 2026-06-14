@@ -1,0 +1,3131 @@
+{
+	"version": "1.0.0",
+	"gitCommitHash": "9ba86e1a39368ab74f770ab47766e211d5b52484",
+	"generatedAt": "2026-06-14T09:54:17.400Z",
+	"files": {
+		".env.example": {
+			"filePath": ".env.example",
+			"contentHash": "5127f084f94b761392f7a6f0795325d4a2dbaf0b46a1aa39b246ebcb4fa300e8",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 96,
+			"hasStructuralAnalysis": true
+		},
+		".github/workflows/deploy.yml": {
+			"filePath": ".github/workflows/deploy.yml",
+			"contentHash": "a2d4a2a194bddca7e32487f1ec2df4a003ecefb4f2c46cced33a0e6cb20ebade",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 108,
+			"hasStructuralAnalysis": true
+		},
+		".github/workflows/monthly-audit.yml": {
+			"filePath": ".github/workflows/monthly-audit.yml",
+			"contentHash": "5284c151c08b25bed8d2910e3b16a1c1f6a9e968e2642827ac8b40228f2a7e11",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 49,
+			"hasStructuralAnalysis": true
+		},
+		".husky/pre-commit": {
+			"filePath": ".husky/pre-commit",
+			"contentHash": "fda5fa5d7a6b1744bcb5d15235af119f94abcd3a00d6bce83547b94ffd93eab3",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 2,
+			"hasStructuralAnalysis": false
+		},
+		".husky/pre-push": {
+			"filePath": ".husky/pre-push",
+			"contentHash": "fc5397cd6b269849369a4b317024a07639839c39ab05bba27ef31ae396eeefe5",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 2,
+			"hasStructuralAnalysis": false
+		},
+		".openkb/10-arsitektur/ARCHITECTURE.md": {
+			"filePath": ".openkb/10-arsitektur/ARCHITECTURE.md",
+			"contentHash": "616550b7c7767681e940a5ca5e572161e5d4293852ce9233938dd4c012534957",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 238,
+			"hasStructuralAnalysis": true
+		},
+		".openkb/10-arsitektur/ASTRO_V6_CLOUDFLARE_CONFIG_AUDIT.md": {
+			"filePath": ".openkb/10-arsitektur/ASTRO_V6_CLOUDFLARE_CONFIG_AUDIT.md",
+			"contentHash": "3abe20c8d5a040edd2223072a7633bad553bfd371f6e3625d5f3c8ee88d45f95",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 176,
+			"hasStructuralAnalysis": true
+		},
+		".openkb/10-arsitektur/audit-komprehensif.md": {
+			"filePath": ".openkb/10-arsitektur/audit-komprehensif.md",
+			"contentHash": "96e8ba01989852623d4023e045913df7bd44437b1525f2aaa86b81f1a8b1a60e",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 321,
+			"hasStructuralAnalysis": true
+		},
+		".openkb/10-arsitektur/brainstorming.md": {
+			"filePath": ".openkb/10-arsitektur/brainstorming.md",
+			"contentHash": "d4260173148c54eed038e92ed1554175379b4a0488b497ae15557d7f9fadb843",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 366,
+			"hasStructuralAnalysis": true
+		},
+		".openkb/10-arsitektur/CLEAN_CONFIGURATION_SUMMARY.md": {
+			"filePath": ".openkb/10-arsitektur/CLEAN_CONFIGURATION_SUMMARY.md",
+			"contentHash": "adda466f06aa3692e0c185c587a0c18e5b6b81c45ecfed102e652428851f8d0e",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 180,
+			"hasStructuralAnalysis": true
+		},
+		".openkb/10-arsitektur/email-system.md": {
+			"filePath": ".openkb/10-arsitektur/email-system.md",
+			"contentHash": "d5d09f1b793325e7ffc6c3a727988d408ab1667f1efd833a02ec89a81e95bb28",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 381,
+			"hasStructuralAnalysis": true
+		},
+		".openkb/10-arsitektur/ROOT_LEVEL_WRANGLER_CONFIG.md": {
+			"filePath": ".openkb/10-arsitektur/ROOT_LEVEL_WRANGLER_CONFIG.md",
+			"contentHash": "86a0d865517ae85c41f497eff1edbbd6d38981b2bbfeeed30dba191df2ea1438",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 163,
+			"hasStructuralAnalysis": true
+		},
+		".openkb/10-arsitektur/WORKERD_COMPATIBILITY_AUDIT.md": {
+			"filePath": ".openkb/10-arsitektur/WORKERD_COMPATIBILITY_AUDIT.md",
+			"contentHash": "b097b7c840c7158b808cc26944196dabc77a26d9bc4e918ba08fe7a9f2c43b23",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 211,
+			"hasStructuralAnalysis": true
+		},
+		".openkb/10-arsitektur/WRANGLER_PREVIEW_ERROR_10015.md": {
+			"filePath": ".openkb/10-arsitektur/WRANGLER_PREVIEW_ERROR_10015.md",
+			"contentHash": "27f5ea05a923f5766728cd1ba5a404e55ba2a3ac6f0b52ae0c8fc14e52444580",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 141,
+			"hasStructuralAnalysis": true
+		},
+		".openkb/20-cms-dan-konten/cms-integration.md": {
+			"filePath": ".openkb/20-cms-dan-konten/cms-integration.md",
+			"contentHash": "0eebee7abc539708a85a0ae5e56f86c5822f84b9e889fb04b5ae4989acb97755",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 407,
+			"hasStructuralAnalysis": true
+		},
+		".openkb/20-cms-dan-konten/DATA_SOURCES.md": {
+			"filePath": ".openkb/20-cms-dan-konten/DATA_SOURCES.md",
+			"contentHash": "3ab9390c2ef91a822f8eb8e97db72ddeb410894f57d0fda0a231632413b3000b",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 294,
+			"hasStructuralAnalysis": true
+		},
+		".openkb/20-cms-dan-konten/kegiatan-content-architecture.md": {
+			"filePath": ".openkb/20-cms-dan-konten/kegiatan-content-architecture.md",
+			"contentHash": "270b700e753182d0612e7f6703e86727a37a668edcf8a734cf0a9823d42a5fe6",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 69,
+			"hasStructuralAnalysis": true
+		},
+		".openkb/20-cms-dan-konten/sanity-strategi.md": {
+			"filePath": ".openkb/20-cms-dan-konten/sanity-strategi.md",
+			"contentHash": "3a38726b13b3443dd2b8a760630e9ae48e6f858d02c6df6cbdffb82b416608bb",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 831,
+			"hasStructuralAnalysis": true
+		},
+		".openkb/30-deploy/commit-strategy.md": {
+			"filePath": ".openkb/30-deploy/commit-strategy.md",
+			"contentHash": "d3980bd7006df725f1c41cce48c1fd1051a49bca00f90e62f77c7bd98b412370",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 355,
+			"hasStructuralAnalysis": true
+		},
+		".openkb/30-deploy/deployment.md": {
+			"filePath": ".openkb/30-deploy/deployment.md",
+			"contentHash": "9cd49a26cea4ec7e703f5c3913a3294c5ab40a7fd666f4fbead2be23c671cc05",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 623,
+			"hasStructuralAnalysis": true
+		},
+		".openkb/30-deploy/spotlight-integration.md": {
+			"filePath": ".openkb/30-deploy/spotlight-integration.md",
+			"contentHash": "d6cd58d1d9b1e0872b868d73e15ebce2303da7b4b3905bf695c0d17f7b184d35",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 393,
+			"hasStructuralAnalysis": true
+		},
+		".openkb/README.md": {
+			"filePath": ".openkb/README.md",
+			"contentHash": "ae7c23f69de2f775f01ca8bc34c812948e85a45cfd343cb798d6befeb81fd25b",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 52,
+			"hasStructuralAnalysis": true
+		},
+		".sisyphus/analysis/CODEBASE_ANALYSIS_REPORT.md": {
+			"filePath": ".sisyphus/analysis/CODEBASE_ANALYSIS_REPORT.md",
+			"contentHash": "8539698fd676f818f3197a1d2822353e66432060fca689b3e358b23d41580ebb",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 410,
+			"hasStructuralAnalysis": true
+		},
+		".sisyphus/AUDIT_RESULTS.md": {
+			"filePath": ".sisyphus/AUDIT_RESULTS.md",
+			"contentHash": "c54cf0a5a23cd58d6463c02b65164c08eed10823494e1140691f4e1389d4fffe",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 139,
+			"hasStructuralAnalysis": true
+		},
+		".sisyphus/FRONT_END_CHECKLIST_INTEGRATION.md": {
+			"filePath": ".sisyphus/FRONT_END_CHECKLIST_INTEGRATION.md",
+			"contentHash": "eb1a5c8272be1fe360acb8ef75f938145b9b955ee5baa7e3702740eaf651c429",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 276,
+			"hasStructuralAnalysis": true
+		},
+		".sisyphus/IMPROVEMENT_SUMMARY.md": {
+			"filePath": ".sisyphus/IMPROVEMENT_SUMMARY.md",
+			"contentHash": "8b874fcd27e2f4a60059359bb8e494c836573ba9ba499242df36f12fd3a5aa1f",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 399,
+			"hasStructuralAnalysis": true
+		},
+		".sisyphus/MCP_USAGE_GUIDE.md": {
+			"filePath": ".sisyphus/MCP_USAGE_GUIDE.md",
+			"contentHash": "56c80d0469994d339f521bb3a570f8748021b2c49b552c565fd17f8f0ba11fd5",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 404,
+			"hasStructuralAnalysis": true
+		},
+		".sisyphus/plans/COMMIT_STRATEGY_FINAL.md": {
+			"filePath": ".sisyphus/plans/COMMIT_STRATEGY_FINAL.md",
+			"contentHash": "5297c168c364c7c2e3760f09c39cefb6706e80d5171267d4b6d7a1f4cd99767b",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 253,
+			"hasStructuralAnalysis": true
+		},
+		".sisyphus/plans/commit-sesi-2.md": {
+			"filePath": ".sisyphus/plans/commit-sesi-2.md",
+			"contentHash": "39c3356c0487804d964cd9b8e906ce6be5edbc87872d143b34e824882177bd09",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 269,
+			"hasStructuralAnalysis": true
+		},
+		".sisyphus/plans/COMPREHENSIVE_REFACTORING_PLAN.md": {
+			"filePath": ".sisyphus/plans/COMPREHENSIVE_REFACTORING_PLAN.md",
+			"contentHash": "a3a18050976cbf411876643aae91b1d3917a6d39fde226161ac41d83a530e0e0",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 309,
+			"hasStructuralAnalysis": true
+		},
+		".sisyphus/plans/comprehensive-audit-and-fix-plan.md": {
+			"filePath": ".sisyphus/plans/comprehensive-audit-and-fix-plan.md",
+			"contentHash": "a064f8f4b0e3dcce8ee775d0fb6c145cfdf916b2cd3115b25ea7227df8fa07dc",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 419,
+			"hasStructuralAnalysis": true
+		},
+		".sisyphus/summary.md": {
+			"filePath": ".sisyphus/summary.md",
+			"contentHash": "38734b5f8ca66345c524ffcea41d1122d4bb0436560bec8cde1b96db154c96f0",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 46,
+			"hasStructuralAnalysis": true
+		},
+		".understand-anything/.understandignore": {
+			"filePath": ".understand-anything/.understandignore",
+			"contentHash": "a6f72b449d318d406bfec173f05d2597036e4227c47b57a3cf2277678963c633",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 64,
+			"hasStructuralAnalysis": false
+		},
+		"astro.config.mjs": {
+			"filePath": "astro.config.mjs",
+			"contentHash": "aed2a10bfa7489972d959f3324e53d1d1a07bf290468f875a868dd2d5ef48875",
+			"functions": [],
+			"classes": [],
+			"imports": [
+				{
+					"source": "@astrojs/cloudflare",
+					"specifiers": ["cloudflare"]
+				},
+				{
+					"source": "@astrojs/mdx",
+					"specifiers": ["mdx"]
+				},
+				{
+					"source": "@astrojs/sitemap",
+					"specifiers": ["sitemap"]
+				},
+				{
+					"source": "@sanity/astro",
+					"specifiers": ["sanity"]
+				},
+				{
+					"source": "@sentry/astro",
+					"specifiers": ["sentry"]
+				},
+				{
+					"source": "@tailwindcss/vite",
+					"specifiers": ["tailwindcss"]
+				},
+				{
+					"source": "astro/config",
+					"specifiers": ["defineConfig"]
+				},
+				{
+					"source": "vite",
+					"specifiers": ["loadEnv"]
+				}
+			],
+			"exports": [],
+			"totalLines": 74,
+			"hasStructuralAnalysis": true
+		},
+		"biome.json": {
+			"filePath": "biome.json",
+			"contentHash": "a00719ad6675814c218a866e121d60497f54980b050a24a7e7f9161d073036fa",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 50,
+			"hasStructuralAnalysis": true
+		},
+		"DESIGN_SYSTEM_AUDIT.md": {
+			"filePath": "DESIGN_SYSTEM_AUDIT.md",
+			"contentHash": "b6d5e35fa39b55ae829986223742c4162c2a1f1c3df85d771d2c8d431f2ce5de",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 225,
+			"hasStructuralAnalysis": true
+		},
+		"docs/DEPLOYMENT_GUIDE.md": {
+			"filePath": "docs/DEPLOYMENT_GUIDE.md",
+			"contentHash": "ae6215bcc015789dc41d173dd17d8b84e874656cea31e0f71dbc42275e03b77c",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 392,
+			"hasStructuralAnalysis": true
+		},
+		"docs/DESIGN_SYSTEM.md": {
+			"filePath": "docs/DESIGN_SYSTEM.md",
+			"contentHash": "8bbfb1f1517382d3571ece9393bbfd849aecb5716eb9df1b8b080d3d0d4a75c7",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 348,
+			"hasStructuralAnalysis": true
+		},
+		"docs/hero-component.md": {
+			"filePath": "docs/hero-component.md",
+			"contentHash": "2f2787baece59cd8a70ec7909d256b31952cf489e1a0f32ec53262e5c1c93f8d",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 146,
+			"hasStructuralAnalysis": true
+		},
+		"docs/README.md": {
+			"filePath": "docs/README.md",
+			"contentHash": "916756b45b5be9403bf22431c4aff1cfb2975ed0d5f091d6bc9140a80cf790df",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 23,
+			"hasStructuralAnalysis": true
+		},
+		"docs/testing/TEST_MCP_INSTRUCTIONS.md": {
+			"filePath": "docs/testing/TEST_MCP_INSTRUCTIONS.md",
+			"contentHash": "b1cef18248cb71d053447f44d10d9bfc9f5cd75766269e54c1d3d43f6fe17bf9",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 298,
+			"hasStructuralAnalysis": true
+		},
+		"docs/web-vitals.md": {
+			"filePath": "docs/web-vitals.md",
+			"contentHash": "8a0bbf4e5d90b8c0c880a6f095b7b776c761f2c94bb813b4f2050f3f18e90571",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 31,
+			"hasStructuralAnalysis": true
+		},
+		"docs/wrangler-configs.md": {
+			"filePath": "docs/wrangler-configs.md",
+			"contentHash": "9faa0b58078978c5703471aa255d4ce2c198c5c31b494e2a95c17097af642b42",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 216,
+			"hasStructuralAnalysis": true
+		},
+		"donasi-snapshot.md": {
+			"filePath": "donasi-snapshot.md",
+			"contentHash": "2300d1377642a6de9cb054b666b0ebc55b5245ab329a312a446f5e04f2cb1198",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 70,
+			"hasStructuralAnalysis": true
+		},
+		"download_logos.py": {
+			"filePath": "download_logos.py",
+			"contentHash": "804d59009ea16b8ab2c5f76d308ba64333aaf8e4e47828e273cffd4a2c5a32e3",
+			"functions": [],
+			"classes": [],
+			"imports": [
+				{
+					"source": "requests",
+					"specifiers": ["requests"]
+				},
+				{
+					"source": "urllib.parse",
+					"specifiers": ["urllib.parse"]
+				},
+				{
+					"source": "os",
+					"specifiers": ["os"]
+				}
+			],
+			"exports": [],
+			"totalLines": 44,
+			"hasStructuralAnalysis": true
+		},
+		"eslint.config.js": {
+			"filePath": "eslint.config.js",
+			"contentHash": "ab0090380e88481e720d26406c8f68ca6813e23c10dcd41ca2b56efbf01cef29",
+			"functions": [],
+			"classes": [],
+			"imports": [
+				{
+					"source": "@eslint/js",
+					"specifiers": ["js"]
+				},
+				{
+					"source": "eslint-plugin-astro",
+					"specifiers": ["astro"]
+				},
+				{
+					"source": "typescript-eslint",
+					"specifiers": ["tseslint"]
+				}
+			],
+			"exports": [],
+			"totalLines": 34,
+			"hasStructuralAnalysis": true
+		},
+		"package.json": {
+			"filePath": "package.json",
+			"contentHash": "4e2ebfad0be3c842900ffccafb7aa1e18da2a81f7412cf46807f517c7969e807",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 70,
+			"hasStructuralAnalysis": true
+		},
+		"playwright.config.ts": {
+			"filePath": "playwright.config.ts",
+			"contentHash": "8920e406147ea6b8e146bfc3c7fb72b5bd5db03a8dc43f6b0a5b13e91220e516",
+			"functions": [],
+			"classes": [],
+			"imports": [
+				{
+					"source": "@playwright/test",
+					"specifiers": ["defineConfig", "devices"]
+				}
+			],
+			"exports": [],
+			"totalLines": 46,
+			"hasStructuralAnalysis": true
+		},
+		"public/dampak-nyata-sm.webp": {
+			"filePath": "public/dampak-nyata-sm.webp",
+			"contentHash": "0620308ac66827ac7f500c9fb167e4c104dacda958f872c1d64c1a54dea39e31",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 98,
+			"hasStructuralAnalysis": false
+		},
+		"public/dampak-nyata.avif": {
+			"filePath": "public/dampak-nyata.avif",
+			"contentHash": "a33e7d232f39c3336868bc60d47d9325a1ed360c70d21843303bb21069610143",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 470,
+			"hasStructuralAnalysis": false
+		},
+		"public/dampak-nyata.webp": {
+			"filePath": "public/dampak-nyata.webp",
+			"contentHash": "f1fdcb77eeae8a7efef6b2979cf4fe6523d3a96e83d76196e87fb068d6800afb",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 319,
+			"hasStructuralAnalysis": false
+		},
+		"public/images/charity-contact.webp": {
+			"filePath": "public/images/charity-contact.webp",
+			"contentHash": "6cbccd040dc85cdf3a695adbdc6c3c382105f5dbd0580f7a2c00070fdfbe69fc",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 199,
+			"hasStructuralAnalysis": false
+		},
+		"public/logo-yayasan-sm.avif": {
+			"filePath": "public/logo-yayasan-sm.avif",
+			"contentHash": "8a8aaa33ec357ba868c1065e1dc8dbe06e002c8e8fd318892833eca11ac3e373",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 35,
+			"hasStructuralAnalysis": false
+		},
+		"public/logo-yayasan-sm.webp": {
+			"filePath": "public/logo-yayasan-sm.webp",
+			"contentHash": "bc63e09ca8d643ba949bf7fb082c9f2a562180f5061903bd3f9538236ed5b22e",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 49,
+			"hasStructuralAnalysis": false
+		},
+		"public/logo-yayasan.webp": {
+			"filePath": "public/logo-yayasan.webp",
+			"contentHash": "5ce2cd51d533c80751114c97c19c607ee418d91d3fe5b3978b583d36a4d19c17",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 79,
+			"hasStructuralAnalysis": false
+		},
+		"public/qris.webp": {
+			"filePath": "public/qris.webp",
+			"contentHash": "d35766b0bd6a0f7e47f6c9f4357f5a8808baf4862e05339e1a3c03488accd220",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 161,
+			"hasStructuralAnalysis": false
+		},
+		"public/site.webmanifest": {
+			"filePath": "public/site.webmanifest",
+			"contentHash": "1701903a5de566583f903e698d17f3d8c6ca48659f4d466ab28bfa922f101854",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 44,
+			"hasStructuralAnalysis": false
+		},
+		"public/sw.js": {
+			"filePath": "public/sw.js",
+			"contentHash": "0b703483f17a33170855ea3d1ecb3b8828e33c87769164118129923ca219bce4",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 143,
+			"hasStructuralAnalysis": true
+		},
+		"README.md": {
+			"filePath": "README.md",
+			"contentHash": "62548b15a48aca30cf93f034d5bcce498b909959457b6708f44a3ca5c451a4e1",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 448,
+			"hasStructuralAnalysis": true
+		},
+		"scripts/audit-frontend-checklist.mjs": {
+			"filePath": "scripts/audit-frontend-checklist.mjs",
+			"contentHash": "2472465b5eddf8f20486a949db55e7f9f2e031f6aed16bd7abf20bad7875c5a3",
+			"functions": [
+				{
+					"name": "categorizeFile",
+					"params": ["filePath"],
+					"exported": false,
+					"lineCount": 17
+				},
+				{
+					"name": "getRulesForCategory",
+					"params": ["category"],
+					"exported": false,
+					"lineCount": 18
+				},
+				{
+					"name": "scanFile",
+					"params": ["filePath", "rules"],
+					"exported": false,
+					"lineCount": 29
+				},
+				{
+					"name": "getAllFiles",
+					"params": ["dirPath"],
+					"exported": false,
+					"lineCount": 15
+				},
+				{
+					"name": "scanDirectory",
+					"params": ["dirPath"],
+					"exported": false,
+					"lineCount": 17
+				},
+				{
+					"name": "generateReport",
+					"params": ["results"],
+					"exported": false,
+					"lineCount": 30
+				},
+				{
+					"name": "bar",
+					"params": ["pct"],
+					"exported": false,
+					"lineCount": 4
+				},
+				{
+					"name": "printReport",
+					"params": ["report", "failures"],
+					"exported": false,
+					"lineCount": 75
+				},
+				{
+					"name": "main",
+					"params": [],
+					"exported": false,
+					"lineCount": 16
+				}
+			],
+			"classes": [],
+			"imports": [
+				{
+					"source": "node:fs/promises",
+					"specifiers": ["readdir", "readFile", "stat"]
+				},
+				{
+					"source": "node:path",
+					"specifiers": ["extname", "join", "relative"]
+				}
+			],
+			"exports": [],
+			"totalLines": 450,
+			"hasStructuralAnalysis": true
+		},
+		"scripts/cache-gallery-photos.ts": {
+			"filePath": "scripts/cache-gallery-photos.ts",
+			"contentHash": "3e86a3c74e4c0ceb4a34294e4029373f44cd8669f171afc61371ef2c8abc3559",
+			"functions": [
+				{
+					"name": "cacheGalleryPhotos",
+					"params": [],
+					"exported": false,
+					"lineCount": 48
+				}
+			],
+			"classes": [],
+			"imports": [
+				{
+					"source": "node:fs",
+					"specifiers": ["mkdirSync", "writeFileSync"]
+				},
+				{
+					"source": "node:path",
+					"specifiers": ["dirname", "join"]
+				},
+				{
+					"source": "node:url",
+					"specifiers": ["fileURLToPath"]
+				},
+				{
+					"source": "../src/lib/google-drive.ts",
+					"specifiers": ["getFullImageUrl", "getThumbnailUrl", "listImagesInFolder"]
+				}
+			],
+			"exports": [],
+			"totalLines": 90,
+			"hasStructuralAnalysis": true
+		},
+		"scripts/discover-and-cache-galleries.ts": {
+			"filePath": "scripts/discover-and-cache-galleries.ts",
+			"contentHash": "4db8fe83e62186ff033f89843b22ebdf0170e3def6a598d91d717ea1312161f6",
+			"functions": [
+				{
+					"name": "discoverAndCacheGalleries",
+					"params": [],
+					"exported": false,
+					"lineCount": 87
+				}
+			],
+			"classes": [],
+			"imports": [
+				{
+					"source": "node:fs",
+					"specifiers": ["mkdirSync", "writeFileSync"]
+				},
+				{
+					"source": "node:path",
+					"specifiers": ["dirname", "join"]
+				},
+				{
+					"source": "node:url",
+					"specifiers": ["fileURLToPath"]
+				},
+				{
+					"source": "../src/lib/google-drive.ts",
+					"specifiers": [
+						"DriveFolder",
+						"getFullImageUrl",
+						"getThumbnailUrl",
+						"listImagesInFolder",
+						"listSubfolders",
+						"parseFolderName"
+					]
+				}
+			],
+			"exports": [],
+			"totalLines": 129,
+			"hasStructuralAnalysis": true
+		},
+		"scripts/reset-rtdb.ts": {
+			"filePath": "scripts/reset-rtdb.ts",
+			"contentHash": "baebcc7dc34d1de91406c0fcdc2aa0421dfb931714579b6134599888e492ea99",
+			"functions": [
+				{
+					"name": "resetRTDB",
+					"params": [],
+					"exported": false,
+					"lineCount": 23
+				}
+			],
+			"classes": [],
+			"imports": [
+				{
+					"source": "../src/lib/firebase/admin",
+					"specifiers": ["getFirebaseAdminToken"]
+				}
+			],
+			"exports": [],
+			"totalLines": 31,
+			"hasStructuralAnalysis": true
+		},
+		"scripts/run_lighthouse_all.sh": {
+			"filePath": "scripts/run_lighthouse_all.sh",
+			"contentHash": "7f1b76f4553b0539cd94b0859d92a4fcc2f3cfd7fa547303b185c15651b8dcec",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 10,
+			"hasStructuralAnalysis": true
+		},
+		"scripts/seed-pengurus.ts": {
+			"filePath": "scripts/seed-pengurus.ts",
+			"contentHash": "f9abe09e1f7ef09ff986b9e1515d07e90c80d066067eea5f36e53f4b8978af00",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 88,
+			"hasStructuralAnalysis": true
+		},
+		"sentry-config.md": {
+			"filePath": "sentry-config.md",
+			"contentHash": "340032700bd826d12e6ff13003e5a74ecae23ce3cc65b2031187e3ea84715e5b",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 84,
+			"hasStructuralAnalysis": true
+		},
+		"sentry.client.config.js": {
+			"filePath": "sentry.client.config.js",
+			"contentHash": "2ce7c63a3f1a6b19494293cc0e451eaaed0ec22608a58f14f6871e4c2e754cfc",
+			"functions": [],
+			"classes": [],
+			"imports": [
+				{
+					"source": "@sentry/astro",
+					"specifiers": ["* as Sentry"]
+				}
+			],
+			"exports": [],
+			"totalLines": 11,
+			"hasStructuralAnalysis": true
+		},
+		"sentry.server.config.js": {
+			"filePath": "sentry.server.config.js",
+			"contentHash": "749e12bf8c3a82bb7373e76e82d607e0329dcf364bdd833e35ce9703db5b6943",
+			"functions": [],
+			"classes": [],
+			"imports": [
+				{
+					"source": "@sentry/astro",
+					"specifiers": ["* as Sentry"]
+				}
+			],
+			"exports": [],
+			"totalLines": 15,
+			"hasStructuralAnalysis": true
+		},
+		"src/components/__tests__/Button.test.ts": {
+			"filePath": "src/components/__tests__/Button.test.ts",
+			"contentHash": "dbcf3c0a4d1ef5269a82a7100120b258afddf8c321183b5d0df61a20dd55499c",
+			"functions": [],
+			"classes": [],
+			"imports": [
+				{
+					"source": "vitest",
+					"specifiers": ["describe", "expect", "it"]
+				}
+			],
+			"exports": [],
+			"totalLines": 189,
+			"hasStructuralAnalysis": true
+		},
+		"src/components/__tests__/Card.test.ts": {
+			"filePath": "src/components/__tests__/Card.test.ts",
+			"contentHash": "8e7b44db93690aed60aad139c875392827e0be3e3ead6350f87f28d315cd79bb",
+			"functions": [],
+			"classes": [],
+			"imports": [
+				{
+					"source": "vitest",
+					"specifiers": ["describe", "expect", "it"]
+				}
+			],
+			"exports": [],
+			"totalLines": 130,
+			"hasStructuralAnalysis": true
+		},
+		"src/components/__tests__/Icon.test.ts": {
+			"filePath": "src/components/__tests__/Icon.test.ts",
+			"contentHash": "e3a9a8a9ed652b3bf4f7bbca2465bfd8a3044c16b0c3fc4653a6d6e205b735ad",
+			"functions": [],
+			"classes": [],
+			"imports": [
+				{
+					"source": "vitest",
+					"specifiers": ["describe", "expect", "it"]
+				}
+			],
+			"exports": [],
+			"totalLines": 161,
+			"hasStructuralAnalysis": true
+		},
+		"src/components/__tests__/README.md": {
+			"filePath": "src/components/__tests__/README.md",
+			"contentHash": "c0ea37858574c6b628249fca8299cd7d0be572d76ad670a3d1cfa7a89e2e5461",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 152,
+			"hasStructuralAnalysis": true
+		},
+		"src/components/AmbientBlossom.astro": {
+			"filePath": "src/components/AmbientBlossom.astro",
+			"contentHash": "d260102c8373d8a084c058069e2396c341d52db8d44f08e3f5b82d8597a42030",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 46,
+			"hasStructuralAnalysis": false
+		},
+		"src/components/BaseHead.astro": {
+			"filePath": "src/components/BaseHead.astro",
+			"contentHash": "627bab30642bef70968b61fdb1c69a9f6d7ce8c38bd681496ef5609601686f66",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 307,
+			"hasStructuralAnalysis": false
+		},
+		"src/components/ErrorState.astro": {
+			"filePath": "src/components/ErrorState.astro",
+			"contentHash": "dcb478a0a5af9c23f4e61d475d1c17411a90e78570a6d190fd4f0f923b13dffa",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 46,
+			"hasStructuralAnalysis": false
+		},
+		"src/components/Footer.astro": {
+			"filePath": "src/components/Footer.astro",
+			"contentHash": "f7e2ed91d64b45969ef7f0c4eaf4b6ff4e1c627d9e40446253a0fd91485c95f3",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 193,
+			"hasStructuralAnalysis": false
+		},
+		"src/components/gallery/Lightbox.astro": {
+			"filePath": "src/components/gallery/Lightbox.astro",
+			"contentHash": "8ae414b1084fa4dfba5da5b956cff3a66a772a9066ba8135eb9e082d291e6f96",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 358,
+			"hasStructuralAnalysis": false
+		},
+		"src/components/gallery/LikeButton.astro": {
+			"filePath": "src/components/gallery/LikeButton.astro",
+			"contentHash": "9311764369ed4220b8d1db97b6d58df6610ea0f44d9d5ac7478aa010d467d67e",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 135,
+			"hasStructuralAnalysis": false
+		},
+		"src/components/gallery/MasonryGrid.astro": {
+			"filePath": "src/components/gallery/MasonryGrid.astro",
+			"contentHash": "332e3dfe13b26a2ff5e8061165ef5f333d781c4e3c4144026f1568d2633f194e",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 180,
+			"hasStructuralAnalysis": false
+		},
+		"src/components/Hero.astro": {
+			"filePath": "src/components/Hero.astro",
+			"contentHash": "43dfcedf3ea954bddb7faa6c9747474161159f2173f426b3756b8f1e01ce3998",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 95,
+			"hasStructuralAnalysis": false
+		},
+		"src/components/Navbar.astro": {
+			"filePath": "src/components/Navbar.astro",
+			"contentHash": "8e4359c705d247fe3bb5411acb2487d2b1e8bf6adaf1c8363ceef51dd4218e49",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 337,
+			"hasStructuralAnalysis": false
+		},
+		"src/components/RetryButton.astro": {
+			"filePath": "src/components/RetryButton.astro",
+			"contentHash": "bd5c92839860d1b57eb820df1472d7c793bc77c5eeaa0fd555226d39b794234d",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 17,
+			"hasStructuralAnalysis": false
+		},
+		"src/components/sections/Dampak.astro": {
+			"filePath": "src/components/sections/Dampak.astro",
+			"contentHash": "f2170f33c5512b5b2052224732487e6388e567461016aee38f8fa72e93c63c71",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 89,
+			"hasStructuralAnalysis": false
+		},
+		"src/components/sections/FAQ.astro": {
+			"filePath": "src/components/sections/FAQ.astro",
+			"contentHash": "bdd2ce54dbb53d36a423d966d8ebc23efb4fe205e177bdb4f2cd303ef7c6000e",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 193,
+			"hasStructuralAnalysis": false
+		},
+		"src/components/sections/Hero.astro": {
+			"filePath": "src/components/sections/Hero.astro",
+			"contentHash": "339c7b779c94742cffb131d05e5e79d4e4b746e402183f9533df96f5a94af9bc",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 137,
+			"hasStructuralAnalysis": false
+		},
+		"src/components/sections/PageHeader.astro": {
+			"filePath": "src/components/sections/PageHeader.astro",
+			"contentHash": "0ac66b1cd79cb055f874757893dc079ffa40fbc17621fe6be798aac3772e4228",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 36,
+			"hasStructuralAnalysis": false
+		},
+		"src/components/sections/Partners.astro": {
+			"filePath": "src/components/sections/Partners.astro",
+			"contentHash": "ab5828661a504dbcbae08bc6cafba8da858e2633e617669fdf917ca64c2824d1",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 142,
+			"hasStructuralAnalysis": false
+		},
+		"src/components/sections/Section.astro": {
+			"filePath": "src/components/sections/Section.astro",
+			"contentHash": "54be9538a70f9d0cd12a430e6f468a7d030385585265a7d973396807c20dd6bd",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 53,
+			"hasStructuralAnalysis": false
+		},
+		"src/components/sections/Stats.astro": {
+			"filePath": "src/components/sections/Stats.astro",
+			"contentHash": "41c8aac9ab3724603cfdc6ebb5ec06927c038c39dcf330f2ddf6a912d4dbf572",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 46,
+			"hasStructuralAnalysis": false
+		},
+		"src/components/sections/Testimonials.astro": {
+			"filePath": "src/components/sections/Testimonials.astro",
+			"contentHash": "7f32f5d456341594f326976989e1bf8c2f9f1c74e922b163f19113e9a42d9623",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 261,
+			"hasStructuralAnalysis": false
+		},
+		"src/components/sections/Wakaf.astro": {
+			"filePath": "src/components/sections/Wakaf.astro",
+			"contentHash": "c717be1d9f3bec5bccfb3b47cf689e1f50c24f5156536865b703e5b14e5dc06d",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 191,
+			"hasStructuralAnalysis": false
+		},
+		"src/components/ui/Badge.astro": {
+			"filePath": "src/components/ui/Badge.astro",
+			"contentHash": "52bcca1ecbb4dacf0770b6f978aa6b08ef374bb231110bdcc15a99bbde4ef57e",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 68,
+			"hasStructuralAnalysis": false
+		},
+		"src/components/ui/Button.astro": {
+			"filePath": "src/components/ui/Button.astro",
+			"contentHash": "b27327a91443cc17110d7811445d01f044664d7adbc13ff2daf2e9f4d6ef93dd",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 74,
+			"hasStructuralAnalysis": false
+		},
+		"src/components/ui/Card.astro": {
+			"filePath": "src/components/ui/Card.astro",
+			"contentHash": "734ece034badda8e3e4b2d1fc8bcd11d5bdba4f550b395d35d24a5fb0372a53b",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 54,
+			"hasStructuralAnalysis": false
+		},
+		"src/components/ui/Container.astro": {
+			"filePath": "src/components/ui/Container.astro",
+			"contentHash": "c98ac61da83f2b2c421e51bf5a55d1ba45b9b8c149c64861217689ae531bdab1",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 9,
+			"hasStructuralAnalysis": false
+		},
+		"src/components/ui/Heading.astro": {
+			"filePath": "src/components/ui/Heading.astro",
+			"contentHash": "90195365e0a57e520c0e91af7eb48dbab10990e2b35495aa530ebeb961b6e94a",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 66,
+			"hasStructuralAnalysis": false
+		},
+		"src/components/ui/Icon.astro": {
+			"filePath": "src/components/ui/Icon.astro",
+			"contentHash": "8f6153cf00151afac4b672fc87e64a2b3dcd089d7be6401b8ddd8455168cc871",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 164,
+			"hasStructuralAnalysis": false
+		},
+		"src/content.config.ts": {
+			"filePath": "src/content.config.ts",
+			"contentHash": "580878b2b560daf0048fb72069fc20af1dcac76746b62700deccf673cf97bf1c",
+			"functions": [],
+			"classes": [],
+			"imports": [
+				{
+					"source": "astro:content",
+					"specifiers": ["defineCollection"]
+				},
+				{
+					"source": "astro/loaders",
+					"specifiers": ["glob"]
+				},
+				{
+					"source": "zod",
+					"specifiers": ["z"]
+				}
+			],
+			"exports": ["collections"],
+			"totalLines": 29,
+			"hasStructuralAnalysis": true
+		},
+		"src/content/blog/amalan-sunnah-idul-adha.md": {
+			"filePath": "src/content/blog/amalan-sunnah-idul-adha.md",
+			"contentHash": "dc6031b0b7b155f9f1fbcf744ffcc23ce9ec91b25adde57d2e82565967f49baa",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 55,
+			"hasStructuralAnalysis": true
+		},
+		"src/content/blog/cara-bijak-berdonasi.md": {
+			"filePath": "src/content/blog/cara-bijak-berdonasi.md",
+			"contentHash": "dd97f7cdba856ebd0804270e46d5044ddbffcf1eb65663a5c377c85c874991bc",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 58,
+			"hasStructuralAnalysis": true
+		},
+		"src/content/blog/keutamaan-10-hari-dzulhijjah.md": {
+			"filePath": "src/content/blog/keutamaan-10-hari-dzulhijjah.md",
+			"contentHash": "9f5806f1a31ed6f1f61d36ea4aa6e5de09f08f67e59be9449120fc4ecfaab9b1",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 49,
+			"hasStructuralAnalysis": true
+		},
+		"src/content/blog/manfaat-sedekah-subuh.md": {
+			"filePath": "src/content/blog/manfaat-sedekah-subuh.md",
+			"contentHash": "54875ba01f8377b17fe77ea6ce69862fb5f55b722d06c7ab86bd0a4229d51b1d",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 53,
+			"hasStructuralAnalysis": true
+		},
+		"src/content/blog/metode-belajar-islam-interaktif.md": {
+			"filePath": "src/content/blog/metode-belajar-islam-interaktif.md",
+			"contentHash": "8dc37727805b66cb4f423a0751c3f3e95260b50b3a038f76bfe2eaf723d8f771",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 51,
+			"hasStructuralAnalysis": true
+		},
+		"src/content/blog/panduan-zakat-fitrah.md": {
+			"filePath": "src/content/blog/panduan-zakat-fitrah.md",
+			"contentHash": "8f9091e2921521cb901222ceb68138817c8bed5ea418f661367c0083ad061c0b",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 57,
+			"hasStructuralAnalysis": true
+		},
+		"src/content/blog/pentingnya-tahfiz-alquran.md": {
+			"filePath": "src/content/blog/pentingnya-tahfiz-alquran.md",
+			"contentHash": "fe287453301fe61333fb6cb95f42b9071a92e594c1eb9204377674312d439f21",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 61,
+			"hasStructuralAnalysis": true
+		},
+		"src/content/blog/pentingnya-wakaf-tunai.md": {
+			"filePath": "src/content/blog/pentingnya-wakaf-tunai.md",
+			"contentHash": "e3835e633d02512d25afd62a5186e99784a0ad8d62c62b43fa74e74df0458609",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 43,
+			"hasStructuralAnalysis": true
+		},
+		"src/content/blog/program-santunan-anak-yatim.md": {
+			"filePath": "src/content/blog/program-santunan-anak-yatim.md",
+			"contentHash": "37b865befff2a4005a39c80e61fdc288c6791c6d0d8c4f276347829786409bf2",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 44,
+			"hasStructuralAnalysis": true
+		},
+		"src/content/blog/README.md": {
+			"filePath": "src/content/blog/README.md",
+			"contentHash": "6a0040746330a02421aeeffb8a470be85924e820d97f7e2fd0b8077e3fd73a0a",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 39,
+			"hasStructuralAnalysis": true
+		},
+		"src/content/blog/tips-mendidik-anak-islam.md": {
+			"filePath": "src/content/blog/tips-mendidik-anak-islam.md",
+			"contentHash": "245f0e380274a8a969e01a1e4bdc9b8a598f4a84483c43d0a32f00db8b8d9db5",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 52,
+			"hasStructuralAnalysis": true
+		},
+		"src/content/blog/transparansi-donasi-asib.md": {
+			"filePath": "src/content/blog/transparansi-donasi-asib.md",
+			"contentHash": "6fdd11cc69a86ffa7d21bf7b895703eea4ae9b3c192382642e0c2f9775d4db61",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 52,
+			"hasStructuralAnalysis": true
+		},
+		"src/content/kegiatan/jumat-bersedekah.md": {
+			"filePath": "src/content/kegiatan/jumat-bersedekah.md",
+			"contentHash": "1d08a6dac8b34f30811bdfcdb0a18a4067f1496968537c0726caba3e64c1a023",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 62,
+			"hasStructuralAnalysis": true
+		},
+		"src/content/kegiatan/kajian-pekanan-tafsir-juz30.md": {
+			"filePath": "src/content/kegiatan/kajian-pekanan-tafsir-juz30.md",
+			"contentHash": "2b4486b7e9fa4fb231a7b930cd54bdeebf1cb4880dde9ef9a8a1af3e7c312c28",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 56,
+			"hasStructuralAnalysis": true
+		},
+		"src/content/kegiatan/laporan-beasiswa-anak-dhuafa.md": {
+			"filePath": "src/content/kegiatan/laporan-beasiswa-anak-dhuafa.md",
+			"contentHash": "b83a3f408aca0b7e9b587eeb51c8985a4b5d3de6e66218bc8a2f4607613d4942",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 70,
+			"hasStructuralAnalysis": true
+		},
+		"src/content/kegiatan/santunan-sembako-mei-2026.md": {
+			"filePath": "src/content/kegiatan/santunan-sembako-mei-2026.md",
+			"contentHash": "0a67a3a0952edd13c790ee31513e7acd1b365870ff252fe9d009211a5bde9298",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 58,
+			"hasStructuralAnalysis": true
+		},
+		"src/content/kegiatan/wisuda-juz30-milad-3.md": {
+			"filePath": "src/content/kegiatan/wisuda-juz30-milad-3.md",
+			"contentHash": "0448efbf2d92651cf15726376081ad8d977cecf1f017dde21350b06e795b420d",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 47,
+			"hasStructuralAnalysis": true
+		},
+		"src/data/galleries.ts": {
+			"filePath": "src/data/galleries.ts",
+			"contentHash": "ec12d8e76bc53d21c6f1b6e11f8b4faf775355857f72df6e7f2a44ef582bdfed",
+			"functions": [
+				{
+					"name": "getGoogleDriveCredentials",
+					"params": [],
+					"returnType": "string | undefined",
+					"exported": false,
+					"lineCount": 3
+				},
+				{
+					"name": "transformDriveImage",
+					"params": ["img"],
+					"returnType": "GalleryImage",
+					"exported": false,
+					"lineCount": 11
+				},
+				{
+					"name": "transformDriveFolder",
+					"params": ["folder"],
+					"returnType": "Promise<GalleryEntry | null>",
+					"exported": false,
+					"lineCount": 33
+				},
+				{
+					"name": "fetchAllGalleries",
+					"params": [],
+					"returnType": "Promise<GalleryEntry[]>",
+					"exported": true,
+					"lineCount": 38
+				},
+				{
+					"name": "fetchGalleryBySlug",
+					"params": ["slug"],
+					"returnType": "Promise<GalleryEntry | null>",
+					"exported": true,
+					"lineCount": 23
+				},
+				{
+					"name": "filterPublishedGalleries",
+					"params": ["galleries"],
+					"returnType": "GalleryEntry[]",
+					"exported": true,
+					"lineCount": 3
+				},
+				{
+					"name": "filterGalleriesByCategory",
+					"params": ["galleries", "category"],
+					"returnType": "GalleryEntry[]",
+					"exported": true,
+					"lineCount": 6
+				},
+				{
+					"name": "setCachedGalleries",
+					"params": ["galleries"],
+					"exported": true,
+					"lineCount": 3
+				},
+				{
+					"name": "getGalleryBySlug",
+					"params": ["slug"],
+					"returnType": "GalleryEntry | undefined",
+					"exported": true,
+					"lineCount": 6
+				},
+				{
+					"name": "getPublishedGalleries",
+					"params": [],
+					"returnType": "GalleryEntry[]",
+					"exported": true,
+					"lineCount": 6
+				},
+				{
+					"name": "getGalleriesByCategory",
+					"params": ["category"],
+					"returnType": "GalleryEntry[]",
+					"exported": true,
+					"lineCount": 6
+				}
+			],
+			"classes": [],
+			"imports": [
+				{
+					"source": "cloudflare:workers",
+					"specifiers": ["env"]
+				},
+				{
+					"source": "../lib/google-drive",
+					"specifiers": [
+						"DriveFolder",
+						"DriveImage",
+						"getFullImageUrl",
+						"getThumbnailUrl",
+						"listImagesInFolder",
+						"listSubfolders",
+						"parseFolderName"
+					]
+				},
+				{
+					"source": "../lib/kv-cache",
+					"specifiers": ["cachedFetch", "driveCacheKey"]
+				}
+			],
+			"exports": [
+				"fetchAllGalleries",
+				"fetchGalleryBySlug",
+				"filterPublishedGalleries",
+				"filterGalleriesByCategory",
+				"setCachedGalleries",
+				"getGalleryBySlug",
+				"getPublishedGalleries",
+				"getGalleriesByCategory"
+			],
+			"totalLines": 196,
+			"hasStructuralAnalysis": true
+		},
+		"src/data/hero-photos.ts": {
+			"filePath": "src/data/hero-photos.ts",
+			"contentHash": "889ef704761497e35785ac5190064eb5af8311b4a150c82a0cee57e16064ccf0",
+			"functions": [
+				{
+					"name": "fetchHeroPhotos",
+					"params": [],
+					"returnType": "Promise<HeroPhoto[]>",
+					"exported": true,
+					"lineCount": 26
+				}
+			],
+			"classes": [],
+			"imports": [
+				{
+					"source": "cloudflare:workers",
+					"specifiers": ["env"]
+				},
+				{
+					"source": "../lib/google-drive",
+					"specifiers": ["DriveImage"]
+				},
+				{
+					"source": "../lib/google-drive",
+					"specifiers": ["getFullImageUrl", "getThumbnailUrl", "listItemsWithShortcuts"]
+				}
+			],
+			"exports": ["fetchHeroPhotos"],
+			"totalLines": 42,
+			"hasStructuralAnalysis": true
+		},
+		"src/data/site.ts": {
+			"filePath": "src/data/site.ts",
+			"contentHash": "2a3e2ec7205a478f2acadb9ea0b33e4480875334e89024e2b0488c976b7206ac",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": ["SITE", "CONTACT", "BANKS", "SOCIAL", "STATS", "DONATION"],
+			"totalLines": 152,
+			"hasStructuralAnalysis": true
+		},
+		"src/env.d.ts": {
+			"filePath": "src/env.d.ts",
+			"contentHash": "d90abca1b98e4dda3a8d66750c43d1fae0f5f936739651853d723862c38ed717",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 28,
+			"hasStructuralAnalysis": true
+		},
+		"src/layouts/BaseLayout.astro": {
+			"filePath": "src/layouts/BaseLayout.astro",
+			"contentHash": "5a0b92b4a2168ca3cd4552b7ef600790155a1a3ac541fa5f0ab82c3c338ab92f",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 130,
+			"hasStructuralAnalysis": false
+		},
+		"src/lib/__tests__/constants.test.ts": {
+			"filePath": "src/lib/__tests__/constants.test.ts",
+			"contentHash": "cd0733e79e52c728f650caf0c83a7194d8a8c897b2bb3a340e2c11571a36d654",
+			"functions": [],
+			"classes": [],
+			"imports": [
+				{
+					"source": "vitest",
+					"specifiers": ["describe", "expect", "it"]
+				},
+				{
+					"source": "../constants",
+					"specifiers": ["KATEGORI_LABELS", "NAV_ITEMS"]
+				}
+			],
+			"exports": [],
+			"totalLines": 83,
+			"hasStructuralAnalysis": true
+		},
+		"src/lib/__tests__/firebase-admin.test.ts": {
+			"filePath": "src/lib/__tests__/firebase-admin.test.ts",
+			"contentHash": "8dcd704ea3d917ba02bcd5819867730ec10d0f06fe532b95b66ef322181d9d1b",
+			"functions": [],
+			"classes": [],
+			"imports": [
+				{
+					"source": "vitest",
+					"specifiers": ["beforeEach", "describe", "expect", "it", "vi"]
+				}
+			],
+			"exports": [],
+			"totalLines": 59,
+			"hasStructuralAnalysis": true
+		},
+		"src/lib/__tests__/google-drive.test.ts": {
+			"filePath": "src/lib/__tests__/google-drive.test.ts",
+			"contentHash": "87d5a33a424926c3fac73486c8767b2644d59bb633699d77be578eb4dc5c6c0a",
+			"functions": [],
+			"classes": [],
+			"imports": [
+				{
+					"source": "vitest",
+					"specifiers": ["beforeEach", "describe", "expect", "it", "vi"]
+				}
+			],
+			"exports": [],
+			"totalLines": 97,
+			"hasStructuralAnalysis": true
+		},
+		"src/lib/__tests__/site-data.test.ts": {
+			"filePath": "src/lib/__tests__/site-data.test.ts",
+			"contentHash": "80d55eb9b222454c87d365a73115e3ab17290c30a23cc0e6ffbd2c95f933d827",
+			"functions": [],
+			"classes": [],
+			"imports": [
+				{
+					"source": "vitest",
+					"specifiers": ["describe", "expect", "it"]
+				},
+				{
+					"source": "../../data/site",
+					"specifiers": ["CONTACT", "SITE", "SOCIAL"]
+				}
+			],
+			"exports": [],
+			"totalLines": 48,
+			"hasStructuralAnalysis": true
+		},
+		"src/lib/config.ts": {
+			"filePath": "src/lib/config.ts",
+			"contentHash": "8f729734a3626ca06f2cc8e3cb42e37b27fc5c439caefd63651dfc2e2d4ad83f",
+			"functions": [
+				{
+					"name": "getGoogleDriveCredentials",
+					"params": [],
+					"returnType": "GoogleDriveCredentials",
+					"exported": true,
+					"lineCount": 23
+				},
+				{
+					"name": "getResendApiKey",
+					"params": [],
+					"returnType": "string",
+					"exported": true,
+					"lineCount": 7
+				},
+				{
+					"name": "getSanityReadToken",
+					"params": [],
+					"returnType": "string",
+					"exported": true,
+					"lineCount": 7
+				}
+			],
+			"classes": [],
+			"imports": [
+				{
+					"source": "cloudflare:workers",
+					"specifiers": ["env"]
+				},
+				{
+					"source": "zod",
+					"specifiers": ["z"]
+				}
+			],
+			"exports": ["getGoogleDriveCredentials", "getResendApiKey", "getSanityReadToken"],
+			"totalLines": 50,
+			"hasStructuralAnalysis": true
+		},
+		"src/lib/constants.ts": {
+			"filePath": "src/lib/constants.ts",
+			"contentHash": "81f0b133eeb7c6754b1bdaf56843b84b72d4d435c8907f63d16fd71557ae09fe",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": ["NAV_ITEMS", "KATEGORI_LABELS"],
+			"totalLines": 17,
+			"hasStructuralAnalysis": true
+		},
+		"src/lib/error-handler.ts": {
+			"filePath": "src/lib/error-handler.ts",
+			"contentHash": "f9b97221f21d363a9333eccbc12ac60e9ec21bed83a1ef4f1c50151b7a3d1102",
+			"functions": [
+				{
+					"name": "handleError",
+					"params": ["error", "options"],
+					"returnType": "void",
+					"exported": true,
+					"lineCount": 46
+				},
+				{
+					"name": "initGlobalErrorHandling",
+					"params": [],
+					"returnType": "void",
+					"exported": true,
+					"lineCount": 27
+				},
+				{
+					"name": "withErrorHandling",
+					"params": ["fn", "errorMessage"],
+					"returnType": "Promise<T | null>",
+					"exported": true,
+					"lineCount": 15
+				}
+			],
+			"classes": [],
+			"imports": [
+				{
+					"source": "./toast-utils",
+					"specifiers": ["showErrorToast"]
+				}
+			],
+			"exports": ["handleError", "initGlobalErrorHandling", "withErrorHandling"],
+			"totalLines": 121,
+			"hasStructuralAnalysis": true
+		},
+		"src/lib/google-drive.ts": {
+			"filePath": "src/lib/google-drive.ts",
+			"contentHash": "7d4fcf4543fed38a0db9ac110b40bbe3f6ba782a3a46c40dbe2aec259d7ed78c",
+			"functions": [
+				{
+					"name": "getAccessToken",
+					"params": [],
+					"returnType": "Promise<string>",
+					"exported": true,
+					"lineCount": 66
+				},
+				{
+					"name": "listImagesInFolder",
+					"params": ["folderId"],
+					"returnType": "Promise<DriveImage[]>",
+					"exported": true,
+					"lineCount": 28
+				},
+				{
+					"name": "listSubfolders",
+					"params": ["parentFolderId"],
+					"returnType": "Promise<DriveFolder[]>",
+					"exported": true,
+					"lineCount": 25
+				},
+				{
+					"name": "getThumbnailUrl",
+					"params": ["fileId", "width"],
+					"exported": true,
+					"lineCount": 3
+				},
+				{
+					"name": "getFullImageUrl",
+					"params": ["fileId", "width"],
+					"exported": true,
+					"lineCount": 3
+				},
+				{
+					"name": "listItemsWithShortcuts",
+					"params": ["folderId"],
+					"returnType": "Promise<DriveImage[]>",
+					"exported": true,
+					"lineCount": 75
+				},
+				{
+					"name": "parseFolderName",
+					"params": ["folderName"],
+					"returnType": "{\n\tcategory: string\n\ttitle: string\n\tdate: string\n\tslug: string\n} | null",
+					"exported": true,
+					"lineCount": 48
+				},
+				{
+					"name": "parseDate",
+					"params": ["dateStr"],
+					"returnType": "string",
+					"exported": false,
+					"lineCount": 39
+				},
+				{
+					"name": "generateSlug",
+					"params": ["category", "title", "date"],
+					"returnType": "string",
+					"exported": false,
+					"lineCount": 21
+				}
+			],
+			"classes": [],
+			"imports": [
+				{
+					"source": "./config",
+					"specifiers": ["getGoogleDriveCredentials"]
+				}
+			],
+			"exports": [
+				"getAccessToken",
+				"listImagesInFolder",
+				"listSubfolders",
+				"getThumbnailUrl",
+				"getFullImageUrl",
+				"listItemsWithShortcuts",
+				"parseFolderName"
+			],
+			"totalLines": 357,
+			"hasStructuralAnalysis": true
+		},
+		"src/lib/kv-cache.ts": {
+			"filePath": "src/lib/kv-cache.ts",
+			"contentHash": "16faed7a2d72973397c20841a73372490463c8889fddc8a887f1ef3072f06c79",
+			"functions": [
+				{
+					"name": "hashKey",
+					"params": ["str"],
+					"returnType": "string",
+					"exported": false,
+					"lineCount": 9
+				},
+				{
+					"name": "kvGet",
+					"params": ["key"],
+					"returnType": "Promise<T | null>",
+					"exported": true,
+					"lineCount": 10
+				},
+				{
+					"name": "kvSet",
+					"params": ["key", "value", "ttlSeconds"],
+					"returnType": "Promise<void>",
+					"exported": true,
+					"lineCount": 7
+				},
+				{
+					"name": "cachedFetch",
+					"params": ["options"],
+					"returnType": "Promise<T>",
+					"exported": true,
+					"lineCount": 47
+				},
+				{
+					"name": "sanityCacheKey",
+					"params": ["query", "params"],
+					"returnType": "string",
+					"exported": true,
+					"lineCount": 4
+				},
+				{
+					"name": "driveCacheKey",
+					"params": ["endpoint"],
+					"returnType": "string",
+					"exported": true,
+					"lineCount": 3
+				}
+			],
+			"classes": [],
+			"imports": [
+				{
+					"source": "cloudflare:workers",
+					"specifiers": ["env"]
+				}
+			],
+			"exports": ["kvGet", "kvSet", "cachedFetch", "sanityCacheKey", "driveCacheKey"],
+			"totalLines": 119,
+			"hasStructuralAnalysis": true
+		},
+		"src/lib/likes.ts": {
+			"filePath": "src/lib/likes.ts",
+			"contentHash": "422375e5e346c6505f59a1001ec447f0109745870bef27154be061f777fdedd6",
+			"functions": [
+				{
+					"name": "getGalleryKey",
+					"params": ["slug"],
+					"returnType": "string",
+					"exported": false,
+					"lineCount": 3
+				},
+				{
+					"name": "getPhotoLikeKey",
+					"params": ["slug", "photoId"],
+					"returnType": "string",
+					"exported": false,
+					"lineCount": 3
+				},
+				{
+					"name": "getGalleryLikes",
+					"params": ["slug"],
+					"returnType": "Promise<GalleryLikeData>",
+					"exported": true,
+					"lineCount": 11
+				},
+				{
+					"name": "toggleGalleryLike",
+					"params": ["slug", "userId", "action"],
+					"returnType": "Promise<{ count: number; liked: boolean }>",
+					"exported": true,
+					"lineCount": 23
+				},
+				{
+					"name": "getPhotoLikes",
+					"params": ["slug"],
+					"returnType": "Promise<Record<string, number>>",
+					"exported": true,
+					"lineCount": 19
+				},
+				{
+					"name": "incrementPhotoLike",
+					"params": ["slug", "photoId"],
+					"returnType": "Promise<number>",
+					"exported": true,
+					"lineCount": 7
+				}
+			],
+			"classes": [],
+			"imports": [
+				{
+					"source": "cloudflare:workers",
+					"specifiers": ["env"]
+				}
+			],
+			"exports": ["getGalleryLikes", "toggleGalleryLike", "getPhotoLikes", "incrementPhotoLike"],
+			"totalLines": 97,
+			"hasStructuralAnalysis": true
+		},
+		"src/lib/sanity/client.ts": {
+			"filePath": "src/lib/sanity/client.ts",
+			"contentHash": "f62841be05274083254d0275862481f1aaec8fe890c525c7d3c74eaaf5ee0525",
+			"functions": [
+				{
+					"name": "getKegiatanList",
+					"params": [],
+					"returnType": "Promise<SanityKegiatan[]>",
+					"exported": true,
+					"lineCount": 6
+				},
+				{
+					"name": "getKegiatanItem",
+					"params": ["slug"],
+					"returnType": "Promise<SanityKegiatan | null>",
+					"exported": true,
+					"lineCount": 6
+				},
+				{
+					"name": "getProgramList",
+					"params": [],
+					"returnType": "Promise<SanityProgram[]>",
+					"exported": true,
+					"lineCount": 6
+				},
+				{
+					"name": "getBankDonasi",
+					"params": [],
+					"returnType": "Promise<SanityBankDonasi[]>",
+					"exported": true,
+					"lineCount": 6
+				},
+				{
+					"name": "getPengurus",
+					"params": [],
+					"returnType": "Promise<SanityPengurus[]>",
+					"exported": true,
+					"lineCount": 6
+				},
+				{
+					"name": "getSiteSettings",
+					"params": [],
+					"returnType": "Promise<SanitySiteSettings | null>",
+					"exported": true,
+					"lineCount": 6
+				},
+				{
+					"name": "getFaqList",
+					"params": [],
+					"returnType": "Promise<SanityFaq[] | null>",
+					"exported": true,
+					"lineCount": 9
+				},
+				{
+					"name": "getBlogPostList",
+					"params": [],
+					"returnType": "Promise<SanityBlogPost[]>",
+					"exported": true,
+					"lineCount": 6
+				},
+				{
+					"name": "getBlogPost",
+					"params": ["slug"],
+					"returnType": "Promise<SanityBlogPost | null>",
+					"exported": true,
+					"lineCount": 6
+				}
+			],
+			"classes": [],
+			"imports": [
+				{
+					"source": "sanity:client",
+					"specifiers": ["sanityClient"]
+				},
+				{
+					"source": "../kv-cache",
+					"specifiers": ["cachedFetch", "sanityCacheKey"]
+				},
+				{
+					"source": "./queries",
+					"specifiers": [
+						"bankDonasiQuery",
+						"blogPostItemQuery",
+						"blogPostListQuery",
+						"faqListQuery",
+						"kegiatanItemQuery",
+						"kegiatanListQuery",
+						"pengurusQuery",
+						"programListQuery",
+						"siteSettingsQuery"
+					]
+				},
+				{
+					"source": "./types",
+					"specifiers": [
+						"SanityBankDonasi",
+						"SanityBlogPost",
+						"SanityFaq",
+						"SanityKegiatan",
+						"SanityPengurus",
+						"SanityProgram",
+						"SanitySiteSettings"
+					]
+				}
+			],
+			"exports": [
+				"getKegiatanList",
+				"getKegiatanItem",
+				"getProgramList",
+				"getBankDonasi",
+				"getPengurus",
+				"getSiteSettings",
+				"getFaqList",
+				"getBlogPostList",
+				"getBlogPost"
+			],
+			"totalLines": 89,
+			"hasStructuralAnalysis": true
+		},
+		"src/lib/sanity/queries.ts": {
+			"filePath": "src/lib/sanity/queries.ts",
+			"contentHash": "5846386380f27401707a43ee6924177c2723c69446080ecf4b46472c0146f808",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [
+				"faqListQuery",
+				"kegiatanListQuery",
+				"kegiatanItemQuery",
+				"programListQuery",
+				"bankDonasiQuery",
+				"pengurusQuery",
+				"blogPostListQuery",
+				"blogPostItemQuery",
+				"siteSettingsQuery"
+			],
+			"totalLines": 128,
+			"hasStructuralAnalysis": true
+		},
+		"src/lib/sanity/render.ts": {
+			"filePath": "src/lib/sanity/render.ts",
+			"contentHash": "5dc480281045c01b10f4c37834878d133c79320342a59a1ef4ae34b1323712ab",
+			"functions": [
+				{
+					"name": "renderPortableText",
+					"params": ["body"],
+					"returnType": "string",
+					"exported": true,
+					"lineCount": 36
+				}
+			],
+			"classes": [],
+			"imports": [
+				{
+					"source": "@portabletext/to-html",
+					"specifiers": ["toHTML"]
+				}
+			],
+			"exports": ["renderPortableText"],
+			"totalLines": 39,
+			"hasStructuralAnalysis": true
+		},
+		"src/lib/sanity/types.ts": {
+			"filePath": "src/lib/sanity/types.ts",
+			"contentHash": "deb48a2e6d0c97121be0898c0b4aa2e41d1ef0f069cef7b49ac528a7230cf671",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 163,
+			"hasStructuralAnalysis": true
+		},
+		"src/lib/toast-utils.ts": {
+			"filePath": "src/lib/toast-utils.ts",
+			"contentHash": "cca280fc8f58383eb8d7a01e9880c262a7e241b0bad8ca35bee843b7b858927c",
+			"functions": [
+				{
+					"name": "showToast",
+					"params": ["message", "options"],
+					"returnType": "void",
+					"exported": true,
+					"lineCount": 48
+				},
+				{
+					"name": "showErrorToast",
+					"params": ["message"],
+					"returnType": "void",
+					"exported": true,
+					"lineCount": 3
+				},
+				{
+					"name": "showSuccessToast",
+					"params": ["message"],
+					"returnType": "void",
+					"exported": true,
+					"lineCount": 3
+				},
+				{
+					"name": "removeToast",
+					"params": ["toast"],
+					"returnType": "void",
+					"exported": false,
+					"lineCount": 6
+				},
+				{
+					"name": "escapeHtml",
+					"params": ["text"],
+					"returnType": "string",
+					"exported": false,
+					"lineCount": 5
+				}
+			],
+			"classes": [],
+			"imports": [],
+			"exports": ["showToast", "showErrorToast", "showSuccessToast"],
+			"totalLines": 95,
+			"hasStructuralAnalysis": true
+		},
+		"src/lib/web-vitals.ts": {
+			"filePath": "src/lib/web-vitals.ts",
+			"contentHash": "d6ea95db1fe5b830bb267d98e36699c4a02b59daad0d0a750587d6643cf94659",
+			"functions": [
+				{
+					"name": "formatMetric",
+					"params": ["name", "value", "rating"],
+					"returnType": "object",
+					"exported": false,
+					"lineCount": 10
+				},
+				{
+					"name": "onCoreMetric",
+					"params": ["metric"],
+					"exported": false,
+					"lineCount": 7
+				},
+				{
+					"name": "initWebVitalsMonitoring",
+					"params": [],
+					"exported": true,
+					"lineCount": 9
+				}
+			],
+			"classes": [],
+			"imports": [
+				{
+					"source": "web-vitals",
+					"specifiers": ["onCLS", "onFCP", "onINP", "onLCP", "onTTFB"]
+				}
+			],
+			"exports": ["initWebVitalsMonitoring"],
+			"totalLines": 38,
+			"hasStructuralAnalysis": true
+		},
+		"src/middleware.ts": {
+			"filePath": "src/middleware.ts",
+			"contentHash": "47342e3746d52a13eb55a08fc77cca90ab07f7d9ac9f67075bbf611301406fba",
+			"functions": [],
+			"classes": [],
+			"imports": [
+				{
+					"source": "astro:middleware",
+					"specifiers": ["defineMiddleware"]
+				}
+			],
+			"exports": ["onRequest"],
+			"totalLines": 42,
+			"hasStructuralAnalysis": true
+		},
+		"src/pages/404.astro": {
+			"filePath": "src/pages/404.astro",
+			"contentHash": "e4e32a40e158eeedd04c8687f641d05682f47d306b587b165b42045273f466f2",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 38,
+			"hasStructuralAnalysis": false
+		},
+		"src/pages/api/__tests__/galleries.test.ts": {
+			"filePath": "src/pages/api/__tests__/galleries.test.ts",
+			"contentHash": "0cdb7c613adc8691cf33fc7b982f096ca4f4011788ab2b35e253a31eae91183d",
+			"functions": [],
+			"classes": [],
+			"imports": [
+				{
+					"source": "vitest",
+					"specifiers": ["describe", "expect", "it", "vi"]
+				}
+			],
+			"exports": [],
+			"totalLines": 89,
+			"hasStructuralAnalysis": true
+		},
+		"src/pages/api/__tests__/health.test.ts": {
+			"filePath": "src/pages/api/__tests__/health.test.ts",
+			"contentHash": "669b4af6b465f18c5c3d31e37a8d0f73d803421ac5c2275bacb72f0650a48905",
+			"functions": [],
+			"classes": [],
+			"imports": [
+				{
+					"source": "vitest",
+					"specifiers": ["describe", "expect", "it", "vi"]
+				}
+			],
+			"exports": [],
+			"totalLines": 76,
+			"hasStructuralAnalysis": true
+		},
+		"src/pages/api/__tests__/kontak.test.ts": {
+			"filePath": "src/pages/api/__tests__/kontak.test.ts",
+			"contentHash": "26388cbaa95b2638f65c7d6dc3711f0c1e776ab3714017143d03d148b1a70360",
+			"functions": [],
+			"classes": [],
+			"imports": [
+				{
+					"source": "vitest",
+					"specifiers": ["describe", "expect", "it", "vi"]
+				}
+			],
+			"exports": [],
+			"totalLines": 110,
+			"hasStructuralAnalysis": true
+		},
+		"src/pages/api/__tests__/like.test.ts": {
+			"filePath": "src/pages/api/__tests__/like.test.ts",
+			"contentHash": "3372228a1bad553f85e49a8a92d7811128dba9bcbed52393ddb4970e32db909a",
+			"functions": [],
+			"classes": [],
+			"imports": [
+				{
+					"source": "vitest",
+					"specifiers": ["describe", "expect", "it", "vi"]
+				},
+				{
+					"source": "zod",
+					"specifiers": ["z"]
+				}
+			],
+			"exports": [],
+			"totalLines": 98,
+			"hasStructuralAnalysis": true
+		},
+		"src/pages/api/drive-image/[id].ts": {
+			"filePath": "src/pages/api/drive-image/[id].ts",
+			"contentHash": "da98544db4c335836ce1f1c10c14182b51386e7a6e6c62b98f825b9816295080",
+			"functions": [
+				{
+					"name": "getCredentials",
+					"params": [],
+					"returnType": "string | undefined",
+					"exported": false,
+					"lineCount": 3
+				},
+				{
+					"name": "GET",
+					"params": ["{ params, request }"],
+					"exported": true,
+					"lineCount": 62
+				}
+			],
+			"classes": [],
+			"imports": [
+				{
+					"source": "cloudflare:workers",
+					"specifiers": ["env"]
+				},
+				{
+					"source": "astro",
+					"specifiers": ["APIRoute"]
+				},
+				{
+					"source": "../../../lib/google-drive",
+					"specifiers": ["getAccessToken"]
+				},
+				{
+					"source": "../../../lib/kv-cache",
+					"specifiers": ["cachedFetch", "driveCacheKey"]
+				}
+			],
+			"exports": ["prerender", "GET"],
+			"totalLines": 76,
+			"hasStructuralAnalysis": true
+		},
+		"src/pages/api/galleries.ts": {
+			"filePath": "src/pages/api/galleries.ts",
+			"contentHash": "30c339008d6a50ad8cedbd3e45e8c7b2e17d578d59954d03ee301bd54c8ef5cc",
+			"functions": [
+				{
+					"name": "GET",
+					"params": [],
+					"exported": true,
+					"lineCount": 21
+				}
+			],
+			"classes": [],
+			"imports": [
+				{
+					"source": "astro",
+					"specifiers": ["APIRoute"]
+				},
+				{
+					"source": "../../data/galleries",
+					"specifiers": ["fetchAllGalleries", "filterPublishedGalleries"]
+				}
+			],
+			"exports": ["GET"],
+			"totalLines": 25,
+			"hasStructuralAnalysis": true
+		},
+		"src/pages/api/gallery-like.ts": {
+			"filePath": "src/pages/api/gallery-like.ts",
+			"contentHash": "2d5fdc24d337f6389d2121ac4593ea468728b5b05a350eb3f8a70ba7175058a5",
+			"functions": [
+				{
+					"name": "generateFingerprint",
+					"params": ["request"],
+					"returnType": "Promise<string>",
+					"exported": false,
+					"lineCount": 15
+				},
+				{
+					"name": "GET",
+					"params": ["{ request }"],
+					"exported": true,
+					"lineCount": 34
+				},
+				{
+					"name": "POST",
+					"params": ["{ request }"],
+					"exported": true,
+					"lineCount": 40
+				}
+			],
+			"classes": [],
+			"imports": [
+				{
+					"source": "astro",
+					"specifiers": ["APIRoute"]
+				},
+				{
+					"source": "zod",
+					"specifiers": ["z"]
+				},
+				{
+					"source": "../../lib/likes",
+					"specifiers": ["getGalleryLikes", "toggleGalleryLike"]
+				}
+			],
+			"exports": ["GET", "POST"],
+			"totalLines": 106,
+			"hasStructuralAnalysis": true
+		},
+		"src/pages/api/health.ts": {
+			"filePath": "src/pages/api/health.ts",
+			"contentHash": "17a4c491879cf81871e1097a31c3fbc7dc28e443a616501b1772b1fe7c10249c",
+			"functions": [
+				{
+					"name": "GET",
+					"params": [],
+					"exported": true,
+					"lineCount": 84
+				}
+			],
+			"classes": [],
+			"imports": [
+				{
+					"source": "cloudflare:workers",
+					"specifiers": ["env"]
+				},
+				{
+					"source": "astro",
+					"specifiers": ["APIRoute"]
+				},
+				{
+					"source": "../../lib/config",
+					"specifiers": ["getGoogleDriveCredentials"]
+				}
+			],
+			"exports": ["GET"],
+			"totalLines": 100,
+			"hasStructuralAnalysis": true
+		},
+		"src/pages/api/kontak.ts": {
+			"filePath": "src/pages/api/kontak.ts",
+			"contentHash": "ff585fb6dd56a363875081fe4e23f47115583365dbe31fed7fc1a0a798e5d74e",
+			"functions": [
+				{
+					"name": "sanitize",
+					"params": ["input"],
+					"returnType": "string",
+					"exported": false,
+					"lineCount": 7
+				},
+				{
+					"name": "buildNotificationHtml",
+					"params": ["data"],
+					"returnType": "string",
+					"exported": false,
+					"lineCount": 47
+				},
+				{
+					"name": "buildAutoReplyHtml",
+					"params": ["data"],
+					"returnType": "string",
+					"exported": false,
+					"lineCount": 30
+				},
+				{
+					"name": "sendResendEmail",
+					"params": ["apiKey", "to", "subject", "html", "replyTo"],
+					"returnType": "Promise<{ success: boolean; error?: string }>",
+					"exported": false,
+					"lineCount": 39
+				},
+				{
+					"name": "getClientIp",
+					"params": ["request"],
+					"returnType": "string",
+					"exported": false,
+					"lineCount": 7
+				},
+				{
+					"name": "POST",
+					"params": ["{ request }"],
+					"exported": true,
+					"lineCount": 140
+				}
+			],
+			"classes": [],
+			"imports": [
+				{
+					"source": "cloudflare:workers",
+					"specifiers": ["env"]
+				},
+				{
+					"source": "astro",
+					"specifiers": ["APIRoute"]
+				},
+				{
+					"source": "zod",
+					"specifiers": ["z"]
+				},
+				{
+					"source": "../../lib/config",
+					"specifiers": ["getResendApiKey"]
+				}
+			],
+			"exports": ["POST"],
+			"totalLines": 314,
+			"hasStructuralAnalysis": true
+		},
+		"src/pages/api/like.ts": {
+			"filePath": "src/pages/api/like.ts",
+			"contentHash": "9a3dfb62d633504e99f50fb96062df84028bf5c22a2ddcf4fc0c7c3ca408dacb",
+			"functions": [
+				{
+					"name": "GET",
+					"params": ["{ request }"],
+					"exported": true,
+					"lineCount": 27
+				},
+				{
+					"name": "POST",
+					"params": ["{ request }"],
+					"exported": true,
+					"lineCount": 33
+				}
+			],
+			"classes": [],
+			"imports": [
+				{
+					"source": "astro",
+					"specifiers": ["APIRoute"]
+				},
+				{
+					"source": "zod",
+					"specifiers": ["z"]
+				},
+				{
+					"source": "../../lib/likes",
+					"specifiers": ["getPhotoLikes", "incrementPhotoLike"]
+				}
+			],
+			"exports": ["GET", "POST"],
+			"totalLines": 75,
+			"hasStructuralAnalysis": true
+		},
+		"src/pages/blog/[slug].astro": {
+			"filePath": "src/pages/blog/[slug].astro",
+			"contentHash": "8a11aba8fa0de177655c5d1cf7f25b3c212a7238dc4ed21e9408ec2f12c4fcc4",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 263,
+			"hasStructuralAnalysis": false
+		},
+		"src/pages/blog/index.astro": {
+			"filePath": "src/pages/blog/index.astro",
+			"contentHash": "7d0164f588ae9d203ecbe675efc2974b5803dc6d0a7f82f9da188a4564f759f6",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 117,
+			"hasStructuralAnalysis": false
+		},
+		"src/pages/donasi.astro": {
+			"filePath": "src/pages/donasi.astro",
+			"contentHash": "9d1a9f849133b506d8f7808eb2e097fb1d2fe563ca780ef0724fdf5290844f2b",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 316,
+			"hasStructuralAnalysis": false
+		},
+		"src/pages/faq.astro": {
+			"filePath": "src/pages/faq.astro",
+			"contentHash": "22f6beeeb2016191782bb46fa0e75606b2702b39af5d8b7532c6fdb7c30f63cb",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 278,
+			"hasStructuralAnalysis": false
+		},
+		"src/pages/galeri.astro": {
+			"filePath": "src/pages/galeri.astro",
+			"contentHash": "223e566046117906c825d8c29f31f5176b92cf41cb88cd281a512aa28d57cc06",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 345,
+			"hasStructuralAnalysis": false
+		},
+		"src/pages/galeri/[slug].astro": {
+			"filePath": "src/pages/galeri/[slug].astro",
+			"contentHash": "5cf1cfddc3b6154cb734c4ed7c4e48896eb2cd99c2dec107a06be676820e8efa",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 223,
+			"hasStructuralAnalysis": false
+		},
+		"src/pages/index.astro": {
+			"filePath": "src/pages/index.astro",
+			"contentHash": "b1764a1b314fbc82e06868bf98f1d42bd206b8c5c5733b7f63f2332dd396d4d1",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 191,
+			"hasStructuralAnalysis": false
+		},
+		"src/pages/kebijakan-privasi.astro": {
+			"filePath": "src/pages/kebijakan-privasi.astro",
+			"contentHash": "1d99d3621a78088506adec44866146f9f7c419fd1b8b8541d5f720bd1ead07c1",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 181,
+			"hasStructuralAnalysis": false
+		},
+		"src/pages/kegiatan/[slug].astro": {
+			"filePath": "src/pages/kegiatan/[slug].astro",
+			"contentHash": "0c22d6d1c73686842274f2b2183699980dbae285fcc7a0e9de834a7cadc9ab4f",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 548,
+			"hasStructuralAnalysis": false
+		},
+		"src/pages/kegiatan/index.astro": {
+			"filePath": "src/pages/kegiatan/index.astro",
+			"contentHash": "5e6e74c2ce7154719a8f32a72b0e17b2b628367d56d43f188da3f1854fd8ea14",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 113,
+			"hasStructuralAnalysis": false
+		},
+		"src/pages/kontak.astro": {
+			"filePath": "src/pages/kontak.astro",
+			"contentHash": "b09e972cd90842ee62cfb44525100c1c43034be0bbf6b5b95ce287edb53d0176",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 475,
+			"hasStructuralAnalysis": false
+		},
+		"src/pages/program.astro": {
+			"filePath": "src/pages/program.astro",
+			"contentHash": "28c625d1af005bca693561c4b4c3f374dabc006d3859f89698dc1c841144d57f",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 457,
+			"hasStructuralAnalysis": false
+		},
+		"src/pages/rss.xml.ts": {
+			"filePath": "src/pages/rss.xml.ts",
+			"contentHash": "a7396aa2e4f53da5d195e169c3e81f68ccd6b95a704622e65c837293dbcbcc5a",
+			"functions": [
+				{
+					"name": "GET",
+					"params": [],
+					"exported": true,
+					"lineCount": 31
+				}
+			],
+			"classes": [],
+			"imports": [
+				{
+					"source": "astro:content",
+					"specifiers": ["getCollection"]
+				},
+				{
+					"source": "@astrojs/rss",
+					"specifiers": ["rss"]
+				},
+				{
+					"source": "../data/site",
+					"specifiers": ["SITE"]
+				}
+			],
+			"exports": ["GET"],
+			"totalLines": 36,
+			"hasStructuralAnalysis": true
+		},
+		"src/pages/syarat-ketentuan.astro": {
+			"filePath": "src/pages/syarat-ketentuan.astro",
+			"contentHash": "9b06667839d8cdb0c6e36222211f1b9193ff8298f9e9d334c685ea01f80c4396",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 201,
+			"hasStructuralAnalysis": false
+		},
+		"src/pages/tentang.astro": {
+			"filePath": "src/pages/tentang.astro",
+			"contentHash": "c999d35c8e5911eb5c83d7d8fa845898d919ec60c623434953ed88f828435a9d",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 391,
+			"hasStructuralAnalysis": false
+		},
+		"src/pages/test-fade.astro": {
+			"filePath": "src/pages/test-fade.astro",
+			"contentHash": "c3baca82840d88f473c96639fd64dbac9d69ba556cead9c4a072ce1d0debd3cd",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 296,
+			"hasStructuralAnalysis": false
+		},
+		"src/styles/design-tokens.css": {
+			"filePath": "src/styles/design-tokens.css",
+			"contentHash": "e5c28902a9645b4be7819e84648017a5fb06028af0763ca1f74d566e9bf54fa0",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 184,
+			"hasStructuralAnalysis": false
+		},
+		"src/styles/global.css": {
+			"filePath": "src/styles/global.css",
+			"contentHash": "4b3fc5c0d5dfaeb442800bc4f8b663a3313eb5c1832f61d287b4b53e5043a2b2",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 267,
+			"hasStructuralAnalysis": false
+		},
+		"studio-amalshalih/eslint.config.mjs": {
+			"filePath": "studio-amalshalih/eslint.config.mjs",
+			"contentHash": "c5807d719bd7e7fe92e44afc822e98b191bfdd31b1d2195fe154a8ee7edda875",
+			"functions": [],
+			"classes": [],
+			"imports": [
+				{
+					"source": "@sanity/eslint-config-studio",
+					"specifiers": ["studio"]
+				}
+			],
+			"exports": [],
+			"totalLines": 4,
+			"hasStructuralAnalysis": true
+		},
+		"studio-amalshalih/package.json": {
+			"filePath": "studio-amalshalih/package.json",
+			"contentHash": "d2237d3c80e68bae6f1bcc3fdf1b078c5d7c7fd8893c5f1ea187e44be567fb92",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 38,
+			"hasStructuralAnalysis": true
+		},
+		"studio-amalshalih/README.md": {
+			"filePath": "studio-amalshalih/README.md",
+			"contentHash": "9bdd511ad54209f86ba4c4c356726bd3259e2187c41aebdc0a88c7f690627493",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 10,
+			"hasStructuralAnalysis": true
+		},
+		"studio-amalshalih/sanity.cli.ts": {
+			"filePath": "studio-amalshalih/sanity.cli.ts",
+			"contentHash": "85b23abc3e44f411eeac3db197bd2d6a9f2dabbaf79899641efb5b8a8541d5f9",
+			"functions": [],
+			"classes": [],
+			"imports": [
+				{
+					"source": "sanity/cli",
+					"specifiers": ["defineCliConfig"]
+				}
+			],
+			"exports": [],
+			"totalLines": 17,
+			"hasStructuralAnalysis": true
+		},
+		"studio-amalshalih/sanity.config.ts": {
+			"filePath": "studio-amalshalih/sanity.config.ts",
+			"contentHash": "1df2df4f46d3120b00d352a9af8166e074d0860fbb1efdc32bd0a14c09d36813",
+			"functions": [],
+			"classes": [],
+			"imports": [
+				{
+					"source": "@sanity/vision",
+					"specifiers": ["visionTool"]
+				},
+				{
+					"source": "sanity",
+					"specifiers": ["defineConfig"]
+				},
+				{
+					"source": "sanity/structure",
+					"specifiers": ["structureTool"]
+				},
+				{
+					"source": "./schemaTypes",
+					"specifiers": ["schemaTypes"]
+				}
+			],
+			"exports": [],
+			"totalLines": 19,
+			"hasStructuralAnalysis": true
+		},
+		"studio-amalshalih/schemaTypes/bankDonasi.ts": {
+			"filePath": "studio-amalshalih/schemaTypes/bankDonasi.ts",
+			"contentHash": "475d7c6f8d66c281c89f13da7d1926dd9931478fb533f1ed12679a6985ec0004",
+			"functions": [],
+			"classes": [],
+			"imports": [
+				{
+					"source": "sanity",
+					"specifiers": ["defineField", "defineType"]
+				}
+			],
+			"exports": ["bankDonasiType"],
+			"totalLines": 51,
+			"hasStructuralAnalysis": true
+		},
+		"studio-amalshalih/schemaTypes/blockContent.ts": {
+			"filePath": "studio-amalshalih/schemaTypes/blockContent.ts",
+			"contentHash": "a28d64900f52751d0bfbc85fcbed644787de5a1026fa9f147dcb3c623fcf8a0b",
+			"functions": [],
+			"classes": [],
+			"imports": [
+				{
+					"source": "sanity",
+					"specifiers": ["defineArrayMember", "defineType"]
+				}
+			],
+			"exports": ["blockContentType"],
+			"totalLines": 41,
+			"hasStructuralAnalysis": true
+		},
+		"studio-amalshalih/schemaTypes/blogPost.ts": {
+			"filePath": "studio-amalshalih/schemaTypes/blogPost.ts",
+			"contentHash": "b2f234f52149ddc2c6464bcad6ecf2ed659dc4725aac113c25ef646c61cb1805",
+			"functions": [],
+			"classes": [],
+			"imports": [
+				{
+					"source": "sanity",
+					"specifiers": ["defineField", "defineType"]
+				}
+			],
+			"exports": ["blogPostType"],
+			"totalLines": 86,
+			"hasStructuralAnalysis": true
+		},
+		"studio-amalshalih/schemaTypes/faq.ts": {
+			"filePath": "studio-amalshalih/schemaTypes/faq.ts",
+			"contentHash": "84eac4959e2c2f96e86a40c3f7fb2f808ab006b636033bc95849c9d43d908cea",
+			"functions": [],
+			"classes": [],
+			"imports": [
+				{
+					"source": "sanity",
+					"specifiers": ["defineField", "defineType"]
+				}
+			],
+			"exports": ["faqType"],
+			"totalLines": 78,
+			"hasStructuralAnalysis": true
+		},
+		"studio-amalshalih/schemaTypes/index.ts": {
+			"filePath": "studio-amalshalih/schemaTypes/index.ts",
+			"contentHash": "f9ea2e359aa667affcd0352e27f99d99f3347865a0f8ea42ba43ca7dbfc12d45",
+			"functions": [],
+			"classes": [],
+			"imports": [
+				{
+					"source": "./bankDonasi",
+					"specifiers": ["bankDonasiType"]
+				},
+				{
+					"source": "./blockContent",
+					"specifiers": ["blockContentType"]
+				},
+				{
+					"source": "./blogPost",
+					"specifiers": ["blogPostType"]
+				},
+				{
+					"source": "./faq",
+					"specifiers": ["faqType"]
+				},
+				{
+					"source": "./kegiatan",
+					"specifiers": ["kegiatanType"]
+				},
+				{
+					"source": "./pengurus",
+					"specifiers": ["pengurusType"]
+				},
+				{
+					"source": "./program",
+					"specifiers": ["programType"]
+				},
+				{
+					"source": "./siteSettings",
+					"specifiers": ["siteSettingsType"]
+				}
+			],
+			"exports": ["schemaTypes"],
+			"totalLines": 23,
+			"hasStructuralAnalysis": true
+		},
+		"studio-amalshalih/schemaTypes/kegiatan.ts": {
+			"filePath": "studio-amalshalih/schemaTypes/kegiatan.ts",
+			"contentHash": "0dbfbef5d407bae283bbc74f5ca744029c2b06134d90a51305a2d987ef287535",
+			"functions": [],
+			"classes": [],
+			"imports": [
+				{
+					"source": "sanity",
+					"specifiers": ["defineField", "defineType"]
+				}
+			],
+			"exports": ["kegiatanType"],
+			"totalLines": 74,
+			"hasStructuralAnalysis": true
+		},
+		"studio-amalshalih/schemaTypes/pengurus.ts": {
+			"filePath": "studio-amalshalih/schemaTypes/pengurus.ts",
+			"contentHash": "26a88c6a436559eeece8c1184a168de0249730f0945d8471761191eac7db9d07",
+			"functions": [],
+			"classes": [],
+			"imports": [
+				{
+					"source": "sanity",
+					"specifiers": ["defineField", "defineType"]
+				}
+			],
+			"exports": ["pengurusType"],
+			"totalLines": 54,
+			"hasStructuralAnalysis": true
+		},
+		"studio-amalshalih/schemaTypes/program.ts": {
+			"filePath": "studio-amalshalih/schemaTypes/program.ts",
+			"contentHash": "ac65979efdb30ffd3b6a93fff15ab338da1277dc1aeefd35eef9758bbf602af6",
+			"functions": [],
+			"classes": [],
+			"imports": [
+				{
+					"source": "sanity",
+					"specifiers": ["defineField", "defineType"]
+				}
+			],
+			"exports": ["programType"],
+			"totalLines": 112,
+			"hasStructuralAnalysis": true
+		},
+		"studio-amalshalih/schemaTypes/siteSettings.ts": {
+			"filePath": "studio-amalshalih/schemaTypes/siteSettings.ts",
+			"contentHash": "3a60dad2ab44a3ede9500f6ca530b0c1c9c08c829a2e1991cccfcbf66e7b1f2d",
+			"functions": [],
+			"classes": [],
+			"imports": [
+				{
+					"source": "sanity",
+					"specifiers": ["defineField", "defineType"]
+				}
+			],
+			"exports": ["siteSettingsType"],
+			"totalLines": 351,
+			"hasStructuralAnalysis": true
+		},
+		"studio-amalshalih/static/.gitkeep": {
+			"filePath": "studio-amalshalih/static/.gitkeep",
+			"contentHash": "7635960718f1ae5cfaeab98e80b07e7e8cd88ab24c40139cf7722b809ad2ac1b",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 2,
+			"hasStructuralAnalysis": false
+		},
+		"studio-amalshalih/tsconfig.json": {
+			"filePath": "studio-amalshalih/tsconfig.json",
+			"contentHash": "e51938302f6d2c97aa33120e33b1703b9771ae7092b72a037eb09b5cff78cb11",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 18,
+			"hasStructuralAnalysis": true
+		},
+		"tentang-snapshot.md": {
+			"filePath": "tentang-snapshot.md",
+			"contentHash": "f6dbc8ea16282a4afe6399f048276ea0100d3156d8f5ce48c6199c1cdac2f142",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 60,
+			"hasStructuralAnalysis": true
+		},
+		"test/e2e/blog.spec.ts": {
+			"filePath": "test/e2e/blog.spec.ts",
+			"contentHash": "3f97384198d6692e48b8974bd3f9793ad0fe2943669ded8c3c817668f11a4b04",
+			"functions": [],
+			"classes": [],
+			"imports": [
+				{
+					"source": "@playwright/test",
+					"specifiers": ["expect", "test"]
+				}
+			],
+			"exports": [],
+			"totalLines": 54,
+			"hasStructuralAnalysis": true
+		},
+		"test/e2e/contact-form.spec.ts": {
+			"filePath": "test/e2e/contact-form.spec.ts",
+			"contentHash": "7ce2e4caf104c3ab5aa88ee1e5b28818cdbbde66657883abc97fbf82cb91b12a",
+			"functions": [],
+			"classes": [],
+			"imports": [
+				{
+					"source": "@playwright/test",
+					"specifiers": ["expect", "test"]
+				}
+			],
+			"exports": [],
+			"totalLines": 55,
+			"hasStructuralAnalysis": true
+		},
+		"test/e2e/homepage.spec.ts": {
+			"filePath": "test/e2e/homepage.spec.ts",
+			"contentHash": "097900b072f13cc6bfea95d82cfe7aa463ad9d0f5f841a81c28803c83c340bab",
+			"functions": [],
+			"classes": [],
+			"imports": [
+				{
+					"source": "@playwright/test",
+					"specifiers": ["expect", "test"]
+				}
+			],
+			"exports": [],
+			"totalLines": 37,
+			"hasStructuralAnalysis": true
+		},
+		"test/e2e/navigation.spec.ts": {
+			"filePath": "test/e2e/navigation.spec.ts",
+			"contentHash": "5fcf02b925b70e0ac255d313e712b669bc79ff381f155483e791169fa1441922",
+			"functions": [],
+			"classes": [],
+			"imports": [
+				{
+					"source": "@playwright/test",
+					"specifiers": ["expect", "test"]
+				}
+			],
+			"exports": [],
+			"totalLines": 53,
+			"hasStructuralAnalysis": true
+		},
+		"test/integration/api.test.ts": {
+			"filePath": "test/integration/api.test.ts",
+			"contentHash": "62cd1b5d5f33bae531502c6820ae0fad1081a86a17ac9f0c0007d32a60c82b4a",
+			"functions": [],
+			"classes": [],
+			"imports": [
+				{
+					"source": "vitest",
+					"specifiers": ["describe", "expect", "it"]
+				}
+			],
+			"exports": [],
+			"totalLines": 172,
+			"hasStructuralAnalysis": true
+		},
+		"test/lighthouse/lighthouse-audit.spec.ts": {
+			"filePath": "test/lighthouse/lighthouse-audit.spec.ts",
+			"contentHash": "f3e80b60a972d9ae30c7c0be1a98a1db1934d19b3b82680b0989fbf1903904d7",
+			"functions": [],
+			"classes": [],
+			"imports": [
+				{
+					"source": "@playwright/test",
+					"specifiers": ["expect", "test"]
+				}
+			],
+			"exports": [],
+			"totalLines": 75,
+			"hasStructuralAnalysis": true
+		},
+		"tsconfig.json": {
+			"filePath": "tsconfig.json",
+			"contentHash": "bfb72c85648c4706d792e42d1e27802736f251b30c1bcb5491931ab601477899",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 9,
+			"hasStructuralAnalysis": true
+		},
+		"vitest.config.ts": {
+			"filePath": "vitest.config.ts",
+			"contentHash": "5680d414bad344bb743a71a3ae857e14be3c442842e1eb9374b076cf3a94847f",
+			"functions": [],
+			"classes": [],
+			"imports": [
+				{
+					"source": "@cloudflare/vitest-pool-workers",
+					"specifiers": ["cloudflareTest"]
+				},
+				{
+					"source": "vitest/config",
+					"specifiers": ["defineConfig"]
+				}
+			],
+			"exports": [],
+			"totalLines": 21,
+			"hasStructuralAnalysis": true
+		},
+		"wrangler.build.jsonc": {
+			"filePath": "wrangler.build.jsonc",
+			"contentHash": "836eba06dd57e092d703e9576d25b64cd64bcb3bdcfee14e1dafa725194fff93",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 9,
+			"hasStructuralAnalysis": true
+		},
+		"wrangler.jsonc": {
+			"filePath": "wrangler.jsonc",
+			"contentHash": "eba903f60f9cf399554d2f6230c6e7eb76d379ddd8fce388aafe27f2ff5b7128",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 27,
+			"hasStructuralAnalysis": true
+		},
+		"wrangler.staging.jsonc": {
+			"filePath": "wrangler.staging.jsonc",
+			"contentHash": "3b6220955954b208746aa059f442827602b7dd2d919ab2f615fc55d8a248f324",
+			"functions": [],
+			"classes": [],
+			"imports": [],
+			"exports": [],
+			"totalLines": 27,
+			"hasStructuralAnalysis": true
+		}
+	}
+}

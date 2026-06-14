@@ -54,7 +54,7 @@ try {
 	<Container class="py-8 sm:py-16">
 		<div class="grid gap-5 sm:gap-6 md:grid-cols-3">
 			<!-- QRIS — Moved to top for mobile visibility, order restored on sm+ -->
-			<Card variant="hover" class="relative overflow-hidden order-first sm:order-none sm:p-6 h-full">
+			<Card variant="hover" class="relative overflow-hidden sm:p-6 h-full">
 				<!-- Background watermark — mobile only, position randomized per reload -->
 				<div class="absolute sm:hidden pointer-events-none text-primary-500/[0.06]" data-donation-watermark>
 					<Icon name="qrcode" size={24} aria-hidden="true" />
@@ -62,8 +62,8 @@ try {
 				<div class="mb-3 icon-box hidden sm:inline-flex">
 					<Icon name="qrcode" size={7} aria-hidden="true" />
 				</div>
-				<h2 class="text-lg sm:text-xl font-bold text-warm-900">QRIS</h2>
-				<p class="mt-2 text-sm text-warm-700">
+				<h2 class="text-lg sm:text-xl font-bold text-text-primary">QRIS</h2>
+				<p class="mt-2 text-sm text-text-secondary">
 					Scan kode QRIS berikut menggunakan aplikasi mobile banking atau e-wallet Anda.
 				</p>
 				<div class="mt-4 flex justify-center">
@@ -73,11 +73,11 @@ try {
 						class="h-52 sm:h-64 w-auto max-w-xs sm:max-w-sm rounded-lg sm:rounded-xl shadow-sm"
 						width="778"
 						height="800"
-						loading="lazy"
+						fetchpriority="high"
 						decoding="async"
 					/>
 				</div>
-				<div class="mt-3 rounded-lg bg-primary-50 p-3 sm:p-4 text-sm text-primary-800">
+				<div class="mt-3 rounded-lg bg-primary-50 dark:bg-primary-900/40 p-3 sm:p-4 text-sm text-primary-800 dark:text-primary-200">
 					<strong>Cara:</strong> Buka aplikasi berlogo QRIS → Scan kode → Cek nominal → Donasi/Bayar
 				</div>
 			</Card>
@@ -91,17 +91,17 @@ try {
 				<div class="mb-3 icon-box hidden sm:inline-flex">
 					<Icon name="credit-card" size={7} aria-hidden="true" />
 				</div>
-				<h2 class="text-lg sm:text-xl font-bold text-warm-900">Transfer Bank</h2>
-				<p class="mt-2 text-sm text-warm-700">Salurkan donasi melalui rekening resmi Yayasan ASIB di bawah ini.</p>
+				<h2 class="text-lg sm:text-xl font-bold text-text-primary">Transfer Bank</h2>
+				<p class="mt-2 text-sm text-text-secondary">Salurkan donasi melalui rekening resmi Yayasan ASIB di bawah ini.</p>
 
 				<!-- Pilih Bank via Dropdown -->
 				<div class="mt-5" data-bank-selector>
-					<label for="bank-select" class="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-warm-500">
+					<label for="bank-select" class="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-text-muted">
 						Pilih Bank
 					</label>
 					<select
 						id="bank-select"
-						class="block w-full rounded-xl border border-primary-200 bg-white px-4 py-2.5 text-sm font-medium text-warm-900 shadow-sm transition-colors focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20"
+						class="block w-full rounded-xl border border-primary-200 dark:border-primary-800 bg-white dark:bg-surface-secondary px-4 py-2.5 text-base font-medium text-text-primary shadow-sm transition-colors focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20"
 					>
 						{banks.map((bank, i) => (
 							<option value={i} selected={i === 0}>{bank.name}</option>
@@ -112,25 +112,25 @@ try {
 					<div class="mt-4">
 						{banks.map((bank, i) => (
 							<div class={`bank-detail ${i === 0 ? '' : 'hidden'}`} data-index={i}>
-								<div class="rounded-xl sm:rounded-2xl bg-white p-4 sm:p-5 shadow-sm">
+								<div class="rounded-xl sm:rounded-2xl bg-surface-elevated dark:bg-surface-secondary p-4 sm:p-5 shadow-sm">
 									<div class="flex items-center justify-between mb-3 sm:mb-4">
 										<div class="flex items-center gap-2">
-											<div class="rounded-lg bg-primary-50 p-2 text-primary-700">
+											<div class="rounded-lg bg-primary-50 dark:bg-primary-900/40 p-2 text-primary-700 dark:text-primary-400">
 												<Icon name="credit-card" size={5} aria-hidden="true" />
 											</div>
-											<span class="text-sm font-semibold text-warm-900">{bank.fullName}</span>
+											<span class="text-sm font-semibold text-text-primary">{bank.fullName}</span>
 										</div>
-										<span class="text-[10px] font-semibold uppercase tracking-wider text-warm-800">Rekening Resmi</span>
+										<span class="text-[10px] font-semibold uppercase tracking-wider text-text-secondary">Rekening Resmi</span>
 									</div>
 
-									<div class="flex items-center justify-between rounded-lg sm:rounded-xl bg-warm-50 p-3 sm:p-4">
+									<div class="flex items-center justify-between rounded-lg sm:rounded-xl bg-warm-50 dark:bg-warm-900/30 p-3 sm:p-4">
 										<div>
-											<p class="text-[11px] font-semibold uppercase tracking-wide text-warm-500">Nomor Rekening</p>
-											<p class="mt-0.5 text-lg sm:text-xl font-extrabold tracking-wider text-primary-700 font-mono">{bank.accountNumber}</p>
+											<p class="text-[11px] font-semibold uppercase tracking-wide text-text-muted">Nomor Rekening</p>
+											<p class="mt-0.5 text-lg sm:text-xl font-extrabold tracking-wider text-primary-700 dark:text-primary-400 font-mono">{bank.accountNumber}</p>
 										</div>
 										<button
 											type="button"
-											class="copy-btn inline-flex h-9 w-9 items-center justify-center rounded-lg bg-white text-primary-700 shadow-sm transition-colors duration-200 hover:bg-primary-50 active:scale-90"
+											class="copy-btn inline-flex h-9 w-9 items-center justify-center rounded-lg bg-white dark:bg-surface-secondary text-primary-700 dark:text-primary-400 shadow-sm transition-colors duration-200 hover:bg-primary-50 active:scale-90"
 											data-copy={bank.accountNumber}
 											aria-label="Salin nomor rekening"
 										>
@@ -139,8 +139,8 @@ try {
 										</button>
 									</div>
 
-									<p class="mt-2 text-center text-sm text-warm-600">
-										a.n. <span class="font-semibold text-warm-900">{bank.accountName}</span>
+									<p class="mt-2 text-center text-sm text-text-secondary">
+										a.n. <span class="font-semibold text-text-primary">{bank.accountName}</span>
 									</p>
 								</div>
 							</div>
@@ -148,8 +148,8 @@ try {
 					</div>
 				</div>
 
-				<div class="mt-3 rounded-lg sm:rounded-xl bg-gold-50 px-4 py-3 text-sm text-gold-800">
-					<strong>Konfirmasi donasi:</strong> Setelah transfer, kirim bukti ke WhatsApp <strong>{contactPhone}</strong>.
+				<div class="mt-3 rounded-lg sm:rounded-xl bg-gold-50 dark:bg-gold-900/30 px-4 py-3 text-sm text-gold-800 dark:text-gold-200">
+					<strong>Konfirmasi donasi:</strong> Setelah transfer, kirim bukti ke WhatsApp <a href={contactWhatsapp} target="_blank" rel="noopener noreferrer" class="font-semibold underline underline-offset-2 decoration-gold-400/50 hover:decoration-gold-500">{contactPhone}</a>.
 				</div>
 			</Card>
 
@@ -162,8 +162,8 @@ try {
 				<div class="mb-3 icon-box hidden sm:inline-flex">
 					<Icon name="globe" size={7} aria-hidden="true" />
 				</div>
-				<h2 class="text-lg sm:text-xl font-bold text-warm-900">Donasi Online</h2>
-				<p class="mt-2 text-sm text-warm-700">
+				<h2 class="text-lg sm:text-xl font-bold text-text-primary">Donasi Online</h2>
+				<p class="mt-2 text-sm text-text-secondary">
 					Kunjungi platform donasi online kami melalui link berikut.
 				</p>
 				<div class="mt-4 space-y-3">
@@ -171,24 +171,24 @@ try {
 						href={linktreeUrl}
 						target="_blank"
 						rel="noopener noreferrer"
-						class="flex items-center gap-3 rounded-lg sm:rounded-xl border border-primary-200 bg-white p-3 sm:p-4 transition-colors duration-200 hover:border-primary-400 hover:bg-primary-50 hover:shadow-sm"
+						class="flex items-center gap-3 rounded-lg sm:rounded-xl border border-primary-200 dark:border-primary-800 bg-white dark:bg-surface-secondary p-3 sm:p-4 transition-colors duration-200 hover:border-primary-400 dark:hover:border-primary-600 hover:bg-primary-50 dark:hover:bg-primary-900/30 hover:shadow-sm"
 					>
-						<div class="rounded-lg bg-primary-100 p-2 text-primary-700 shrink-0">
+						<div class="rounded-lg bg-primary-100 dark:bg-primary-900/40 p-2 text-primary-700 dark:text-primary-400 shrink-0">
 							<Icon name="external-link" size={6} aria-hidden="true" />
 						</div>
 						<div class="min-w-0">
-							<p class="truncate font-semibold text-warm-900">{linktreeUrl.replace('https://', '')}</p>
-							<p class="text-xs text-warm-900">Semua program donasi dalam satu tautan</p>
+							<p class="truncate font-semibold text-text-primary">{linktreeUrl.replace('https://', '')}</p>
+							<p class="text-xs text-text-primary">Semua program donasi dalam satu tautan</p>
 						</div>
-						<Icon name="external-link" size={5} class="shrink-0 text-warm-600" aria-hidden="true" />
+						<Icon name="external-link" size={5} class="shrink-0 text-text-secondary" aria-hidden="true" />
 					</a>
 				</div>
-				<div class="mt-4 rounded-lg sm:rounded-xl bg-warm-50 p-4 sm:p-5">
-					<h3 class="font-semibold text-warm-800">Butuh bantuan?</h3>
-					<p class="mt-1 text-sm text-warm-700">
+				<div class="mt-4 rounded-lg sm:rounded-xl bg-warm-50 dark:bg-warm-900/30 p-4 sm:p-5">
+					<h3 class="font-semibold text-text-primary">Butuh bantuan?</h3>
+					<p class="mt-1 text-sm text-text-secondary">
 						Hubungi admin kami melalui WhatsApp:
 					</p>
-					<div class="mt-2 flex justify-end sm:block">
+					<div class="mt-2 flex justify-end">
 						<Button variant="primary" href={contactWhatsapp} target="_blank" rel="noopener noreferrer">
 							<Icon name="whatsapp" size={4} aria-hidden="true" />
 							Chat WhatsApp
@@ -201,7 +201,7 @@ try {
 
 	<Fragment slot="after-main">
 		<!-- Sacred Geometry & Architecture — honeycomb tessellation + mosque dome silhouettes -->
-		<section class="relative overflow-hidden bg-gradient-to-b from-primary-50 via-gold-50/30 to-warm-50">
+		<section class="relative overflow-hidden bg-gradient-to-b from-primary-50 via-gold-50/30 to-warm-50 dark:from-primary-950 dark:via-primary-900/40 dark:to-warm-950">
 			<!-- Honeycomb tessellation overlay using hexagon clip-path -->
 			<div class="absolute inset-0 opacity-[0.04]" aria-hidden="true">
 				<!-- Row 1 -->
@@ -235,21 +235,21 @@ try {
 
 			<Container as="div" class="relative z-10 py-5 sm:py-6 lg:py-8">
 				<!-- Glassmorphism card with ethereal feel -->
-				<div class="relative mx-auto max-w-3xl rounded-xl sm:rounded-2xl bg-white/50 backdrop-blur-xl border border-white/50 shadow-xl shadow-primary-900/5 p-5 sm:p-8 text-center overflow-hidden">
+				<div class="relative mx-auto max-w-3xl rounded-xl sm:rounded-2xl bg-white/50 dark:bg-surface-secondary/80 backdrop-blur-xl border border-white/50 dark:border-white/10 shadow-xl shadow-primary-900/5 p-5 sm:p-8 text-center overflow-hidden">
 					<!-- Decorative large quote mark -->
 					<div class="absolute -top-2 left-3 sm:left-6 text-[5rem] sm:text-[7rem] leading-none font-serif text-gold-400/10 select-none pointer-events-none" aria-hidden="true">&ldquo;</div>
 
 					<blockquote class="relative">
-						<p class="text-base sm:text-lg lg:text-xl font-semibold leading-relaxed text-warm-900 font-display">
+						<p class="text-base sm:text-lg lg:text-xl font-semibold leading-relaxed text-text-primary font-display">
 							Perumpamaan orang yang menginfakkan hartanya di jalan Allah
 							seperti sebutir biji yang menumbuhkan tujuh bulir, pada tiap-tiap bulir
 							terdapat seratus biji.
 						</p>
 					</blockquote>
 
-					<div class="mx-auto mt-4 h-0.5 w-10 sm:w-14 rounded-full bg-gradient-to-r from-gold-300 to-gold-500"></div>
+					<div class="mx-auto mt-4 h-0.5 w-10 sm:w-14 rounded-full bg-gradient-to-r from-gold-300 to-gold-500 dark:from-gold-500 dark:to-gold-300"></div>
 
-					<p class="mt-3 text-xs sm:text-sm font-semibold tracking-wide text-primary-700 uppercase">
+					<p class="mt-3 text-xs sm:text-sm font-semibold tracking-wide text-primary-700 dark:text-primary-400 uppercase">
 						— QS. Al-Baqarah: 261
 					</p>
 				</div>
@@ -269,15 +269,15 @@ try {
 
 	if (!select || details.length === 0) return;
 
-	// Show initial
-	select.dispatchEvent(new Event('change'));
-
 	select.addEventListener('change', () => {
 		const idx = select.value;
 		details.forEach((el) => {
 			el.classList.toggle('hidden', el.getAttribute('data-index') !== idx);
 		});
 	});
+
+	// Show initial
+	select.dispatchEvent(new Event('change'));
 
 	// Clipboard
 	root.querySelectorAll('.copy-btn').forEach((btn) => {

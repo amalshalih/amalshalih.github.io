@@ -21,7 +21,7 @@ export const onRequest = defineMiddleware(async (context, next) => {
 			"script-src 'self' 'unsafe-inline' https://*.sentry.io; " +
 			"style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " +
 			"font-src 'self' https://fonts.gstatic.com https://fonts.googleapis.com; " +
-			"img-src 'self' data: blob: https://cdn.sanity.io https://facebook.com https://instagram.com https://youtube.com https://tiktok.com https://wa.me https://www.google.com/maps https://linktr.ee https://www.googleapis.com; " +
+			"img-src 'self' data: blob: https://cdn.sanity.io https://images.unsplash.com https://unsplash.com https://facebook.com https://instagram.com https://youtube.com https://tiktok.com https://wa.me https://www.google.com/maps https://linktr.ee https://www.googleapis.com; " +
 			"connect-src 'self' https://*.ingest.us.sentry.io https://api.resend.com https://www.googleapis.com https://fonts.googleapis.com https://fonts.gstatic.com; " +
 			"frame-src 'self' https://www.youtube.com https://youtube.com https://facebook.com https://instagram.com https://linktr.ee https://wa.me; " +
 			"form-action 'self' https://api.resend.com; " +

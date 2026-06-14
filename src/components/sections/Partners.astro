@@ -74,6 +74,7 @@ const {
 								alt={partner.name}
 								class="max-h-12 sm:max-h-16 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity duration-300"
 								loading="lazy"
+								decoding="async"
 							/>
 						) : (
 							<span class="text-xs sm:text-sm font-semibold text-text-muted text-center px-2">
@@ -99,6 +100,7 @@ const {
 								alt={partner.name}
 								class="max-h-12 sm:max-h-16 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity duration-300"
 								loading="lazy"
+								decoding="async"
 							/>
 						) : (
 							<span class="text-xs sm:text-sm font-semibold text-text-muted text-center px-2">
@@ -131,5 +133,10 @@ const {
 		100% {
 			transform: translateX(-50%);
 		}
+	}
+	
+	/* Pause carousel on hover for better UX */
+	.animate-\[partner-scroll_30s_linear_infinite\]:hover {
+		animation-play-state: paused;
 	}
 </style>

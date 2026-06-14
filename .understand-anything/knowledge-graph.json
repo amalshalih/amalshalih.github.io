@@ -1,0 +1,2963 @@
+{
+	"version": "1.0.0",
+	"project": {
+		"name": "Yayasan Amal Shalih Insan Bantul",
+		"languages": [
+			"astro",
+			"typescript",
+			"javascript",
+			"css",
+			"markdown",
+			"yaml",
+			"json",
+			"jsonc",
+			"python",
+			"shell"
+		],
+		"frameworks": ["Astro", "Tailwind CSS", "Cloudflare Workers", "Sanity CMS", "Sentry"],
+		"description": "Website resmi Yayasan Amal Shalih Insan Bantul (ASIB) — organisasi nirlaba bidang Pendidikan Islam, Sosial Kemanusiaan, dan Keagamaan",
+		"analyzedAt": "2026-06-14T10:30:55.178Z",
+		"gitCommitHash": "9ba86e1a39368ab74f770ab47766e211d5b52484"
+	},
+	"nodes": [
+		{
+			"id": "pipeline:.github/workflows/deploy.yml",
+			"type": "pipeline",
+			"name": "deploy.yml",
+			"filePath": ".github/workflows/deploy.yml",
+			"summary": "GitHub Actions workflow untuk deploy otomatis ke Cloudflare Workers — meliputi build, lint, test, dan deployment",
+			"tags": ["yaml", "ci/cd", "infra", "github-actions"],
+			"complexity": "complex"
+		},
+		{
+			"id": "pipeline:.github/workflows/monthly-audit.yml",
+			"type": "pipeline",
+			"name": "monthly-audit.yml",
+			"filePath": ".github/workflows/monthly-audit.yml",
+			"summary": "GitHub Actions scheduled workflow untuk audit frontend bulanan — WCAG, performa, kualitas kode",
+			"tags": ["yaml", "ci/cd", "infra", "github-actions"],
+			"complexity": "complex"
+		},
+		{
+			"id": "config:.env.example",
+			"type": "config",
+			"name": ".env.example",
+			"filePath": ".env.example",
+			"summary": "Template environment variables untuk konfigurasi development dan production website Yayasan ASIB",
+			"tags": ["config"],
+			"complexity": "complex"
+		},
+		{
+			"id": "document:DESIGN_SYSTEM_AUDIT.md",
+			"type": "document",
+			"name": "DESIGN_SYSTEM_AUDIT.md",
+			"filePath": "DESIGN_SYSTEM_AUDIT.md",
+			"summary": "Design System Audit Report - Landing Page Yayasan — Dokumentasi arsitektur dan teknis website Yayasan ASIB",
+			"tags": ["markdown", "documentation"],
+			"complexity": "complex"
+		},
+		{
+			"id": "document:README.md",
+			"type": "document",
+			"name": "README.md",
+			"filePath": "README.md",
+			"summary": "Yayasan Amal Shalih Insan Bantul — Website Resmi — Dokumentasi arsitektur dan teknis website Yayasan ASIB",
+			"tags": ["markdown", "documentation"],
+			"complexity": "complex"
+		},
+		{
+			"id": "config:biome.json",
+			"type": "config",
+			"name": "biome.json",
+			"filePath": "biome.json",
+			"summary": "Konfigurasi Biome linter dan formatter untuk konsistensi kode",
+			"tags": ["json", "config"],
+			"complexity": "complex"
+		},
+		{
+			"id": "document:donasi-snapshot.md",
+			"type": "document",
+			"name": "donasi-snapshot.md",
+			"filePath": "donasi-snapshot.md",
+			"summary": "Dokumentasi: donasi-snapshot.md",
+			"tags": ["markdown", "documentation"],
+			"complexity": "complex"
+		},
+		{
+			"id": "config:package.json",
+			"type": "config",
+			"name": "package.json",
+			"filePath": "package.json",
+			"summary": "Manifest project Astro v6 dengan dependencies, scripts, dan metadata untuk website Yayasan ASIB",
+			"tags": ["json", "config"],
+			"complexity": "complex"
+		},
+		{
+			"id": "document:sentry-config.md",
+			"type": "document",
+			"name": "sentry-config.md",
+			"filePath": "sentry-config.md",
+			"summary": "Sentry Configuration — Why Separate Files? — Dokumentasi arsitektur dan teknis website Yayasan ASIB",
+			"tags": ["markdown", "documentation", "sentry", "monitoring"],
+			"complexity": "complex"
+		},
+		{
+			"id": "document:tentang-snapshot.md",
+			"type": "document",
+			"name": "tentang-snapshot.md",
+			"filePath": "tentang-snapshot.md",
+			"summary": "Dokumentasi: tentang-snapshot.md",
+			"tags": ["markdown", "documentation"],
+			"complexity": "complex"
+		},
+		{
+			"id": "config:tsconfig.json",
+			"type": "config",
+			"name": "tsconfig.json",
+			"filePath": "tsconfig.json",
+			"summary": "Konfigurasi TypeScript untuk type checking dan module resolution",
+			"tags": ["json", "config"],
+			"complexity": "moderate"
+		},
+		{
+			"id": "config:wrangler.build.jsonc",
+			"type": "config",
+			"name": "wrangler.build.jsonc",
+			"filePath": "wrangler.build.jsonc",
+			"summary": "Konfigurasi Cloudflare Workers untuk lingkungan build — routes, env vars, and bindings",
+			"tags": ["jsonc", "config", "cloudflare", "workers"],
+			"complexity": "moderate"
+		},
+		{
+			"id": "config:wrangler.jsonc",
+			"type": "config",
+			"name": "wrangler.jsonc",
+			"filePath": "wrangler.jsonc",
+			"summary": "Konfigurasi Cloudflare Workers untuk lingkungan production — routes, env vars, and bindings",
+			"tags": ["jsonc", "config", "cloudflare", "workers"],
+			"complexity": "moderate"
+		},
+		{
+			"id": "config:wrangler.staging.jsonc",
+			"type": "config",
+			"name": "wrangler.staging.jsonc",
+			"filePath": "wrangler.staging.jsonc",
+			"summary": "Konfigurasi Cloudflare Workers untuk lingkungan staging — routes, env vars, and bindings",
+			"tags": ["jsonc", "config", "cloudflare", "workers"],
+			"complexity": "moderate"
+		},
+		{
+			"id": "document:.openkb/10-arsitektur/ARCHITECTURE.md",
+			"type": "document",
+			"name": "ARCHITECTURE.md",
+			"filePath": ".openkb/10-arsitektur/ARCHITECTURE.md",
+			"summary": "Architecture Decisions — Dokumentasi arsitektur dan teknis website Yayasan ASIB",
+			"tags": ["markdown", "documentation", "knowledge-base"],
+			"complexity": "complex"
+		},
+		{
+			"id": "document:.openkb/10-arsitektur/ASTRO_V6_CLOUDFLARE_CONFIG_AUDIT.md",
+			"type": "document",
+			"name": "ASTRO_V6_CLOUDFLARE_CONFIG_AUDIT.md",
+			"filePath": ".openkb/10-arsitektur/ASTRO_V6_CLOUDFLARE_CONFIG_AUDIT.md",
+			"summary": "Astro v6 + Cloudflare Workers Configuration Audit — Dokumentasi arsitektur dan teknis website Yayasan ASIB",
+			"tags": ["markdown", "documentation", "knowledge-base"],
+			"complexity": "complex"
+		},
+		{
+			"id": "document:.openkb/10-arsitektur/CLEAN_CONFIGURATION_SUMMARY.md",
+			"type": "document",
+			"name": "CLEAN_CONFIGURATION_SUMMARY.md",
+			"filePath": ".openkb/10-arsitektur/CLEAN_CONFIGURATION_SUMMARY.md",
+			"summary": "✅ Astro v6 + Cloudflare Workers - Clean Configuration — Dokumentasi arsitektur dan teknis website Yayasan ASIB",
+			"tags": ["markdown", "documentation", "knowledge-base"],
+			"complexity": "complex"
+		},
+		{
+			"id": "document:.openkb/10-arsitektur/ROOT_LEVEL_WRANGLER_CONFIG.md",
+			"type": "document",
+			"name": "ROOT_LEVEL_WRANGLER_CONFIG.md",
+			"filePath": ".openkb/10-arsitektur/ROOT_LEVEL_WRANGLER_CONFIG.md",
+			"summary": "✅ Clean Root-Level Wrangler Configuration — Dokumentasi arsitektur dan teknis website Yayasan ASIB",
+			"tags": ["markdown", "documentation", "knowledge-base"],
+			"complexity": "complex"
+		},
+		{
+			"id": "document:.openkb/10-arsitektur/WORKERD_COMPATIBILITY_AUDIT.md",
+			"type": "document",
+			"name": "WORKERD_COMPATIBILITY_AUDIT.md",
+			"filePath": ".openkb/10-arsitektur/WORKERD_COMPATIBILITY_AUDIT.md",
+			"summary": "Astro v6 + Cloudflare Workers Workerd Compatibility Audit — Dokumentasi arsitektur dan teknis website Yayasan ASIB",
+			"tags": ["markdown", "documentation", "knowledge-base"],
+			"complexity": "complex"
+		},
+		{
+			"id": "document:.openkb/10-arsitektur/WRANGLER_PREVIEW_ERROR_10015.md",
+			"type": "document",
+			"name": "WRANGLER_PREVIEW_ERROR_10015.md",
+			"filePath": ".openkb/10-arsitektur/WRANGLER_PREVIEW_ERROR_10015.md",
+			"summary": "🚨 IMPORTANT: Worker Previews Error 10015 - BUKAN Bug! — Dokumentasi arsitektur dan teknis website Yayasan ASIB",
+			"tags": ["markdown", "documentation", "knowledge-base"],
+			"complexity": "complex"
+		},
+		{
+			"id": "document:.openkb/10-arsitektur/audit-komprehensif.md",
+			"type": "document",
+			"name": "audit-komprehensif.md",
+			"filePath": ".openkb/10-arsitektur/audit-komprehensif.md",
+			"summary": "Audit Komprehensif Yayasan Amal Shalih Insan Bantul (ASIB) — Dokumentasi arsitektur dan teknis website Yayasan ASIB",
+			"tags": ["markdown", "documentation", "knowledge-base"],
+			"complexity": "complex"
+		},
+		{
+			"id": "document:.openkb/10-arsitektur/brainstorming.md",
+			"type": "document",
+			"name": "brainstorming.md",
+			"filePath": ".openkb/10-arsitektur/brainstorming.md",
+			"summary": "Brainstorming Website Yayasan ASIB — Dokumentasi arsitektur dan teknis website Yayasan ASIB",
+			"tags": ["markdown", "documentation", "knowledge-base"],
+			"complexity": "complex"
+		},
+		{
+			"id": "document:.openkb/10-arsitektur/email-system.md",
+			"type": "document",
+			"name": "email-system.md",
+			"filePath": ".openkb/10-arsitektur/email-system.md",
+			"summary": "Email System — Yayasan Amal Shalih Insan Bantul — Dokumentasi arsitektur dan teknis website Yayasan ASIB",
+			"tags": ["markdown", "documentation", "knowledge-base"],
+			"complexity": "complex"
+		},
+		{
+			"id": "document:.openkb/20-cms-dan-konten/DATA_SOURCES.md",
+			"type": "document",
+			"name": "DATA_SOURCES.md",
+			"filePath": ".openkb/20-cms-dan-konten/DATA_SOURCES.md",
+			"summary": "Data Sources Documentation — Dokumentasi arsitektur dan teknis website Yayasan ASIB",
+			"tags": ["markdown", "documentation", "knowledge-base"],
+			"complexity": "complex"
+		},
+		{
+			"id": "document:.openkb/20-cms-dan-konten/cms-integration.md",
+			"type": "document",
+			"name": "cms-integration.md",
+			"filePath": ".openkb/20-cms-dan-konten/cms-integration.md",
+			"summary": "Integrasi Sanity CMS — Yayasan ASIB — Dokumentasi arsitektur dan teknis website Yayasan ASIB",
+			"tags": ["markdown", "documentation", "knowledge-base"],
+			"complexity": "complex"
+		},
+		{
+			"id": "document:.openkb/20-cms-dan-konten/kegiatan-content-architecture.md",
+			"type": "document",
+			"name": "kegiatan-content-architecture.md",
+			"filePath": ".openkb/20-cms-dan-konten/kegiatan-content-architecture.md",
+			"summary": "Konten Kegiatan — Arsitektur — Dokumentasi arsitektur dan teknis website Yayasan ASIB",
+			"tags": ["markdown", "documentation", "knowledge-base"],
+			"complexity": "complex"
+		},
+		{
+			"id": "document:.openkb/20-cms-dan-konten/sanity-strategi.md",
+			"type": "document",
+			"name": "sanity-strategi.md",
+			"filePath": ".openkb/20-cms-dan-konten/sanity-strategi.md",
+			"summary": "Sanity CMS — Strategi, Arsitektur & Panduan Lengkap — Dokumentasi arsitektur dan teknis website Yayasan ASIB",
+			"tags": ["markdown", "documentation", "knowledge-base"],
+			"complexity": "complex"
+		},
+		{
+			"id": "document:.openkb/30-deploy/commit-strategy.md",
+			"type": "document",
+			"name": "commit-strategy.md",
+			"filePath": ".openkb/30-deploy/commit-strategy.md",
+			"summary": "Commit Strategy — Handover Tim — Dokumentasi arsitektur dan teknis website Yayasan ASIB",
+			"tags": ["markdown", "documentation", "knowledge-base"],
+			"complexity": "complex"
+		},
+		{
+			"id": "document:.openkb/30-deploy/deployment.md",
+			"type": "document",
+			"name": "deployment.md",
+			"filePath": ".openkb/30-deploy/deployment.md",
+			"summary": "Panduan Deployment Website Yayasan ASIB — Dokumentasi arsitektur dan teknis website Yayasan ASIB",
+			"tags": ["markdown", "documentation", "knowledge-base"],
+			"complexity": "complex"
+		},
+		{
+			"id": "document:.openkb/30-deploy/spotlight-integration.md",
+			"type": "document",
+			"name": "spotlight-integration.md",
+			"filePath": ".openkb/30-deploy/spotlight-integration.md",
+			"summary": "Spotlight Debug Overlay — Integrasi & Panduan — Dokumentasi arsitektur dan teknis website Yayasan ASIB",
+			"tags": ["markdown", "documentation", "knowledge-base"],
+			"complexity": "complex"
+		},
+		{
+			"id": "document:.sisyphus/AUDIT_RESULTS.md",
+			"type": "document",
+			"name": "AUDIT_RESULTS.md",
+			"filePath": ".sisyphus/AUDIT_RESULTS.md",
+			"summary": "Front-End Checklist Audit Results — Dokumentasi arsitektur dan teknis website Yayasan ASIB",
+			"tags": ["markdown", "documentation", "ai-work-plan"],
+			"complexity": "complex"
+		},
+		{
+			"id": "document:.sisyphus/FRONT_END_CHECKLIST_INTEGRATION.md",
+			"type": "document",
+			"name": "FRONT_END_CHECKLIST_INTEGRATION.md",
+			"filePath": ".sisyphus/FRONT_END_CHECKLIST_INTEGRATION.md",
+			"summary": "🎯 Front-End Checklist Integration Plan — Dokumentasi arsitektur dan teknis website Yayasan ASIB",
+			"tags": ["markdown", "documentation", "ai-work-plan"],
+			"complexity": "complex"
+		},
+		{
+			"id": "document:.sisyphus/IMPROVEMENT_SUMMARY.md",
+			"type": "document",
+			"name": "IMPROVEMENT_SUMMARY.md",
+			"filePath": ".sisyphus/IMPROVEMENT_SUMMARY.md",
+			"summary": "🚀 Codebase Improvement Summary — Yayasan ASIB — Dokumentasi arsitektur dan teknis website Yayasan ASIB",
+			"tags": ["markdown", "documentation", "ai-work-plan"],
+			"complexity": "complex"
+		},
+		{
+			"id": "document:.sisyphus/MCP_USAGE_GUIDE.md",
+			"type": "document",
+			"name": "MCP_USAGE_GUIDE.md",
+			"filePath": ".sisyphus/MCP_USAGE_GUIDE.md",
+			"summary": "🤖 Front-End Checklist MCP Usage Guide — Dokumentasi arsitektur dan teknis website Yayasan ASIB",
+			"tags": ["markdown", "documentation", "ai-work-plan"],
+			"complexity": "complex"
+		},
+		{
+			"id": "document:.sisyphus/summary.md",
+			"type": "document",
+			"name": "summary.md",
+			"filePath": ".sisyphus/summary.md",
+			"summary": "Sisyphus Summary — OpenKB Restructure — Dokumentasi arsitektur dan teknis website Yayasan ASIB",
+			"tags": ["markdown", "documentation", "ai-work-plan"],
+			"complexity": "complex"
+		},
+		{
+			"id": "document:.sisyphus/plans/COMMIT_STRATEGY_FINAL.md",
+			"type": "document",
+			"name": "COMMIT_STRATEGY_FINAL.md",
+			"filePath": ".sisyphus/plans/COMMIT_STRATEGY_FINAL.md",
+			"summary": "📋 STRATEGI COMMIT - Astro v6 + Cloudflare Workers Cleanup — Dokumentasi arsitektur dan teknis website Yayasan ASIB",
+			"tags": ["markdown", "documentation", "ai-work-plan"],
+			"complexity": "complex"
+		},
+		{
+			"id": "document:.sisyphus/plans/COMPREHENSIVE_REFACTORING_PLAN.md",
+			"type": "document",
+			"name": "COMPREHENSIVE_REFACTORING_PLAN.md",
+			"filePath": ".sisyphus/plans/COMPREHENSIVE_REFACTORING_PLAN.md",
+			"summary": "🎯 CODEBASE ANALYSIS & REFACTORING PLAN — Dokumentasi arsitektur dan teknis website Yayasan ASIB",
+			"tags": ["markdown", "documentation", "ai-work-plan"],
+			"complexity": "complex"
+		},
+		{
+			"id": "document:.sisyphus/plans/commit-sesi-2.md",
+			"type": "document",
+			"name": "commit-sesi-2.md",
+			"filePath": ".sisyphus/plans/commit-sesi-2.md",
+			"summary": "Commit Sesi 2 — Gallery, Blog, Deploy, Perbaikan — Dokumentasi arsitektur dan teknis website Yayasan ASIB",
+			"tags": ["markdown", "documentation", "ai-work-plan"],
+			"complexity": "complex"
+		},
+		{
+			"id": "document:.sisyphus/plans/comprehensive-audit-and-fix-plan.md",
+			"type": "document",
+			"name": "comprehensive-audit-and-fix-plan.md",
+			"filePath": ".sisyphus/plans/comprehensive-audit-and-fix-plan.md",
+			"summary": "🔍 COMPREHENSIVE AUDIT: Astro v6 + Cloudflare Workers — Dokumentasi arsitektur dan teknis website Yayasan ASIB",
+			"tags": ["markdown", "documentation", "ai-work-plan"],
+			"complexity": "complex"
+		},
+		{
+			"id": "document:docs/DEPLOYMENT_GUIDE.md",
+			"type": "document",
+			"name": "DEPLOYMENT_GUIDE.md",
+			"filePath": "docs/DEPLOYMENT_GUIDE.md",
+			"summary": "🚀 Deployment Guide — Yayasan ASIB — Dokumentasi arsitektur dan teknis website Yayasan ASIB",
+			"tags": ["markdown", "documentation"],
+			"complexity": "complex"
+		},
+		{
+			"id": "document:docs/DESIGN_SYSTEM.md",
+			"type": "document",
+			"name": "DESIGN_SYSTEM.md",
+			"filePath": "docs/DESIGN_SYSTEM.md",
+			"summary": "Design System — Yayasan ASIB — Dokumentasi arsitektur dan teknis website Yayasan ASIB",
+			"tags": ["markdown", "documentation"],
+			"complexity": "complex"
+		},
+		{
+			"id": "document:docs/README.md",
+			"type": "document",
+			"name": "README.md",
+			"filePath": "docs/README.md",
+			"summary": "📚 Dokumentasi Yayasan — Sudah Dipindahkan — Dokumentasi arsitektur dan teknis website Yayasan ASIB",
+			"tags": ["markdown", "documentation"],
+			"complexity": "complex"
+		},
+		{
+			"id": "document:docs/hero-component.md",
+			"type": "document",
+			"name": "hero-component.md",
+			"filePath": "docs/hero-component.md",
+			"summary": "Hero Component — Dokumentasi arsitektur dan teknis website Yayasan ASIB",
+			"tags": ["markdown", "documentation"],
+			"complexity": "complex"
+		},
+		{
+			"id": "document:docs/web-vitals.md",
+			"type": "document",
+			"name": "web-vitals.md",
+			"filePath": "docs/web-vitals.md",
+			"summary": "Dokumentasi: web-vitals.md",
+			"tags": ["markdown", "documentation"],
+			"complexity": "complex"
+		},
+		{
+			"id": "document:docs/wrangler-configs.md",
+			"type": "document",
+			"name": "wrangler-configs.md",
+			"filePath": "docs/wrangler-configs.md",
+			"summary": "Wrangler Configuration Guide — Dokumentasi arsitektur dan teknis website Yayasan ASIB",
+			"tags": ["markdown", "documentation", "cloudflare", "workers"],
+			"complexity": "complex"
+		},
+		{
+			"id": "document:src/content/blog/README.md",
+			"type": "document",
+			"name": "README.md",
+			"filePath": "src/content/blog/README.md",
+			"summary": "Konten Blog — Catatan — Dokumentasi arsitektur dan teknis website Yayasan ASIB",
+			"tags": ["markdown", "documentation", "content", "blog"],
+			"complexity": "complex"
+		},
+		{
+			"id": "document:src/content/blog/amalan-sunnah-idul-adha.md",
+			"type": "document",
+			"name": "amalan-sunnah-idul-adha.md",
+			"filePath": "src/content/blog/amalan-sunnah-idul-adha.md",
+			"summary": "Konten artikel: --- — bagian dari publikasi website Yayasan ASIB",
+			"tags": ["markdown", "documentation", "content", "blog"],
+			"complexity": "complex"
+		},
+		{
+			"id": "document:src/content/blog/cara-bijak-berdonasi.md",
+			"type": "document",
+			"name": "cara-bijak-berdonasi.md",
+			"filePath": "src/content/blog/cara-bijak-berdonasi.md",
+			"summary": "Konten artikel: --- — bagian dari publikasi website Yayasan ASIB",
+			"tags": ["markdown", "documentation", "content", "blog"],
+			"complexity": "complex"
+		},
+		{
+			"id": "document:src/content/blog/keutamaan-10-hari-dzulhijjah.md",
+			"type": "document",
+			"name": "keutamaan-10-hari-dzulhijjah.md",
+			"filePath": "src/content/blog/keutamaan-10-hari-dzulhijjah.md",
+			"summary": "Konten artikel: --- — bagian dari publikasi website Yayasan ASIB",
+			"tags": ["markdown", "documentation", "content", "blog"],
+			"complexity": "complex"
+		},
+		{
+			"id": "document:src/content/blog/manfaat-sedekah-subuh.md",
+			"type": "document",
+			"name": "manfaat-sedekah-subuh.md",
+			"filePath": "src/content/blog/manfaat-sedekah-subuh.md",
+			"summary": "Konten artikel: --- — bagian dari publikasi website Yayasan ASIB",
+			"tags": ["markdown", "documentation", "content", "blog"],
+			"complexity": "complex"
+		},
+		{
+			"id": "document:src/content/blog/metode-belajar-islam-interaktif.md",
+			"type": "document",
+			"name": "metode-belajar-islam-interaktif.md",
+			"filePath": "src/content/blog/metode-belajar-islam-interaktif.md",
+			"summary": "Konten artikel: --- — bagian dari publikasi website Yayasan ASIB",
+			"tags": ["markdown", "documentation", "content", "blog"],
+			"complexity": "complex"
+		},
+		{
+			"id": "document:src/content/blog/panduan-zakat-fitrah.md",
+			"type": "document",
+			"name": "panduan-zakat-fitrah.md",
+			"filePath": "src/content/blog/panduan-zakat-fitrah.md",
+			"summary": "Konten artikel: --- — bagian dari publikasi website Yayasan ASIB",
+			"tags": ["markdown", "documentation", "content", "blog"],
+			"complexity": "complex"
+		},
+		{
+			"id": "document:src/content/blog/pentingnya-tahfiz-alquran.md",
+			"type": "document",
+			"name": "pentingnya-tahfiz-alquran.md",
+			"filePath": "src/content/blog/pentingnya-tahfiz-alquran.md",
+			"summary": "Konten artikel: --- — bagian dari publikasi website Yayasan ASIB",
+			"tags": ["markdown", "documentation", "content", "blog"],
+			"complexity": "complex"
+		},
+		{
+			"id": "document:src/content/blog/pentingnya-wakaf-tunai.md",
+			"type": "document",
+			"name": "pentingnya-wakaf-tunai.md",
+			"filePath": "src/content/blog/pentingnya-wakaf-tunai.md",
+			"summary": "Konten artikel: --- — bagian dari publikasi website Yayasan ASIB",
+			"tags": ["markdown", "documentation", "content", "blog"],
+			"complexity": "complex"
+		},
+		{
+			"id": "document:src/content/blog/program-santunan-anak-yatim.md",
+			"type": "document",
+			"name": "program-santunan-anak-yatim.md",
+			"filePath": "src/content/blog/program-santunan-anak-yatim.md",
+			"summary": "Konten artikel: --- — bagian dari publikasi website Yayasan ASIB",
+			"tags": ["markdown", "documentation", "content", "blog"],
+			"complexity": "complex"
+		},
+		{
+			"id": "document:src/content/blog/tips-mendidik-anak-islam.md",
+			"type": "document",
+			"name": "tips-mendidik-anak-islam.md",
+			"filePath": "src/content/blog/tips-mendidik-anak-islam.md",
+			"summary": "Konten artikel: --- — bagian dari publikasi website Yayasan ASIB",
+			"tags": ["markdown", "documentation", "content", "blog"],
+			"complexity": "complex"
+		},
+		{
+			"id": "document:src/content/blog/transparansi-donasi-asib.md",
+			"type": "document",
+			"name": "transparansi-donasi-asib.md",
+			"filePath": "src/content/blog/transparansi-donasi-asib.md",
+			"summary": "Konten artikel: --- — bagian dari publikasi website Yayasan ASIB",
+			"tags": ["markdown", "documentation", "content", "blog"],
+			"complexity": "complex"
+		},
+		{
+			"id": "document:src/content/kegiatan/jumat-bersedekah.md",
+			"type": "document",
+			"name": "jumat-bersedekah.md",
+			"filePath": "src/content/kegiatan/jumat-bersedekah.md",
+			"summary": "Konten artikel: --- — bagian dari publikasi website Yayasan ASIB",
+			"tags": ["markdown", "documentation", "content", "blog"],
+			"complexity": "complex"
+		},
+		{
+			"id": "document:src/content/kegiatan/kajian-pekanan-tafsir-juz30.md",
+			"type": "document",
+			"name": "kajian-pekanan-tafsir-juz30.md",
+			"filePath": "src/content/kegiatan/kajian-pekanan-tafsir-juz30.md",
+			"summary": "Konten artikel: --- — bagian dari publikasi website Yayasan ASIB",
+			"tags": ["markdown", "documentation", "content", "blog"],
+			"complexity": "complex"
+		},
+		{
+			"id": "document:src/content/kegiatan/laporan-beasiswa-anak-dhuafa.md",
+			"type": "document",
+			"name": "laporan-beasiswa-anak-dhuafa.md",
+			"filePath": "src/content/kegiatan/laporan-beasiswa-anak-dhuafa.md",
+			"summary": "Konten artikel: --- — bagian dari publikasi website Yayasan ASIB",
+			"tags": ["markdown", "documentation", "content", "blog"],
+			"complexity": "complex"
+		},
+		{
+			"id": "document:src/content/kegiatan/santunan-sembako-mei-2026.md",
+			"type": "document",
+			"name": "santunan-sembako-mei-2026.md",
+			"filePath": "src/content/kegiatan/santunan-sembako-mei-2026.md",
+			"summary": "Konten artikel: --- — bagian dari publikasi website Yayasan ASIB",
+			"tags": ["markdown", "documentation", "content", "blog"],
+			"complexity": "complex"
+		},
+		{
+			"id": "document:src/content/kegiatan/wisuda-juz30-milad-3.md",
+			"type": "document",
+			"name": "wisuda-juz30-milad-3.md",
+			"filePath": "src/content/kegiatan/wisuda-juz30-milad-3.md",
+			"summary": "Konten artikel: --- — bagian dari publikasi website Yayasan ASIB",
+			"tags": ["markdown", "documentation", "content", "blog"],
+			"complexity": "complex"
+		},
+		{
+			"id": "document:studio-amalshalih/README.md",
+			"type": "document",
+			"name": "README.md",
+			"filePath": "studio-amalshalih/README.md",
+			"summary": "Sanity Clean Content Studio — Dokumentasi arsitektur dan teknis website Yayasan ASIB",
+			"tags": ["markdown", "documentation"],
+			"complexity": "moderate"
+		},
+		{
+			"id": "config:studio-amalshalih/package.json",
+			"type": "config",
+			"name": "package.json",
+			"filePath": "studio-amalshalih/package.json",
+			"summary": "File konfigurasi: package.json",
+			"tags": ["json", "config"],
+			"complexity": "moderate"
+		},
+		{
+			"id": "config:studio-amalshalih/tsconfig.json",
+			"type": "config",
+			"name": "tsconfig.json",
+			"filePath": "studio-amalshalih/tsconfig.json",
+			"summary": "File konfigurasi: tsconfig.json",
+			"tags": ["json", "config"],
+			"complexity": "moderate"
+		},
+		{
+			"id": "file:.husky/pre-commit",
+			"type": "file",
+			"name": "pre-commit",
+			"filePath": ".husky/pre-commit",
+			"summary": "Git hook: pre-commit — hook untuk otomatisasi git workflow",
+			"tags": ["git-hook"],
+			"complexity": "simple"
+		},
+		{
+			"id": "file:.husky/pre-push",
+			"type": "file",
+			"name": "pre-push",
+			"filePath": ".husky/pre-push",
+			"summary": "Git hook: pre-push — hook untuk otomatisasi git workflow",
+			"tags": ["git-hook"],
+			"complexity": "simple"
+		},
+		{
+			"id": "document:.openkb/README.md",
+			"type": "document",
+			"name": "README.md",
+			"filePath": ".openkb/README.md",
+			"summary": "Technical Knowledge Base — Website Yayasan ASIB — Dokumentasi arsitektur dan teknis website Yayasan ASIB",
+			"tags": ["markdown", "documentation", "knowledge-base"],
+			"complexity": "complex"
+		},
+		{
+			"id": "document:.sisyphus/analysis/CODEBASE_ANALYSIS_REPORT.md",
+			"type": "document",
+			"name": "CODEBASE_ANALYSIS_REPORT.md",
+			"filePath": ".sisyphus/analysis/CODEBASE_ANALYSIS_REPORT.md",
+			"summary": "📊 COMPREHENSIVE CODEBASE ANALYSIS REPORT — Dokumentasi arsitektur dan teknis website Yayasan ASIB",
+			"tags": ["markdown", "documentation", "ai-work-plan"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:.understand-anything/.understandignore",
+			"type": "file",
+			"name": ".understandignore",
+			"filePath": ".understand-anything/.understandignore",
+			"summary": "File: .understandignore",
+			"tags": [],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:astro.config.mjs",
+			"type": "file",
+			"name": "astro.config.mjs",
+			"filePath": "astro.config.mjs",
+			"summary": "File: astro.config.mjs",
+			"tags": ["javascript"],
+			"complexity": "complex"
+		},
+		{
+			"id": "document:docs/testing/TEST_MCP_INSTRUCTIONS.md",
+			"type": "document",
+			"name": "TEST_MCP_INSTRUCTIONS.md",
+			"filePath": "docs/testing/TEST_MCP_INSTRUCTIONS.md",
+			"summary": "🧪 MCP Integration Test Guide — Dokumentasi arsitektur dan teknis website Yayasan ASIB",
+			"tags": ["markdown", "documentation"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:download_logos.py",
+			"type": "file",
+			"name": "download_logos.py",
+			"filePath": "download_logos.py",
+			"summary": "File: download_logos.py",
+			"tags": ["python"],
+			"complexity": "complex"
+		},
+		{
+			"id": "config:eslint.config.js",
+			"type": "config",
+			"name": "eslint.config.js",
+			"filePath": "eslint.config.js",
+			"summary": "ESLint flat configuration untuk kualitas kode JavaScript/TypeScript",
+			"tags": ["javascript", "config"],
+			"complexity": "moderate"
+		},
+		{
+			"id": "config:playwright.config.ts",
+			"type": "config",
+			"name": "playwright.config.ts",
+			"filePath": "playwright.config.ts",
+			"summary": "Playwright E2E test configuration untuk browser testing",
+			"tags": ["typescript", "config"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:public/dampak-nyata-sm.webp",
+			"type": "file",
+			"name": "dampak-nyata-sm.webp",
+			"filePath": "public/dampak-nyata-sm.webp",
+			"summary": "Static asset: dampak-nyata-sm.webp — aset publik untuk website Yayasan ASIB",
+			"tags": ["image", "asset"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:public/dampak-nyata.avif",
+			"type": "file",
+			"name": "dampak-nyata.avif",
+			"filePath": "public/dampak-nyata.avif",
+			"summary": "Static asset: dampak-nyata.avif — aset publik untuk website Yayasan ASIB",
+			"tags": ["image", "asset"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:public/dampak-nyata.webp",
+			"type": "file",
+			"name": "dampak-nyata.webp",
+			"filePath": "public/dampak-nyata.webp",
+			"summary": "Static asset: dampak-nyata.webp — aset publik untuk website Yayasan ASIB",
+			"tags": ["image", "asset"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:public/images/charity-contact.webp",
+			"type": "file",
+			"name": "charity-contact.webp",
+			"filePath": "public/images/charity-contact.webp",
+			"summary": "Static asset: charity-contact.webp — aset publik untuk website Yayasan ASIB",
+			"tags": ["image", "asset"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:public/logo-yayasan-sm.avif",
+			"type": "file",
+			"name": "logo-yayasan-sm.avif",
+			"filePath": "public/logo-yayasan-sm.avif",
+			"summary": "Static asset: logo-yayasan-sm.avif — aset publik untuk website Yayasan ASIB",
+			"tags": ["image", "asset"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:public/logo-yayasan-sm.webp",
+			"type": "file",
+			"name": "logo-yayasan-sm.webp",
+			"filePath": "public/logo-yayasan-sm.webp",
+			"summary": "Static asset: logo-yayasan-sm.webp — aset publik untuk website Yayasan ASIB",
+			"tags": ["image", "asset"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:public/logo-yayasan.webp",
+			"type": "file",
+			"name": "logo-yayasan.webp",
+			"filePath": "public/logo-yayasan.webp",
+			"summary": "Static asset: logo-yayasan.webp — aset publik untuk website Yayasan ASIB",
+			"tags": ["image", "asset"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:public/qris.webp",
+			"type": "file",
+			"name": "qris.webp",
+			"filePath": "public/qris.webp",
+			"summary": "Static asset: qris.webp — aset publik untuk website Yayasan ASIB",
+			"tags": ["image", "asset"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:public/site.webmanifest",
+			"type": "file",
+			"name": "site.webmanifest",
+			"filePath": "public/site.webmanifest",
+			"summary": "Static asset: site.webmanifest — aset publik untuk website Yayasan ASIB",
+			"tags": ["asset"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:public/sw.js",
+			"type": "file",
+			"name": "sw.js",
+			"filePath": "public/sw.js",
+			"summary": "Static asset: sw.js — aset publik untuk website Yayasan ASIB",
+			"tags": ["javascript", "asset"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:scripts/audit-frontend-checklist.mjs",
+			"type": "file",
+			"name": "audit-frontend-checklist.mjs",
+			"filePath": "scripts/audit-frontend-checklist.mjs",
+			"summary": "Utility script: audit-frontend-checklist.mjs — skrip otomatisasi untuk website Yayasan ASIB",
+			"tags": ["javascript", "script"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:scripts/cache-gallery-photos.ts",
+			"type": "file",
+			"name": "cache-gallery-photos.ts",
+			"filePath": "scripts/cache-gallery-photos.ts",
+			"summary": "Utility script: cache-gallery-photos.ts — skrip otomatisasi untuk website Yayasan ASIB",
+			"tags": ["typescript", "script"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:scripts/discover-and-cache-galleries.ts",
+			"type": "file",
+			"name": "discover-and-cache-galleries.ts",
+			"filePath": "scripts/discover-and-cache-galleries.ts",
+			"summary": "Utility script: discover-and-cache-galleries.ts — skrip otomatisasi untuk website Yayasan ASIB",
+			"tags": ["typescript", "script"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:scripts/reset-rtdb.ts",
+			"type": "file",
+			"name": "reset-rtdb.ts",
+			"filePath": "scripts/reset-rtdb.ts",
+			"summary": "Utility script: reset-rtdb.ts — skrip otomatisasi untuk website Yayasan ASIB",
+			"tags": ["typescript", "script"],
+			"complexity": "moderate"
+		},
+		{
+			"id": "file:scripts/run_lighthouse_all.sh",
+			"type": "file",
+			"name": "run_lighthouse_all.sh",
+			"filePath": "scripts/run_lighthouse_all.sh",
+			"summary": "Utility script: run_lighthouse_all.sh — skrip otomatisasi untuk website Yayasan ASIB",
+			"tags": ["shell", "script"],
+			"complexity": "moderate"
+		},
+		{
+			"id": "file:scripts/seed-pengurus.ts",
+			"type": "file",
+			"name": "seed-pengurus.ts",
+			"filePath": "scripts/seed-pengurus.ts",
+			"summary": "Utility script: seed-pengurus.ts — skrip otomatisasi untuk website Yayasan ASIB",
+			"tags": ["typescript", "script"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:sentry.client.config.js",
+			"type": "file",
+			"name": "sentry.client.config.js",
+			"filePath": "sentry.client.config.js",
+			"summary": "File: sentry.client.config.js",
+			"tags": ["javascript", "sentry", "monitoring"],
+			"complexity": "moderate"
+		},
+		{
+			"id": "file:sentry.server.config.js",
+			"type": "file",
+			"name": "sentry.server.config.js",
+			"filePath": "sentry.server.config.js",
+			"summary": "File: sentry.server.config.js",
+			"tags": ["javascript", "sentry", "monitoring"],
+			"complexity": "moderate"
+		},
+		{
+			"id": "file:src/components/__tests__/Button.test.ts",
+			"type": "file",
+			"name": "Button.test.ts",
+			"filePath": "src/components/__tests__/Button.test.ts",
+			"summary": "Test: Button.test.ts — pengujian untuk komponen/fungsi website Yayasan ASIB",
+			"tags": ["typescript", "component", "test"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:src/components/__tests__/Card.test.ts",
+			"type": "file",
+			"name": "Card.test.ts",
+			"filePath": "src/components/__tests__/Card.test.ts",
+			"summary": "Test: Card.test.ts — pengujian untuk komponen/fungsi website Yayasan ASIB",
+			"tags": ["typescript", "component", "test"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:src/components/__tests__/Icon.test.ts",
+			"type": "file",
+			"name": "Icon.test.ts",
+			"filePath": "src/components/__tests__/Icon.test.ts",
+			"summary": "Test: Icon.test.ts — pengujian untuk komponen/fungsi website Yayasan ASIB",
+			"tags": ["typescript", "component", "test"],
+			"complexity": "complex"
+		},
+		{
+			"id": "document:src/components/__tests__/README.md",
+			"type": "document",
+			"name": "README.md",
+			"filePath": "src/components/__tests__/README.md",
+			"summary": "Component Tests — Yayasan ASIB — Dokumentasi arsitektur dan teknis website Yayasan ASIB",
+			"tags": ["markdown", "documentation", "component", "test"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:src/components/AmbientBlossom.astro",
+			"type": "file",
+			"name": "AmbientBlossom.astro",
+			"filePath": "src/components/AmbientBlossom.astro",
+			"summary": "Komponen Astro: AmbientBlossom — komponen untuk website Yayasan ASIB",
+			"tags": ["astro", "component"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:src/components/BaseHead.astro",
+			"type": "file",
+			"name": "BaseHead.astro",
+			"filePath": "src/components/BaseHead.astro",
+			"summary": "Komponen Astro: BaseHead — komponen untuk website Yayasan ASIB",
+			"tags": ["astro", "component"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:src/components/ErrorState.astro",
+			"type": "file",
+			"name": "ErrorState.astro",
+			"filePath": "src/components/ErrorState.astro",
+			"summary": "Komponen Astro: ErrorState — komponen untuk website Yayasan ASIB",
+			"tags": ["astro", "component"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:src/components/Footer.astro",
+			"type": "file",
+			"name": "Footer.astro",
+			"filePath": "src/components/Footer.astro",
+			"summary": "Komponen Astro: Footer — komponen untuk website Yayasan ASIB",
+			"tags": ["astro", "component"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:src/components/gallery/Lightbox.astro",
+			"type": "file",
+			"name": "Lightbox.astro",
+			"filePath": "src/components/gallery/Lightbox.astro",
+			"summary": "Komponen Astro: Lightbox — komponen untuk website Yayasan ASIB",
+			"tags": ["astro", "component"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:src/components/gallery/LikeButton.astro",
+			"type": "file",
+			"name": "LikeButton.astro",
+			"filePath": "src/components/gallery/LikeButton.astro",
+			"summary": "Komponen Astro: LikeButton — komponen untuk website Yayasan ASIB",
+			"tags": ["astro", "component"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:src/components/gallery/MasonryGrid.astro",
+			"type": "file",
+			"name": "MasonryGrid.astro",
+			"filePath": "src/components/gallery/MasonryGrid.astro",
+			"summary": "Komponen Astro: MasonryGrid — komponen untuk website Yayasan ASIB",
+			"tags": ["astro", "component"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:src/components/Hero.astro",
+			"type": "file",
+			"name": "Hero.astro",
+			"filePath": "src/components/Hero.astro",
+			"summary": "Komponen Astro: Hero — komponen untuk website Yayasan ASIB",
+			"tags": ["astro", "component"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:src/components/Navbar.astro",
+			"type": "file",
+			"name": "Navbar.astro",
+			"filePath": "src/components/Navbar.astro",
+			"summary": "Komponen Astro: Navbar — komponen untuk website Yayasan ASIB",
+			"tags": ["astro", "component", "tested"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:src/components/RetryButton.astro",
+			"type": "file",
+			"name": "RetryButton.astro",
+			"filePath": "src/components/RetryButton.astro",
+			"summary": "Komponen Astro: RetryButton — komponen untuk website Yayasan ASIB",
+			"tags": ["astro", "component"],
+			"complexity": "moderate"
+		},
+		{
+			"id": "file:src/components/sections/Dampak.astro",
+			"type": "file",
+			"name": "Dampak.astro",
+			"filePath": "src/components/sections/Dampak.astro",
+			"summary": "Section komponen: Dampak — bagian halaman website Yayasan ASIB",
+			"tags": ["astro", "component"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:src/components/sections/FAQ.astro",
+			"type": "file",
+			"name": "FAQ.astro",
+			"filePath": "src/components/sections/FAQ.astro",
+			"summary": "Section komponen: FAQ — bagian halaman website Yayasan ASIB",
+			"tags": ["astro", "component"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:src/components/sections/Hero.astro",
+			"type": "file",
+			"name": "Hero.astro",
+			"filePath": "src/components/sections/Hero.astro",
+			"summary": "Section komponen: Hero — bagian halaman website Yayasan ASIB",
+			"tags": ["astro", "component"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:src/components/sections/PageHeader.astro",
+			"type": "file",
+			"name": "PageHeader.astro",
+			"filePath": "src/components/sections/PageHeader.astro",
+			"summary": "Section komponen: PageHeader — bagian halaman website Yayasan ASIB",
+			"tags": ["astro", "component"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:src/components/sections/Partners.astro",
+			"type": "file",
+			"name": "Partners.astro",
+			"filePath": "src/components/sections/Partners.astro",
+			"summary": "Section komponen: Partners — bagian halaman website Yayasan ASIB",
+			"tags": ["astro", "component"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:src/components/sections/Section.astro",
+			"type": "file",
+			"name": "Section.astro",
+			"filePath": "src/components/sections/Section.astro",
+			"summary": "Section komponen: Section — bagian halaman website Yayasan ASIB",
+			"tags": ["astro", "component"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:src/components/sections/Stats.astro",
+			"type": "file",
+			"name": "Stats.astro",
+			"filePath": "src/components/sections/Stats.astro",
+			"summary": "Section komponen: Stats — bagian halaman website Yayasan ASIB",
+			"tags": ["astro", "component"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:src/components/sections/Testimonials.astro",
+			"type": "file",
+			"name": "Testimonials.astro",
+			"filePath": "src/components/sections/Testimonials.astro",
+			"summary": "Section komponen: Testimonials — bagian halaman website Yayasan ASIB",
+			"tags": ["astro", "component"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:src/components/sections/Wakaf.astro",
+			"type": "file",
+			"name": "Wakaf.astro",
+			"filePath": "src/components/sections/Wakaf.astro",
+			"summary": "Section komponen: Wakaf — bagian halaman website Yayasan ASIB",
+			"tags": ["astro", "component"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:src/components/ui/Badge.astro",
+			"type": "file",
+			"name": "Badge.astro",
+			"filePath": "src/components/ui/Badge.astro",
+			"summary": "Komponen UI: Badge — reusable UI component untuk website Yayasan ASIB",
+			"tags": ["astro", "component"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:src/components/ui/Button.astro",
+			"type": "file",
+			"name": "Button.astro",
+			"filePath": "src/components/ui/Button.astro",
+			"summary": "Komponen UI: Button — reusable UI component untuk website Yayasan ASIB",
+			"tags": ["astro", "component", "tested"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:src/components/ui/Card.astro",
+			"type": "file",
+			"name": "Card.astro",
+			"filePath": "src/components/ui/Card.astro",
+			"summary": "Komponen UI: Card — reusable UI component untuk website Yayasan ASIB",
+			"tags": ["astro", "component", "tested"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:src/components/ui/Container.astro",
+			"type": "file",
+			"name": "Container.astro",
+			"filePath": "src/components/ui/Container.astro",
+			"summary": "Komponen UI: Container — reusable UI component untuk website Yayasan ASIB",
+			"tags": ["astro", "component"],
+			"complexity": "moderate"
+		},
+		{
+			"id": "file:src/components/ui/Heading.astro",
+			"type": "file",
+			"name": "Heading.astro",
+			"filePath": "src/components/ui/Heading.astro",
+			"summary": "Komponen UI: Heading — reusable UI component untuk website Yayasan ASIB",
+			"tags": ["astro", "component"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:src/components/ui/Icon.astro",
+			"type": "file",
+			"name": "Icon.astro",
+			"filePath": "src/components/ui/Icon.astro",
+			"summary": "Komponen UI: Icon — reusable UI component untuk website Yayasan ASIB",
+			"tags": ["astro", "component", "tested"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:src/content.config.ts",
+			"type": "file",
+			"name": "content.config.ts",
+			"filePath": "src/content.config.ts",
+			"summary": "File: content.config.ts",
+			"tags": ["typescript"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:src/data/galleries.ts",
+			"type": "file",
+			"name": "galleries.ts",
+			"filePath": "src/data/galleries.ts",
+			"summary": "Data: galleries.ts — data layer dan konfigurasi konten website",
+			"tags": ["typescript", "data"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:src/data/hero-photos.ts",
+			"type": "file",
+			"name": "hero-photos.ts",
+			"filePath": "src/data/hero-photos.ts",
+			"summary": "Data: hero-photos.ts — data layer dan konfigurasi konten website",
+			"tags": ["typescript", "data"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:src/data/site.ts",
+			"type": "file",
+			"name": "site.ts",
+			"filePath": "src/data/site.ts",
+			"summary": "Data: site.ts — data layer dan konfigurasi konten website",
+			"tags": ["typescript", "data", "tested"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:src/env.d.ts",
+			"type": "file",
+			"name": "env.d.ts",
+			"filePath": "src/env.d.ts",
+			"summary": "File: env.d.ts",
+			"tags": ["typescript"],
+			"complexity": "moderate"
+		},
+		{
+			"id": "file:src/layouts/BaseLayout.astro",
+			"type": "file",
+			"name": "BaseLayout.astro",
+			"filePath": "src/layouts/BaseLayout.astro",
+			"summary": "Layout: BaseLayout — template layout utama website dengan header, navigasi, dan footer",
+			"tags": ["astro"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:src/lib/__tests__/constants.test.ts",
+			"type": "file",
+			"name": "constants.test.ts",
+			"filePath": "src/lib/__tests__/constants.test.ts",
+			"summary": "Library: constants.test.ts — modul utilitas untuk website Yayasan ASIB",
+			"tags": ["typescript", "utility", "test"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:src/lib/__tests__/firebase-admin.test.ts",
+			"type": "file",
+			"name": "firebase-admin.test.ts",
+			"filePath": "src/lib/__tests__/firebase-admin.test.ts",
+			"summary": "Library: firebase-admin.test.ts — modul utilitas untuk website Yayasan ASIB",
+			"tags": ["typescript", "utility", "test"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:src/lib/__tests__/google-drive.test.ts",
+			"type": "file",
+			"name": "google-drive.test.ts",
+			"filePath": "src/lib/__tests__/google-drive.test.ts",
+			"summary": "Library: google-drive.test.ts — modul utilitas untuk website Yayasan ASIB",
+			"tags": ["typescript", "utility", "test"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:src/lib/__tests__/site-data.test.ts",
+			"type": "file",
+			"name": "site-data.test.ts",
+			"filePath": "src/lib/__tests__/site-data.test.ts",
+			"summary": "Library: site-data.test.ts — modul utilitas untuk website Yayasan ASIB",
+			"tags": ["typescript", "utility", "test"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:src/lib/config.ts",
+			"type": "file",
+			"name": "config.ts",
+			"filePath": "src/lib/config.ts",
+			"summary": "Library: config.ts — modul utilitas untuk website Yayasan ASIB",
+			"tags": ["typescript", "utility"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:src/lib/constants.ts",
+			"type": "file",
+			"name": "constants.ts",
+			"filePath": "src/lib/constants.ts",
+			"summary": "Library: constants.ts — modul utilitas untuk website Yayasan ASIB",
+			"tags": ["typescript", "utility", "tested"],
+			"complexity": "moderate"
+		},
+		{
+			"id": "file:src/lib/error-handler.ts",
+			"type": "file",
+			"name": "error-handler.ts",
+			"filePath": "src/lib/error-handler.ts",
+			"summary": "Library: error-handler.ts — modul utilitas untuk website Yayasan ASIB",
+			"tags": ["typescript", "utility"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:src/lib/google-drive.ts",
+			"type": "file",
+			"name": "google-drive.ts",
+			"filePath": "src/lib/google-drive.ts",
+			"summary": "Library: google-drive.ts — modul utilitas untuk website Yayasan ASIB",
+			"tags": ["typescript", "utility", "tested"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:src/lib/kv-cache.ts",
+			"type": "file",
+			"name": "kv-cache.ts",
+			"filePath": "src/lib/kv-cache.ts",
+			"summary": "Library: kv-cache.ts — modul utilitas untuk website Yayasan ASIB",
+			"tags": ["typescript", "utility"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:src/lib/likes.ts",
+			"type": "file",
+			"name": "likes.ts",
+			"filePath": "src/lib/likes.ts",
+			"summary": "Library: likes.ts — modul utilitas untuk website Yayasan ASIB",
+			"tags": ["typescript", "utility"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:src/lib/sanity/client.ts",
+			"type": "file",
+			"name": "client.ts",
+			"filePath": "src/lib/sanity/client.ts",
+			"summary": "Library: client.ts — modul utilitas untuk website Yayasan ASIB",
+			"tags": ["typescript", "utility"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:src/lib/sanity/queries.ts",
+			"type": "file",
+			"name": "queries.ts",
+			"filePath": "src/lib/sanity/queries.ts",
+			"summary": "Library: queries.ts — modul utilitas untuk website Yayasan ASIB",
+			"tags": ["typescript", "utility"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:src/lib/sanity/render.ts",
+			"type": "file",
+			"name": "render.ts",
+			"filePath": "src/lib/sanity/render.ts",
+			"summary": "Library: render.ts — modul utilitas untuk website Yayasan ASIB",
+			"tags": ["typescript", "utility"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:src/lib/sanity/types.ts",
+			"type": "file",
+			"name": "types.ts",
+			"filePath": "src/lib/sanity/types.ts",
+			"summary": "Library: types.ts — modul utilitas untuk website Yayasan ASIB",
+			"tags": ["typescript", "utility"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:src/lib/toast-utils.ts",
+			"type": "file",
+			"name": "toast-utils.ts",
+			"filePath": "src/lib/toast-utils.ts",
+			"summary": "Library: toast-utils.ts — modul utilitas untuk website Yayasan ASIB",
+			"tags": ["typescript", "utility"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:src/lib/web-vitals.ts",
+			"type": "file",
+			"name": "web-vitals.ts",
+			"filePath": "src/lib/web-vitals.ts",
+			"summary": "Library: web-vitals.ts — modul utilitas untuk website Yayasan ASIB",
+			"tags": ["typescript", "utility"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:src/middleware.ts",
+			"type": "file",
+			"name": "middleware.ts",
+			"filePath": "src/middleware.ts",
+			"summary": "File: middleware.ts",
+			"tags": ["typescript"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:src/pages/404.astro",
+			"type": "file",
+			"name": "404.astro",
+			"filePath": "src/pages/404.astro",
+			"summary": "Halaman: 404 — route halaman website Yayasan ASIB",
+			"tags": ["astro", "page", "route"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:src/pages/api/__tests__/galleries.test.ts",
+			"type": "file",
+			"name": "galleries.test.ts",
+			"filePath": "src/pages/api/__tests__/galleries.test.ts",
+			"summary": "Halaman: galleries.test.ts — route halaman website Yayasan ASIB",
+			"tags": ["typescript", "page", "route", "test"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:src/pages/api/__tests__/health.test.ts",
+			"type": "file",
+			"name": "health.test.ts",
+			"filePath": "src/pages/api/__tests__/health.test.ts",
+			"summary": "Halaman: health.test.ts — route halaman website Yayasan ASIB",
+			"tags": ["typescript", "page", "route", "test"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:src/pages/api/__tests__/kontak.test.ts",
+			"type": "file",
+			"name": "kontak.test.ts",
+			"filePath": "src/pages/api/__tests__/kontak.test.ts",
+			"summary": "Halaman: kontak.test.ts — route halaman website Yayasan ASIB",
+			"tags": ["typescript", "page", "route", "test"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:src/pages/api/__tests__/like.test.ts",
+			"type": "file",
+			"name": "like.test.ts",
+			"filePath": "src/pages/api/__tests__/like.test.ts",
+			"summary": "Halaman: like.test.ts — route halaman website Yayasan ASIB",
+			"tags": ["typescript", "page", "route", "test"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:src/pages/api/drive-image/[id].ts",
+			"type": "file",
+			"name": "[id].ts",
+			"filePath": "src/pages/api/drive-image/[id].ts",
+			"summary": "Halaman: [id].ts — route halaman website Yayasan ASIB",
+			"tags": ["typescript", "page", "route"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:src/pages/api/galleries.ts",
+			"type": "file",
+			"name": "galleries.ts",
+			"filePath": "src/pages/api/galleries.ts",
+			"summary": "Halaman: galleries.ts — route halaman website Yayasan ASIB",
+			"tags": ["typescript", "page", "route", "tested"],
+			"complexity": "moderate"
+		},
+		{
+			"id": "file:src/pages/api/gallery-like.ts",
+			"type": "file",
+			"name": "gallery-like.ts",
+			"filePath": "src/pages/api/gallery-like.ts",
+			"summary": "Halaman: gallery-like.ts — route halaman website Yayasan ASIB",
+			"tags": ["typescript", "page", "route"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:src/pages/api/health.ts",
+			"type": "file",
+			"name": "health.ts",
+			"filePath": "src/pages/api/health.ts",
+			"summary": "Halaman: health.ts — route halaman website Yayasan ASIB",
+			"tags": ["typescript", "page", "route", "tested"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:src/pages/api/kontak.ts",
+			"type": "file",
+			"name": "kontak.ts",
+			"filePath": "src/pages/api/kontak.ts",
+			"summary": "Halaman: kontak.ts — route halaman website Yayasan ASIB",
+			"tags": ["typescript", "page", "route", "tested"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:src/pages/api/like.ts",
+			"type": "file",
+			"name": "like.ts",
+			"filePath": "src/pages/api/like.ts",
+			"summary": "Halaman: like.ts — route halaman website Yayasan ASIB",
+			"tags": ["typescript", "page", "route", "tested"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:src/pages/blog/[slug].astro",
+			"type": "file",
+			"name": "[slug].astro",
+			"filePath": "src/pages/blog/[slug].astro",
+			"summary": "Halaman dinamis: [slug].astro — route dengan parameter untuk konten dinamis",
+			"tags": ["astro", "page", "route"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:src/pages/blog/index.astro",
+			"type": "file",
+			"name": "index.astro",
+			"filePath": "src/pages/blog/index.astro",
+			"summary": "Halaman: index — route halaman website Yayasan ASIB",
+			"tags": ["astro", "page", "route"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:src/pages/donasi.astro",
+			"type": "file",
+			"name": "donasi.astro",
+			"filePath": "src/pages/donasi.astro",
+			"summary": "Halaman: donasi — route halaman website Yayasan ASIB",
+			"tags": ["astro", "page", "route"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:src/pages/faq.astro",
+			"type": "file",
+			"name": "faq.astro",
+			"filePath": "src/pages/faq.astro",
+			"summary": "Halaman: faq — route halaman website Yayasan ASIB",
+			"tags": ["astro", "page", "route"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:src/pages/galeri.astro",
+			"type": "file",
+			"name": "galeri.astro",
+			"filePath": "src/pages/galeri.astro",
+			"summary": "Halaman: galeri — route halaman website Yayasan ASIB",
+			"tags": ["astro", "page", "route"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:src/pages/galeri/[slug].astro",
+			"type": "file",
+			"name": "[slug].astro",
+			"filePath": "src/pages/galeri/[slug].astro",
+			"summary": "Halaman dinamis: [slug].astro — route dengan parameter untuk konten dinamis",
+			"tags": ["astro", "page", "route"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:src/pages/index.astro",
+			"type": "file",
+			"name": "index.astro",
+			"filePath": "src/pages/index.astro",
+			"summary": "Halaman: index — route halaman website Yayasan ASIB",
+			"tags": ["astro", "page", "route", "tested"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:src/pages/kebijakan-privasi.astro",
+			"type": "file",
+			"name": "kebijakan-privasi.astro",
+			"filePath": "src/pages/kebijakan-privasi.astro",
+			"summary": "Halaman: kebijakan-privasi — route halaman website Yayasan ASIB",
+			"tags": ["astro", "page", "route"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:src/pages/kegiatan/[slug].astro",
+			"type": "file",
+			"name": "[slug].astro",
+			"filePath": "src/pages/kegiatan/[slug].astro",
+			"summary": "Halaman dinamis: [slug].astro — route dengan parameter untuk konten dinamis",
+			"tags": ["astro", "page", "route"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:src/pages/kegiatan/index.astro",
+			"type": "file",
+			"name": "index.astro",
+			"filePath": "src/pages/kegiatan/index.astro",
+			"summary": "Halaman: index — route halaman website Yayasan ASIB",
+			"tags": ["astro", "page", "route", "tested"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:src/pages/kontak.astro",
+			"type": "file",
+			"name": "kontak.astro",
+			"filePath": "src/pages/kontak.astro",
+			"summary": "Halaman: kontak — route halaman website Yayasan ASIB",
+			"tags": ["astro", "page", "route", "tested"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:src/pages/program.astro",
+			"type": "file",
+			"name": "program.astro",
+			"filePath": "src/pages/program.astro",
+			"summary": "Halaman: program — route halaman website Yayasan ASIB",
+			"tags": ["astro", "page", "route"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:src/pages/rss.xml.ts",
+			"type": "file",
+			"name": "rss.xml.ts",
+			"filePath": "src/pages/rss.xml.ts",
+			"summary": "Halaman: rss.xml.ts — route halaman website Yayasan ASIB",
+			"tags": ["typescript", "page", "route"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:src/pages/syarat-ketentuan.astro",
+			"type": "file",
+			"name": "syarat-ketentuan.astro",
+			"filePath": "src/pages/syarat-ketentuan.astro",
+			"summary": "Halaman: syarat-ketentuan — route halaman website Yayasan ASIB",
+			"tags": ["astro", "page", "route"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:src/pages/tentang.astro",
+			"type": "file",
+			"name": "tentang.astro",
+			"filePath": "src/pages/tentang.astro",
+			"summary": "Halaman: tentang — route halaman website Yayasan ASIB",
+			"tags": ["astro", "page", "route"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:src/pages/test-fade.astro",
+			"type": "file",
+			"name": "test-fade.astro",
+			"filePath": "src/pages/test-fade.astro",
+			"summary": "Halaman: test-fade — route halaman website Yayasan ASIB",
+			"tags": ["astro", "page", "route"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:src/styles/design-tokens.css",
+			"type": "file",
+			"name": "design-tokens.css",
+			"filePath": "src/styles/design-tokens.css",
+			"summary": "Stylesheet: design-tokens.css — kustomisasi Tailwind CSS dan utility styles",
+			"tags": ["css"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:src/styles/global.css",
+			"type": "file",
+			"name": "global.css",
+			"filePath": "src/styles/global.css",
+			"summary": "Stylesheet: global.css — kustomisasi Tailwind CSS dan utility styles",
+			"tags": ["css"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:studio-amalshalih/eslint.config.mjs",
+			"type": "file",
+			"name": "eslint.config.mjs",
+			"filePath": "studio-amalshalih/eslint.config.mjs",
+			"summary": "File: eslint.config.mjs",
+			"tags": ["javascript"],
+			"complexity": "simple"
+		},
+		{
+			"id": "file:studio-amalshalih/sanity.cli.ts",
+			"type": "file",
+			"name": "sanity.cli.ts",
+			"filePath": "studio-amalshalih/sanity.cli.ts",
+			"summary": "File: sanity.cli.ts",
+			"tags": ["typescript"],
+			"complexity": "moderate"
+		},
+		{
+			"id": "file:studio-amalshalih/sanity.config.ts",
+			"type": "file",
+			"name": "sanity.config.ts",
+			"filePath": "studio-amalshalih/sanity.config.ts",
+			"summary": "File: sanity.config.ts",
+			"tags": ["typescript"],
+			"complexity": "moderate"
+		},
+		{
+			"id": "file:studio-amalshalih/schemaTypes/bankDonasi.ts",
+			"type": "file",
+			"name": "bankDonasi.ts",
+			"filePath": "studio-amalshalih/schemaTypes/bankDonasi.ts",
+			"summary": "File: bankDonasi.ts",
+			"tags": ["typescript"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:studio-amalshalih/schemaTypes/blockContent.ts",
+			"type": "file",
+			"name": "blockContent.ts",
+			"filePath": "studio-amalshalih/schemaTypes/blockContent.ts",
+			"summary": "File: blockContent.ts",
+			"tags": ["typescript"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:studio-amalshalih/schemaTypes/blogPost.ts",
+			"type": "file",
+			"name": "blogPost.ts",
+			"filePath": "studio-amalshalih/schemaTypes/blogPost.ts",
+			"summary": "File: blogPost.ts",
+			"tags": ["typescript"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:studio-amalshalih/schemaTypes/faq.ts",
+			"type": "file",
+			"name": "faq.ts",
+			"filePath": "studio-amalshalih/schemaTypes/faq.ts",
+			"summary": "File: faq.ts",
+			"tags": ["typescript"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:studio-amalshalih/schemaTypes/index.ts",
+			"type": "file",
+			"name": "index.ts",
+			"filePath": "studio-amalshalih/schemaTypes/index.ts",
+			"summary": "File: index.ts",
+			"tags": ["typescript"],
+			"complexity": "moderate"
+		},
+		{
+			"id": "file:studio-amalshalih/schemaTypes/kegiatan.ts",
+			"type": "file",
+			"name": "kegiatan.ts",
+			"filePath": "studio-amalshalih/schemaTypes/kegiatan.ts",
+			"summary": "File: kegiatan.ts",
+			"tags": ["typescript"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:studio-amalshalih/schemaTypes/pengurus.ts",
+			"type": "file",
+			"name": "pengurus.ts",
+			"filePath": "studio-amalshalih/schemaTypes/pengurus.ts",
+			"summary": "File: pengurus.ts",
+			"tags": ["typescript"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:studio-amalshalih/schemaTypes/program.ts",
+			"type": "file",
+			"name": "program.ts",
+			"filePath": "studio-amalshalih/schemaTypes/program.ts",
+			"summary": "File: program.ts",
+			"tags": ["typescript"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:studio-amalshalih/schemaTypes/siteSettings.ts",
+			"type": "file",
+			"name": "siteSettings.ts",
+			"filePath": "studio-amalshalih/schemaTypes/siteSettings.ts",
+			"summary": "File: siteSettings.ts",
+			"tags": ["typescript"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:studio-amalshalih/static/.gitkeep",
+			"type": "file",
+			"name": ".gitkeep",
+			"filePath": "studio-amalshalih/static/.gitkeep",
+			"summary": "File: .gitkeep",
+			"tags": [],
+			"complexity": "simple"
+		},
+		{
+			"id": "file:test/e2e/blog.spec.ts",
+			"type": "file",
+			"name": "blog.spec.ts",
+			"filePath": "test/e2e/blog.spec.ts",
+			"summary": "Test: blog.spec.ts — pengujian untuk komponen/fungsi website Yayasan ASIB",
+			"tags": ["typescript", "test"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:test/e2e/contact-form.spec.ts",
+			"type": "file",
+			"name": "contact-form.spec.ts",
+			"filePath": "test/e2e/contact-form.spec.ts",
+			"summary": "Test: contact-form.spec.ts — pengujian untuk komponen/fungsi website Yayasan ASIB",
+			"tags": ["typescript", "test"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:test/e2e/homepage.spec.ts",
+			"type": "file",
+			"name": "homepage.spec.ts",
+			"filePath": "test/e2e/homepage.spec.ts",
+			"summary": "Test: homepage.spec.ts — pengujian untuk komponen/fungsi website Yayasan ASIB",
+			"tags": ["typescript", "test"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:test/e2e/navigation.spec.ts",
+			"type": "file",
+			"name": "navigation.spec.ts",
+			"filePath": "test/e2e/navigation.spec.ts",
+			"summary": "Test: navigation.spec.ts — pengujian untuk komponen/fungsi website Yayasan ASIB",
+			"tags": ["typescript", "test"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:test/integration/api.test.ts",
+			"type": "file",
+			"name": "api.test.ts",
+			"filePath": "test/integration/api.test.ts",
+			"summary": "Test: api.test.ts — pengujian untuk komponen/fungsi website Yayasan ASIB",
+			"tags": ["typescript", "test"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:test/lighthouse/lighthouse-audit.spec.ts",
+			"type": "file",
+			"name": "lighthouse-audit.spec.ts",
+			"filePath": "test/lighthouse/lighthouse-audit.spec.ts",
+			"summary": "Test: lighthouse-audit.spec.ts — pengujian untuk komponen/fungsi website Yayasan ASIB",
+			"tags": ["typescript", "test"],
+			"complexity": "complex"
+		},
+		{
+			"id": "file:vitest.config.ts",
+			"type": "file",
+			"name": "vitest.config.ts",
+			"filePath": "vitest.config.ts",
+			"summary": "File: vitest.config.ts",
+			"tags": ["typescript"],
+			"complexity": "moderate"
+		}
+	],
+	"edges": [
+		{
+			"source": "document:DESIGN_SYSTEM_AUDIT.md",
+			"target": "document:README.md",
+			"type": "related",
+			"weight": 0.4,
+			"direction": "forward",
+			"description": "Same dir: "
+		},
+		{
+			"source": "document:README.md",
+			"target": "document:donasi-snapshot.md",
+			"type": "related",
+			"weight": 0.4,
+			"direction": "forward",
+			"description": "Same dir: "
+		},
+		{
+			"source": "document:donasi-snapshot.md",
+			"target": "document:sentry-config.md",
+			"type": "related",
+			"weight": 0.4,
+			"direction": "forward",
+			"description": "Same dir: "
+		},
+		{
+			"source": "document:sentry-config.md",
+			"target": "document:tentang-snapshot.md",
+			"type": "related",
+			"weight": 0.4,
+			"direction": "forward",
+			"description": "Same dir: "
+		},
+		{
+			"source": "document:.openkb/10-arsitektur/ARCHITECTURE.md",
+			"target": "document:.openkb/10-arsitektur/ASTRO_V6_CLOUDFLARE_CONFIG_AUDIT.md",
+			"type": "related",
+			"weight": 0.4,
+			"direction": "forward",
+			"description": "Same dir: .openkb/10-arsitektur"
+		},
+		{
+			"source": "document:.openkb/10-arsitektur/ASTRO_V6_CLOUDFLARE_CONFIG_AUDIT.md",
+			"target": "document:.openkb/10-arsitektur/CLEAN_CONFIGURATION_SUMMARY.md",
+			"type": "related",
+			"weight": 0.4,
+			"direction": "forward",
+			"description": "Same dir: .openkb/10-arsitektur"
+		},
+		{
+			"source": "document:.openkb/10-arsitektur/CLEAN_CONFIGURATION_SUMMARY.md",
+			"target": "document:.openkb/10-arsitektur/ROOT_LEVEL_WRANGLER_CONFIG.md",
+			"type": "related",
+			"weight": 0.4,
+			"direction": "forward",
+			"description": "Same dir: .openkb/10-arsitektur"
+		},
+		{
+			"source": "document:.openkb/10-arsitektur/ROOT_LEVEL_WRANGLER_CONFIG.md",
+			"target": "document:.openkb/10-arsitektur/WORKERD_COMPATIBILITY_AUDIT.md",
+			"type": "related",
+			"weight": 0.4,
+			"direction": "forward",
+			"description": "Same dir: .openkb/10-arsitektur"
+		},
+		{
+			"source": "document:.openkb/10-arsitektur/WORKERD_COMPATIBILITY_AUDIT.md",
+			"target": "document:.openkb/10-arsitektur/WRANGLER_PREVIEW_ERROR_10015.md",
+			"type": "related",
+			"weight": 0.4,
+			"direction": "forward",
+			"description": "Same dir: .openkb/10-arsitektur"
+		},
+		{
+			"source": "document:.openkb/10-arsitektur/WRANGLER_PREVIEW_ERROR_10015.md",
+			"target": "document:.openkb/10-arsitektur/audit-komprehensif.md",
+			"type": "related",
+			"weight": 0.4,
+			"direction": "forward",
+			"description": "Same dir: .openkb/10-arsitektur"
+		},
+		{
+			"source": "document:.openkb/10-arsitektur/audit-komprehensif.md",
+			"target": "document:.openkb/10-arsitektur/brainstorming.md",
+			"type": "related",
+			"weight": 0.4,
+			"direction": "forward",
+			"description": "Same dir: .openkb/10-arsitektur"
+		},
+		{
+			"source": "document:.openkb/10-arsitektur/brainstorming.md",
+			"target": "document:.openkb/10-arsitektur/email-system.md",
+			"type": "related",
+			"weight": 0.4,
+			"direction": "forward",
+			"description": "Same dir: .openkb/10-arsitektur"
+		},
+		{
+			"source": "document:.openkb/20-cms-dan-konten/DATA_SOURCES.md",
+			"target": "document:.openkb/20-cms-dan-konten/cms-integration.md",
+			"type": "related",
+			"weight": 0.4,
+			"direction": "forward",
+			"description": "Same dir: .openkb/20-cms-dan-konten"
+		},
+		{
+			"source": "document:.openkb/20-cms-dan-konten/cms-integration.md",
+			"target": "document:.openkb/20-cms-dan-konten/kegiatan-content-architecture.md",
+			"type": "related",
+			"weight": 0.4,
+			"direction": "forward",
+			"description": "Same dir: .openkb/20-cms-dan-konten"
+		},
+		{
+			"source": "document:.openkb/20-cms-dan-konten/kegiatan-content-architecture.md",
+			"target": "document:.openkb/20-cms-dan-konten/sanity-strategi.md",
+			"type": "related",
+			"weight": 0.4,
+			"direction": "forward",
+			"description": "Same dir: .openkb/20-cms-dan-konten"
+		},
+		{
+			"source": "document:.openkb/30-deploy/commit-strategy.md",
+			"target": "document:.openkb/30-deploy/deployment.md",
+			"type": "related",
+			"weight": 0.4,
+			"direction": "forward",
+			"description": "Same dir: .openkb/30-deploy"
+		},
+		{
+			"source": "document:.openkb/30-deploy/deployment.md",
+			"target": "document:.openkb/30-deploy/spotlight-integration.md",
+			"type": "related",
+			"weight": 0.4,
+			"direction": "forward",
+			"description": "Same dir: .openkb/30-deploy"
+		},
+		{
+			"source": "document:.sisyphus/AUDIT_RESULTS.md",
+			"target": "document:.sisyphus/FRONT_END_CHECKLIST_INTEGRATION.md",
+			"type": "related",
+			"weight": 0.4,
+			"direction": "forward",
+			"description": "Same dir: .sisyphus"
+		},
+		{
+			"source": "document:.sisyphus/FRONT_END_CHECKLIST_INTEGRATION.md",
+			"target": "document:.sisyphus/IMPROVEMENT_SUMMARY.md",
+			"type": "related",
+			"weight": 0.4,
+			"direction": "forward",
+			"description": "Same dir: .sisyphus"
+		},
+		{
+			"source": "document:.sisyphus/IMPROVEMENT_SUMMARY.md",
+			"target": "document:.sisyphus/MCP_USAGE_GUIDE.md",
+			"type": "related",
+			"weight": 0.4,
+			"direction": "forward",
+			"description": "Same dir: .sisyphus"
+		},
+		{
+			"source": "document:.sisyphus/MCP_USAGE_GUIDE.md",
+			"target": "document:.sisyphus/summary.md",
+			"type": "related",
+			"weight": 0.4,
+			"direction": "forward",
+			"description": "Same dir: .sisyphus"
+		},
+		{
+			"source": "document:.sisyphus/plans/COMMIT_STRATEGY_FINAL.md",
+			"target": "document:.sisyphus/plans/COMPREHENSIVE_REFACTORING_PLAN.md",
+			"type": "related",
+			"weight": 0.4,
+			"direction": "forward",
+			"description": "Same dir: .sisyphus/plans"
+		},
+		{
+			"source": "document:.sisyphus/plans/COMPREHENSIVE_REFACTORING_PLAN.md",
+			"target": "document:.sisyphus/plans/commit-sesi-2.md",
+			"type": "related",
+			"weight": 0.4,
+			"direction": "forward",
+			"description": "Same dir: .sisyphus/plans"
+		},
+		{
+			"source": "document:.sisyphus/plans/commit-sesi-2.md",
+			"target": "document:.sisyphus/plans/comprehensive-audit-and-fix-plan.md",
+			"type": "related",
+			"weight": 0.4,
+			"direction": "forward",
+			"description": "Same dir: .sisyphus/plans"
+		},
+		{
+			"source": "document:docs/DEPLOYMENT_GUIDE.md",
+			"target": "document:docs/DESIGN_SYSTEM.md",
+			"type": "related",
+			"weight": 0.4,
+			"direction": "forward",
+			"description": "Same dir: docs"
+		},
+		{
+			"source": "document:docs/DESIGN_SYSTEM.md",
+			"target": "document:docs/README.md",
+			"type": "related",
+			"weight": 0.4,
+			"direction": "forward",
+			"description": "Same dir: docs"
+		},
+		{
+			"source": "document:docs/README.md",
+			"target": "document:docs/hero-component.md",
+			"type": "related",
+			"weight": 0.4,
+			"direction": "forward",
+			"description": "Same dir: docs"
+		},
+		{
+			"source": "document:docs/hero-component.md",
+			"target": "document:docs/web-vitals.md",
+			"type": "related",
+			"weight": 0.4,
+			"direction": "forward",
+			"description": "Same dir: docs"
+		},
+		{
+			"source": "document:docs/web-vitals.md",
+			"target": "document:docs/wrangler-configs.md",
+			"type": "related",
+			"weight": 0.4,
+			"direction": "forward",
+			"description": "Same dir: docs"
+		},
+		{
+			"source": "document:src/content/blog/README.md",
+			"target": "document:src/content/blog/amalan-sunnah-idul-adha.md",
+			"type": "related",
+			"weight": 0.4,
+			"direction": "forward",
+			"description": "Same dir: src/content/blog"
+		},
+		{
+			"source": "document:src/content/blog/amalan-sunnah-idul-adha.md",
+			"target": "document:src/content/blog/cara-bijak-berdonasi.md",
+			"type": "related",
+			"weight": 0.4,
+			"direction": "forward",
+			"description": "Same dir: src/content/blog"
+		},
+		{
+			"source": "document:src/content/blog/cara-bijak-berdonasi.md",
+			"target": "document:src/content/blog/keutamaan-10-hari-dzulhijjah.md",
+			"type": "related",
+			"weight": 0.4,
+			"direction": "forward",
+			"description": "Same dir: src/content/blog"
+		},
+		{
+			"source": "document:src/content/blog/keutamaan-10-hari-dzulhijjah.md",
+			"target": "document:src/content/blog/manfaat-sedekah-subuh.md",
+			"type": "related",
+			"weight": 0.4,
+			"direction": "forward",
+			"description": "Same dir: src/content/blog"
+		},
+		{
+			"source": "document:src/content/blog/manfaat-sedekah-subuh.md",
+			"target": "document:src/content/blog/metode-belajar-islam-interaktif.md",
+			"type": "related",
+			"weight": 0.4,
+			"direction": "forward",
+			"description": "Same dir: src/content/blog"
+		},
+		{
+			"source": "document:src/content/blog/metode-belajar-islam-interaktif.md",
+			"target": "document:src/content/blog/panduan-zakat-fitrah.md",
+			"type": "related",
+			"weight": 0.4,
+			"direction": "forward",
+			"description": "Same dir: src/content/blog"
+		},
+		{
+			"source": "document:src/content/blog/panduan-zakat-fitrah.md",
+			"target": "document:src/content/blog/pentingnya-tahfiz-alquran.md",
+			"type": "related",
+			"weight": 0.4,
+			"direction": "forward",
+			"description": "Same dir: src/content/blog"
+		},
+		{
+			"source": "document:src/content/blog/pentingnya-tahfiz-alquran.md",
+			"target": "document:src/content/blog/pentingnya-wakaf-tunai.md",
+			"type": "related",
+			"weight": 0.4,
+			"direction": "forward",
+			"description": "Same dir: src/content/blog"
+		},
+		{
+			"source": "document:src/content/blog/pentingnya-wakaf-tunai.md",
+			"target": "document:src/content/blog/program-santunan-anak-yatim.md",
+			"type": "related",
+			"weight": 0.4,
+			"direction": "forward",
+			"description": "Same dir: src/content/blog"
+		},
+		{
+			"source": "document:src/content/blog/program-santunan-anak-yatim.md",
+			"target": "document:src/content/blog/tips-mendidik-anak-islam.md",
+			"type": "related",
+			"weight": 0.4,
+			"direction": "forward",
+			"description": "Same dir: src/content/blog"
+		},
+		{
+			"source": "document:src/content/blog/tips-mendidik-anak-islam.md",
+			"target": "document:src/content/blog/transparansi-donasi-asib.md",
+			"type": "related",
+			"weight": 0.4,
+			"direction": "forward",
+			"description": "Same dir: src/content/blog"
+		},
+		{
+			"source": "document:src/content/kegiatan/jumat-bersedekah.md",
+			"target": "document:src/content/kegiatan/kajian-pekanan-tafsir-juz30.md",
+			"type": "related",
+			"weight": 0.4,
+			"direction": "forward",
+			"description": "Same dir: src/content/kegiatan"
+		},
+		{
+			"source": "document:src/content/kegiatan/kajian-pekanan-tafsir-juz30.md",
+			"target": "document:src/content/kegiatan/laporan-beasiswa-anak-dhuafa.md",
+			"type": "related",
+			"weight": 0.4,
+			"direction": "forward",
+			"description": "Same dir: src/content/kegiatan"
+		},
+		{
+			"source": "document:src/content/kegiatan/laporan-beasiswa-anak-dhuafa.md",
+			"target": "document:src/content/kegiatan/santunan-sembako-mei-2026.md",
+			"type": "related",
+			"weight": 0.4,
+			"direction": "forward",
+			"description": "Same dir: src/content/kegiatan"
+		},
+		{
+			"source": "document:src/content/kegiatan/santunan-sembako-mei-2026.md",
+			"target": "document:src/content/kegiatan/wisuda-juz30-milad-3.md",
+			"type": "related",
+			"weight": 0.4,
+			"direction": "forward",
+			"description": "Same dir: src/content/kegiatan"
+		},
+		{
+			"source": "file:scripts/cache-gallery-photos.ts",
+			"target": "file:src/lib/google-drive.ts",
+			"type": "imports",
+			"weight": 0.7,
+			"direction": "forward",
+			"description": "cache-gallery-photos.ts imports google-drive.ts"
+		},
+		{
+			"source": "file:scripts/discover-and-cache-galleries.ts",
+			"target": "file:src/lib/google-drive.ts",
+			"type": "imports",
+			"weight": 0.7,
+			"direction": "forward",
+			"description": "discover-and-cache-galleries.ts imports google-drive.ts"
+		},
+		{
+			"source": "file:src/components/Navbar.astro",
+			"target": "file:test/e2e/navigation.spec.ts",
+			"type": "tested_by",
+			"weight": 0.5,
+			"direction": "forward",
+			"description": "navigation.spec.ts tests Navbar.astro"
+		},
+		{
+			"source": "file:src/data/galleries.ts",
+			"target": "file:src/lib/google-drive.ts",
+			"type": "imports",
+			"weight": 0.7,
+			"direction": "forward",
+			"description": "galleries.ts imports google-drive.ts"
+		},
+		{
+			"source": "file:src/data/galleries.ts",
+			"target": "file:src/lib/kv-cache.ts",
+			"type": "imports",
+			"weight": 0.7,
+			"direction": "forward",
+			"description": "galleries.ts imports kv-cache.ts"
+		},
+		{
+			"source": "file:src/data/hero-photos.ts",
+			"target": "file:src/lib/google-drive.ts",
+			"type": "imports",
+			"weight": 0.7,
+			"direction": "forward",
+			"description": "hero-photos.ts imports google-drive.ts"
+		},
+		{
+			"source": "file:src/lib/__tests__/constants.test.ts",
+			"target": "file:src/lib/constants.ts",
+			"type": "imports",
+			"weight": 0.7,
+			"direction": "forward",
+			"description": "constants.test.ts imports constants.ts"
+		},
+		{
+			"source": "file:src/lib/__tests__/site-data.test.ts",
+			"target": "file:src/data/site.ts",
+			"type": "imports",
+			"weight": 0.7,
+			"direction": "forward",
+			"description": "site-data.test.ts imports site.ts"
+		},
+		{
+			"source": "file:src/lib/error-handler.ts",
+			"target": "file:src/lib/toast-utils.ts",
+			"type": "imports",
+			"weight": 0.7,
+			"direction": "forward",
+			"description": "error-handler.ts imports toast-utils.ts"
+		},
+		{
+			"source": "file:src/lib/google-drive.ts",
+			"target": "file:src/lib/config.ts",
+			"type": "imports",
+			"weight": 0.7,
+			"direction": "forward",
+			"description": "google-drive.ts imports config.ts"
+		},
+		{
+			"source": "file:src/lib/sanity/client.ts",
+			"target": "file:src/lib/kv-cache.ts",
+			"type": "imports",
+			"weight": 0.7,
+			"direction": "forward",
+			"description": "client.ts imports kv-cache.ts"
+		},
+		{
+			"source": "file:src/lib/sanity/client.ts",
+			"target": "file:src/lib/sanity/queries.ts",
+			"type": "imports",
+			"weight": 0.7,
+			"direction": "forward",
+			"description": "client.ts imports queries.ts"
+		},
+		{
+			"source": "file:src/lib/sanity/client.ts",
+			"target": "file:src/lib/sanity/types.ts",
+			"type": "imports",
+			"weight": 0.7,
+			"direction": "forward",
+			"description": "client.ts imports types.ts"
+		},
+		{
+			"source": "file:src/components/ui/Button.astro",
+			"target": "file:src/components/__tests__/Button.test.ts",
+			"type": "tested_by",
+			"weight": 0.5,
+			"direction": "forward",
+			"description": "Button.test.ts tests Button.astro"
+		},
+		{
+			"source": "file:src/components/ui/Card.astro",
+			"target": "file:src/components/__tests__/Card.test.ts",
+			"type": "tested_by",
+			"weight": 0.5,
+			"direction": "forward",
+			"description": "Card.test.ts tests Card.astro"
+		},
+		{
+			"source": "file:src/components/ui/Icon.astro",
+			"target": "file:src/components/__tests__/Icon.test.ts",
+			"type": "tested_by",
+			"weight": 0.5,
+			"direction": "forward",
+			"description": "Icon.test.ts tests Icon.astro"
+		},
+		{
+			"source": "file:src/lib/constants.ts",
+			"target": "file:src/lib/__tests__/constants.test.ts",
+			"type": "tested_by",
+			"weight": 0.5,
+			"direction": "forward",
+			"description": "constants.test.ts tests constants.ts"
+		},
+		{
+			"source": "file:src/lib/google-drive.ts",
+			"target": "file:src/lib/__tests__/google-drive.test.ts",
+			"type": "tested_by",
+			"weight": 0.5,
+			"direction": "forward",
+			"description": "google-drive.test.ts tests google-drive.ts"
+		},
+		{
+			"source": "file:src/data/site.ts",
+			"target": "file:src/lib/__tests__/site-data.test.ts",
+			"type": "tested_by",
+			"weight": 0.5,
+			"direction": "forward",
+			"description": "site-data.test.ts tests site.ts"
+		},
+		{
+			"source": "file:src/pages/api/drive-image/[id].ts",
+			"target": "file:src/lib/google-drive.ts",
+			"type": "imports",
+			"weight": 0.7,
+			"direction": "forward",
+			"description": "[id].ts imports google-drive.ts"
+		},
+		{
+			"source": "file:src/pages/api/drive-image/[id].ts",
+			"target": "file:src/lib/kv-cache.ts",
+			"type": "imports",
+			"weight": 0.7,
+			"direction": "forward",
+			"description": "[id].ts imports kv-cache.ts"
+		},
+		{
+			"source": "file:src/pages/api/galleries.ts",
+			"target": "file:src/data/galleries.ts",
+			"type": "imports",
+			"weight": 0.7,
+			"direction": "forward",
+			"description": "galleries.ts imports galleries.ts"
+		},
+		{
+			"source": "file:src/pages/api/gallery-like.ts",
+			"target": "file:src/lib/likes.ts",
+			"type": "imports",
+			"weight": 0.7,
+			"direction": "forward",
+			"description": "gallery-like.ts imports likes.ts"
+		},
+		{
+			"source": "file:src/pages/api/health.ts",
+			"target": "file:src/lib/config.ts",
+			"type": "imports",
+			"weight": 0.7,
+			"direction": "forward",
+			"description": "health.ts imports config.ts"
+		},
+		{
+			"source": "file:src/pages/api/kontak.ts",
+			"target": "file:src/lib/config.ts",
+			"type": "imports",
+			"weight": 0.7,
+			"direction": "forward",
+			"description": "kontak.ts imports config.ts"
+		},
+		{
+			"source": "file:src/pages/api/like.ts",
+			"target": "file:src/lib/likes.ts",
+			"type": "imports",
+			"weight": 0.7,
+			"direction": "forward",
+			"description": "like.ts imports likes.ts"
+		},
+		{
+			"source": "file:src/pages/api/galleries.ts",
+			"target": "file:src/pages/api/__tests__/galleries.test.ts",
+			"type": "tested_by",
+			"weight": 0.5,
+			"direction": "forward",
+			"description": "galleries.test.ts tests galleries.ts"
+		},
+		{
+			"source": "file:src/pages/api/health.ts",
+			"target": "file:src/pages/api/__tests__/health.test.ts",
+			"type": "tested_by",
+			"weight": 0.5,
+			"direction": "forward",
+			"description": "health.test.ts tests health.ts"
+		},
+		{
+			"source": "file:src/pages/api/kontak.ts",
+			"target": "file:src/pages/api/__tests__/kontak.test.ts",
+			"type": "tested_by",
+			"weight": 0.5,
+			"direction": "forward",
+			"description": "kontak.test.ts tests kontak.ts"
+		},
+		{
+			"source": "file:src/pages/api/like.ts",
+			"target": "file:src/pages/api/__tests__/like.test.ts",
+			"type": "tested_by",
+			"weight": 0.5,
+			"direction": "forward",
+			"description": "like.test.ts tests like.ts"
+		},
+		{
+			"source": "file:src/pages/index.astro",
+			"target": "file:test/e2e/homepage.spec.ts",
+			"type": "tested_by",
+			"weight": 0.5,
+			"direction": "forward",
+			"description": "homepage.spec.ts tests index.astro"
+		},
+		{
+			"source": "file:src/pages/api/health.ts",
+			"target": "file:test/integration/api.test.ts",
+			"type": "tested_by",
+			"weight": 0.5,
+			"direction": "forward",
+			"description": "api.test.ts tests health.ts"
+		},
+		{
+			"source": "file:src/pages/index.astro",
+			"target": "file:test/lighthouse/lighthouse-audit.spec.ts",
+			"type": "tested_by",
+			"weight": 0.5,
+			"direction": "forward",
+			"description": "lighthouse-audit.spec.ts tests index.astro"
+		},
+		{
+			"source": "file:src/pages/rss.xml.ts",
+			"target": "file:src/data/site.ts",
+			"type": "imports",
+			"weight": 0.7,
+			"direction": "forward",
+			"description": "rss.xml.ts imports site.ts"
+		},
+		{
+			"source": "file:studio-amalshalih/sanity.config.ts",
+			"target": "file:studio-amalshalih/schemaTypes/index.ts",
+			"type": "imports",
+			"weight": 0.7,
+			"direction": "forward",
+			"description": "sanity.config.ts imports index.ts"
+		},
+		{
+			"source": "file:studio-amalshalih/schemaTypes/index.ts",
+			"target": "file:studio-amalshalih/schemaTypes/bankDonasi.ts",
+			"type": "imports",
+			"weight": 0.7,
+			"direction": "forward",
+			"description": "index.ts imports bankDonasi.ts"
+		},
+		{
+			"source": "file:studio-amalshalih/schemaTypes/index.ts",
+			"target": "file:studio-amalshalih/schemaTypes/blockContent.ts",
+			"type": "imports",
+			"weight": 0.7,
+			"direction": "forward",
+			"description": "index.ts imports blockContent.ts"
+		},
+		{
+			"source": "file:studio-amalshalih/schemaTypes/index.ts",
+			"target": "file:studio-amalshalih/schemaTypes/blogPost.ts",
+			"type": "imports",
+			"weight": 0.7,
+			"direction": "forward",
+			"description": "index.ts imports blogPost.ts"
+		},
+		{
+			"source": "file:studio-amalshalih/schemaTypes/index.ts",
+			"target": "file:studio-amalshalih/schemaTypes/faq.ts",
+			"type": "imports",
+			"weight": 0.7,
+			"direction": "forward",
+			"description": "index.ts imports faq.ts"
+		},
+		{
+			"source": "file:studio-amalshalih/schemaTypes/index.ts",
+			"target": "file:studio-amalshalih/schemaTypes/kegiatan.ts",
+			"type": "imports",
+			"weight": 0.7,
+			"direction": "forward",
+			"description": "index.ts imports kegiatan.ts"
+		},
+		{
+			"source": "file:studio-amalshalih/schemaTypes/index.ts",
+			"target": "file:studio-amalshalih/schemaTypes/pengurus.ts",
+			"type": "imports",
+			"weight": 0.7,
+			"direction": "forward",
+			"description": "index.ts imports pengurus.ts"
+		},
+		{
+			"source": "file:studio-amalshalih/schemaTypes/index.ts",
+			"target": "file:studio-amalshalih/schemaTypes/program.ts",
+			"type": "imports",
+			"weight": 0.7,
+			"direction": "forward",
+			"description": "index.ts imports program.ts"
+		},
+		{
+			"source": "file:studio-amalshalih/schemaTypes/index.ts",
+			"target": "file:studio-amalshalih/schemaTypes/siteSettings.ts",
+			"type": "imports",
+			"weight": 0.7,
+			"direction": "forward",
+			"description": "index.ts imports siteSettings.ts"
+		},
+		{
+			"source": "file:src/pages/kegiatan/index.astro",
+			"target": "file:test/e2e/blog.spec.ts",
+			"type": "tested_by",
+			"weight": 0.5,
+			"direction": "forward",
+			"description": "blog.spec.ts tests index.astro"
+		},
+		{
+			"source": "file:src/pages/kontak.astro",
+			"target": "file:test/e2e/contact-form.spec.ts",
+			"type": "tested_by",
+			"weight": 0.5,
+			"direction": "forward",
+			"description": "contact-form.spec.ts tests kontak.astro"
+		}
+	],
+	"layers": [
+		{
+			"id": "layer:ci-cd",
+			"name": "CI/CD",
+			"description": "GitHub Actions workflows for automated deployment and auditing",
+			"nodeIds": [
+				"pipeline:.github/workflows/deploy.yml",
+				"pipeline:.github/workflows/monthly-audit.yml"
+			]
+		},
+		{
+			"id": "layer:project-config",
+			"name": "Project Configuration",
+			"description": "Root-level project configuration files",
+			"nodeIds": [
+				"config:.env.example",
+				"config:biome.json",
+				"config:package.json",
+				"config:tsconfig.json",
+				"file:astro.config.mjs",
+				"config:eslint.config.js",
+				"config:playwright.config.ts",
+				"file:sentry.client.config.js",
+				"file:sentry.server.config.js"
+			]
+		},
+		{
+			"id": "layer:project-docs",
+			"name": "Project Documentation",
+			"description": "Root-level project documentation",
+			"nodeIds": [
+				"document:DESIGN_SYSTEM_AUDIT.md",
+				"document:README.md",
+				"document:donasi-snapshot.md",
+				"document:sentry-config.md",
+				"document:tentang-snapshot.md"
+			]
+		},
+		{
+			"id": "layer:cloudflare-config",
+			"name": "Cloudflare Config",
+			"description": "Cloudflare Workers and Wrangler configuration files",
+			"nodeIds": [
+				"config:wrangler.build.jsonc",
+				"config:wrangler.jsonc",
+				"config:wrangler.staging.jsonc"
+			]
+		},
+		{
+			"id": "layer:architecture-docs",
+			"name": "Architecture Documentation",
+			"description": "System architecture, configuration audits, and design documentation",
+			"nodeIds": [
+				"document:.openkb/10-arsitektur/ARCHITECTURE.md",
+				"document:.openkb/10-arsitektur/ASTRO_V6_CLOUDFLARE_CONFIG_AUDIT.md",
+				"document:.openkb/10-arsitektur/CLEAN_CONFIGURATION_SUMMARY.md",
+				"document:.openkb/10-arsitektur/ROOT_LEVEL_WRANGLER_CONFIG.md",
+				"document:.openkb/10-arsitektur/WORKERD_COMPATIBILITY_AUDIT.md",
+				"document:.openkb/10-arsitektur/WRANGLER_PREVIEW_ERROR_10015.md",
+				"document:.openkb/10-arsitektur/audit-komprehensif.md",
+				"document:.openkb/10-arsitektur/brainstorming.md",
+				"document:.openkb/10-arsitektur/email-system.md"
+			]
+		},
+		{
+			"id": "layer:cms-docs",
+			"name": "CMS & Content Docs",
+			"description": "Sanity CMS integration, content architecture, and data source documentation",
+			"nodeIds": [
+				"document:.openkb/20-cms-dan-konten/DATA_SOURCES.md",
+				"document:.openkb/20-cms-dan-konten/cms-integration.md",
+				"document:.openkb/20-cms-dan-konten/kegiatan-content-architecture.md",
+				"document:.openkb/20-cms-dan-konten/sanity-strategi.md"
+			]
+		},
+		{
+			"id": "layer:deployment-docs",
+			"name": "Deployment Docs",
+			"description": "Deployment pipeline, commit strategy, and monitoring documentation",
+			"nodeIds": [
+				"document:.openkb/30-deploy/commit-strategy.md",
+				"document:.openkb/30-deploy/deployment.md",
+				"document:.openkb/30-deploy/spotlight-integration.md"
+			]
+		},
+		{
+			"id": "layer:ai-work-plans",
+			"name": "AI Work Plans",
+			"description": "Sisyphus AI agent work plans and analysis reports",
+			"nodeIds": [
+				"document:.sisyphus/AUDIT_RESULTS.md",
+				"document:.sisyphus/FRONT_END_CHECKLIST_INTEGRATION.md",
+				"document:.sisyphus/IMPROVEMENT_SUMMARY.md",
+				"document:.sisyphus/MCP_USAGE_GUIDE.md",
+				"document:.sisyphus/summary.md",
+				"document:.sisyphus/plans/COMMIT_STRATEGY_FINAL.md",
+				"document:.sisyphus/plans/COMPREHENSIVE_REFACTORING_PLAN.md",
+				"document:.sisyphus/plans/commit-sesi-2.md",
+				"document:.sisyphus/plans/comprehensive-audit-and-fix-plan.md",
+				"document:.sisyphus/analysis/CODEBASE_ANALYSIS_REPORT.md"
+			]
+		},
+		{
+			"id": "layer:docs",
+			"name": "Documentation",
+			"description": "Project documentation including design system and deployment guides",
+			"nodeIds": [
+				"document:docs/DEPLOYMENT_GUIDE.md",
+				"document:docs/DESIGN_SYSTEM.md",
+				"document:docs/README.md",
+				"document:docs/hero-component.md",
+				"document:docs/web-vitals.md",
+				"document:docs/wrangler-configs.md",
+				"document:docs/testing/TEST_MCP_INSTRUCTIONS.md"
+			]
+		},
+		{
+			"id": "layer:blog-content",
+			"name": "Blog Content",
+			"description": "Markdown articles for the blog section",
+			"nodeIds": [
+				"document:src/content/blog/README.md",
+				"document:src/content/blog/amalan-sunnah-idul-adha.md",
+				"document:src/content/blog/cara-bijak-berdonasi.md",
+				"document:src/content/blog/keutamaan-10-hari-dzulhijjah.md",
+				"document:src/content/blog/manfaat-sedekah-subuh.md",
+				"document:src/content/blog/metode-belajar-islam-interaktif.md",
+				"document:src/content/blog/panduan-zakat-fitrah.md",
+				"document:src/content/blog/pentingnya-tahfiz-alquran.md",
+				"document:src/content/blog/pentingnya-wakaf-tunai.md",
+				"document:src/content/blog/program-santunan-anak-yatim.md",
+				"document:src/content/blog/tips-mendidik-anak-islam.md",
+				"document:src/content/blog/transparansi-donasi-asib.md"
+			]
+		},
+		{
+			"id": "layer:kegiatan-content",
+			"name": "Kegiatan Content",
+			"description": "Markdown content for kegiatan (activities) section",
+			"nodeIds": [
+				"document:src/content/kegiatan/jumat-bersedekah.md",
+				"document:src/content/kegiatan/kajian-pekanan-tafsir-juz30.md",
+				"document:src/content/kegiatan/laporan-beasiswa-anak-dhuafa.md",
+				"document:src/content/kegiatan/santunan-sembako-mei-2026.md",
+				"document:src/content/kegiatan/wisuda-juz30-milad-3.md"
+			]
+		},
+		{
+			"id": "layer:other",
+			"name": "Other",
+			"description": "Uncategorized files",
+			"nodeIds": [
+				"document:studio-amalshalih/README.md",
+				"config:studio-amalshalih/package.json",
+				"config:studio-amalshalih/tsconfig.json",
+				"file:download_logos.py",
+				"file:src/content.config.ts",
+				"file:src/env.d.ts",
+				"file:studio-amalshalih/eslint.config.mjs",
+				"file:studio-amalshalih/sanity.cli.ts",
+				"file:studio-amalshalih/sanity.config.ts",
+				"file:studio-amalshalih/schemaTypes/bankDonasi.ts",
+				"file:studio-amalshalih/schemaTypes/blockContent.ts",
+				"file:studio-amalshalih/schemaTypes/blogPost.ts",
+				"file:studio-amalshalih/schemaTypes/faq.ts",
+				"file:studio-amalshalih/schemaTypes/index.ts",
+				"file:studio-amalshalih/schemaTypes/kegiatan.ts",
+				"file:studio-amalshalih/schemaTypes/pengurus.ts",
+				"file:studio-amalshalih/schemaTypes/program.ts",
+				"file:studio-amalshalih/schemaTypes/siteSettings.ts",
+				"file:studio-amalshalih/static/.gitkeep",
+				"file:vitest.config.ts"
+			]
+		},
+		{
+			"id": "layer:git-hooks",
+			"name": "Git Hooks",
+			"description": "Git pre-commit and pre-push hooks",
+			"nodeIds": ["file:.husky/pre-commit", "file:.husky/pre-push"]
+		},
+		{
+			"id": "layer:knowledge-base",
+			"name": "Knowledge Base",
+			"description": "Technical knowledge base root documentation",
+			"nodeIds": ["document:.openkb/README.md"]
+		},
+		{
+			"id": "layer:kg-config",
+			"name": "Knowledge Graph",
+			"description": "Knowledge graph configuration and analysis files",
+			"nodeIds": ["file:.understand-anything/.understandignore"]
+		},
+		{
+			"id": "layer:static-assets",
+			"name": "Static Assets",
+			"description": "Public static assets (images, icons, manifests)",
+			"nodeIds": [
+				"file:public/dampak-nyata-sm.webp",
+				"file:public/dampak-nyata.avif",
+				"file:public/dampak-nyata.webp",
+				"file:public/images/charity-contact.webp",
+				"file:public/logo-yayasan-sm.avif",
+				"file:public/logo-yayasan-sm.webp",
+				"file:public/logo-yayasan.webp",
+				"file:public/qris.webp",
+				"file:public/site.webmanifest",
+				"file:public/sw.js"
+			]
+		},
+		{
+			"id": "layer:scripts",
+			"name": "Scripts",
+			"description": "Build and maintenance utility scripts",
+			"nodeIds": [
+				"file:scripts/audit-frontend-checklist.mjs",
+				"file:scripts/cache-gallery-photos.ts",
+				"file:scripts/discover-and-cache-galleries.ts",
+				"file:scripts/reset-rtdb.ts",
+				"file:scripts/run_lighthouse_all.sh",
+				"file:scripts/seed-pengurus.ts"
+			]
+		},
+		{
+			"id": "layer:shared-components",
+			"name": "Shared Components",
+			"description": "Shared Astro components (BaseHead, etc.)",
+			"nodeIds": [
+				"file:src/components/__tests__/Button.test.ts",
+				"file:src/components/__tests__/Card.test.ts",
+				"file:src/components/__tests__/Icon.test.ts",
+				"document:src/components/__tests__/README.md",
+				"file:src/components/AmbientBlossom.astro",
+				"file:src/components/BaseHead.astro",
+				"file:src/components/ErrorState.astro",
+				"file:src/components/Footer.astro",
+				"file:src/components/gallery/Lightbox.astro",
+				"file:src/components/gallery/LikeButton.astro",
+				"file:src/components/gallery/MasonryGrid.astro",
+				"file:src/components/Hero.astro",
+				"file:src/components/Navbar.astro",
+				"file:src/components/RetryButton.astro"
+			]
+		},
+		{
+			"id": "layer:section-components",
+			"name": "Section Components",
+			"description": "Reusable page section components (Hero, FAQ, Stats, etc.)",
+			"nodeIds": [
+				"file:src/components/sections/Dampak.astro",
+				"file:src/components/sections/FAQ.astro",
+				"file:src/components/sections/Hero.astro",
+				"file:src/components/sections/PageHeader.astro",
+				"file:src/components/sections/Partners.astro",
+				"file:src/components/sections/Section.astro",
+				"file:src/components/sections/Stats.astro",
+				"file:src/components/sections/Testimonials.astro",
+				"file:src/components/sections/Wakaf.astro"
+			]
+		},
+		{
+			"id": "layer:ui-components",
+			"name": "UI Components",
+			"description": "Reusable UI components (Button, Card, Icon, Badge, etc.)",
+			"nodeIds": [
+				"file:src/components/ui/Badge.astro",
+				"file:src/components/ui/Button.astro",
+				"file:src/components/ui/Card.astro",
+				"file:src/components/ui/Container.astro",
+				"file:src/components/ui/Heading.astro",
+				"file:src/components/ui/Icon.astro"
+			]
+		},
+		{
+			"id": "layer:data-layer",
+			"name": "Data Layer",
+			"description": "Site data configuration and content data files",
+			"nodeIds": [
+				"file:src/data/galleries.ts",
+				"file:src/data/hero-photos.ts",
+				"file:src/data/site.ts"
+			]
+		},
+		{
+			"id": "layer:layouts",
+			"name": "Layouts",
+			"description": "Page layout templates and structure",
+			"nodeIds": ["file:src/layouts/BaseLayout.astro"]
+		},
+		{
+			"id": "layer:lib-utilities",
+			"name": "Library Utilities",
+			"description": "Shared utility functions and library modules",
+			"nodeIds": [
+				"file:src/lib/__tests__/constants.test.ts",
+				"file:src/lib/__tests__/firebase-admin.test.ts",
+				"file:src/lib/__tests__/google-drive.test.ts",
+				"file:src/lib/__tests__/site-data.test.ts",
+				"file:src/lib/config.ts",
+				"file:src/lib/constants.ts",
+				"file:src/lib/error-handler.ts",
+				"file:src/lib/google-drive.ts",
+				"file:src/lib/kv-cache.ts",
+				"file:src/lib/likes.ts",
+				"file:src/lib/sanity/client.ts",
+				"file:src/lib/sanity/queries.ts",
+				"file:src/lib/sanity/render.ts",
+				"file:src/lib/sanity/types.ts",
+				"file:src/lib/toast-utils.ts",
+				"file:src/lib/web-vitals.ts"
+			]
+		},
+		{
+			"id": "layer:middleware",
+			"name": "Middleware",
+			"description": "Server middleware for request handling",
+			"nodeIds": ["file:src/middleware.ts"]
+		},
+		{
+			"id": "layer:pages",
+			"name": "Pages",
+			"description": "Application route pages and API endpoints",
+			"nodeIds": [
+				"file:src/pages/404.astro",
+				"file:src/pages/api/__tests__/galleries.test.ts",
+				"file:src/pages/api/__tests__/health.test.ts",
+				"file:src/pages/api/__tests__/kontak.test.ts",
+				"file:src/pages/api/__tests__/like.test.ts",
+				"file:src/pages/api/drive-image/[id].ts",
+				"file:src/pages/api/galleries.ts",
+				"file:src/pages/api/gallery-like.ts",
+				"file:src/pages/api/health.ts",
+				"file:src/pages/api/kontak.ts",
+				"file:src/pages/api/like.ts",
+				"file:src/pages/blog/[slug].astro",
+				"file:src/pages/blog/index.astro",
+				"file:src/pages/donasi.astro",
+				"file:src/pages/faq.astro",
+				"file:src/pages/galeri.astro",
+				"file:src/pages/galeri/[slug].astro",
+				"file:src/pages/index.astro",
+				"file:src/pages/kebijakan-privasi.astro",
+				"file:src/pages/kegiatan/[slug].astro",
+				"file:src/pages/kegiatan/index.astro",
+				"file:src/pages/kontak.astro",
+				"file:src/pages/program.astro",
+				"file:src/pages/rss.xml.ts",
+				"file:src/pages/syarat-ketentuan.astro",
+				"file:src/pages/tentang.astro",
+				"file:src/pages/test-fade.astro"
+			]
+		},
+		{
+			"id": "layer:styles",
+			"name": "Styles",
+			"description": "Global stylesheets, Tailwind theme, and design tokens",
+			"nodeIds": ["file:src/styles/design-tokens.css", "file:src/styles/global.css"]
+		},
+		{
+			"id": "layer:tests",
+			"name": "Tests",
+			"description": "End-to-end, integration, and unit tests",
+			"nodeIds": [
+				"file:test/e2e/blog.spec.ts",
+				"file:test/e2e/contact-form.spec.ts",
+				"file:test/e2e/homepage.spec.ts",
+				"file:test/e2e/navigation.spec.ts",
+				"file:test/integration/api.test.ts",
+				"file:test/lighthouse/lighthouse-audit.spec.ts"
+			]
+		}
+	],
+	"tour": [
+		{
+			"order": 1,
+			"title": "Project Overview",
+			"description": "Start with README to understand project purpose, tech stack, and architecture.",
+			"nodeIds": ["document:README.md"]
+		},
+		{
+			"order": 2,
+			"title": "Application Configuration",
+			"description": "Astro config and middleware define server behavior and page rendering.",
+			"nodeIds": ["file:astro.config.mjs", "file:src/middleware.ts"]
+		},
+		{
+			"order": 3,
+			"title": "Layout & Navigation",
+			"description": "BaseLayout provides consistent page structure with Navbar and Footer.",
+			"nodeIds": [
+				"file:src/layouts/BaseLayout.astro",
+				"file:src/components/Navbar.astro",
+				"file:src/components/Footer.astro"
+			]
+		},
+		{
+			"order": 4,
+			"title": "Homepage & Sections",
+			"description": "The homepage is composed of reusable sections like Hero, Stats, FAQ, Wakaf, and Testimonials.",
+			"nodeIds": [
+				"file:src/pages/index.astro",
+				"file:src/components/sections/Hero.astro",
+				"file:src/components/sections/Stats.astro",
+				"file:src/components/sections/FAQ.astro"
+			]
+		},
+		{
+			"order": 5,
+			"title": "UI Component System",
+			"description": "Reusable UI components: Button, Card, Icon, Badge, Container form the design system.",
+			"nodeIds": [
+				"file:src/components/ui/Button.astro",
+				"file:src/components/ui/Card.astro",
+				"file:src/components/ui/Icon.astro",
+				"file:src/components/ui/Container.astro"
+			]
+		},
+		{
+			"order": 6,
+			"title": "Sanity CMS Schemas",
+			"description": "Content schemas define data models for blog posts, activities, FAQs, programs, and site settings.",
+			"nodeIds": [
+				"config:studio-amalshalih/package.json",
+				"file:studio-amalshalih/schemaTypes/index.ts",
+				"file:studio-amalshalih/schemaTypes/blogPost.ts",
+				"file:studio-amalshalih/schemaTypes/kegiatan.ts"
+			]
+		},
+		{
+			"order": 7,
+			"title": "Content Collections & Blog",
+			"description": "Markdown content collections store blog articles and kegiatan content.",
+			"nodeIds": ["document:src/content/blog/README.md", "file:src/content.config.ts"]
+		},
+		{
+			"order": 8,
+			"title": "API Endpoints",
+			"description": "API routes handle gallery data, likes, health checks, and contact forms.",
+			"nodeIds": [
+				"file:src/pages/api/galleries.ts",
+				"file:src/pages/api/like.ts",
+				"file:src/pages/api/health.ts",
+				"file:src/pages/api/kontak.ts"
+			]
+		},
+		{
+			"order": 9,
+			"title": "Gallery System",
+			"description": "Google Drive integration with KV caching powers the photo gallery feature.",
+			"nodeIds": [
+				"file:src/lib/google-drive.ts",
+				"file:src/lib/kv-cache.ts",
+				"file:src/data/galleries.ts",
+				"file:src/pages/galeri.astro"
+			]
+		},
+		{
+			"order": 10,
+			"title": "Data Layer & Utilities",
+			"description": "Central site data and shared utilities drive content across all pages.",
+			"nodeIds": ["file:src/data/site.ts", "file:src/lib/constants.ts"]
+		},
+		{
+			"order": 11,
+			"title": "Styling & Design Tokens",
+			"description": "Tailwind CSS custom theme, design tokens, and global styles.",
+			"nodeIds": ["file:src/styles/global.css", "file:src/styles/design-tokens.css"]
+		},
+		{
+			"order": 12,
+			"title": "Testing & Quality Assurance",
+			"description": "E2E tests with Playwright, integration tests, and Lighthouse audits.",
+			"nodeIds": [
+				"file:test/e2e/homepage.spec.ts",
+				"file:test/integration/api.test.ts",
+				"file:test/lighthouse/lighthouse-audit.spec.ts",
+				"file:vitest.config.ts"
+			]
+		}
+	]
+}

@@ -1,0 +1,60 @@
+- generic [active] [ref=e1]:
+  - link "Langsung ke konten utama" [ref=e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - banner [ref=e3]:
+    - navigation [ref=e5]:
+      - link "Logo Yayasan ASIB Yayasan Amal Shalih Insan Bantul" [ref=e6] [cursor=pointer]:
+        - /url: /
+        - img "Logo Yayasan ASIB" [ref=e7]
+        - generic [ref=e8]
+      - generic [ref=e11]:
+        - generic [ref=e12]
+        - link "Donasi" [ref=e18] [cursor=pointer]:
+          - /url: /donasi
+  - main [ref=e19]:
+    - generic [ref=e21]:
+      - paragraph [ref=e22]: Tentang Kami
+      - heading "Mengenal Yayasan ASIB" [level=1] [ref=e23]
+    - generic [ref=e24]:
+      - generic [ref=e26]:
+        - generic [ref=e27]
+        - generic [ref=e39]
+      - generic [ref=e55]:
+        - generic [ref=e56]
+        - generic [ref=e60]
+      - generic [ref=e80]:
+        - generic [ref=e81]
+        - generic [ref=e85]
+  - generic [ref=e177]:
+    - heading "Ingin Tahu Lebih Lanjut?" [level=2] [ref=e178]
+    - paragraph [ref=e179]: Hubungi kami untuk pertanyaan, konfirmasi donasi, atau informasi program Yayasan ASIB.
+    - generic [ref=e180]:
+      - link "Hubungi Kami" [ref=e181] [cursor=pointer]:
+        - /url: /kontak
+        - img [ref=e182]
+        - text: Hubungi Kami
+      - link "Donasi Sekarang" [ref=e184] [cursor=pointer]:
+        - /url: /donasi
+  - contentinfo [ref=e185]:
+    - generic [ref=e186]:
+      - generic [ref=e187]:
+        - generic [ref=e188]
+        - generic [ref=e209]
+      - generic [ref=e254]:
+        - generic [ref=e255]: © 2026 Yayasan Amal Shalih Insan Bantul. Seluruh hak cipta dilindungi.
+        - generic [ref=e256]
+  - generic [ref=e262]:
+    - button "Menu" [ref=e263]:
+      - img [ref=e265]
+      - generic: Menu
+    - button "Inspect" [ref=e269]:
+      - img [ref=e271]
+      - generic: Inspect
+    - button "Audit" [ref=e273]:
+      - generic [ref=e274]:
+        - img [ref=e275]
+        - img [ref=e278]
+      - generic: Audit
+    - button "Settings" [ref=e281]:
+      - img [ref=e283]
+      - generic: Settings

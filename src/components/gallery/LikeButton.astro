@@ -10,9 +10,22 @@ const { gallerySlug } = Astro.props
   <button
     type="button"
     data-like-button
-    class="group inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 shadow-sm ring-1 ring-warm-200 transition-all hover:shadow-md hover:ring-warm-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2"
+    class="group inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 shadow-sm ring-1 ring-warm-200 transition-all hover:shadow-md hover:ring-warm-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
     aria-label="Sukai galeri ini"
   >
+    <!-- Loading Spinner -->
+    <svg
+      class="loading-spinner hidden h-5 w-5 text-warm-500 animate-spin"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+    >
+      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3"></circle>
+      <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+    </svg>
+    
+    <!-- Heart Icon -->
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
@@ -21,13 +34,14 @@ const { gallerySlug } = Astro.props
       stroke-width="2"
       stroke-linecap="round"
       stroke-linejoin="round"
-      class="h-5 w-5 text-warm-400 transition-colors group-hover:text-rose-500 group-data-[liked=true]:fill-rose-500 group-data-[liked=true]:text-rose-500 group-data-[liked=true]:animate-pulse"
+      class="heart-icon h-5 w-5 text-warm-500 transition-colors group-hover:text-rose-600 group-data-[liked=true]:fill-rose-500 group-data-[liked=true]:text-rose-500 group-data-[liked=true]:animate-pulse"
       data-heart-icon
       aria-hidden="true"
     >
       <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
     </svg>
-    <span class="text-sm font-medium text-warm-700">
+    
+    <span class="text-sm font-medium text-warm-700 dark:text-warm-300">
       <span data-like-count>0</span> suka
     </span>
   </button>
@@ -40,8 +54,11 @@ const { gallerySlug } = Astro.props
   
   const button = container.querySelector('[data-like-button]');
   const countEl = container.querySelector("[data-like-count]");
+  const heartIcon = container.querySelector('[data-heart-icon]');
+  const loadingSpinner = container.querySelector('.loading-spinner');
   
   let currentLiked = false;
+  let isLoading = false;
   
   async function fetchLikes() {
     try {
@@ -65,8 +82,25 @@ const { gallerySlug } = Astro.props
     button.setAttribute('aria-label', currentLiked ? 'Batal suka galeri ini' : 'Sukai galeri ini');
   }
   
+  function setLoading(loading) {
+    isLoading = loading;
+    button.disabled = loading;
+    
+    if (loading) {
+      loadingSpinner?.classList.remove('hidden');
+      heartIcon?.classList.add('hidden');
+      button.classList.add('opacity-50', 'cursor-not-allowed');
+    } else {
+      loadingSpinner?.classList.add('hidden');
+      heartIcon?.classList.remove('hidden');
+      button.classList.remove('opacity-50', 'cursor-not-allowed');
+    }
+  }
+  
   async function toggleLike() {
-    button.disabled = true;
+    if (isLoading) return; // Prevent double-click
+    
+    setLoading(true);
     
     try {
       const response = await fetch('/api/gallery-like', {
@@ -83,11 +117,13 @@ const { gallerySlug } = Astro.props
         countEl.textContent = result.count.toLocaleString('id-ID');
         currentLiked = result.liked;
         updateUI();
+      } else {
+        console.error('Failed to toggle like: server error');
       }
     } catch (err) {
       console.error('Failed to toggle like:', err);
     } finally {
-      button.disabled = false;
+      setLoading(false);
     }
   }
   

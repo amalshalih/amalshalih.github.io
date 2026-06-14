@@ -80,7 +80,7 @@ const {
 			<!-- Prev Button -->
 			<button
 				id="testimonial-prev"
-				class="hidden md:flex absolute -left-6 lg:-left-12 xl:-left-16 top-1/2 -translate-y-1/2 z-20 h-10 w-10 items-center justify-center rounded-full bg-surface-elevated dark:bg-surface-secondary shadow-md border border-border-primary dark:border-border-inverse text-text-primary hover:bg-primary-50 dark:hover:bg-primary-950 transition-all opacity-0 group-hover:opacity-100 focus:opacity-100 pointer-events-auto"
+				class="hidden md:flex absolute -left-6 lg:-left-12 xl:-left-16 top-1/2 -translate-y-1/2 z-20 h-10 w-10 items-center justify-center rounded-full bg-surface-elevated dark:bg-surface-secondary shadow-md border border-border-primary dark:border-border-inverse text-text-primary hover:bg-primary-50 dark:hover:bg-primary-950 transition-all opacity-0 group-hover:opacity-100 focus:opacity-100 pointer-events-auto focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-surface-secondary"
 				aria-label="Sebelumnya"
 			>
 				<Icon name="chevron-left" size={4} />
@@ -125,7 +125,8 @@ const {
 									src={testimonial.photo}
 									alt={testimonial.author}
 									class="h-12 w-12 rounded-full object-cover"
-									loading="lazy"
+									loading="eager"
+									decoding="async"
 									width={48}
 									height={48}
 								/>
@@ -148,7 +149,7 @@ const {
 			<!-- Next Button -->
 			<button
 				id="testimonial-next"
-				class="hidden md:flex absolute -right-6 lg:-right-12 xl:-right-16 top-1/2 -translate-y-1/2 z-20 h-10 w-10 items-center justify-center rounded-full bg-surface-elevated dark:bg-surface-secondary shadow-md border border-border-primary dark:border-border-inverse text-text-primary hover:bg-primary-50 dark:hover:bg-primary-950 transition-all opacity-0 group-hover:opacity-100 focus:opacity-100 pointer-events-auto"
+				class="hidden md:flex absolute -right-6 lg:-right-12 xl:-right-16 top-1/2 -translate-y-1/2 z-20 h-10 w-10 items-center justify-center rounded-full bg-surface-elevated dark:bg-surface-secondary shadow-md border border-border-primary dark:border-border-inverse text-text-primary hover:bg-primary-50 dark:hover:bg-primary-950 transition-all opacity-0 group-hover:opacity-100 focus:opacity-100 pointer-events-auto focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-surface-secondary"
 				aria-label="Selanjutnya"
 			>
 				<Icon name="chevron-right" size={4} />

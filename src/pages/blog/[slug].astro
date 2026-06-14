@@ -109,59 +109,56 @@ const relatedPosts = allPosts
 	modifiedTime={post.data.date.toISOString()}
 	currentPage={`/blog/${post.id}`}
 >
-	<!-- Full-Width Hero Section -->
-	<div class="relative w-full overflow-hidden bg-warm-50 isolate">
+	<!-- Full-Width Hero Section with Overlap -->
+	<div class="relative w-full overflow-hidden -mt-[70px] sm:-mt-[82px]">
 		<!-- Full-Bleed Ambient Background Glow -->
 		{post.data.image && (
-			<div class="absolute inset-0 z-0 overflow-hidden blur-sm opacity-90 transition-opacity duration-1000" aria-hidden="true">
+			<div class="absolute inset-0 z-0 overflow-hidden bg-transparent pointer-events-none" aria-hidden="true">
 				<img
 					src={post.data.image}
 					alt=""
-					class="h-full w-full object-cover scale-110"
+					class="w-full h-full object-cover blur-sm opacity-60 mix-blend-screen"
+					style="-webkit-mask-image: linear-gradient(to bottom, black 10%, transparent 100%); mask-image: linear-gradient(to bottom, black 10%, transparent 100%);"
 				/>
 			</div>
 		)}
 
-		<!-- Readability Gradient Scrim (Strengthened for sharpness) -->
-		<div class="absolute inset-0 z-0 bg-gradient-to-r from-warm-50 via-warm-50/60 to-transparent pointer-events-none" aria-hidden="true"></div>
-
-		<!-- Bottom fade to transparent for seamless transition with content card -->
-		<div class="absolute bottom-0 left-0 right-0 h-32 z-0 bg-gradient-to-t from-warm-50 via-warm-50/80 to-transparent pointer-events-none" aria-hidden="true"></div>
-
-		<Container as="div" class="relative z-10 pb-16 sm:pb-20 md:pb-24">
+		<Container as="div" class="relative z-10 pt-[82px] sm:pt-[96px] pb-16 sm:pb-20 md:pb-24">
 			<div class="mx-auto max-w-3xl">
-				<!-- Breadcrumbs -->
-				<nav class="py-4 mb-6 flex items-center gap-2 text-xs font-medium text-warm-500">
-					<a href="/" class="hover:text-primary-600 transition-colors">Beranda</a>
+<!-- Breadcrumbs -->
+				<nav class="py-4 mb-6 flex items-center gap-2 text-xs font-medium text-warm-700 dark:text-warm-200">
+					<a href="/" class="hover:text-primary-700 dark:hover:text-primary-300 transition-colors">Beranda</a>
 					<Icon name="chevron-right" size={3} class="shrink-0 translate-y-[1px]" />
-					<a href="/blog" class="hover:text-primary-600 transition-colors">Blog</a>
+					<a href="/blog" class="hover:text-primary-700 dark:hover:text-primary-300 transition-colors">Blog</a>
 					<Icon name="chevron-right" size={3} class="shrink-0 translate-y-[1px]" />
-					<span class="text-warm-900 truncate">{post.data.title}</span>
+					<span class="text-warm-900 dark:text-warm-100 truncate">{post.data.title}</span>
 				</nav>
 
 				<!-- Asymmetric Header Layout -->
 				<div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
 					<!-- Left: Title & Metadata -->
 					<div class="md:col-span-7 text-left">
-						<div class="hidden md:flex items-center gap-1.5 text-[10px] sm:text-xs font-bold uppercase tracking-widest text-warm-600 mb-3">
+						<div class="hidden md:flex items-center gap-1.5 text-[10px] sm:text-xs font-bold uppercase tracking-widest text-warm-900 dark:text-warm-100 mb-3">
 							<Icon name="calendar" size={3} class="shrink-0" />
-							{formattedDate}
+							<span class="bg-white/80 dark:bg-warm-900/80 backdrop-blur-sm px-2 py-0.5 rounded">
+								{formattedDate}
+							</span>
 						</div>
-						<h1 class="mb-4 text-3xl font-extrabold tracking-tight text-warm-900 sm:text-4xl lg:text-5xl leading-tight">
+						<h1 class="mb-4 text-3xl font-extrabold tracking-tight text-warm-900 dark:text-warm-100 sm:text-4xl lg:text-5xl leading-tight">
 							{post.data.title}
 						</h1>
-						<div class="flex flex-wrap items-center gap-x-3 gap-y-2 text-xs sm:text-sm text-warm-700 font-medium">
-							<span class="text-warm-900 font-bold">{post.data.author}</span>
-							<span class="hidden sm:inline text-warm-400">•</span>
-							<span class="rounded-full bg-primary-100/80 px-2 py-0.5 text-[10px] sm:text-xs font-semibold text-primary-700 ring-1 ring-inset ring-primary-600/20">
+						<div class="flex flex-wrap items-center gap-x-3 gap-y-2 text-xs sm:text-sm text-warm-800 dark:text-warm-300 font-medium">
+							<span class="text-warm-900 dark:text-warm-100 font-bold">{post.data.author}</span>
+							<span class="hidden sm:inline text-warm-500 dark:text-warm-500">•</span>
+							<span class="rounded-full bg-primary-100/80 dark:bg-primary-900/80 px-2 py-0.5 text-[10px] sm:text-xs font-semibold text-primary-900 dark:text-primary-200 ring-1 ring-inset ring-primary-600/20">
 								{post.data.category || 'Edukasi'}
 							</span>
-							<span class="hidden sm:inline md:hidden text-warm-400">•</span>
+							<span class="hidden sm:inline md:hidden text-warm-500 dark:text-warm-500">•</span>
 							<div class="flex items-center gap-1.5 md:hidden">
 								<Icon name="calendar" size={3.5} class="shrink-0" />
 								{formattedDate}
 							</div>
-							<span class="hidden sm:inline text-warm-400">•</span>
+							<span class="hidden sm:inline text-warm-500 dark:text-warm-500">•</span>
 							<div class="flex items-center gap-1.5">
 								<Icon name="clock" size={3.5} class="shrink-0" />
 								{readingTime} mnt baca
@@ -194,16 +191,16 @@ const relatedPosts = allPosts
 		</Container>
 	</div>
 
-	<!-- Overlapping Article Content Card -->
-	<section class="mx-auto max-w-6xl sm:px-6 lg:px-8 relative z-20 -mt-12 sm:-mt-16 md:-mt-20">
-		<div class="mx-auto max-w-3xl bg-gradient-to-b from-white/20 via-white/80 to-white/90 rounded-t-3xl shadow-2xl backdrop-blur-sm px-4 py-5 sm:p-6 lg:p-8">
+	<!-- Article Content Card (No Overlap) -->
+	<section class="mx-auto max-w-6xl sm:px-6 lg:px-8 relative z-20">
+		<div class="mx-auto max-w-3xl bg-gradient-to-b from-white/20 via-white/80 to-white/90 dark:from-warm-900/20 dark:via-warm-900/80 dark:to-warm-900/90 rounded-t-3xl shadow-2xl backdrop-blur-sm px-4 py-5 sm:p-6 lg:p-8">
 			<!-- Article Body with Prose Typography -->
 			<div class="prose prose-slate max-w-none
-				prose-headings:text-warm-900 prose-headings:tracking-tight
-				prose-p:text-warm-700 prose-p:leading-relaxed
-				prose-a:text-primary-600 hover:prose-a:text-primary-700 prose-a:font-medium
-				prose-strong:text-warm-900 prose-strong:font-bold
-				prose-blockquote:border-l-primary-500 prose-blockquote:bg-primary-50 prose-blockquote:py-1 prose-blockquote:px-4 prose-blockquote:rounded-r-lg
+				prose-headings:text-warm-900 dark:prose-headings:text-warm-100 prose-headings:tracking-tight
+				prose-p:text-warm-700 dark:prose-p:text-warm-300 prose-p:leading-relaxed
+				prose-a:text-primary-600 dark:prose-a:text-primary-400 hover:prose-a:text-primary-700 dark:hover:prose-a:text-primary-300 prose-a:font-medium
+				prose-strong:text-warm-900 dark:prose-strong:text-warm-100 prose-strong:font-bold
+				prose-blockquote:border-l-primary-500 dark:prose-blockquote:border-l-primary-400 prose-blockquote:bg-primary-50 dark:prose-blockquote:bg-primary-900/30 prose-blockquote:py-1 prose-blockquote:px-4 prose-blockquote:rounded-r-lg
 				prose-img:rounded-2xl prose-img:shadow-md
 				sm:prose-lg">
 				{postFromSanity && post.body ? (
@@ -235,23 +232,23 @@ const relatedPosts = allPosts
 
 				<!-- Related Posts -->
 				{relatedPosts.length > 0 && (
-					<div class="pt-12 border-t border-warm-200">
-						<h3 class="mb-8 text-2xl font-bold text-warm-900 flex items-center gap-3">
-							<span class="h-8 w-1 bg-primary-600 rounded-full"></span>
+					<div class="pt-12 border-t border-warm-200 dark:border-warm-700">
+						<h3 class="mb-8 text-2xl font-bold text-warm-900 dark:text-warm-100 flex items-center gap-3">
+							<span class="h-8 w-1 bg-primary-600 dark:bg-primary-400 rounded-full"></span>
 							Artikel Terkait
 						</h3>
 						<!-- Mobile: horizontal snap carousel dengan negatif margin agar full-bleed / Desktop: grid -->
 						<div class="-mx-4 px-4 flex gap-6 overflow-x-auto snap-x snap-mandatory scroll-pl-4 pb-4 sm:mx-0 sm:px-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:snap-none sm:pb-0 lg:grid-cols-3">
 							{relatedPosts.map(post => (
-								<a href={`/blog/${post.id}`} class="group block overflow-hidden rounded-2xl border border-warm-100 bg-white hover:border-primary-200 hover:shadow-md transition-all w-[75vw] min-w-[260px] sm:w-auto sm:min-w-0 snap-start shrink-0 sm:shrink">
+								<a href={`/blog/${post.id}`} class="group block overflow-hidden rounded-2xl border border-warm-100 dark:border-warm-700 bg-white dark:bg-warm-900 hover:border-primary-200 dark:hover:border-primary-600 hover:shadow-md transition-all w-[75vw] min-w-[260px] sm:w-auto sm:min-w-0 snap-start shrink-0 sm:shrink">
 									<div class="aspect-video overflow-hidden">
 										<img src={post.data.image || '/logo-yayasan.webp'} alt={post.data.title} class="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500" />
 									</div>
 									<div class="p-4">
-										<h4 class="font-bold text-warm-900 group-hover:text-primary-700 transition-colors line-clamp-2 mb-2">
+										<h4 class="font-bold text-warm-900 dark:text-warm-100 group-hover:text-primary-700 dark:group-hover:text-primary-400 transition-colors line-clamp-2 mb-2">
 											{post.data.title}
 										</h4>
-										<p class="text-xs text-warm-500 line-clamp-2 leading-relaxed">
+										<p class="text-xs text-warm-500 dark:text-warm-400 line-clamp-2 leading-relaxed">
 											{post.data.description}
 										</p>
 									</div>

@@ -98,7 +98,7 @@ const coverImage =
     <!-- Like Button and Back to galleries link -->
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
       <LikeButton gallerySlug={gallery.slug} />
-      <a href="/galeri" class="inline-flex items-center gap-2 text-sm text-primary-700 hover:text-primary-800 transition-colors group">
+      <a href="/galeri" class="inline-flex items-center gap-2 text-sm text-primary-700 dark:text-primary-400 hover:text-primary-800 dark:hover:text-primary-300 transition-colors group">
         <Icon name="arrow-left" size={4} class="transition-transform group-hover:-translate-x-1" aria-hidden="true" />
         <span>Kembali ke Galeri</span>
       </a>
@@ -115,7 +115,7 @@ const coverImage =
           loading="eager"
           fetchpriority="high"
         />
-        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
         <div class="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6">
           <span class="inline-block rounded-md bg-white/90 px-3 py-1 text-xs font-bold uppercase tracking-wider text-primary-700 shadow-sm backdrop-blur-sm mb-2">
             Foto Pilihan
@@ -134,10 +134,10 @@ const coverImage =
           }
           return (
             <section>
-              <h2 class="text-lg font-semibold text-warm-900 mb-4 flex items-center gap-2">
+              <h2 class="text-lg font-semibold text-warm-900 dark:text-warm-100 mb-4 flex items-center gap-2">
                 <Icon name="calendar" size={4} aria-hidden="true" />
                 <time>{date}</time>
-                <span class="text-sm font-normal text-warm-500">({imgs.length} foto)</span>
+                <span class="text-sm font-normal text-warm-500 dark:text-warm-400">({imgs.length} foto)</span>
               </h2>
               <MasonryGrid images={imgs} gallerySlug={gallery.slug} startIndex={startIndex} />
             </section>
@@ -146,11 +146,11 @@ const coverImage =
       </div>
     ) : (
       <div class="flex flex-col items-center justify-center py-16 sm:py-24 text-center">
-        <div class="mb-3 rounded-full bg-warm-50 p-4 sm:p-6 text-warm-300">
+        <div class="mb-3 rounded-full bg-warm-50 dark:bg-warm-800 p-4 sm:p-6 text-warm-500 dark:text-warm-400">
           <Icon name="image" size={10} class="sm:size-16" aria-hidden="true" />
         </div>
-        <h2 class="text-lg sm:text-xl font-bold text-warm-900">Belum Ada Foto</h2>
-        <p class="mt-2 max-w-xs text-sm sm:text-base text-warm-600">
+        <h2 class="text-lg sm:text-xl font-bold text-warm-900 dark:text-warm-100">Belum Ada Foto</h2>
+        <p class="mt-2 max-w-xs text-sm sm:text-base text-warm-600 dark:text-warm-300">
           Foto dokumentasi untuk kegiatan ini akan segera ditambahkan oleh tim media.
         </p>
         <a href="/galeri" class="mt-6 inline-flex items-center gap-2 rounded-lg bg-primary-700 px-4 py-2 text-sm font-semibold text-white hover:bg-primary-800 transition-colors">
@@ -169,6 +169,8 @@ const coverImage =
   const coverImg = document.querySelector('[data-cover-image]');
   const coverCaption = document.querySelector('[data-cover-caption]');
   if (!coverImg) return;
+
+  let coverUpdateTimeout;
 
   function updateCover(data) {
     if (!data || typeof data !== 'object') return;
@@ -204,10 +206,11 @@ const coverImage =
   // Wait for MasonryGrid to load data (avoids double fetch and race condition)
   window.addEventListener('galleryLikesLoaded', function(e) {
     updateCover(e.detail);
+    clearTimeout(coverUpdateTimeout); // Cancel fallback fetch
   }, { once: true });
 
   // Fallback: if no event after 100ms, fetch independently
-  setTimeout(function() {
+  coverUpdateTimeout = setTimeout(function() {
     if (!window.__galleryLikeDataReady) {
       fetch(`/api/like?slug=${encodeURIComponent(gallery.slug)}`)
         .then(res => res.json())
