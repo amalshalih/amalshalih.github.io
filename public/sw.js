@@ -1,43 +1,47 @@
 // Service Worker for offline caching and performance optimization
 // Scope: / (all paths)
-// Cache strategy: Cache-first for hero images, Network-first for other resources
 
 const CACHE_NAME = 'kegiatan-v1'
 const HERO_CACHE = 'hero-images-v1'
 const STATIC_CACHE = 'static-v1'
 
-// Install event - cache static assets
+// Helper: safely cache a URL — skips non-200/redirected responses instead of crashing addAll
+async function cacheUrl(cache, url) {
+	try {
+		const response = await fetch(url)
+		if (response.ok && response.type === 'basic') {
+			await cache.put(url, response)
+		} else {
+			console.warn('[SW] Skipping (non-ok/opaque):', url, response.status)
+		}
+	} catch (err) {
+		console.warn('[SW] Skipping (fetch failed):', url, err.message)
+	}
+}
+
+// Install event — cache static assets
 self.addEventListener('install', (event) => {
 	event.waitUntil(
-		caches
-			.open(STATIC_CACHE)
-			.then((cache) =>
-				cache.addAll([
-					'/',
-					'/donasi',
-					'/kegiatan',
-					'/api/kegiatan',
-					'/offline.html',
-					'/favicon.svg',
-					'/favicon.ico',
-					'/logo-yayasan.webp',
-					'/logo-yayasan-sm.webp',
-					'/qris.webp',
-				]),
-			)
-			.then(() => self.skipWaiting()),
-	)
-
-	// Cache hero images separately
-	event.waitUntil(
-		caches.open(HERO_CACHE).then((cache) => {
-			// Add hero image patterns (will be populated on fetch)
+		(async () => {
+			const cache = await caches.open(STATIC_CACHE)
+			const urls = [
+				'/',
+				'/donasi',
+				'/kegiatan',
+				'/favicon.svg',
+				'/favicon.ico',
+				'/logo-yayasan.webp',
+				'/logo-yayasan-sm.webp',
+				'/qris.webp',
+			]
+			// Cache each URL individually so one failure doesn't crash the whole install
+			await Promise.allSettled(urls.map((url) => cacheUrl(cache, url)))
 			return self.skipWaiting()
-		}),
+		})(),
 	)
 })
 
-// Activate event - clean up old caches
+// Activate event — clean up old caches
 self.addEventListener('activate', (event) => {
 	event.waitUntil(
 		caches
@@ -57,28 +61,21 @@ self.addEventListener('activate', (event) => {
 	)
 })
 
-// Fetch event - implement caching strategies
+// Fetch event — implement caching strategies
 self.addEventListener('fetch', (event) => {
 	const request = event.request
 	const url = new URL(request.url)
 
-	// Strategy 1: Hero images - Cache-first with fallback
+	// Strategy 1: Hero images — Cache-first with fallback
 	if (
 		url.pathname.match(/\/kegiatan\/([^/]+)\//) &&
 		(request.url.endsWith('.webp') || request.url.endsWith('.png'))
 	) {
 		event.respondWith(
 			caches.match(request, { cacheName: HERO_CACHE }).then((response) => {
-				// Return cached version if available
-				if (response) {
-					return response
-				}
-				// Otherwise fetch and cache
+				if (response) return response
 				return fetch(request).then((response) => {
-					if (!response || response.status !== 200 || response.type !== 'basic') {
-						return response
-					}
-					// Clone response for caching
+					if (!response || response.status !== 200 || response.type !== 'basic') return response
 					const responseClone = response.clone()
 					caches.open(HERO_CACHE).then((cache) => cache.put(request, responseClone))
 					return response
@@ -88,43 +85,30 @@ self.addEventListener('fetch', (event) => {
 		return
 	}
 
-	// Strategy 2: Other images - Network-first with cache fallback
+	// Strategy 2: Other images — Network-first with cache fallback
 	if (request.url.match(/\.(webp|png|jpg|jpeg|gif|svg)$/)) {
 		event.respondWith(
 			fetch(request)
 				.then((response) => {
-					if (!response || response.status !== 200 || response.type !== 'basic') {
-						return response
-					}
+					if (!response || response.status !== 200 || response.type !== 'basic') return response
 					const responseClone = response.clone()
-					// Cache successful responses
 					caches.open(HERO_CACHE).then((cache) => cache.put(request, responseClone))
 					return response
 				})
 				.catch(() => {
-					// Network failed - try cache
 					return caches.match(request, { cacheName: HERO_CACHE })
 				}),
 		)
 		return
 	}
 
-	// Strategy 3: API routes - Network-first only
+	// Strategy 3: API routes — Network-first only
 	if (url.pathname.startsWith('/api/')) {
-		event.respondWith(
-			fetch(request)
-				.then((response) => {
-					if (!response || response.status !== 200) {
-						return response
-					}
-					return response
-				})
-				.catch(() => new Response('Network error', { status: 503 })),
-		)
+		event.respondWith(fetch(request).catch(() => new Response('Network error', { status: 503 })))
 		return
 	}
 
-	// Strategy 4: Everything else - Try cache first, then network
+	// Strategy 4: Everything else — Try cache first, then network
 	event.respondWith(
 		caches.match(request, { cacheName: STATIC_CACHE }).then((response) => {
 			if (response) return response
@@ -133,10 +117,9 @@ self.addEventListener('fetch', (event) => {
 	)
 })
 
-// Message event - for client communication
+// Message event — for client communication
 self.addEventListener('message', (event) => {
 	if (event.data.action === 'CACHE_UPDATED') {
-		// Notify client that new cache is available
 		event.source.postMessage({ type: 'CACHE_UPDATE_COMPLETE' })
 	}
 })
