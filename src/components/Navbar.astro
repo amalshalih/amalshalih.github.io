@@ -1,6 +1,6 @@
 ---
-import { NAV_ITEMS } from '../lib/constants'
-import { getSiteSettings } from '../lib/sanity/client'
+import { NAV_ITEMS } from '@lib/constants'
+import { getSiteSettings } from '@lib/sanity/client'
 import Button from './ui/Button.astro'
 import Icon from './ui/Icon.astro'
 
@@ -10,7 +10,7 @@ interface Props {
 
 const { currentPage } = Astro.props
 
-const isHomepage = currentPage === '/'
+const isHomepage = currentPage === '/' || currentPage?.startsWith('/barkas')
 const isBlogDetail = currentPage?.startsWith('/blog/')
 
 let navItems = NAV_ITEMS
@@ -28,7 +28,7 @@ try {
 <header
 	id="main-header"
 	class={`sticky top-0 z-50 w-full transition-all duration-500 ease-in-out pt-0 px-0 ${
-		currentPage === '/' || currentPage?.startsWith('/blog/')
+		currentPage === '/' || currentPage?.startsWith('/blog/') || currentPage?.startsWith('/barkas')
 			? 'bg-transparent'
 			: 'bg-white dark:bg-warm-950 border-b border-primary-100 dark:border-warm-800'
 	}`}
@@ -58,29 +58,79 @@ try {
 			</a>
 
 			<!-- Desktop Nav -->
-			<div class="hidden sm:flex items-center justify-end gap-1 overflow-hidden">
-				<div class="flex items-center gap-1 overflow-x-auto scrollbar-hide whitespace-nowrap snap-x snap-mandatory min-w-0 max-w-[320px] lg:max-w-none">
-					{navItems.map((item) => (
-						<a
-							href={item.href}
-							aria-current={currentPage === item.href ? 'page' : undefined}
-							class={`desktop-nav-link rounded-lg px-3 py-2 text-sm font-medium transition-colors shrink-0 snap-start ${
-								currentPage === item.href
-									? isHomepage
-										? 'bg-white/20 text-white'
-										: isBlogDetail
-											? 'bg-warm-100 dark:bg-white/20 text-warm-900 dark:text-white'
-											: 'bg-primary-50 dark:bg-warm-800 text-primary-700 dark:text-warm-200'
-									: isHomepage
-										? 'text-white/80 hover:bg-white/10 hover:text-white'
-										: isBlogDetail
-											? 'text-warm-700/80 dark:text-white/80 hover:bg-warm-100 dark:hover:bg-white/10 hover:text-warm-900 dark:hover:text-white'
-											: 'text-warm-700 dark:text-warm-300 hover:bg-warm-100 dark:hover:bg-warm-800 hover:text-warm-800 dark:hover:text-warm-100'
-							}`}
-						>
-							{item.label}
-						</a>
-					))}
+			<div class="hidden sm:flex items-center justify-end gap-1 overflow-visible">
+				<div class="flex items-center gap-1 overflow-visible whitespace-nowrap snap-x snap-mandatory min-w-0 max-w-[320px] lg:max-w-none">
+					{navItems.map((item) => {
+						const hasChildren = 'children' in item && Array.isArray(item.children) && item.children.length > 0
+						const children = hasChildren ? (item.children as { label: string; href: string }[]) : null
+						const isBarkasActive = hasChildren && currentPage?.startsWith('/barkas')
+						const isActive = currentPage === item.href || isBarkasActive
+
+						if (hasChildren && children) {
+							return (
+								<div class="relative group" data-has-children="true">
+									<a
+										href={item.href}
+										aria-current={isActive ? 'page' : undefined}
+										class={`desktop-nav-link rounded-lg px-3 py-2 text-sm font-medium transition-colors shrink-0 snap-start inline-flex items-center gap-1 ${
+											isActive
+												? isHomepage || isBarkasActive
+													? 'bg-white/20 text-white'
+													: isBlogDetail
+														? 'bg-warm-100 dark:bg-white/20 text-warm-900 dark:text-white'
+														: 'bg-primary-50 dark:bg-warm-800 text-primary-700 dark:text-warm-200'
+												: isHomepage || isBarkasActive
+													? 'text-white/80 hover:bg-white/10 hover:text-white'
+													: isBlogDetail
+														? 'text-warm-700/80 dark:text-white/80 hover:bg-warm-100 dark:hover:bg-white/10 hover:text-warm-900 dark:hover:text-white'
+														: 'text-warm-700 dark:text-warm-300 hover:bg-warm-100 dark:hover:bg-warm-800 hover:text-warm-800 dark:hover:text-warm-100'
+										}`}
+									>
+										{item.label}
+										<svg class="w-3 h-3 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/></svg>
+									</a>
+									<div class="dropdown-menu absolute top-full left-1/2 -translate-x-1/2 mt-1 min-w-[160px] rounded-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 translate-y-1 group-hover:translate-y-0 shadow-xl shadow-primary-900/10 dark:shadow-black/30 z-50 pointer-events-none group-hover:pointer-events-auto bg-white dark:bg-warm-900 border border-warm-200 dark:border-warm-700 py-1.5" role="menu">
+										{children.map((child) => (
+											<a
+												href={child.href}
+												aria-current={currentPage === child.href ? 'page' : undefined}
+												class={`dropdown-link block px-4 py-2 text-sm transition-colors ${
+													currentPage === child.href
+														? 'bg-primary-50 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 font-medium'
+														: 'text-warm-700 dark:text-warm-300 hover:bg-warm-50 dark:hover:bg-warm-800 hover:text-warm-900 dark:hover:text-warm-100'
+												}`}
+												role="menuitem"
+											>
+												{child.label}
+											</a>
+										))}
+									</div>
+								</div>
+							)
+						}
+
+						return (
+							<a
+								href={item.href}
+								aria-current={currentPage === item.href ? 'page' : undefined}
+								class={`desktop-nav-link rounded-lg px-3 py-2 text-sm font-medium transition-colors shrink-0 snap-start ${
+									currentPage === item.href
+										? isHomepage
+											? 'bg-white/20 text-white'
+											: isBlogDetail
+												? 'bg-warm-100 dark:bg-white/20 text-warm-900 dark:text-white'
+												: 'bg-primary-50 dark:bg-warm-800 text-primary-700 dark:text-warm-200'
+										: isHomepage
+											? 'text-white/80 hover:bg-white/10 hover:text-white'
+											: isBlogDetail
+												? 'text-warm-700/80 dark:text-white/80 hover:bg-warm-100 dark:hover:bg-white/10 hover:text-warm-900 dark:hover:text-white'
+												: 'text-warm-700 dark:text-warm-300 hover:bg-warm-100 dark:hover:bg-warm-800 hover:text-warm-800 dark:hover:text-warm-100'
+								}`}
+							>
+								{item.label}
+							</a>
+						)
+					})}
 				</div>
 				<Button
 					href="/donasi"
@@ -114,7 +164,7 @@ try {
 		<!-- Mobile Nav Drawer -->
 		<div
 			id="mobile-menu"
-			class={`sm:hidden w-full transition-all duration-300 ease-in-out max-h-0 overflow-hidden opacity-0 rounded-b-2xl ${
+			class={`sm:hidden w-full rounded-b-2xl ${
 				isHomepage
 					? 'bg-primary-950/95 backdrop-blur-lg'
 					: isBlogDetail
@@ -122,29 +172,60 @@ try {
 						: 'bg-white/95 dark:bg-warm-900/95 backdrop-blur-lg'
 			}`}
 			aria-hidden="true"
+			style="max-height: 0; opacity: 0; visibility: hidden; overflow: hidden; transition: max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease, visibility 0s linear 0.45s;"
 		>
 			<div class={`flex flex-col p-4 pt-0 space-y-1 border-t ${isHomepage ? 'border-white/10' : isBlogDetail ? 'border-warm-100 dark:border-warm-800' : 'border-warm-100 dark:border-warm-800'}`}>
-				{navItems.map((item) => (
-					<a
-						href={item.href}
-						aria-current={currentPage === item.href ? 'page' : undefined}
-						class={`rounded-lg px-4 py-3 text-base font-medium transition-colors ${
-							currentPage === item.href
-								? isHomepage
-									? 'bg-white/20 text-white'
-									: isBlogDetail
-										? 'bg-warm-100 dark:bg-white/20 text-warm-900 dark:text-white'
-										: 'bg-primary-50 dark:bg-warm-800 text-primary-700 dark:text-warm-200'
-								: isHomepage
-									? 'text-white/80 hover:bg-white/10 hover:text-white'
-									: isBlogDetail
-										? 'text-warm-700 dark:text-warm-300 hover:bg-warm-100 dark:hover:bg-warm-800 hover:text-warm-800 dark:hover:text-warm-100'
-										: 'text-warm-700 dark:text-warm-300 hover:bg-warm-100 dark:hover:bg-warm-800 hover:text-warm-800 dark:hover:text-warm-100'
-						}`}
-					>
-						{item.label}
-					</a>
-				))}
+				{navItems.map((item) => {
+					const hasChildren = 'children' in item && Array.isArray(item.children) && item.children.length > 0
+					const children = hasChildren ? (item.children as { label: string; href: string }[]) : null
+					const isBarkasActive = hasChildren && currentPage?.startsWith('/barkas')
+					const isActive = currentPage === item.href || isBarkasActive
+
+					return (
+						<>
+							<a
+								href={item.href}
+								aria-current={isActive ? 'page' : undefined}
+								class={`mobile-nav-link rounded-lg px-4 py-3 text-base font-medium transition-colors ${
+									isActive
+										? isHomepage || isBarkasActive
+											? 'bg-white/20 text-white'
+											: isBlogDetail
+												? 'bg-warm-100 dark:bg-white/20 text-warm-900 dark:text-white'
+												: 'bg-primary-50 dark:bg-warm-800 text-primary-700 dark:text-warm-200'
+										: isHomepage || isBarkasActive
+											? 'text-white/80 hover:bg-white/10 hover:text-white'
+											: isBlogDetail
+												? 'text-warm-700 dark:text-warm-300 hover:bg-warm-100 dark:hover:bg-warm-800 hover:text-warm-800 dark:hover:text-warm-100'
+												: 'text-warm-700 dark:text-warm-300 hover:bg-warm-100 dark:hover:bg-warm-800 hover:text-warm-800 dark:hover:text-warm-100'
+								}`}
+							>
+								{item.label}
+							</a>
+							{hasChildren && children && (
+								<div class="flex flex-col ml-4 border-l-2 border-warm-200 dark:border-warm-700 pl-3 space-y-1 mt-1">
+									{children.map((child) => (
+										<a
+											href={child.href}
+											aria-current={currentPage === child.href ? 'page' : undefined}
+											class={`mobile-sub-link rounded-lg px-4 py-2.5 text-sm font-medium transition-colors ${
+												currentPage === child.href
+													? 'bg-primary-100 dark:bg-primary-800/40 text-primary-700 dark:text-primary-300'
+													: isHomepage
+														? 'text-white/70 hover:bg-white/10 hover:text-white'
+														: isBlogDetail
+															? 'text-warm-600 dark:text-warm-400 hover:bg-warm-100 dark:hover:bg-warm-800 hover:text-warm-800 dark:hover:text-warm-100'
+															: 'text-warm-600 dark:text-warm-400 hover:bg-warm-100 dark:hover:bg-warm-800 hover:text-warm-800 dark:hover:text-warm-100'
+											}`}
+										>
+											{child.label}
+										</a>
+									))}
+								</div>
+							)}
+						</>
+					)
+				})}
 				<div class={`pt-3 border-t ${isHomepage ? 'border-white/10' : isBlogDetail ? 'border-warm-100 dark:border-warm-800' : 'border-warm-100 dark:border-warm-800'}`}>
 					<a
 						href="/donasi"
@@ -179,19 +260,43 @@ try {
 		mobileMenu.setAttribute('aria-hidden', String(isExpanded));
 
 		if (!isExpanded) {
-			mobileMenu.classList.remove('max-h-0', 'opacity-0');
-			mobileMenu.classList.add('max-h-96', 'opacity-100');
+			// OPEN: smooth animation using actual content height
+			mobileMenu.style.visibility = 'visible';
+			mobileMenu.style.overflowY = 'auto';
+			const contentHeight = mobileMenu.scrollHeight;
+			mobileMenu.style.maxHeight = contentHeight + 'px';
+			mobileMenu.style.opacity = '1';
+			mobileMenu.style.transition = 'max-height 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.35s ease, visibility 0s linear';
+
 			menuIcon.classList.add('hidden');
 			closeIcon.classList.remove('hidden');
+
+			// Make header solid when menu open on transparent pages
+			document.getElementById('main-header')?.classList.add('menu-open');
+
 			const firstLink = mobileMenu.querySelector('a');
 			if (firstLink instanceof HTMLElement) {
 				firstLink.focus();
 			}
 		} else {
-			mobileMenu.classList.remove('max-h-96', 'opacity-100');
-			mobileMenu.classList.add('max-h-0', 'opacity-0');
+			// CLOSE: animate height to 0
+			mobileMenu.style.overflowY = 'hidden';
+			mobileMenu.style.maxHeight = '0';
+			mobileMenu.style.opacity = '0';
+			mobileMenu.style.transition = 'max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease, visibility 0s linear 0.4s';
+			// Delay visibility to let animation complete
+			setTimeout(() => {
+				if (menuButton.getAttribute('aria-expanded') === 'false') {
+					mobileMenu.style.visibility = 'hidden';
+				}
+			}, 450);
+
 			menuIcon.classList.remove('hidden');
 			closeIcon.classList.add('hidden');
+
+			// Remove header solid state
+			document.getElementById('main-header')?.classList.remove('menu-open');
+
 			menuButton.focus();
 		}
 	}
@@ -244,7 +349,7 @@ try {
 	const logoText1 = document.getElementById('logo-text-1');
 	const logoText2 = document.getElementById('logo-text-2');
 	const logoTextMobile = document.getElementById('logo-text-mobile');
-	const isHomepage = header?.dataset.page === '/';
+	const isHomepage = header?.dataset.page === '/' || header?.dataset.page?.startsWith('/barkas');
 	const isBlogDetail = header?.dataset.page?.startsWith('/blog/');
 	const isTransparentPage = isHomepage || isBlogDetail;
 
@@ -317,19 +422,20 @@ try {
 				// Mobile menu: dark overlay for homepage
 				const mobileMenu = document.getElementById('mobile-menu');
 				if (mobileMenu) {
-					mobileMenu.className = "sm:hidden w-full transition-all duration-300 ease-in-out max-h-0 overflow-hidden opacity-0 rounded-b-2xl bg-primary-950/95 backdrop-blur-lg";
+					mobileMenu.classList.remove('bg-white/95', 'dark:bg-warm-950/95', 'dark:bg-warm-900/95');
+					mobileMenu.classList.add('bg-primary-950/95');
 					const mobileMenuBorder = mobileMenu.querySelector('.border-t');
 					if (mobileMenuBorder) {
 						mobileMenuBorder.classList.remove('border-warm-100', 'dark:border-warm-800');
 						mobileMenuBorder.classList.add('border-white/10');
 					}
-					const mobileLinks = mobileMenu.querySelectorAll('a');
+					const mobileLinks = mobileMenu.querySelectorAll('.mobile-nav-link');
 					mobileLinks.forEach(link => {
 						const isCurrent = link.getAttribute('aria-current') === 'page';
 						if (isCurrent) {
-							link.className = "rounded-lg px-4 py-3 text-base font-medium transition-colors bg-white/20 text-white";
+							link.className = "mobile-nav-link rounded-lg px-4 py-3 text-base font-medium transition-colors bg-white/20 text-white";
 						} else {
-							link.className = "rounded-lg px-4 py-3 text-base font-medium transition-colors text-white/80 hover:bg-white/10 hover:text-white";
+							link.className = "mobile-nav-link rounded-lg px-4 py-3 text-base font-medium transition-colors text-white/80 hover:bg-white/10 hover:text-white";
 						}
 					});
 					const donateSection = mobileMenu.querySelector('.pt-3');
@@ -366,19 +472,20 @@ try {
 				// Mobile menu: light/dark solid bg for blog
 				const mobileMenu = document.getElementById('mobile-menu');
 				if (mobileMenu) {
-					mobileMenu.className = "sm:hidden w-full transition-all duration-300 ease-in-out max-h-0 overflow-hidden opacity-0 rounded-b-2xl bg-white/95 dark:bg-warm-950/95 backdrop-blur-lg";
+					mobileMenu.classList.remove('bg-primary-950/95');
+					mobileMenu.classList.add('bg-white/95', 'dark:bg-warm-950/95');
 					const mobileMenuBorder = mobileMenu.querySelector('.border-t');
 					if (mobileMenuBorder) {
 						mobileMenuBorder.classList.remove('border-white/10', 'border-warm-100', 'dark:border-warm-800');
 						mobileMenuBorder.classList.add('border-warm-100', 'dark:border-warm-800');
 					}
-					const mobileLinks = mobileMenu.querySelectorAll('a');
+					const mobileLinks = mobileMenu.querySelectorAll('.mobile-nav-link');
 					mobileLinks.forEach(link => {
 						const isCurrent = link.getAttribute('aria-current') === 'page';
 						if (isCurrent) {
-							link.className = "rounded-lg px-4 py-3 text-base font-medium transition-colors bg-warm-100 dark:bg-white/20 text-warm-900 dark:text-white";
+							link.className = "mobile-nav-link rounded-lg px-4 py-3 text-base font-medium transition-colors bg-warm-100 dark:bg-white/20 text-warm-900 dark:text-white";
 						} else {
-							link.className = "rounded-lg px-4 py-3 text-base font-medium transition-colors text-warm-700 dark:text-warm-300 hover:bg-warm-100 dark:hover:bg-warm-800 hover:text-warm-800 dark:hover:text-warm-100";
+							link.className = "mobile-nav-link rounded-lg px-4 py-3 text-base font-medium transition-colors text-warm-700 dark:text-warm-300 hover:bg-warm-100 dark:hover:bg-warm-800 hover:text-warm-800 dark:hover:text-warm-100";
 						}
 					});
 					const donateSection = mobileMenu.querySelector('.pt-3');
@@ -398,4 +505,43 @@ try {
 
 	window.addEventListener('scroll', handleScroll, { passive: true });
 	handleScroll();
+
+	// Recalculate mobile menu height on resize (orientation change)
+	window.addEventListener('resize', () => {
+		if (mobileMenu && menuButton?.getAttribute('aria-expanded') === 'true') {
+			mobileMenu.style.maxHeight = mobileMenu.scrollHeight + 'px';
+		}
+	});
 </script>
+
+<style>
+	/* When mobile menu is open on transparent pages, make capsule solid */
+	#main-header.menu-open #header-capsule {
+		background: rgba(0, 40, 15, 0.95) !important;
+		backdrop-filter: blur(16px) !important;
+		color: white !important;
+	}
+	#main-header.menu-open .desktop-nav-link,
+	#main-header.menu-open #logo-text-1,
+	#main-header.menu-open #logo-text-2,
+	#main-header.menu-open #logo-text-mobile {
+		color: white !important;
+	}
+	#main-header.menu-open #logo-text-2 {
+		color: rgba(255,255,255,0.7) !important;
+	}
+	#main-header.menu-open .menu-icon {
+		color: white !important;
+	}
+	/* Blog detail — lighter bg when menu open */
+	body:has([data-page*="/blog/"]) #main-header.menu-open #header-capsule {
+		background: rgba(255, 255, 255, 0.97) !important;
+		color: #1c1917 !important;
+	}
+	@media (prefers-color-scheme: dark) {
+		body:has([data-page*="/blog/"]) #main-header.menu-open #header-capsule {
+			background: rgba(12, 10, 9, 0.97) !important;
+			color: #f5f5f4 !important;
+		}
+	}
+</style>

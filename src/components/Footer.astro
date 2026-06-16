@@ -1,6 +1,6 @@
 ---
-import { CONTACT, SITE, SOCIAL } from '../data/site'
-import { getSiteSettings } from '../lib/sanity/client'
+import { CONTACT, SITE, SOCIAL } from '@data/site'
+import { getSiteSettings } from '@lib/sanity/client'
 import Container from './ui/Container.astro'
 import Icon from './ui/Icon.astro'
 
@@ -122,6 +122,7 @@ try {
 						<li><a href="/blog" aria-current={currentPage === '/blog' ? 'page' : undefined} class="text-primary-200 dark:text-warm-300 hover:text-white transition-colors">Blog</a></li>
 						<li><a href="/galeri" aria-current={currentPage === '/galeri' ? 'page' : undefined} class="text-primary-200 dark:text-warm-300 hover:text-white transition-colors">Galeri</a></li>
 <li><a href="/donasi" aria-current={currentPage === '/donasi' ? 'page' : undefined} class="text-primary-200 dark:text-warm-300 hover:text-white transition-colors">Donasi</a></li>
+<li><a href="/barkas" aria-current={currentPage === '/barkas' ? 'page' : undefined} class="text-primary-200 dark:text-warm-300 hover:text-white transition-colors">BARKAS</a></li>
 <li><a href="/kontak" aria-current={currentPage === '/kontak' ? 'page' : undefined} class="text-primary-200 dark:text-warm-300 hover:text-white transition-colors">Kontak</a></li>
 <li><a href="/faq" aria-current={currentPage === '/faq' ? 'page' : undefined} class="text-primary-200 dark:text-warm-300 hover:text-white transition-colors">FAQ</a></li>
 					</ul>
