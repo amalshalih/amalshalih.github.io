@@ -3,6 +3,17 @@
 	"include": [".astro/types.d.ts", "**/*", "./worker-configuration.d.ts"],
 	"exclude": ["dist", "studio-amalshalih/dist"],
 	"compilerOptions": {
-		"strictNullChecks": true
+		"strictNullChecks": true,
+		"baseUrl": ".",
+		"paths": {
+			"@components/*": ["src/components/*"],
+			"@data/*": ["src/data/*"],
+			"@layouts/*": ["src/layouts/*"],
+			"@lib/*": ["src/lib/*"],
+			"@content/*": ["src/content/*"],
+			"@pages/*": ["src/pages/*"],
+			"@styles/*": ["src/styles/*"],
+			"@assets/*": ["src/assets/*"]
+		}
 	}
 }

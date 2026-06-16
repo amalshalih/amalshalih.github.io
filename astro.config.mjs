@@ -71,6 +71,18 @@ export default defineConfig({
 			}),
 	].filter(Boolean),
 	vite: {
+		resolve: {
+			alias: {
+				'@components': './src/components',
+				'@data': './src/data',
+				'@layouts': './src/layouts',
+				'@lib': './src/lib',
+				'@content': './src/content',
+				'@pages': './src/pages',
+				'@styles': './src/styles',
+				'@assets': './src/assets',
+			},
+		},
 		build: {
 			sourcemap: true,
 		},
