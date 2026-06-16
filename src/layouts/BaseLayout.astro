@@ -1,8 +1,8 @@
 ---
-import AmbientBlossom from '../components/AmbientBlossom.astro'
-import BaseHead from '../components/BaseHead.astro'
-import Footer from '../components/Footer.astro'
-import Navbar from '../components/Navbar.astro'
+import AmbientBlossom from '@components/AmbientBlossom.astro'
+import BaseHead from '@components/BaseHead.astro'
+import Footer from '@components/Footer.astro'
+import Navbar from '@components/Navbar.astro'
 
 interface Props {
 	title: string
@@ -31,7 +31,7 @@ const { title, description, image, currentPage, pageType, publishedTime, modifie
 		/>
 		
 		<!-- JSON-LD Structured Data for SEO -->
-		<script type="application/ld+json" is:raw>
+		<script is:inline type="application/ld+json" is:raw>
 		{
 			"@context": "https://schema.org",
 			"@graph": [
@@ -90,28 +90,6 @@ const { title, description, image, currentPage, pageType, publishedTime, modifie
 		<a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-primary-600 focus:px-4 focus:py-3 focus:text-sm focus:font-semibold focus:text-white focus:shadow-lg">
 			Langsung ke konten utama
 		</a>
-		
-		<script is:inline>
-			// Dark Mode Detection & Console Log
-			(function() {
-				const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-				const isDark = mediaQuery.matches;
-				
-				console.log('%c🌗 Dark Mode Detection', 'font-weight: bold; font-size: 14px; color: #166534;');
-				console.log('%cSystem Theme:', 'font-weight: bold;', isDark ? '🌙 Dark' : '☀️ Light');
-				console.log('%cCSS Media Query:', 'font-weight: bold;', '(prefers-color-scheme: ' + (isDark ? 'dark' : 'light') + ')');
-				console.log('%cMatchMedia Result:', 'font-weight: bold;', mediaQuery.matches);
-				
-				// Listen for changes
-				mediaQuery.addEventListener('change', (e) => {
-					const newMode = e.matches ? '🌙 Dark' : '☀️ Light';
-					console.log('%c🔄 Theme Changed:', 'font-weight: bold; color: #166534;', newMode);
-					console.log('New prefers-color-scheme:', e.matches ? 'dark' : 'light');
-				});
-				
-				console.log('%c💡 Tip:', 'font-weight: bold;', 'Untuk mengubah theme, gunakan DevTools → Rendering → Emulate CSS prefers-color-scheme');
-			})();
-		</script>
 		
 		<AmbientBlossom />
 

@@ -28,6 +28,22 @@
 	--color-gold-800: #92400e;
 	--color-gold-900: #78350f;
 
+	/* Red accent (for alerts, sold status, discounts) */
+	--color-red-50: #fef2f2;
+	--color-red-100: #fee2e2;
+	--color-red-200: #fecaca;
+	--color-red-300: #fca5a5;
+	--color-red-400: #f87171;
+	--color-red-500: #ef4444;
+	--color-red-600: #dc2626;
+	--color-red-700: #b91c1c;
+	--color-red-800: #991b1b;
+	--color-red-900: #7f1d1d;
+
+	/* WhatsApp brand colors (for WhatsApp buttons) */
+	--color-whatsapp: #25D366;
+	--color-whatsapp-dark: #128C7E;
+
 	/* Neutral — WCAG AA compliant contrast ratios */
 	--color-warm-50: #fafaf9;
 	--color-warm-100: #f5f5f4;
@@ -61,6 +77,19 @@
 	--color-accent-primary: var(--color-accent-primary);
 	--color-accent-gold: var(--color-accent-gold);
 	--color-accent-gold-light: var(--color-accent-gold-light);
+	--color-text-accent-primary: var(--color-text-accent-primary);
+	--color-text-gold: var(--color-text-gold);
+	--color-text-sold: var(--color-text-sold);
+
+	--color-badge-primary-bg: var(--color-badge-primary-bg);
+	--color-badge-primary-text: var(--color-badge-primary-text);
+	--color-badge-gold-bg: var(--color-badge-gold-bg);
+	--color-badge-gold-text: var(--color-badge-gold-text);
+	--color-badge-alert-bg: var(--color-badge-alert-bg);
+	--color-badge-alert-text: var(--color-badge-alert-text);
+
+	--color-surface-placeholder: var(--color-surface-placeholder);
+	--color-surface-hover: var(--color-surface-hover);
 
 	--font-sans: 'Inter', 'Noto Sans', ui-sans-serif, system-ui, sans-serif;
 	--font-display: 'Plus Jakarta Sans', 'Inter', 'Noto Sans', ui-sans-serif, system-ui, sans-serif;
@@ -186,6 +215,101 @@
 		display: none;
 	}
 }
+
+/* ---------- ANIMATIONS — BARKAS & General ---------- */
+
+/* Gradient shift for hero sections */
+@keyframes gradient-shift {
+	0% { background-position: 0% 50%; }
+	50% { background-position: 100% 50%; }
+	100% { background-position: 0% 50%; }
+}
+
+/* Skeleton shimmer for loading placeholders */
+@keyframes shimmer {
+	0% { background-position: -200% 0; }
+	100% { background-position: 200% 0; }
+}
+
+/* Badge pulse — subtle alive indicator */
+@keyframes badge-pulse {
+	0%, 100% { opacity: 1; }
+	50% { opacity: 0.75; transform: scale(1.04); }
+}
+
+/* Fade-in + slide-up for scroll-triggered reveals */
+@keyframes fade-in-up {
+	from { opacity: 0; transform: translateY(24px); }
+	to { opacity: 1; transform: translateY(0); }
+}
+
+/* Fade-in for page load */
+@keyframes fade-in {
+	from { opacity: 0; }
+	to { opacity: 1; }
+}
+
+/* Subtle scale pulse for CTAs */
+@keyframes cta-pulse {
+	0%, 100% { transform: scale(1); }
+	50% { transform: scale(1.03); }
+}
+
+/* Float animation for cards */
+@keyframes float {
+	0%, 100% { transform: translateY(0); }
+	50% { transform: translateY(-4px); }
+}
+
+/* =========================================
+   Animation Utility Classes
+   ========================================= */
+
+.animate-gradient {
+	background-size: 200% 200% !important;
+	animation: gradient-shift 8s ease infinite;
+}
+
+.animate-shimmer {
+	background: linear-gradient(
+		90deg,
+		var(--color-surface-placeholder) 25%,
+		var(--color-surface-elevated) 50%,
+		var(--color-surface-placeholder) 75%
+	) !important;
+	background-size: 200% 100% !important;
+	animation: shimmer 1.5s ease-in-out infinite;
+}
+
+.animate-badge-pulse {
+	animation: badge-pulse 2.5s ease-in-out infinite;
+}
+
+.animate-fade-in-up {
+	opacity: 0;
+	animation: fade-in-up 0.6s ease-out forwards;
+}
+
+.animate-fade-in {
+	opacity: 0;
+	animation: fade-in 0.5s ease-out forwards;
+}
+
+.animate-float {
+	animation: float 4s ease-in-out infinite;
+}
+
+.animate-cta-pulse {
+	animation: cta-pulse 2s ease-in-out infinite;
+}
+
+/* Staggered animation delays (for grid children) */
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.3s; }
+.delay-4 { animation-delay: 0.4s; }
+.delay-5 { animation-delay: 0.5s; }
+.delay-6 { animation-delay: 0.6s; }
 
 /* ---------- Blossom Breath — slow organic pulse ---------- */
 @keyframes blossom-breath-1 {
