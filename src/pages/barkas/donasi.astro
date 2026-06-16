@@ -1,4 +1,5 @@
 ---
+import { Card, Container } from '@components/ui/'
 import barkasData from '@data/barkas-products.json'
 import BaseLayout from '@layouts/BaseLayout.astro'
 
@@ -7,292 +8,108 @@ const wa = programInfo.contact.whatsapp.replace(/-/g, '')
 ---
 
 <BaseLayout title="Donasi Barang - BARKAS" description={programInfo.description} currentPage="/barkas">
-  <main class="donasi-page">
-    <!-- ==================== HERO ==================== -->
-    <section class="donasi-hero -mt-[70px] sm:-mt-[82px] min-h-[300px] sm:min-h-[320px] lg:min-h-[360px]">
-      <div class="container pt-[90px] sm:pt-[110px] pb-6 sm:pb-10 lg:pb-12">
-        <div class="hero-split">
-          <div class="hero-text-col animate-fade-in">
-            <h1>Donasi Barang untuk BARKAS</h1>
-            <p class="tagline">Barang bekas Anda bisa menjadi berkah bagi sesama</p>
-            <p class="description">Setiap donasi barang yang Anda berikan akan disalurkan atau dijual untuk mendukung program sosial, pendidikan, dan dakwah Yayasan ASIB.</p>
-            <div class="hero-cta animate-fade-in-up delay-2">
-              <a href={`https://wa.me/${wa}`} class="btn btn-primary" target="_blank" rel="noopener noreferrer">📱 Hubungi WhatsApp</a>
-              <a href="/barkas" class="btn btn-secondary">← Kembali ke Katalog</a>
-            </div>
-          </div>
-          <div class="hero-visual-col animate-fade-in delay-1">
-            <div class="hero-circle">
-              <span class="hero-circle-icon">🎁</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+	<main>
+		<!-- ==================== HERO ==================== -->
+		<section
+			class="relative -mt-[70px] sm:-mt-[82px] min-h-[300px] sm:min-h-[320px] lg:min-h-[360px] flex items-center overflow-hidden text-white"
+			style="background-image: url('https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1400&q=75'); background-size: cover; background-position: center 30%;"
+		>
+			<div class="absolute inset-0 bg-gradient-to-br from-[rgba(140,60,20,0.82)] via-[rgba(0,50,15,0.78)] to-[rgba(0,20,5,0.6)] pointer-events-none" />
+			<Container class="relative z-1 pt-[90px] sm:pt-[110px] pb-6 sm:pb-10 lg:pb-12">
+				<div class="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-10 items-center relative z-1">
+					<div class="text-center lg:text-left animate-fade-in">
+						<Heading level="h1" size="4xl" class="text-white mb-2.5">Donasi Barang untuk BARKAS</Heading>
+						<p class="text-2xl mb-5 opacity-95 text-white">Barang bekas Anda bisa menjadi berkah bagi sesama</p>
+						<p class="text-lg max-w-[600px] mx-auto lg:mx-0 mb-[30px] text-white/90">Setiap donasi barang yang Anda berikan akan disalurkan atau dijual untuk mendukung program sosial, pendidikan, dan dakwah Yayasan ASIB.</p>
+						<div class="flex gap-[15px] justify-center lg:justify-start flex-wrap animate-fade-in-up delay-2">
+							<Button variant="outline-light" class="bg-white/90 text-primary-700 hover:bg-white" href={`https://wa.me/${wa}`} target="_blank" rel="noopener noreferrer">📱 Hubungi WhatsApp</Button>
+							<Button variant="outline-light" href="/barkas">← Kembali ke Katalog</Button>
+						</div>
+					</div>
+					<div class="flex justify-center items-center animate-fade-in delay-1">
+						<div class="w-[180px] h-[180px] rounded-full bg-white/12 backdrop-blur-md border-2 border-white/25 flex items-center justify-center transition-transform duration-[0.6s] hover:scale-105">
+							<span class="text-[4.5rem]">🎁</span>
+						</div>
+					</div>
+				</div>
+			</Container>
+		</section>
 
-    <!-- ==================== CARA DONASI ==================== -->
-    <section class="section-steps animate-fade-in-up">
-      <div class="container">
-        <h2>Cara Donasi Barang Bekas</h2>
-        <p class="section-subtitle">Ikuti langkah mudah berikut untuk mendonasikan barang bekas Anda</p>
-        <div class="steps-grid">
-          {programInfo.howToDonate.steps.map((step, index) => (
-            <div class="step-card">
-              <span class="step-number">{index + 1}</span>
-              <p>{step}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
+		<!-- ==================== CARA DONASI ==================== -->
+		<section class="py-[60px] sm:py-16 bg-surface animate-fade-in-up">
+			<Container>
+				<Heading level="h2" size="3xl" class="mb-2.5">Cara Donasi Barang Bekas</Heading>
+				<p class="text-text-secondary text-center mb-10 text-lg">Ikuti langkah mudah berikut untuk mendonasikan barang bekas Anda</p>
+				<div class="grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+					{programInfo.howToDonate.steps.map((step, index) => (
+						<Card variant="hover" padding="md">
+							<span class="bg-accent-primary text-white w-10 h-10 rounded-full flex items-center justify-center font-bold flex-shrink-0">{index + 1}</span>
+							<p class="text-text-primary m-0 pt-2">{step}</p>
+						</div>
+					))}
+				</div>
+			</Container>
+		</section>
 
-    <!-- ==================== BARANG DITERIMA ==================== -->
-    <section class="section-items animate-fade-in-up">
-      <div class="container">
-        <h2>Barang yang Diterima</h2>
-        <p class="section-subtitle">Kami menerima berbagai jenis barang bekas yang masih layak pakai</p>
-        <div class="items-wall">
-          {programInfo.howToDonate.acceptedItems.map(item => (
-            <span class="item-pill">{item}</span>
-          ))}
-        </div>
-      </div>
-    </section>
+		<!-- ==================== BARANG DITERIMA ==================== -->
+		<section class="py-[60px] sm:py-16 bg-surface-secondary animate-fade-in-up">
+			<Container>
+				<Heading level="h2" size="3xl" class="mb-2.5">Barang yang Diterima</Heading>
+				<p class="text-text-secondary text-center mb-10 text-lg">Kami menerima berbagai jenis barang bekas yang masih layak pakai</p>
+				<div class="flex flex-wrap gap-3 justify-center">
+					{programInfo.howToDonate.acceptedItems.map(item => (
+						<span class="bg-surface-elevated px-5 py-2.5 rounded-full border border-border-primary text-text-primary font-medium transition-all duration-300 hover:-translate-y-0.5 hover:scale-105 hover:shadow-md hover:border-accent-primary">{item}</span>
+					))}
+				</div>
+			</Container>
+		</section>
 
-    <!-- ==================== KONTAK ==================== -->
-    <section class="section-contact animate-fade-in-up">
-      <div class="container">
-        <div class="contact-card">
-          <h2>Hubungi Kami</h2>
-          <p class="contact-intro">Siap mendonasikan barang? Hubungi kami melalui:</p>
-          <div class="contact-channels">
-            <div class="channel">
-              <span class="channel-icon">📱</span>
-              <div>
-                <strong>WhatsApp</strong>
-                <a href={`https://wa.me/${wa}`}>{programInfo.contact.whatsapp}</a>
-              </div>
-            </div>
-            <div class="channel">
-              <span class="channel-icon">📧</span>
-              <div>
-                <strong>Email</strong>
-                <a href={`mailto:${programInfo.contact.email}`}>{programInfo.contact.email}</a>
-              </div>
-            </div>
-            <div class="channel">
-              <span class="channel-icon">📍</span>
-              <div>
-                <strong>Alamat</strong>
-                <span>{programInfo.contact.address}</span>
-              </div>
-            </div>
-          </div>
-          <a href={`https://wa.me/${wa}`} class="btn btn-primary btn-large" target="_blank" rel="noopener noreferrer">📱 Hubungi via WhatsApp</a>
-        </div>
-      </div>
-    </section>
+		<!-- ==================== KONTAK ==================== -->
+		<section class="py-[60px] sm:py-16 bg-surface animate-fade-in-up">
+			<Container>
+				<Card variant="default" class="max-w-[650px] mx-auto text-center p-10">
+					<Heading level="h2" size="3xl" class="mb-2.5">Hubungi Kami</Heading>
+					<p class="text-text-secondary mb-[30px]">Siap mendonasikan barang? Hubungi kami melalui:</p>
+					<div class="flex flex-col gap-5 mb-[30px] text-left">
+						<div class="flex gap-[15px] items-center">
+							<span class="text-2xl">📱</span>
+							<div>
+								<strong class="block text-text-primary text-sm">WhatsApp</strong>
+								<a href={`https://wa.me/${wa}`} class="text-text-secondary hover:text-accent-primary transition-colors">{programInfo.contact.whatsapp}</a>
+							</div>
+						</div>
+						<div class="flex gap-[15px] items-center">
+							<span class="text-2xl">📧</span>
+							<div>
+								<strong class="block text-text-primary text-sm">Email</strong>
+								<a href={`mailto:${programInfo.contact.email}`} class="text-text-secondary hover:text-accent-primary transition-colors">{programInfo.contact.email}</a>
+							</div>
+						</div>
+						<div class="flex gap-[15px] items-center">
+							<span class="text-2xl">📍</span>
+							<div>
+								<strong class="block text-text-primary text-sm">Alamat</strong>
+								<span class="text-text-secondary">{programInfo.contact.address}</span>
+							</div>
+						</div>
+					</div>
+					<Button variant="primary" size="lg" href={`https://wa.me/${wa}`} target="_blank" rel="noopener noreferrer">📱 Hubungi via WhatsApp</Button>
+				</div>
+			</Container>
+		</section>
 
-    <!-- ==================== CTA ==================== -->
-    <section class="section-cta animate-fade-in-up">
-      <div class="container">
-        <div class="cta-box">
-          <h2>Ingin Tahu Dampak Donasi Anda?</h2>
-          <p>Setiap barang yang Anda donasikan memberikan manfaat nyata bagi masyarakat.</p>
-          <div class="cta-links">
-            <a href="/barkas/dampak" class="btn btn-primary btn-large">Lihat Dampak</a>
-            <a href="/barkas" class="btn btn-outline btn-large">← Kembali ke Katalog</a>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <style>
-    .donasi-page { font-family: system-ui, -apple-system, sans-serif; }
-    .container { max-width: 1200px; margin: 0 auto; padding-left: 20px; padding-right: 20px; }
-
-    /* ========== HERO ========== */
-    .donasi-hero {
-      position: relative;
-      background-image: url('https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1400&q=75');
-      background-size: cover;
-      background-position: center 30%;
-      color: white;
-      overflow: hidden;
-    }
-    .donasi-hero::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: linear-gradient(135deg, rgba(140,60,20,0.82) 0%, rgba(0,50,15,0.78) 50%, rgba(0,20,5,0.6) 100%);
-      pointer-events: none;
-    }
-    .hero-badge {
-      display: inline-block;
-      background: rgba(255,255,255,0.2); color: white;
-      padding: 4px 16px; border-radius: 20px;
-      font-size: 0.85rem; font-weight: 600; margin-bottom: 15px;
-      backdrop-filter: blur(4px);
-    }
-    /* Split layout */
-    .hero-split {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 40px;
-      align-items: center;
-      position: relative;
-      z-index: 1;
-    }
-    .hero-text-col { text-align: left; }
-    .hero-text-col .hero-content { position: static; }
-    .hero-text-col h1 { font-size: 2.5rem; margin-bottom: 10px; font-weight: 700; color: white; }
-    .hero-text-col .tagline { font-size: 1.5rem; margin-bottom: 20px; opacity: 0.95; color: white; }
-    .hero-text-col .description { font-size: 1.1rem; max-width: 600px; margin: 0 0 30px; color: rgba(255,255,255,0.9); }
-    .hero-text-col .hero-cta { justify-content: flex-start; }
-    .hero-cta { display: flex; gap: 15px; flex-wrap: wrap; }
-    /* Visual column - decorative circle */
-    .hero-visual-col {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .hero-circle {
-      width: 180px;
-      height: 180px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.12);
-      backdrop-filter: blur(10px);
-      border: 2px solid rgba(255,255,255,0.25);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: transform 0.6s ease;
-    }
-    .hero-circle:hover { transform: scale(1.08); }
-    .hero-circle-icon { font-size: 4.5rem; }
-
-    /* ========== BUTTONS ========== */
-    .btn {
-      padding: 12px 24px; border-radius: 8px; text-decoration: none;
-      font-weight: 600; transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
-      display: inline-block; border: none; cursor: pointer;
-    }
-    .btn:active { transform: scale(0.97) !important; }
-    .btn-primary {
-      background: rgba(255,255,255,0.95); color: var(--color-primary-700);
-    }
-    .btn-primary:hover {
-      background: rgba(255,255,255,1); transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-    }
-    .btn-secondary {
-      background: rgba(255,255,255,0.15); color: white;
-      border: 2px solid rgba(255,255,255,0.8); backdrop-filter: blur(4px);
-    }
-    .btn-secondary:hover {
-      background: rgba(255,255,255,0.25); transform: translateY(-2px);
-    }
-    .btn-outline {
-      background: transparent; color: var(--color-accent-primary);
-      border: 2px solid var(--color-accent-primary);
-    }
-    .btn-outline:hover { background: var(--color-accent-primary); color: white; transform: translateY(-2px); }
-    .btn-large { padding: 15px 30px; font-size: 1.1rem; }
-
-    /* ========== SECTION STYLES ========== */
-    h2 {
-      font-size: 2rem; text-align: center; margin-bottom: 10px;
-      color: var(--color-text-primary);
-    }
-    .section-subtitle {
-      text-align: center; color: var(--color-text-secondary);
-      margin-bottom: 40px; font-size: 1.05rem;
-    }
-
-    /* Steps */
-    .section-steps { padding: 60px 0; background: var(--color-surface); }
-    .steps-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
-    }
-    .step-card {
-      display: flex; gap: 15px; align-items: flex-start;
-      background: var(--color-surface-elevated);
-      padding: 24px; border-radius: 12px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.04);
-      transition: all 0.3s;
-    }
-    .step-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 25px rgba(0,0,0,0.08);
-    }
-    .step-number {
-      background: var(--color-accent-primary); color: white;
-      width: 40px; height: 40px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-weight: bold; flex-shrink: 0;
-    }
-    .step-card p { color: var(--color-text-primary); margin: 0; padding-top: 8px; }
-
-    /* Items */
-    .section-items { padding: 60px 0; background: var(--color-surface-secondary); }
-    .items-wall {
-      display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;
-    }
-    .item-pill {
-      background: var(--color-surface-elevated);
-      padding: 10px 20px; border-radius: 20px;
-      border: 1px solid var(--color-border-primary);
-      color: var(--color-text-primary); font-weight: 500;
-      transition: all 0.3s;
-    }
-    .item-pill:hover {
-      transform: translateY(-2px) scale(1.03);
-      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-      border-color: var(--color-accent-primary);
-    }
-
-    /* Contact */
-    .section-contact { padding: 60px 0; background: var(--color-surface); }
-    .contact-card {
-      max-width: 650px; margin: 0 auto;
-      background: var(--color-surface-elevated);
-      padding: 40px; border-radius: 16px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-      text-align: center;
-    }
-    .contact-intro { color: var(--color-text-secondary); margin-bottom: 30px; }
-    .contact-channels { display: flex; flex-direction: column; gap: 20px; margin-bottom: 30px; text-align: left; }
-    .channel { display: flex; gap: 15px; align-items: center; }
-    .channel-icon { font-size: 1.5rem; }
-    .channel strong { display: block; color: var(--color-text-primary); font-size: 0.85rem; }
-    .channel a, .channel span { color: var(--color-text-secondary); }
-    .channel a:hover { color: var(--color-accent-primary); }
-
-    /* CTA */
-    .section-cta { padding: 60px 0; background: var(--color-surface-secondary); }
-    .cta-box {
-      text-align: center; max-width: 600px; margin: 0 auto;
-      padding: 40px 20px;
-    }
-    .cta-box p { color: var(--color-text-secondary); font-size: 1.1rem; margin-bottom: 30px; }
-    .cta-links { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
-
-    /* ========== RESPONSIVE ========== */
-    @media (max-width: 768px) {
-      .hero-split { grid-template-columns: 1fr; gap: 20px; text-align: center; }
-      .hero-text-col { text-align: center; }
-      .hero-text-col .description { margin: 0 auto 30px; }
-      .hero-text-col .hero-cta { justify-content: center; }
-      .hero-text-col h1 { font-size: 1.8rem; }
-      .hero-text-col .tagline { font-size: 1.2rem; }
-      .hero-circle { width: 120px; height: 120px; }
-      .hero-circle-icon { font-size: 3rem; }
-      .hero-cta, .cta-links { flex-direction: column; align-items: center; }
-      .btn { width: 100%; max-width: 300px; }
-      .section-steps, .section-items, .section-contact, .section-cta { padding: 40px 0; }
-      .contact-card { padding: 24px; }
-    }
-  </style>
+		<!-- ==================== CTA ==================== -->
+		<section class="py-[60px] sm:py-16 bg-surface-secondary animate-fade-in-up">
+			<Container>
+				<div class="text-center max-w-[600px] mx-auto py-10">
+					<Heading level="h2" size="3xl" class="mb-[15px]">Ingin Tahu Dampak Donasi Anda?</Heading>
+					<p class="text-text-secondary text-lg mb-[30px]">Setiap barang yang Anda donasikan memberikan manfaat nyata bagi masyarakat.</p>
+					<div class="flex gap-[15px] justify-center flex-wrap">
+						<Button variant="primary" size="lg" href="/barkas/dampak">Lihat Dampak</Button>
+						<Button variant="outline" size="lg" href="/barkas">← Kembali ke Katalog</Button>
+					</div>
+				</div>
+			</Container>
+		</section>
+	</main>
 </BaseLayout>
