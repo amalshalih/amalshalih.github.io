@@ -1,14 +1,13 @@
 ---
 import { env } from 'cloudflare:workers'
-import PageHeader from '../components/sections/PageHeader.astro'
-import Card from '../components/ui/Card.astro'
-import Container from '../components/ui/Container.astro'
-import Icon from '../components/ui/Icon.astro'
-import type { GalleryEntry } from '../data/galleries'
-import { fetchAllGalleries, filterPublishedGalleries } from '../data/galleries'
-import BaseLayout from '../layouts/BaseLayout.astro'
-import { KATEGORI_LABELS } from '../lib/constants'
-import { getSiteSettings } from '../lib/sanity/client'
+import PageHeader from '@components/sections/PageHeader.astro'
+import Container from '@components/ui/Container.astro'
+import Icon from '@components/ui/Icon.astro'
+import type { GalleryEntry } from '@data/galleries'
+import { fetchAllGalleries, filterPublishedGalleries } from '@data/galleries'
+import BaseLayout from '@layouts/BaseLayout.astro'
+import { KATEGORI_LABELS } from '@lib/constants'
+import { getSiteSettings } from '@lib/sanity/client'
 
 // SSR - Real-time data fetching (Cloudflare Workers compatible)
 export const prerender = false
@@ -219,7 +218,7 @@ try {
 		{galleries === null ? (
 			<!-- Loading Skeleton -->
 			<div class="grid gap-5 sm:gap-6 lg:gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-				{[1, 2, 3, 4, 5, 6].map((i) => (
+				{[1, 2, 3, 4, 5, 6].map(() => (
 					<div class="animate-pulse">
 						<div class="aspect-[4/3] w-full bg-warm-200 dark:bg-warm-800 rounded-xl sm:rounded-2xl" />
 						<div class="mt-5 space-y-3">

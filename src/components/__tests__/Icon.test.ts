@@ -57,7 +57,6 @@ describe('Icon Registry', () => {
 	})
 
 	it('all fill icons are brand/social media icons', () => {
-		const fillSet = new Set(FILL_ICONS)
 		for (const icon of FILL_ICONS) {
 			expect(icon).toMatch(/^(whatsapp|facebook|instagram|tiktok|youtube)$/)
 		}

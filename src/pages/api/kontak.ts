@@ -1,7 +1,7 @@
 import { env } from 'cloudflare:workers'
+import { getResendApiKey } from '@lib/config'
 import type { APIRoute } from 'astro'
 import { z } from 'zod'
-import { getResendApiKey } from '../../lib/config'
 
 const RESEND_API = 'https://api.resend.com/emails'
 const RATE_LIMIT_WINDOW = 5 * 60 * 1000
@@ -10,7 +10,7 @@ const KV_PREFIX = 'kontak:ip:'
 const kontakSchema = z.object({
 	nama: z.string().trim().min(1, 'Nama harus diisi.'),
 	telepon: z.string().trim().optional().default(''),
-	email: z.string().trim().email('Format email tidak valid.'),
+	email: z.email({ error: 'Format email tidak valid.' }).trim(),
 	subjek: z.string().trim().optional().default('lainnya'),
 	pesan: z
 		.string()

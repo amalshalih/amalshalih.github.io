@@ -1,12 +1,12 @@
 ---
 import { getCollection, render } from 'astro:content'
-import Card from '../../components/ui/Card.astro'
-import Icon from '../../components/ui/Icon.astro'
-import { CONTACT, SITE } from '../../data/site'
-import BaseLayout from '../../layouts/BaseLayout.astro'
-import { KATEGORI_LABELS } from '../../lib/constants'
-import { getKegiatanItem, getKegiatanList, getSiteSettings } from '../../lib/sanity/client'
-import { renderPortableText } from '../../lib/sanity/render'
+import Card from '@components/ui/Card.astro'
+import Icon from '@components/ui/Icon.astro'
+import { CONTACT, SITE } from '@data/site'
+import BaseLayout from '@layouts/BaseLayout.astro'
+import { KATEGORI_LABELS } from '@lib/constants'
+import { getKegiatanItem, getKegiatanList, getSiteSettings } from '@lib/sanity/client'
+import { renderPortableText } from '@lib/sanity/render'
 
 // SSR mode for Cloudflare Workers (not static prerender)
 export const prerender = false

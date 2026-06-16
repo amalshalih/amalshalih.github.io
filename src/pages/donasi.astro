@@ -1,12 +1,12 @@
 ---
-import PageHeader from '../components/sections/PageHeader.astro'
-import Button from '../components/ui/Button.astro'
-import Card from '../components/ui/Card.astro'
-import Container from '../components/ui/Container.astro'
-import Icon from '../components/ui/Icon.astro'
-import { CONTACT, DONATION } from '../data/site'
-import BaseLayout from '../layouts/BaseLayout.astro'
-import { getBankDonasi, getSiteSettings } from '../lib/sanity/client'
+import PageHeader from '@components/sections/PageHeader.astro'
+import Button from '@components/ui/Button.astro'
+import Card from '@components/ui/Card.astro'
+import Container from '@components/ui/Container.astro'
+import Icon from '@components/ui/Icon.astro'
+import { CONTACT, DONATION } from '@data/site'
+import BaseLayout from '@layouts/BaseLayout.astro'
+import { getBankDonasi, getSiteSettings } from '@lib/sanity/client'
 
 // Hybrid: try Sanity first, fall back to local data
 let banks = DONATION.banks.map((b) => ({ ...b }))

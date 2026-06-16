@@ -1,13 +1,13 @@
 ---
-import PageHeader from '../components/sections/PageHeader.astro'
-import Button from '../components/ui/Button.astro'
-import Card from '../components/ui/Card.astro'
-import Container from '../components/ui/Container.astro'
-import Icon from '../components/ui/Icon.astro'
-import { SITE } from '../data/site'
-import BaseLayout from '../layouts/BaseLayout.astro'
-import { getPengurus, getSiteSettings } from '../lib/sanity/client'
-import type { SanityPengurus } from '../lib/sanity/types'
+import PageHeader from '@components/sections/PageHeader.astro'
+import Button from '@components/ui/Button.astro'
+import Card from '@components/ui/Card.astro'
+import Container from '@components/ui/Container.astro'
+import Icon from '@components/ui/Icon.astro'
+import { SITE } from '@data/site'
+import BaseLayout from '@layouts/BaseLayout.astro'
+import { getPengurus, getSiteSettings } from '@lib/sanity/client'
+import type { SanityPengurus } from '@lib/sanity/types'
 
 let legalData = {
 	foundedDate: SITE.foundedDate,

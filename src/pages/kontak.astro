@@ -1,12 +1,12 @@
 ---
-import FAQ from '../components/sections/FAQ.astro'
-import PageHeader from '../components/sections/PageHeader.astro'
-import Button from '../components/ui/Button.astro'
-import Container from '../components/ui/Container.astro'
-import Icon from '../components/ui/Icon.astro'
-import { CONTACT } from '../data/site'
-import BaseLayout from '../layouts/BaseLayout.astro'
-import { getSiteSettings } from '../lib/sanity/client'
+import FAQ from '@components/sections/FAQ.astro'
+import PageHeader from '@components/sections/PageHeader.astro'
+import Button from '@components/ui/Button.astro'
+import Container from '@components/ui/Container.astro'
+import Icon from '@components/ui/Icon.astro'
+import { CONTACT } from '@data/site'
+import BaseLayout from '@layouts/BaseLayout.astro'
+import { getSiteSettings } from '@lib/sanity/client'
 
 // Hybrid: try Sanity first, fall back to local data
 let address = { ...CONTACT.address }
@@ -449,24 +449,24 @@ try {
 
 <style>
 	.subjek-card[data-selected="true"] {
-		border-color: #166534;
-		background-color: #f0fdf4;
+		border-color: var(--color-primary-800);
+		background-color: var(--color-primary-50);
 	}
 	.subjek-card[data-selected="true"] .subjek-icon {
-		color: #16a34a;
+		color: var(--color-primary-600);
 	}
 	.subjek-card[data-selected="true"] .subjek-check {
 		display: block;
 	}
 	@media (prefers-color-scheme: dark) {
 		.subjek-card[data-selected="true"] {
-			border-color: #22c55e;
-			background-color: #052e16;
+			border-color: var(--color-primary-500);
+			background-color: var(--color-primary-950);
 		}
 		.subjek-card[data-selected="true"] .subjek-icon {
-			color: #4ade80;
+			color: var(--color-primary-400);
 		}
-}
+	}
 	</style>
 	
 	<!-- FAQ Section -- moved from beranda -->

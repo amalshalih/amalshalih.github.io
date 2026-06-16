@@ -1,5 +1,5 @@
+import { fetchAllGalleries, filterPublishedGalleries } from '@data/galleries'
 import type { APIRoute } from 'astro'
-import { fetchAllGalleries, filterPublishedGalleries } from '../../data/galleries'
 
 export const GET: APIRoute = async () => {
 	try {

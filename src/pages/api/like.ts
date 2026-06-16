@@ -1,6 +1,6 @@
+import { getPhotoLikes, incrementPhotoLike } from '@lib/likes'
 import type { APIRoute } from 'astro'
 import { z } from 'zod'
-import { getPhotoLikes, incrementPhotoLike } from '../../lib/likes'
 
 const getQuerySchema = z.object({
 	slug: z.string().min(1, 'Slug cannot be empty'),

@@ -1,6 +1,5 @@
 ---
 // Test page untuk hero image fade effect
-layout: null
 ---
 
 <!DOCTYPE html>
@@ -277,13 +276,12 @@ layout: null
     </div>
   </div>
 
-  <script>
-    function setFade(start: number, end: number) {
-      const img = document.querySelector('.hero-mask img') as HTMLImageElement | null;
-      const setting = document.getElementById('current-setting') as HTMLElement | null;
+  <script is:inline>
+    function setFade(start, end) {
+      const img = document.querySelector('.hero-mask img');
+      const setting = document.getElementById('current-setting');
       
       if (img && setting) {
-        img.style.webkitMaskImage = `linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) ${start}%, rgba(0,0,0,0) ${end}%)`;
         img.style.maskImage = `linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) ${start}%, rgba(0,0,0,0) ${end}%)`;
         
         setting.innerHTML = `Current: <strong>rgba(0,0,0,1) 0%, rgba(0,0,0,1) ${start}%, rgba(0,0,0,0) ${end}%)</strong>`;
@@ -291,6 +289,8 @@ layout: null
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
     }
+    // Initialize with default fade values
+    setFade(40, 100);
   </script>
 </body>
 </html>

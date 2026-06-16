@@ -1,11 +1,11 @@
 ---
 import { getCollection } from 'astro:content'
-import PageHeader from '../../components/sections/PageHeader.astro'
-import Card from '../../components/ui/Card.astro'
-import Container from '../../components/ui/Container.astro'
-import Icon from '../../components/ui/Icon.astro'
-import BaseLayout from '../../layouts/BaseLayout.astro'
-import { getBlogPostList } from '../../lib/sanity/client'
+import PageHeader from '@components/sections/PageHeader.astro'
+import Card from '@components/ui/Card.astro'
+import Container from '@components/ui/Container.astro'
+import Icon from '@components/ui/Icon.astro'
+import BaseLayout from '@layouts/BaseLayout.astro'
+import { getBlogPostList } from '@lib/sanity/client'
 
 interface BlogPost {
 	id: string

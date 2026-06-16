@@ -2,7 +2,7 @@ import { env } from 'cloudflare:workers'
 import { z } from 'zod'
 
 const googleDriveCredsSchema = z.object({
-	client_email: z.string().email(),
+	client_email: z.email(),
 	private_key: z.string().min(1),
 })
 

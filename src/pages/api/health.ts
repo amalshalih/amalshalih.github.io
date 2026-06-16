@@ -1,6 +1,6 @@
 import { env } from 'cloudflare:workers'
+import { getGoogleDriveCredentials } from '@lib/config'
 import type { APIRoute } from 'astro'
-import { getGoogleDriveCredentials } from '../../lib/config'
 
 interface HealthCheckResult {
 	status: 'healthy' | 'degraded' | 'unhealthy'

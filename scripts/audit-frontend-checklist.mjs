@@ -9,8 +9,8 @@
  * Components are only checked for rules relevant to their scope.
  */
 
-import { readdir, readFile, stat } from 'node:fs/promises'
-import { extname, join, relative } from 'node:path'
+import { readdir, readFile } from 'node:fs/promises'
+import { extname, join } from 'node:path'
 
 const colors = {
 	reset: '\x1b[0m',

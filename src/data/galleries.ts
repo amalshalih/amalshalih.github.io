@@ -7,8 +7,8 @@ import {
 	listImagesInFolder,
 	listSubfolders,
 	parseFolderName,
-} from '../lib/google-drive'
-import { cachedFetch, driveCacheKey } from '../lib/kv-cache'
+} from '@lib/google-drive'
+import { cachedFetch, driveCacheKey } from '@lib/kv-cache'
 
 function getGoogleDriveCredentials(): string | undefined {
 	return env.GOOGLE_DRIVE_SERVICE_ACCOUNT_KEY

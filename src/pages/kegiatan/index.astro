@@ -1,12 +1,12 @@
 ---
 import { getCollection } from 'astro:content'
-import PageHeader from '../../components/sections/PageHeader.astro'
-import Testimonials from '../../components/sections/Testimonials.astro'
-import Card from '../../components/ui/Card.astro'
-import Container from '../../components/ui/Container.astro'
-import BaseLayout from '../../layouts/BaseLayout.astro'
-import { KATEGORI_LABELS } from '../../lib/constants'
-import { getKegiatanList, getSiteSettings } from '../../lib/sanity/client'
+import PageHeader from '@components/sections/PageHeader.astro'
+import Testimonials from '@components/sections/Testimonials.astro'
+import Card from '@components/ui/Card.astro'
+import Container from '@components/ui/Container.astro'
+import BaseLayout from '@layouts/BaseLayout.astro'
+import { KATEGORI_LABELS } from '@lib/constants'
+import { getKegiatanList, getSiteSettings } from '@lib/sanity/client'
 
 interface kegiatanEntry {
 	id: string

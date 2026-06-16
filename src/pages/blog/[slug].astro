@@ -1,10 +1,10 @@
 ---
 import { getCollection, render } from 'astro:content'
-import Container from '../../components/ui/Container.astro'
-import Icon from '../../components/ui/Icon.astro'
-import BaseLayout from '../../layouts/BaseLayout.astro'
-import { getBlogPost } from '../../lib/sanity/client'
-import { renderPortableText } from '../../lib/sanity/render'
+import Container from '@components/ui/Container.astro'
+import Icon from '@components/ui/Icon.astro'
+import BaseLayout from '@layouts/BaseLayout.astro'
+import { getBlogPost } from '@lib/sanity/client'
+import { renderPortableText } from '@lib/sanity/render'
 
 // SSR mode for Cloudflare Workers
 export const prerender = false

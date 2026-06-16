@@ -1,7 +1,7 @@
 import { env } from 'cloudflare:workers'
+import { getAccessToken } from '@lib/google-drive'
+import { cachedFetch, driveCacheKey } from '@lib/kv-cache'
 import type { APIRoute } from 'astro'
-import { getAccessToken } from '../../../lib/google-drive'
-import { cachedFetch, driveCacheKey } from '../../../lib/kv-cache'
 
 export const prerender = false
 

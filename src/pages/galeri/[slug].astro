@@ -1,12 +1,12 @@
 ---
-import Lightbox from '../../components/gallery/Lightbox.astro'
-import LikeButton from '../../components/gallery/LikeButton.astro'
-import MasonryGrid from '../../components/gallery/MasonryGrid.astro'
-import PageHeader from '../../components/sections/PageHeader.astro'
-import Container from '../../components/ui/Container.astro'
-import Icon from '../../components/ui/Icon.astro'
-import { fetchGalleryBySlug, type GalleryEntry } from '../../data/galleries'
-import BaseLayout from '../../layouts/BaseLayout.astro'
+import Lightbox from '@components/gallery/Lightbox.astro'
+import LikeButton from '@components/gallery/LikeButton.astro'
+import MasonryGrid from '@components/gallery/MasonryGrid.astro'
+import PageHeader from '@components/sections/PageHeader.astro'
+import Container from '@components/ui/Container.astro'
+import Icon from '@components/ui/Icon.astro'
+import { fetchGalleryBySlug, type GalleryEntry } from '@data/galleries'
+import BaseLayout from '@layouts/BaseLayout.astro'
 
 // SSR - Real-time data fetching
 export const prerender = false

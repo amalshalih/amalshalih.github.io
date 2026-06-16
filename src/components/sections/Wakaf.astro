@@ -5,9 +5,9 @@
  * Urgent appeal card for Wakaf Lahan Rumah Tahfidz.
  * Features "Mendesak" badge, verse card, and kinetic Islamic frieze animation.
  */
-import Button from '../ui/Button.astro'
-import Container from '../ui/Container.astro'
-import Icon from '../ui/Icon.astro'
+import Button from '@components/ui/Button.astro'
+import Container from '@components/ui/Container.astro'
+import Icon from '@components/ui/Icon.astro'
 
 interface Props {
 	title?: string
@@ -22,7 +22,6 @@ interface Props {
 const {
 	title = 'Wakaf Lahan Rumah Tahfidz',
 	description = "Saat ini kegiatan Tahfidz, Taman Anak, dan Kantor Yayasan masih bergabung di rumah kontrakan sempit. Kami membutuhkan lahan seluas 2.000 m² untuk mewujudkan Rumah Tahfidz Al-Qur'an yang layak bagi para santri.",
-	targetArea = '2.000 m²',
 	ctaText = 'Bantu Wakaf Sekarang',
 	ctaLink = '/donasi',
 	verse = 'Perumpamaan orang yang menginfakkan hartanya di jalan Allah seperti sebutir biji yang menumbuhkan tujuh bulir.',

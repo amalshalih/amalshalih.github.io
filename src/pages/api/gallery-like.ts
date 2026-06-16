@@ -1,6 +1,6 @@
+import { getGalleryLikes, toggleGalleryLike } from '@lib/likes'
 import type { APIRoute } from 'astro'
 import { z } from 'zod'
-import { getGalleryLikes, toggleGalleryLike } from '../../lib/likes'
 
 // Helper to generate a consistent hash from IP + User Agent
 async function generateFingerprint(request: Request): Promise<string> {

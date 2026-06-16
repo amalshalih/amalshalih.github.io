@@ -1,5 +1,5 @@
 import { sanityClient } from 'sanity:client'
-import { cachedFetch, sanityCacheKey } from '../kv-cache'
+import { cachedFetch, sanityCacheKey } from '@lib/kv-cache'
 import {
 	bankDonasiQuery,
 	blogPostItemQuery,
