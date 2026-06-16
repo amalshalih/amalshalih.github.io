@@ -1,0 +1,768 @@
+---
+import barkasData from '@data/barkas-products.json'
+import BaseLayout from '@layouts/BaseLayout.astro'
+
+const { products, categories, programInfo } = barkasData
+
+// Filter hanya produk yang available
+const availableProducts = products.filter((p) => p.status === 'available')
+
+// Schema.org untuk Google Merchant
+const organizationSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'Organization',
+	name: 'Yayasan Amal Shalih Insan Bantul',
+	url: 'https://amalshalih.or.id',
+	logo: 'https://amalshalih.or.id/images/logo.png',
+	description: programInfo.description,
+	contactPoint: {
+		'@type': 'ContactPoint',
+		telephone: programInfo.contact.whatsapp,
+		contactType: 'customer service',
+		availableLanguage: 'Indonesian',
+	},
+	address: {
+		'@type': 'PostalAddress',
+		addressLocality: 'Bantul',
+		addressRegion: 'Yogyakarta',
+		addressCountry: 'ID',
+	},
+}
+
+const productSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'ItemList',
+	itemListElement: availableProducts.map((product, index) => ({
+		'@type': 'ListItem',
+		position: index + 1,
+		item: {
+			'@type': 'Product',
+			name: product.name,
+			description: product.description,
+			image: product.images.map((img) => `https://amalshalih.or.id${img}`),
+			offers: {
+				'@type': 'Offer',
+				price: product.price,
+				priceCurrency: 'IDR',
+				availability:
+					product.status === 'available'
+						? 'https://schema.org/InStock'
+						: 'https://schema.org/OutOfStock',
+				condition: 'https://schema.org/UsedCondition',
+				seller: {
+					'@type': 'Organization',
+					name: 'Yayasan Amal Shalih Insan Bantul',
+				},
+			},
+		},
+	})),
+}
+---
+
+<BaseLayout title={`${programInfo.fullName} - ${programInfo.tagline}`} description={programInfo.description} currentPage="/barkas">
+  <!-- Schema.org JSON-LD -->
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(productSchema)} />
+
+  <main class="barkas-page">
+    <!-- ==================== HERO ==================== -->
+    <section class="barkas-hero -mt-[70px] sm:-mt-[82px] min-h-[300px] sm:min-h-[320px] lg:min-h-[360px]">
+      <div class="hero-overlay" />
+      <div class="container pt-[90px] sm:pt-[110px] pb-6 sm:pb-10 lg:pb-12">
+        <div class="hero-content animate-fade-in">
+          <h1>{programInfo.fullName}</h1>
+          <p class="tagline animate-fade-in-up delay-1">{programInfo.tagline}</p>
+          <p class="description animate-fade-in-up delay-2">{programInfo.description}</p>
+
+          <div class="hero-cta animate-fade-in-up delay-3">
+            <a href="/barkas/donasi" class="btn hero-btn-primary">Donasi Barang</a>
+            <a href="/barkas/tentang" class="btn hero-btn-secondary">Tentang BARKAS</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== KATALOG ==================== -->
+    <section class="catalog" id="katalog">
+      <div class="container">
+        <div class="section-header animate-fade-in-up">
+          <h2>Katalog Produk Tersedia</h2>
+          <p class="catalog-description">
+            Semua hasil penjualan barang bekas ini digunakan untuk mendukung program sosial, pendidikan, dan dakwah Yayasan ASIB.
+          </p>
+        </div>
+
+        <!-- Category Filter -->
+        <div class="category-filter animate-fade-in-up delay-1">
+          <button class="filter-btn active" data-category="all">Semua</button>
+          {categories.map(cat => (
+            <button class="filter-btn" data-category={cat.id}>{cat.name}</button>
+          ))}
+        </div>
+
+        <!-- Product Grid -->
+        <div class="product-grid" id="product-grid">
+          {availableProducts.map((product) => {
+            const categoryName = categories.find(c => c.id === product.category)?.name || '';
+            return (
+            <article class="product-card" data-category={product.category}>
+              <div class="product-image">
+                <img 
+                  src={product.images[0]} 
+                  alt={product.name}
+                  loading="lazy"
+                  decoding="async"
+                />
+                {product.originalPrice && (
+                  <span class="badge badge-discount">
+                    Hemat {Math.round((1 - product.price / product.originalPrice) * 100)}%
+                  </span>
+                )}
+              </div>
+
+              <div class="product-info">
+                <h3 class="product-name">{product.name}</h3>
+                <p class="product-description">{product.description.substring(0, 100)}...</p>
+
+                <div class="product-meta">
+                  <span class="category-tag">{categoryName}</span>
+                  <span class="condition-tag">
+                    {product.condition === 'used-excellent' && '⭐ Seperti Baru'}
+                    {product.condition === 'used-good' && '✓ Kondisi Baik'}
+                    {product.condition === 'used-fair' && '◐ Layak Pakai'}
+                  </span>
+                  <span class="badge-available animate-badge-pulse">Tersedia</span>
+                </div>
+
+                <div class="product-pricing">
+                  <span class="current-price">Rp {product.price.toLocaleString('id-ID')}</span>
+                  {product.originalPrice && (
+                    <span class="original-price">Rp {product.originalPrice.toLocaleString('id-ID')}</span>
+                  )}
+                </div>
+
+                <div class="product-actions">
+                  <a 
+                    href={`/barkas/${product.id}`}
+                    class="btn btn-primary btn-block"
+                  >
+                    Lihat Detail
+                  </a>
+                  <a 
+                    href={`https://wa.me/${programInfo.contact.whatsapp.replace(/-/g, '')}?text=Halo%20ASIB,%20saya%20tertarik%20dengan%20${encodeURIComponent(product.name)}`}
+                    class="btn btn-whatsapp btn-block"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    💬 Chat via WhatsApp
+                  </a>
+                </div>
+
+                <div class="donor-info">
+                  <small>
+                    🎁 Donatur: {product.donor}<br/>
+                    📅 Diterima: {new Date(product.acquiredDate).toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' })}
+                  </small>
+                </div>
+              </div>
+            </article>
+            );
+          })}
+        </div>
+
+        {availableProducts.length === 0 && (
+          <div class="empty-state animate-fade-in">
+            <p>📦 Belum ada produk tersedia saat ini.</p>
+            <p>Hubungi kami untuk info barang masuk berikutnya!</p>
+          </div>
+        )}
+      </div>
+    </section>
+
+    <!-- ==================== CTA BANNER ==================== -->
+    <section class="cta-banner animate-fade-in-up">
+      <div class="container">
+        <div class="cta-content">
+          <h2>Ingin Berkontribusi?</h2>
+          <p>Ada barang bekas yang masih layak pakai? Donasikan untuk program sosial ASIB.</p>
+          <div class="cta-links">
+            <a href="/barkas/donasi" class="btn btn-primary btn-large">Donasi Barang</a>
+            <a href="/barkas/dampak" class="btn btn-outline btn-large">Lihat Dampak</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <style>
+    .barkas-page {
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    /* ==============================
+       HERO
+    ============================== */
+    .barkas-hero {
+      position: relative;
+      background-image: url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1400&q=75');
+      background-size: cover;
+      background-position: center 40%;
+      color: white;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(0,50,15,0.88) 0%, rgba(0,30,10,0.75) 50%, rgba(0,0,0,0.5) 100%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .barkas-hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      font-weight: 700;
+      color: white;
+    }
+
+    .tagline {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      opacity: 0.95;
+      color: white;
+    }
+
+    .description {
+      font-size: 1.1rem;
+      max-width: 800px;
+      margin: 0 auto 30px;
+      opacity: 0.95;
+      color: rgba(255, 255, 255, 0.95);
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* ==============================
+       BUTTONS
+    ============================== */
+    .btn {
+      padding: 12px 24px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      display: inline-block;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn:active {
+      transform: scale(0.97) !important;
+    }
+
+    /* Hero-specific buttons (transparent glass on hero background) */
+    .hero-btn-primary {
+      background: rgba(255, 255, 255, 0.95);
+      color: var(--color-primary-700);
+    }
+
+    .hero-btn-primary:hover {
+      background: rgba(255, 255, 255, 1);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .hero-btn-secondary {
+      background: rgba(255, 255, 255, 0.15);
+      color: white;
+      border: 2px solid rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(4px);
+    }
+
+    .hero-btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.25);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Standard primary button: solid green — shared with [id].astro */
+    .btn-primary {
+      background: var(--color-accent-primary);
+      color: white;
+      border: none;
+    }
+
+    .btn-primary:hover {
+      background: var(--color-primary-800);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px var(--color-shadow-accent-hover);
+    }
+
+    /* Standard secondary button: outlined — shared with [id].astro */
+    .btn-secondary {
+      background: var(--color-surface-elevated);
+      color: var(--color-accent-primary);
+      border: 2px solid var(--color-accent-primary);
+    }
+
+    .btn-secondary:hover {
+      background: var(--color-surface-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px var(--color-shadow-elevated-hover);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--color-accent-primary);
+      border: 2px solid var(--color-accent-primary);
+    }
+
+    .btn-outline:hover {
+      background: var(--color-accent-primary);
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    .btn-block {
+      width: 100%;
+      text-align: center;
+    }
+
+    .btn-large {
+      padding: 15px 30px;
+      font-size: 1.1rem;
+    }
+
+    .btn-whatsapp {
+      background: var(--color-whatsapp, #25D366);
+      color: white;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .btn-whatsapp:hover {
+      background: var(--color-whatsapp-dark, #128C7E);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3);
+    }
+
+    /* ==============================
+       CATALOG
+    ============================== */
+    .catalog {
+      padding: 60px 0;
+      background: var(--color-surface-secondary);
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .catalog h2 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 10px;
+      color: var(--color-text-primary);
+    }
+
+    .catalog-description {
+      text-align: center;
+      color: var(--color-text-secondary);
+      margin-bottom: 30px;
+    }
+
+    .category-filter {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+    }
+
+    .filter-btn {
+      padding: 8px 20px;
+      border: 2px solid var(--color-accent-primary);
+      background: var(--color-surface-elevated);
+      color: var(--color-accent-primary);
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .filter-btn:hover {
+      background: var(--color-accent-primary);
+      color: white;
+      transform: translateY(-1px);
+    }
+
+    .filter-btn:active {
+      transform: scale(0.95);
+    }
+
+    .filter-btn.active {
+      background: var(--color-accent-primary);
+      color: white;
+      box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3);
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .product-card {
+      background: var(--color-surface-elevated);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      border: 1px solid transparent;
+    }
+
+    .product-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12), 0 4px 12px rgba(0, 0, 0, 0.06);
+      border-color: var(--color-border-primary);
+    }
+
+    .product-image {
+      position: relative;
+      height: 250px;
+      overflow: hidden;
+      background: var(--color-surface-placeholder);
+    }
+
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .product-card:hover .product-image img {
+      transform: scale(1.08);
+    }
+
+    .badge-discount {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: var(--color-red-600);
+      color: white;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: bold;
+      box-shadow: 0 2px 8px rgba(220, 38, 38, 0.4);
+      animation: cta-pulse 2s ease-in-out infinite;
+    }
+
+    .product-info {
+      padding: 20px;
+    }
+
+    .product-name {
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+      color: var(--color-text-primary);
+      transition: color 0.3s;
+    }
+
+    .product-card:hover .product-name {
+      color: var(--color-accent-primary);
+    }
+
+    .product-description {
+      color: var(--color-text-secondary);
+      font-size: 0.9rem;
+      margin-bottom: 15px;
+      line-height: 1.5;
+    }
+
+    .product-meta {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 15px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .category-tag,
+    .condition-tag {
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      transition: transform 0.3s;
+    }
+
+    .category-tag:hover,
+    .condition-tag:hover {
+      transform: scale(1.05);
+    }
+
+    .category-tag {
+      background: var(--color-badge-primary-bg);
+      color: var(--color-badge-primary-text);
+    }
+
+    .condition-tag {
+      background: var(--color-badge-gold-bg);
+      color: var(--color-badge-gold-text);
+    }
+
+    .badge-available {
+      display: inline-block;
+      background: var(--color-badge-primary-bg);
+      color: var(--color-badge-primary-text);
+      padding: 3px 10px;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .product-pricing {
+      margin-bottom: 15px;
+    }
+
+    .current-price {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--color-accent-primary);
+    }
+
+    .original-price {
+      font-size: 1rem;
+      color: var(--color-text-muted);
+      text-decoration: line-through;
+      margin-left: 10px;
+    }
+
+    .product-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+
+    .donor-info {
+      padding-top: 15px;
+      border-top: 1px solid var(--color-border-secondary);
+      color: var(--color-text-secondary);
+      font-size: 0.85rem;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--color-text-secondary);
+    }
+
+    /* ==============================
+       CTA BANNER
+    ============================== */
+    .cta-banner {
+      padding: 60px 0;
+      background: var(--color-surface);
+    }
+
+    .cta-content {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .cta-content h2 {
+      font-size: 2rem;
+      color: var(--color-text-primary);
+      margin-bottom: 15px;
+    }
+
+    .cta-content p {
+      color: var(--color-text-secondary);
+      margin-bottom: 30px;
+      font-size: 1.1rem;
+    }
+
+    .cta-links {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* ==============================
+       SHIMMER SKELETON
+    ============================== */
+    .skeleton-card {
+      background: var(--color-surface-elevated);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .skeleton-image {
+      height: 250px;
+      background: linear-gradient(
+        90deg,
+        var(--color-surface-placeholder) 25%,
+        var(--color-surface-elevated) 50%,
+        var(--color-surface-placeholder) 75%
+      );
+      background-size: 200% 100%;
+      animation: shimmer 1.5s ease-in-out infinite;
+    }
+
+    .skeleton-line {
+      height: 14px;
+      margin: 15px 20px;
+      border-radius: 8px;
+      background: linear-gradient(
+        90deg,
+        var(--color-surface-placeholder) 25%,
+        var(--color-surface-elevated) 50%,
+        var(--color-surface-placeholder) 75%
+      );
+      background-size: 200% 100%;
+      animation: shimmer 1.5s ease-in-out infinite;
+    }
+
+    .skeleton-line.short {
+      width: 60%;
+    }
+
+    .skeleton-line.medium {
+      width: 80%;
+    }
+
+    /* ==============================
+       RESPONSIVE
+    ============================== */
+    @media (max-width: 768px) {
+      .barkas-hero h1 {
+        font-size: 1.8rem;
+      }
+
+      .tagline {
+        font-size: 1.2rem;
+      }
+
+      .hero-cta {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .btn {
+        width: 100%;
+        max-width: 300px;
+      }
+
+      .product-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .cta-links {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .catalog {
+        padding: 40px 0;
+      }
+
+      .cta-banner {
+        padding: 40px 0;
+      }
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .btn-outline,
+      .btn-secondary {
+        color: var(--color-text-primary);
+        border-color: var(--color-text-primary);
+      }
+
+      .btn-outline:hover,
+      .btn-secondary:hover {
+        background: var(--color-text-primary);
+        color: var(--color-surface);
+      }
+    }
+  </style>
+
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', () => {
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      const productCards = document.querySelectorAll('.product-card');
+
+      // Staggered entrance animation
+      productCards.forEach((card, index) => {
+        const el = card;
+        const delay = Math.min(index + 1, 6);
+        el.style.opacity = '0';
+        el.style.animation = `fade-in-up 0.6s ease-out ${delay * 0.12}s forwards`;
+      });
+
+      filterBtns.forEach(btn => {
+        const b = btn;
+        b.addEventListener('click', () => {
+          filterBtns.forEach(x => x.classList.remove('active'));
+          b.classList.add('active');
+
+          const category = b.dataset.category;
+
+          productCards.forEach((card, index) => {
+            const el = card;
+            if (category === 'all' || el.dataset.category === category) {
+              el.style.display = 'block';
+              el.style.animation = 'none';
+              void el.offsetWidth;
+              const delay = Math.min(index + 1, 6);
+              el.style.animation = `fade-in-up 0.5s ease-out ${delay * 0.1}s forwards`;
+              el.style.opacity = '0';
+            } else {
+              el.style.display = 'none';
+            }
+          });
+        });
+      });
+
+      // Skeleton when no products
+      const grid = document.getElementById('product-grid');
+      if (grid && grid.children.length === 0) {
+        for (let i = 0; i < 3; i++) {
+          const skeleton = document.createElement('div');
+          skeleton.className = 'skeleton-card';
+          skeleton.innerHTML = `
+            <div class="skeleton-image"></div>
+            <div class="skeleton-line short"></div>
+            <div class="skeleton-line"></div>
+            <div class="skeleton-line medium"></div>
+          `;
+          grid.appendChild(skeleton);
+        }
+      }
+    });
+  </script>
+</BaseLayout>

@@ -1,0 +1,399 @@
+---
+import barkasData from '@data/barkas-products.json'
+import BaseLayout from '@layouts/BaseLayout.astro'
+
+const { programInfo } = barkasData
+---
+
+<BaseLayout title="Tentang BARKAS" description={programInfo.description} currentPage="/barkas">
+  <main class="tentang-page">
+    <!-- ==================== HERO ==================== -->
+    <section class="tentang-hero -mt-[70px] sm:-mt-[82px] min-h-[300px] sm:min-h-[320px] lg:min-h-[360px]">
+      <div class="container pt-[90px] sm:pt-[110px] pb-6 sm:pb-10 lg:pb-12">
+        <div class="hero-split">
+          <div class="hero-text-col animate-fade-in">
+            <h1>Tentang BARKAS</h1>
+            <p class="tagline">{programInfo.tagline}</p>
+            <p class="description">{programInfo.description}</p>
+            <div class="hero-cta animate-fade-in-up delay-2">
+              <a href="/barkas/donasi" class="btn btn-primary">Donasi Barang</a>
+              <a href="/barkas" class="btn btn-secondary">← Katalog</a>
+            </div>
+          </div>
+          <div class="hero-quote-col animate-fade-in delay-1">
+            <div class="quote-box">
+              <span class="quote-icon">"</span>
+              <blockquote>Menjadikan barang bekas sebagai sarana keberkahan, kepedulian sosial, dan pemberdayaan umat.</blockquote>
+              <span class="quote-attribution">— Visi BARKAS</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== APA ITU BARKAS ==================== -->
+    <section class="section-apa animate-fade-in-up">
+      <div class="container">
+        <div class="apa-grid">
+          <div class="apa-text">
+            <h2>Apa Itu BARKAS?</h2>
+            <p><strong>BARKAS</strong> adalah singkatan dari <strong>Barang Bekas Berkah ASIB</strong>, sebuah program sosial yang menghimpun dan menjual barang-barang bekas layak pakai dari masyarakat.</p>
+            <p>Seluruh hasil penjualan disalurkan untuk mendukung program sosial, pendidikan, dan dakwah Yayasan Amal Shalih Insan Bantul.</p>
+            <p>Dengan BARKAS, barang bekas yang sudah tidak terpakai di rumah Anda bisa menjadi berkah bagi sesama — sekaligus membantu mengurangi limbah dan menjaga lingkungan.</p>
+          </div>
+          <div class="apa-highlights">
+            <div class="highlight">
+              <span class="highlight-icon">🤲</span>
+              <span>Sedekah barang bekas</span>
+            </div>
+            <div class="highlight">
+              <span class="highlight-icon">🛍️</span>
+              <span>Belanja hemat untuk kebaikan</span>
+            </div>
+            <div class="highlight">
+              <span class="highlight-icon">🌍</span>
+              <span>Peduli lingkungan (reduce, reuse)</span>
+            </div>
+            <div class="highlight">
+              <span class="highlight-icon">📈</span>
+              <span>Dana untuk program sosial</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== MISI ==================== -->
+    <section class="section-misi animate-fade-in-up">
+      <div class="container">
+        <h2>Misi Kami</h2>
+        <p class="section-subtitle">Empat pilar yang menjadi fondasi program BARKAS</p>
+        <div class="misi-grid">
+          <div class="misi-card">
+            <div class="misi-card-icon">📋</div>
+            <h3>Amanah</h3>
+            <p>Menghimpun barang bekas dari masyarakat secara amanah dan profesional.</p>
+          </div>
+          <div class="misi-card">
+            <div class="misi-card-icon">♻️</div>
+            <h3>Lingkungan</h3>
+            <p>Mengurangi limbah melalui reuse dan recycle barang bekas yang masih layak pakai.</p>
+          </div>
+          <div class="misi-card">
+            <div class="misi-card-icon">💰</div>
+            <h3>Dana Sosial</h3>
+            <p>Mengubah barang bekas menjadi sumber dana untuk program sosial dan dakwah.</p>
+          </div>
+          <div class="misi-card">
+            <div class="misi-card-icon">🌱</div>
+            <h3>Kepedulian</h3>
+            <p>Menumbuhkan budaya sedekah dan kepedulian lingkungan di masyarakat.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== MANFAAT ==================== -->
+    <section class="section-manfaat animate-fade-in-up">
+      <div class="container">
+        <h2>Manfaat BARKAS</h2>
+        <p class="section-subtitle">Tiga dimensi dampak dari program BARKAS</p>
+        <div class="manfaat-grid">
+          <div class="manfaat-card sosial">
+            <div class="manfaat-icon">🤝</div>
+            <h3>Sosial</h3>
+            <p>Mendukung program santunan yatim & dhuafa, bantuan pendidikan, dan kegiatan sosial lainnya.</p>
+          </div>
+          <div class="manfaat-card lingkungan">
+            <div class="manfaat-icon">🌿</div>
+            <h3>Lingkungan</h3>
+            <p>Mengurangi volume sampah dan limbah melalui prinsip reduce, reuse, dan recycle.</p>
+          </div>
+          <div class="manfaat-card dakwah">
+            <div class="manfaat-icon">🕌</div>
+            <h3>Dakwah</h3>
+            <p>Sarana sedekah yang mudah dan praktis bagi masyarakat untuk berpartisipasi dalam syiar Islam.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== FAQ ==================== -->
+    <section class="section-faq animate-fade-in-up">
+      <div class="container">
+        <h2>Pertanyaan Umum (FAQ)</h2>
+        <p class="section-subtitle">Hal-hal yang sering ditanyakan tentang BARKAS</p>
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary>Apa itu BARKAS?</summary>
+            <p>BARKAS (Barang Bekas Berkah ASIB) adalah program penghimpunan dan penjualan barang bekas layak pakai dari masyarakat. Seluruh hasil penjualan disalurkan untuk program sosial, pendidikan, dan dakwah Yayasan Amal Shalih Insan Bantul.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Barang apa saja yang bisa didonasikan?</summary>
+            <p>Kami menerima pakaian layak pakai, buku dan Al-Qur'an, elektronik bekas, furniture, peralatan rumah tangga, mainan anak, perlengkapan sekolah, besi tua, dan logam bekas. Barang harus dalam kondisi layak pakai.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Bagaimana cara mendonasikan barang?</summary>
+            <p>Cukup hubungi kami via WhatsApp, jelaskan jenis barang yang akan didonasikan, dan tim kami akan menjadwalkan penjemputan atau Anda bisa mengantar langsung ke lokasi yayasan.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Apakah barang bekas benar-benar laku dijual?</summary>
+            <p>Ya! Banyak barang bekas berkualitas seperti furniture, elektronik, dan buku yang masih sangat diminati. Harga kami tentukan sangat terjangkau sehingga barang cepat laku dan dana cepat tersalurkan.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Kemana hasil penjualan disalurkan?</summary>
+            <p>100% hasil penjualan BARKAS disalurkan ke tiga pilar program utama ASIB: Pendidikan Islam (beasiswa, TPA), Keagamaan (dakwah, kajian), dan Sosial Kemanusiaan (santunan yatim & dhuafa, sembako).</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== CTA ==================== -->
+    <section class="section-cta animate-fade-in-up">
+      <div class="container">
+        <div class="cta-box">
+          <h2>Siap Berkontribusi?</h2>
+          <p>Mulai dari donasi barang, belanja produk, atau share informasi ke teman-teman Anda.</p>
+          <div class="cta-links">
+            <a href="/barkas/donasi" class="btn btn-primary btn-large">Donasi Barang</a>
+            <a href="/barkas/dampak" class="btn btn-outline btn-large">Lihat Dampak</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <style>
+    .tentang-page { font-family: system-ui, -apple-system, sans-serif; }
+    .container { max-width: 1200px; margin: 0 auto; padding-left: 20px; padding-right: 20px; }
+
+    /* ========== HERO ========== */
+    .tentang-hero {
+      position: relative;
+      background-image: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1400&q=75');
+      background-size: cover;
+      background-position: center 45%;
+      color: white; overflow: hidden;
+    }
+    .tentang-hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(0,50,15,0.82) 0%, rgba(0,30,10,0.7) 50%, rgba(0,0,0,0.45) 100%);
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.2); color: white;
+      padding: 4px 16px; border-radius: 20px;
+      font-size: 0.85rem; font-weight: 600; margin-bottom: 15px;
+      backdrop-filter: blur(4px);
+    }
+    /* Split layout */
+    .hero-split {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 40px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-text-col { text-align: left; }
+    .hero-text-col h1 { font-size: 2.5rem; margin-bottom: 10px; font-weight: 700; color: white; }
+    .hero-text-col .tagline { font-size: 1.5rem; margin-bottom: 20px; opacity: 0.95; color: white; }
+    .hero-text-col .description { font-size: 1.1rem; max-width: 600px; margin: 0 0 30px; color: rgba(255,255,255,0.9); }
+    .hero-text-col .hero-cta { justify-content: flex-start; }
+    .hero-cta { display: flex; gap: 15px; flex-wrap: wrap; }
+    /* Quote column */
+    .hero-quote-col {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .quote-box {
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 16px;
+      padding: 30px;
+      max-width: 320px;
+      transition: transform 0.5s ease;
+    }
+    .quote-box:hover { transform: translateY(-4px); }
+    .quote-icon {
+      font-size: 3rem;
+      line-height: 1;
+      color: rgba(255,255,255,0.5);
+      display: block;
+      margin-bottom: 10px;
+    }
+    .quote-box blockquote {
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: white;
+      font-style: italic;
+      margin: 0 0 15px;
+    }
+    .quote-attribution {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.7);
+      font-weight: 600;
+    }
+
+    /* ========== BUTTONS ========== */
+    .btn, .btn-outline, .btn-large, .btn-primary, .btn-secondary {
+      padding: 12px 24px; border-radius: 8px; text-decoration: none;
+      font-weight: 600; transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+      display: inline-block; border: none; cursor: pointer;
+    }
+    .btn:active { transform: scale(0.97) !important; }
+    .btn-primary {
+      background: rgba(255,255,255,0.95); color: var(--color-primary-700);
+    }
+    .btn-primary:hover {
+      background: rgba(255,255,255,1); transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+    .btn-secondary {
+      background: rgba(255,255,255,0.15); color: white;
+      border: 2px solid rgba(255,255,255,0.8); backdrop-filter: blur(4px);
+    }
+    .btn-secondary:hover { background: rgba(255,255,255,0.25); transform: translateY(-2px); }
+    .btn-outline {
+      background: transparent; color: var(--color-accent-primary);
+      border: 2px solid var(--color-accent-primary);
+    }
+    .btn-outline:hover { background: var(--color-accent-primary); color: white; transform: translateY(-2px); }
+    .btn-large { padding: 15px 30px; font-size: 1.1rem; }
+
+    /* ========== SECTION STYLES ========== */
+    h2 { font-size: 2rem; text-align: center; margin-bottom: 10px; color: var(--color-text-primary); }
+    .section-subtitle { text-align: center; color: var(--color-text-secondary); margin-bottom: 40px; font-size: 1.05rem; }
+
+    /* Apa Itu BARKAS */
+    .section-apa { padding: 60px 0; background: var(--color-surface); }
+    .apa-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 50px;
+      align-items: center;
+    }
+    .apa-text h2 { text-align: left; }
+    .apa-text p {
+      color: var(--color-text-secondary); line-height: 1.7;
+      margin-bottom: 15px; font-size: 1.05rem;
+    }
+    .apa-highlights { display: flex; flex-direction: column; gap: 16px; }
+    .highlight {
+      display: flex; align-items: center; gap: 14px;
+      background: var(--color-surface-elevated);
+      padding: 16px 20px; border-radius: 12px;
+      color: var(--color-text-primary); font-weight: 500;
+      transition: all 0.3s;
+    }
+    .highlight:hover {
+      transform: translateX(6px);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    }
+    .highlight-icon { font-size: 1.5rem; }
+
+    /* Misi */
+    .section-misi { padding: 60px 0; background: var(--color-surface-secondary); }
+    .misi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 24px;
+    }
+    .misi-card {
+      text-align: center;
+      background: var(--color-surface-elevated);
+      padding: 30px 24px; border-radius: 16px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+      transition: all 0.4s;
+    }
+    .misi-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 35px rgba(0,0,0,0.1);
+    }
+    .misi-card-icon {
+      width: 60px; height: 60px; margin: 0 auto 16px;
+      background: var(--color-surface-secondary);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-size: 1.8rem; transition: transform 0.4s;
+    }
+    .misi-card:hover .misi-card-icon { transform: scale(1.15); }
+    .misi-card h3 { color: var(--color-accent-primary); margin-bottom: 10px; }
+    .misi-card p { color: var(--color-text-secondary); line-height: 1.6; }
+
+    /* Manfaat */
+    .section-manfaat { padding: 60px 0; background: var(--color-surface); }
+    .manfaat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+    }
+    .manfaat-card {
+      text-align: center;
+      padding: 40px 30px; border-radius: 16px;
+      transition: all 0.4s;
+    }
+    .manfaat-card.sosial { background: var(--color-surface-elevated); border-top: 4px solid var(--color-accent-primary); }
+    .manfaat-card.lingkungan { background: var(--color-surface-elevated); border-top: 4px solid var(--color-accent-gold); }
+    .manfaat-card.dakwah { background: var(--color-surface-elevated); border-top: 4px solid var(--color-primary-500); }
+    .manfaat-card:hover { transform: translateY(-4px); box-shadow: 0 12px 35px rgba(0,0,0,0.1); }
+    .manfaat-icon { font-size: 2.5rem; margin-bottom: 16px; }
+    .manfaat-card h3 { margin-bottom: 12px; }
+    .manfaat-card.sosial h3 { color: var(--color-accent-primary); }
+    .manfaat-card.lingkungan h3 { color: var(--color-accent-gold); }
+    .manfaat-card.dakwah h3 { color: var(--color-primary-600); }
+    .manfaat-card p { color: var(--color-text-secondary); line-height: 1.7; }
+
+    /* FAQ */
+    .section-faq { padding: 60px 0; background: var(--color-surface-secondary); }
+    .faq-list { max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+    .faq-item {
+      background: var(--color-surface-elevated);
+      border-radius: 12px; overflow: hidden;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+      transition: box-shadow 0.3s;
+    }
+    .faq-item:hover { box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
+    .faq-item summary {
+      padding: 18px 24px; cursor: pointer;
+      font-weight: 600; color: var(--color-text-primary);
+      list-style: none; display: flex; align-items: center;
+      justify-content: space-between; transition: color 0.3s;
+    }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary::after {
+      content: '+'; font-size: 1.3rem; font-weight: bold;
+      color: var(--color-accent-primary); transition: transform 0.3s;
+    }
+    .faq-item[open] summary::after { transform: rotate(45deg); }
+    .faq-item[open] summary { color: var(--color-accent-primary); }
+    .faq-item p {
+      padding: 0 24px 18px; color: var(--color-text-secondary);
+      line-height: 1.7;
+    }
+
+    /* CTA */
+    .section-cta { padding: 60px 0; background: var(--color-surface); }
+    .cta-box { text-align: center; max-width: 600px; margin: 0 auto; padding: 40px 20px; }
+    .cta-box p { color: var(--color-text-secondary); font-size: 1.1rem; margin-bottom: 30px; }
+    .cta-links { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 768px) {
+      .hero-split { grid-template-columns: 1fr; gap: 20px; text-align: center; }
+      .hero-text-col { text-align: center; }
+      .hero-text-col .description { margin: 0 auto 30px; }
+      .hero-text-col .hero-cta { justify-content: center; }
+      .hero-text-col h1 { font-size: 1.8rem; }
+      .hero-text-col .tagline { font-size: 1.2rem; }
+      .quote-box { max-width: 100%; padding: 20px; }
+      .hero-cta, .cta-links { flex-direction: column; align-items: center; }
+      .btn { width: 100%; max-width: 300px; }
+      .apa-grid { grid-template-columns: 1fr; gap: 30px; }
+      .section-apa, .section-misi, .section-manfaat, .section-faq, .section-cta { padding: 40px 0; }
+      
+    }
+  </style>
+</BaseLayout>

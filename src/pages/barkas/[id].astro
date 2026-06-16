@@ -1,0 +1,812 @@
+---
+import Lightbox from '@components/gallery/Lightbox.astro'
+import barkasData from '@data/barkas-products.json'
+import BaseLayout from '@layouts/BaseLayout.astro'
+
+const { id } = Astro.params
+const product = barkasData.products.find((p) => p.id === id)
+const categories = barkasData.categories
+const programInfo = barkasData.programInfo
+
+if (!product) {
+	return Astro.redirect('/404')
+}
+
+const categoryName = categories.find((c) => c.id === product.category)?.name || ''
+
+const conditionLabels: Record<string, string> = {
+	'used-excellent': 'Seperti Baru',
+	'used-good': 'Kondisi Baik',
+	'used-fair': 'Layak Pakai',
+}
+
+const statusLabels: Record<string, string> = {
+	available: 'Tersedia',
+	reserved: 'Dipesan',
+	sold: 'Terjual',
+}
+
+// Schema.org Product markup for Google Merchant Center
+const productSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'Product',
+	name: product.name,
+	description: product.description,
+	image: product.images.map((img) => `https://amalshalih.or.id${img}`),
+	sku: product.id,
+	category: categoryName,
+	condition:
+		product.condition === 'used-excellent'
+			? 'https://schema.org/ExcellentCondition'
+			: product.condition === 'used-good'
+				? 'https://schema.org/GoodCondition'
+				: 'https://schema.org/FairCondition',
+	offers: {
+		'@type': 'Offer',
+		price: product.price,
+		priceCurrency: 'IDR',
+		availability:
+			product.status === 'available'
+				? 'https://schema.org/InStock'
+				: 'https://schema.org/OutOfStock',
+		seller: {
+			'@type': 'Organization',
+			name: 'Yayasan Amal Shalih Insan Bantul',
+		},
+	},
+}
+
+const lightboxImages = product.images.map((img, index) => ({
+	id: `${product.id}-${index}`,
+	name: `${product.name} - Foto ${index + 1}`,
+	thumbnailUrl: `https://amalshalih.or.id${img}`,
+	fullUrl: `https://amalshalih.or.id${img}`,
+}))
+
+const whatsappUrl = `https://wa.me/${programInfo.contact.whatsapp.replace(/-/g, '')}?text=Halo%20ASIB,%20saya%20ingin%20membeli%20${encodeURIComponent(product.name)}%20(Rp%20${product.price.toLocaleString('id-ID')})`
+const barkasPath = '/barkas'
+---
+
+<BaseLayout title={`${product.name} - ${programInfo.fullName}`} description={product.description} currentPage={barkasPath}>
+  <!-- Schema.org JSON-LD -->
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(productSchema)} />
+
+  <main class="product-detail-page">
+    <!-- Hero / Breadcrumb -->
+    <section class="detail-hero -mt-[70px] sm:-mt-[82px] min-h-[200px] sm:min-h-[240px] lg:min-h-[280px]">
+      <div class="container pt-[90px] sm:pt-[110px] pb-4 sm:pb-8 lg:pb-10">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="/barkas">BARKAS</a>
+          <span class="separator" aria-hidden="true">›</span>
+          <span class="current">{product.name}</span>
+        </nav>
+        <div class="hero-text animate-fade-in-up delay-1">
+          <h1 class="detail-hero-title">{product.name}</h1>
+          <p class="detail-hero-price">Rp {product.price.toLocaleString('id-ID')}</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Product Detail -->
+    <section class="product-detail">
+      <div class="container">
+        <div class="product-grid-detail">
+          <!-- Left: Gallery -->
+          <div class="product-gallery">
+            <div class="main-image" id="main-image-wrapper" onclick="openLightbox(window.__currentImageIndex || 0)">
+              <img
+                id="main-product-image"
+                src={product.images[0]}
+                alt={product.name}
+                loading="eager"
+                decoding="async"
+              />
+            </div>
+
+            {product.images.length > 1 && (
+              <div class="thumbnail-grid" role="list" aria-label="Image thumbnails">
+                {product.images.map((img, index) => (
+                  <button
+                    class="thumbnail${index === 0 ? ' active' : ''}"
+                    role="listitem"
+                    aria-label={`Product image ${index + 1}`}
+                    onclick={`swapProductImage(${index})`}
+                  >
+                    <img src={img} alt="" loading="lazy" />
+                  </button>
+                ))}
+              </div>
+            )}
+
+            <div class="product-badges">
+              <span class="badge badge-condition">
+                {product.condition === 'used-excellent' && '⭐'}
+                {product.condition === 'used-good' && '✓'}
+                {product.condition === 'used-fair' && '◐'}
+                {' '}{conditionLabels[product.condition]}
+              </span>
+              {product.originalPrice && (
+                <span class="badge badge-discount">
+                  Hemat {Math.round((1 - product.price / product.originalPrice) * 100)}%
+                </span>
+              )}
+              <span class={`badge badge-status ${product.status}`}>
+                {statusLabels[product.status]}
+              </span>
+            </div>
+          </div>
+
+          <!-- Right: Info -->
+          <div class="product-info-detail">
+            <span class="category-tag">{categoryName}</span>
+
+            <div class="product-pricing-detail">
+              <span class="current-price">Rp {product.price.toLocaleString('id-ID')}</span>
+              {product.originalPrice && (
+                <span class="original-price">Rp {product.originalPrice.toLocaleString('id-ID')}</span>
+              )}
+            </div>
+
+            <div class="product-description-detail">
+              <h3>Deskripsi</h3>
+              <p>{product.description}</p>
+            </div>
+
+            <div class="product-meta-detail">
+              <div class="meta-item">
+                <strong>Kategori</strong>
+                <span>{categoryName}</span>
+              </div>
+              <div class="meta-item">
+                <strong>Kondisi</strong>
+                <span class={`status-text ${product.status}`}>{conditionLabels[product.condition]}</span>
+              </div>
+              <div class="meta-item">
+                <strong>Status</strong>
+                <span class={`status-text ${product.status}`}>{statusLabels[product.status]}</span>
+              </div>
+              <div class="meta-item">
+                <strong>Donatur</strong>
+                <span>{product.donor}</span>
+              </div>
+              <div class="meta-item">
+                <strong>Diterima</strong>
+                <span>{new Date(product.acquiredDate).toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+              </div>
+            </div>
+
+            {product.tags && product.tags.length > 0 && (
+              <div class="product-tags">
+                <h3>Tags</h3>
+                <div class="tags-list">
+                  {product.tags.map(tag => (
+                    <span class="tag">{tag}</span>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {product.status === 'available' ? (
+              <div class="action-buttons">
+                <a
+                  href={whatsappUrl}
+                  class="btn btn-whatsapp btn-large"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  💬 Beli via WhatsApp
+                </a>
+                <a
+                  href="/barkas"
+                  class="btn btn-secondary btn-large"
+                >
+                  ← Kembali ke Katalog
+                </a>
+              </div>
+            ) : (
+              <div class="sold-out-notice">
+                <p class="sold-message">
+                  {product.status === 'sold'
+                    ? 'Barang ini sudah terjual. Terima kasih atas minat Anda!'
+                    : 'Barang ini sedang dipesan. Silakan cek kembali nanti.'}
+                </p>
+                <a href="/barkas" class="btn btn-primary btn-large">
+                  ← Cari Barang Lain
+                </a>
+              </div>
+            )}
+
+            <div class="impact-info">
+              <h3>💚 Dampak Donasi Anda</h3>
+              <p>
+                Setiap pembelian di BARKAS mendukung program sosial, pendidikan, dan dakwah
+                Yayasan Amal Shalih Insan Bantul. Barang yang sudah tidak terpakai
+                menjadi berkah bagi sesama.
+              </p>
+              <ul>
+                <li>Santunan yatim & dhuafa</li>
+                <li>Beasiswa pendidikan Islam</li>
+                <li>Program dakwah & keagamaan</li>
+                <li>Pengurangan limbah & peduli lingkungan</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Related Info -->
+    <section class="related-info">
+      <div class="container">
+        <div class="info-cards">
+            <div class="info-card">
+              <h3>📦 Donasi Barang</h3>
+              <p>Punya barang bekas layak pakai? Donasikan untuk program sosial ASIB. Kami jemput gratis!</p>
+              <a href="/barkas/donasi" class="btn btn-primary">
+                Cara Donasi
+              </a>
+            </div>
+            <div class="info-card">
+              <h3>🌿 Dampak BARKAS</h3>
+              <p>Setiap pembelian dan donasi Anda mendukung program sosial, pendidikan, dan dakwah.</p>
+              <a href="/barkas/dampak" class="btn btn-secondary">
+                Lihat Dampak
+              </a>
+            </div>
+            <div class="info-card">
+              <h3>📖 Tentang BARKAS</h3>
+              <p>Pelajari lebih lanjut tentang program Barang Bekas Berkah ASIB dan cara kerjanya.</p>
+              <a href="/barkas/tentang" class="btn btn-secondary">
+                Pelajari
+              </a>
+            </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Lightbox images={lightboxImages} />
+
+  <script is:inline define:vars={{ images: product.images }}>
+  (() => {
+    const mainImage = document.getElementById('main-product-image');
+    const thumbnails = document.querySelectorAll('.thumbnail');
+    window.__currentImageIndex = 0;
+
+    window.swapProductImage = function(index) {
+      if (!mainImage || index === window.__currentImageIndex) return;
+      window.__currentImageIndex = index;
+      mainImage.src = images[index];
+      thumbnails.forEach((el, i) => el.classList.toggle('active', i === index));
+    };
+  })();
+  </script>
+
+  <style>
+    .product-detail-page {
+      font-family: system-ui, -apple-system, sans-serif;
+      animation: fade-in 0.6s ease-out;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    /* Detail Hero (gradient + breadcrumb + title) */
+    .detail-hero {
+      position: relative;
+      background-image: url('https://images.unsplash.com/photo-1553413077-190dd305c5ab?w=1400&q=75');
+      background-size: cover;
+      background-position: center 50%;
+      overflow: hidden;
+    }
+
+    .detail-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(0,40,15,0.88) 0%, rgba(0,25,8,0.78) 50%, rgba(0,0,0,0.5) 100%);
+      pointer-events: none;
+    }
+
+    .breadcrumb {
+      position: relative;
+      z-index: 1;
+      animation: fade-in-up 0.4s ease-out;
+    }
+
+    .breadcrumb a {
+      color: rgba(255, 255, 255, 0.85);
+      text-decoration: none;
+      transition: opacity 0.3s;
+    }
+
+    .breadcrumb a:hover {
+      opacity: 1;
+      text-decoration: underline;
+    }
+
+    .breadcrumb .separator {
+      margin: 0 10px;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .breadcrumb .current {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .hero-text {
+      position: relative;
+      z-index: 1;
+      margin-top: 20px;
+    }
+
+    .detail-hero-title {
+      font-size: 2.2rem;
+      color: white;
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+
+    .detail-hero-price {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: var(--color-gold-300);
+    }
+
+    /* Product Detail */
+    .product-detail {
+      padding: 40px 0;
+      background: var(--color-surface);
+    }
+
+    .product-grid-detail {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+
+    /* Gallery */
+    .product-gallery {
+      position: sticky;
+      top: 20px;
+      animation: fade-in-up 0.5s ease-out 0.1s both;
+    }
+
+    .main-image {
+      background: var(--color-surface-placeholder);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 20px;
+      aspect-ratio: 1;
+      transition: box-shadow 0.4s;
+      cursor: pointer;
+    }
+
+    .main-image:hover {
+      box-shadow: 0 8px 30px var(--color-shadow-image-hover);
+    }
+
+    .main-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .main-image:hover img {
+      transform: scale(1.04);
+    }
+
+    .thumbnail-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .thumbnail {
+      border: 2px solid transparent;
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      aspect-ratio: 1;
+      padding: 0;
+      background: none;
+      transition: all 0.3s;
+    }
+
+    .thumbnail:hover {
+      border-color: var(--color-accent-primary);
+      transform: scale(1.05);
+    }
+
+    .thumbnail.active {
+      border-color: var(--color-accent-primary);
+    }
+
+    .thumbnail img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .product-badges {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .badge-condition {
+      background: var(--color-badge-gold-bg);
+      color: var(--color-badge-gold-text);
+    }
+
+    .badge-discount {
+      background: var(--color-red-600);
+      color: white;
+      animation: cta-pulse 2s ease-in-out infinite;
+    }
+
+    .badge-status {
+      background: var(--color-badge-primary-bg);
+      color: var(--color-badge-primary-text);
+    }
+
+    .badge-status.available {
+      animation: badge-pulse 2.5s ease-in-out infinite;
+    }
+
+    .badge-status.reserved {
+      background: var(--color-badge-gold-bg);
+      color: var(--color-badge-gold-text);
+    }
+
+    .badge-status.sold {
+      background: var(--color-badge-alert-bg);
+      color: var(--color-badge-alert-text);
+    }
+
+    /* Product Info */
+    .product-info-detail {
+      padding: 20px;
+      background: var(--color-surface-elevated);
+      border-radius: 12px;
+      box-shadow: 0 4px 6px var(--color-shadow-elevated);
+      animation: fade-in-up 0.5s ease-out 0.2s both;
+      transition: box-shadow 0.4s;
+    }
+
+    .product-info-detail:hover {
+      box-shadow: 0 8px 25px var(--color-shadow-elevated-hover);
+    }
+
+    .category-tag {
+      display: inline-block;
+      background: var(--color-badge-primary-bg);
+      color: var(--color-badge-primary-text);
+      padding: 6px 12px;
+      border-radius: 12px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 15px;
+      transition: transform 0.3s;
+    }
+
+    .category-tag:hover {
+      transform: scale(1.05);
+    }
+
+    .product-title {
+      font-size: 2rem;
+      color: var(--color-text-primary);
+      margin-bottom: 20px;
+      line-height: 1.3;
+    }
+
+    .product-pricing-detail {
+      margin-bottom: 30px;
+    }
+
+    .current-price {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: var(--color-text-accent-primary);
+      transition: color 0.3s;
+    }
+
+    .original-price {
+      font-size: 1.3rem;
+      color: var(--color-text-muted);
+      text-decoration: line-through;
+      margin-left: 15px;
+    }
+
+    .product-description-detail h3 {
+      color: var(--color-text-primary);
+      margin-bottom: 10px;
+    }
+
+    .product-description-detail p {
+      color: var(--color-text-secondary);
+      line-height: 1.6;
+      margin-bottom: 30px;
+    }
+
+    .product-meta-detail {
+      background: var(--color-surface-subtle);
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+    }
+
+    .meta-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--color-border-secondary);
+    }
+
+    .meta-item:last-child {
+      border-bottom: none;
+    }
+
+    .meta-item strong {
+      color: var(--color-text-primary);
+    }
+
+    .meta-item span {
+      color: var(--color-text-secondary);
+    }
+
+    .status-text.available {
+      color: var(--color-text-accent-primary);
+      font-weight: 600;
+    }
+
+    .status-text.reserved {
+      color: var(--color-text-gold);
+      font-weight: 600;
+    }
+
+    .status-text.sold {
+      color: var(--color-text-sold);
+      font-weight: 600;
+    }
+
+    .product-tags {
+      margin-bottom: 30px;
+    }
+
+    .tags-list {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    .tag {
+      background: var(--color-surface-subtle);
+      color: var(--color-text-secondary);
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 0.85rem;
+    }
+
+    /* Action Buttons */
+    .action-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    .btn-large {
+      padding: 15px 30px;
+      font-size: 1.1rem;
+      text-align: center;
+    }
+
+    .btn {
+      padding: 12px 24px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      display: inline-block;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn:active {
+      transform: scale(0.97) !important;
+    }
+
+    .btn-whatsapp {
+      background: var(--color-whatsapp, #25D366);
+      color: white;
+    }
+
+    .btn-whatsapp:hover {
+      background: var(--color-whatsapp-dark, #128C7E);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3);
+    }
+
+    .btn-primary {
+      background: var(--color-accent-primary);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: var(--color-primary-800);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px var(--color-shadow-accent-hover);
+    }
+
+    .btn-secondary {
+      background: var(--color-surface-elevated);
+      color: var(--color-accent-primary);
+      border: 2px solid var(--color-accent-primary);
+    }
+
+    .btn-secondary:hover {
+      background: var(--color-surface-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px var(--color-shadow-elevated-hover);
+    }
+
+    .sold-out-notice {
+      text-align: center;
+      padding: 30px;
+      background: var(--color-surface-subtle);
+      border-radius: 12px;
+      animation: fade-in-up 0.5s ease-out 0.3s both;
+    }
+
+    .sold-message {
+      color: var(--color-text-secondary);
+      margin-bottom: 20px;
+      font-size: 1.1rem;
+    }
+
+    /* Impact Info */
+    .impact-info {
+      background: var(--color-surface-secondary);
+      padding: 30px;
+      border-radius: 16px;
+      border: 1px solid var(--color-border-primary);
+      position: relative;
+      overflow: hidden;
+      animation: fade-in-up 0.5s ease-out 0.3s both;
+      transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .impact-info::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--color-accent-primary) 0%, var(--color-primary-500) 100%);
+    }
+
+    .impact-info:hover {
+      transform: translateY(-2px);
+      border-color: var(--color-accent-primary);
+      box-shadow: 0 12px 35px color-mix(in srgb, var(--color-accent-primary) 8%, transparent);
+    }
+
+    .impact-info h3 {
+      color: var(--color-text-accent-primary);
+      margin-bottom: 15px;
+    }
+
+    .impact-info p {
+      color: var(--color-text-secondary);
+      margin-bottom: 15px;
+      line-height: 1.6;
+    }
+
+    .impact-info ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .impact-info li {
+      padding: 5px 0;
+      padding-left: 25px;
+      position: relative;
+      color: var(--color-text-primary);
+      transition: transform 0.3s;
+    }
+
+    .impact-info li:hover {
+      transform: translateX(4px);
+    }
+
+    .impact-info li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--color-text-accent-primary);
+      font-weight: bold;
+    }
+
+    /* Related Info */
+    .related-info {
+      padding: 60px 0;
+      background: var(--color-surface-secondary);
+    }
+
+    .info-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .info-card {
+      background: var(--color-surface-elevated);
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px var(--color-shadow-elevated);
+      text-align: center;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      animation: fade-in-up 0.5s ease-out both;
+    }
+
+    .info-card:nth-child(1) { animation-delay: 0.3s; }
+    .info-card:nth-child(2) { animation-delay: 0.4s; }
+    .info-card:nth-child(3) { animation-delay: 0.5s; }
+
+    .info-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 40px var(--color-shadow-card-hover);
+    }
+
+    .info-card h3 {
+      color: var(--color-text-primary);
+      margin-bottom: 15px;
+    }
+
+    .info-card p {
+      color: var(--color-text-secondary);
+      margin-bottom: 20px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .product-grid-detail {
+        grid-template-columns: 1fr;
+      }
+
+      .product-title {
+        font-size: 1.5rem;
+      }
+
+      .current-price {
+        font-size: 1.8rem;
+      }
+
+      .thumbnail-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    @media (prefers-color-scheme: dark) {
+      /* btn-secondary switches from green outline to light outline in dark mode */
+      .btn-secondary {
+        color: var(--color-text-primary);
+        border-color: var(--color-text-primary);
+      }
+    }
+  </style>
+</BaseLayout>

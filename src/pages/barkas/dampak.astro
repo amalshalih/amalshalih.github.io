@@ -1,0 +1,875 @@
+---
+import barkasData from '@data/barkas-products.json'
+import BaseLayout from '@layouts/BaseLayout.astro'
+
+const { programInfo } = barkasData
+---
+
+<BaseLayout title="Dampak BARKAS" description={programInfo.description} currentPage="/barkas">
+  <main class="dampak-page">
+    <!-- ==================== HERO ==================== -->
+    <section class="dampak-hero -mt-[70px] sm:-mt-[82px] min-h-[300px] sm:min-h-[320px] lg:min-h-[360px]">
+      <div class="container pt-[90px] sm:pt-[110px] pb-6 sm:pb-10 lg:pb-12">
+        <div class="hero-content animate-fade-in">
+          <h1>Dampak BARKAS</h1>
+          <p class="tagline">Setiap barang bekas adalah berkah yang berlipat</p>
+          <p class="description">Bersama BARKAS, barang bekas yang Anda donasikan atau beli memberikan dampak nyata bagi sosial, pendidikan, dan lingkungan.</p>
+        </div>
+        <div class="hero-stats animate-fade-in-up delay-2">
+          <div class="hero-stat">
+            <span class="hero-stat-number">— kg</span>
+            <span class="hero-stat-label">Barang Terhimpun</span>
+            <span class="hero-stat-micro">baru dimulai</span>
+          </div>
+          <div class="hero-stat">
+            <span class="hero-stat-number">— kg</span>
+            <span class="hero-stat-label">Limbah Berkurang</span>
+            <span class="hero-stat-micro">baru dimulai</span>
+          </div>
+          <div class="hero-stat">
+            <span class="hero-stat-number">Rp —</span>
+            <span class="hero-stat-label">Dana Sosial</span>
+            <span class="hero-stat-micro">baru dimulai</span>
+          </div>
+          <div class="hero-stat">
+            <span class="hero-stat-number">—</span>
+            <span class="hero-stat-label">Penerima Manfaat</span>
+            <span class="hero-stat-micro">baru dimulai</span>
+          </div>
+        </div>
+        <div class="hero-cta animate-fade-in-up delay-3">
+          <a href="/barkas/donasi" class="btn btn-primary">Donasi Barang</a>
+          <a href="/barkas" class="btn btn-secondary">← Katalog</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== RANTAI DAMPAK ==================== -->
+    <section class="section-chain">
+      <div class="container">
+        <div class="chain-intro animate-fade-in-up">
+          <span class="section-label">Alur Dampak</span>
+          <h2>Dari Barang Bekas Menjadi Berkah</h2>
+          <p class="section-subtitle">Setiap barang yang didonasikan mengalir melalui rantai dampak ini — dari sedekah Anda hingga menjadi manfaat nyata bagi masyarakat.</p>
+        </div>
+        <div class="chain-flow animate-fade-in-up delay-1">
+          <div class="chain-step">
+            <span class="chain-step-num">01</span>
+            <div class="chain-step-icon">🎁</div>
+            <div class="chain-step-body">
+              <h3>Donasi Barang</h3>
+              <p>Masyarakat mendonasikan barang bekas layak pakai melalui drop-off atau penjemputan.</p>
+            </div>
+          </div>
+          <div class="chain-connector"><span></span></div>
+          <div class="chain-step">
+            <span class="chain-step-num">02</span>
+            <div class="chain-step-icon">📋</div>
+            <div class="chain-step-body">
+              <h3>Himpun &amp; Kurasi</h3>
+              <p>Tim BARKAS menghimpun, memilah, membersihkan, dan menentukan kelayakan setiap barang.</p>
+            </div>
+          </div>
+          <div class="chain-connector"><span></span></div>
+          <div class="chain-step">
+            <span class="chain-step-num">03</span>
+            <div class="chain-step-icon">🛍️</div>
+            <div class="chain-step-body">
+              <h3>Jual Produk</h3>
+              <p>Barang layak jual ditawarkan dengan harga terjangkau melalui katalog BARKAS.</p>
+            </div>
+          </div>
+          <div class="chain-connector"><span></span></div>
+          <div class="chain-step">
+            <span class="chain-step-num">04</span>
+            <div class="chain-step-icon">💚</div>
+            <div class="chain-step-body">
+              <h3>Salurkan Dana</h3>
+              <p>100% hasil penjualan disalurkan ke program sosial, pendidikan, dan dakwah ASIB.</p>
+            </div>
+          </div>
+          <div class="chain-connector"><span></span></div>
+          <div class="chain-step chain-step--final">
+            <span class="chain-step-num">05</span>
+            <div class="chain-step-icon">🌟</div>
+            <div class="chain-step-body">
+              <h3>Dampak Nyata</h3>
+              <p>Beasiswa, santunan, kajian, sembako — setiap rupiah dari barang bekas Anda menjadi berkah yang berlipat.</p>
+            </div>
+          </div>
+        </div>
+        <div class="chain-note animate-fade-in-up delay-2">
+          <p>🌱 <strong>Efek lingkungan:</strong> Setiap barang yang terhimpun juga berarti mengurangi sampah dan limbah yang berakhir di TPA.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== PROGRAM ==================== -->
+    <section class="section-programs animate-fade-in-up">
+      <div class="container">
+        <div class="programs-header">
+          <span class="section-label">Tujuan Dana</span>
+          <h2>Program yang Didukung</h2>
+          <p class="section-subtitle">Dana dari BARKAS disalurkan ke tiga pilar program utama ASIB</p>
+        </div>
+        <div class="programs-grid">
+          <div class="program-card program-card--edu">
+            <div class="program-card-top">
+              <div class="program-icon-wrap">📚</div>
+              <div>
+                <span class="program-category">Pendidikan</span>
+                <h3>Pendidikan Islam</h3>
+              </div>
+            </div>
+            <div class="program-card-divider"></div>
+            <div class="program-card-body">
+              <p>Beasiswa untuk anak yatim dan dhuafa, bantuan biaya sekolah, dan pengembangan taman pendidikan Al-Qur'an.</p>
+              <ul>
+                <li>Beasiswa siswa berprestasi</li>
+                <li>Bantuan perlengkapan sekolah</li>
+                <li>Program bimbingan belajar</li>
+              </ul>
+            </div>
+          </div>
+          <div class="program-card program-card--religion">
+            <div class="program-card-top">
+              <div class="program-icon-wrap">🕌</div>
+              <div>
+                <span class="program-category">Keagamaan</span>
+                <h3>Keagamaan</h3>
+              </div>
+            </div>
+            <div class="program-card-divider"></div>
+            <div class="program-card-body">
+              <p>Dukungan untuk kegiatan dakwah, pengajian rutin, dan syiar Islam di masyarakat Bantul dan sekitarnya.</p>
+              <ul>
+                <li>Kajian &amp; pengajian rutin</li>
+                <li>Program tahfidz Al-Qur'an</li>
+                <li>Bantuan sarana ibadah</li>
+              </ul>
+            </div>
+          </div>
+          <div class="program-card program-card--social">
+            <div class="program-card-top">
+              <div class="program-icon-wrap">🤝</div>
+              <div>
+                <span class="program-category">Sosial</span>
+                <h3>Sosial Kemanusiaan</h3>
+              </div>
+            </div>
+            <div class="program-card-divider"></div>
+            <div class="program-card-body">
+              <p>Santunan yatim dan dhuafa, bantuan sembako, serta program kemanusiaan untuk masyarakat yang membutuhkan.</p>
+              <ul>
+                <li>Santunan rutin yatim &amp; dhuafa</li>
+                <li>Bantuan sembako</li>
+                <li>Program tanggap bencana</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== CERITA DAMPAK ==================== -->
+    <section class="section-story animate-fade-in-up">
+      <div class="container">
+        <div class="story-layout">
+          <div class="story-visual">
+            <div class="story-ring">
+              <div class="story-ring-inner">
+                <span class="story-circle-emoji">💬</span>
+              </div>
+            </div>
+          </div>
+          <div class="story-text">
+            <span class="section-label section-label--light">Cerita Dampak</span>
+            <h2>Setiap Barang Punya Cerita</h2>
+            <blockquote class="story-quote">
+              "Meja belajar yang kami beli dari katalog BARKAS sekarang dipakai buah hati kami setiap hari. Harganya ramah di kantong, kualitasnya bagus — dan yang paling berkesan, kami tahu uangnya dipakai untuk kebaikan. Rasanya seperti sedekah yang terus mengalir."
+            </blockquote>
+            <div class="story-attribution">
+              <span class="story-avatar">Ibu S</span>
+              <div>
+                <strong>Ibu Sari, Bantul</strong>
+                <span>Pembeli produk BARKAS</span>
+              </div>
+            </div>
+            <p class="story-note">
+              Cerita seperti ini yang membuat setiap barang bekas di BARKAS bukan sekadar transaksi — tapi amal jariyah yang menghubungkan kebaikan banyak orang.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== CTA ==================== -->
+    <section class="section-cta animate-fade-in-up">
+      <div class="container">
+        <div class="cta-box">
+          <h2>Jadi Bagian dari Rantai Kebaikan</h2>
+          <p>Setiap barang bekas yang Anda donasikan atau beli adalah mata rantai yang menghubungkan Anda dengan kebaikan yang tak terputus.</p>
+          <div class="cta-links">
+            <a href="/barkas/donasi" class="btn btn-primary btn-large">Donasi Barang</a>
+            <a href="/barkas" class="btn btn-outline btn-large">Lihat Katalog →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <style>
+    .dampak-page { font-family: system-ui, -apple-system, sans-serif; }
+    .container { max-width: 1200px; margin: 0 auto; padding-left: 20px; padding-right: 20px; }
+
+    /* ========== GENERIC ========== */
+    .section-label {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 5px 16px;
+      border-radius: 20px;
+      margin-bottom: 14px;
+    }
+    h2 { font-size: 2rem; text-align: center; margin-bottom: 10px; color: var(--color-text-primary); }
+    .section-subtitle { text-align: center; color: var(--color-text-secondary); margin-bottom: 40px; font-size: 1.05rem; }
+    @media (min-width: 1024px) {
+      h2 { font-size: 2.25rem; }
+      .section-subtitle { font-size: 1.1rem; }
+    }
+
+    /* ========== HERO ========== */
+    .dampak-hero {
+      position: relative;
+      background-image: url('https://images.unsplash.com/photo-1593113630400-ea4288922497?w=1400&q=75');
+      background-size: cover;
+      background-position: center 35%;
+      color: white; text-align: center; overflow: hidden;
+    }
+    .dampak-hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(0,50,15,0.85) 0%, rgba(0,30,10,0.72) 50%, rgba(0,0,0,0.55) 100%);
+      pointer-events: none;
+    }
+    .hero-content { position: relative; z-index: 1; }
+    .dampak-hero h1 { font-size: 2.5rem; margin-bottom: 10px; font-weight: 700; color: white; }
+    .tagline { font-size: 1.5rem; margin-bottom: 20px; opacity: 0.95; color: white; }
+    .description { font-size: 1.1rem; max-width: 700px; margin: 0 auto 30px; color: rgba(255,255,255,0.9); }
+    .hero-cta { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
+    .hero-stats {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+    }
+    .hero-stat {
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 14px;
+      padding: 14px 22px 10px;
+      text-align: center;
+      min-width: 130px;
+      transition: all 0.3s ease;
+    }
+    .hero-stat:hover {
+      background: rgba(255,255,255,0.18);
+      transform: translateY(-3px);
+      border-color: rgba(255,255,255,0.3);
+    }
+    .hero-stat-number {
+      display: block;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: white;
+    }
+    .hero-stat-label {
+      display: block;
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.85);
+      margin-top: 1px;
+    }
+    .hero-stat-micro {
+      display: block;
+      font-size: 0.6rem;
+      color: rgba(255,255,255,0.4);
+      margin-top: 4px;
+      font-style: italic;
+      letter-spacing: 0.05em;
+    }
+
+    /* ========== BUTTONS ========== */
+    .btn, .btn-outline, .btn-large, .btn-primary, .btn-secondary {
+      padding: 12px 24px; border-radius: 8px; text-decoration: none;
+      font-weight: 600; transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+      display: inline-block; border: none; cursor: pointer;
+    }
+    .btn:active { transform: scale(0.97) !important; }
+    .btn-primary {
+      background: rgba(255,255,255,0.95); color: var(--color-primary-700);
+    }
+    .btn-primary:hover {
+      background: rgba(255,255,255,1); transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+    .btn-secondary {
+      background: rgba(255,255,255,0.15); color: white;
+      border: 2px solid rgba(255,255,255,0.8); backdrop-filter: blur(4px);
+    }
+    .btn-secondary:hover { background: rgba(255,255,255,0.25); transform: translateY(-2px); }
+    .btn-outline {
+      background: transparent; color: var(--color-accent-primary);
+      border: 2px solid var(--color-accent-primary);
+    }
+    .btn-outline:hover { background: var(--color-accent-primary); color: white; transform: translateY(-2px); }
+    .btn-large { padding: 15px 32px; font-size: 1.1rem; }
+
+    /* ========== RANTAI DAMPAK ========== */
+    .section-chain {
+      padding: 60px 0;
+      background: linear-gradient(135deg, var(--color-surface-primary) 0%, color-mix(in srgb, var(--color-surface-primary) 85%, black) 100%);
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+    /* Decorative background circle */
+    .section-chain::after {
+      content: '';
+      position: absolute;
+      width: 400px; height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,215,0,0.06) 0%, transparent 70%);
+      bottom: -100px; right: -100px;
+      pointer-events: none;
+    }
+    .section-chain .section-label {
+      background: rgba(255,255,255,0.15);
+      color: white;
+    }
+    .section-chain h2 { color: white; }
+    .section-chain .section-subtitle { color: rgba(255,255,255,0.7); }
+    .chain-intro {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .chain-flow {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      max-width: 640px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+    .chain-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 18px;
+      background: rgba(255,255,255,0.07);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 14px;
+      padding: 18px 22px;
+      width: 100%;
+      position: relative;
+      transition: all 0.35s ease;
+    }
+    .chain-step:hover {
+      background: rgba(255,255,255,0.12);
+      transform: translateX(5px);
+      border-color: rgba(255,255,255,0.2);
+    }
+    .chain-step--final {
+      background: rgba(255,255,255,0.12);
+      border-color: rgba(255,215,0,0.2);
+    }
+    .chain-step--final:hover {
+      background: rgba(255,255,255,0.18);
+      border-color: rgba(255,215,0,0.35);
+    }
+    .chain-step-num {
+      font-size: 0.65rem;
+      font-weight: 800;
+      color: rgba(255,255,255,0.2);
+      letter-spacing: 0.1em;
+      position: absolute;
+      top: 10px;
+      right: 14px;
+    }
+    .chain-step--final .chain-step-num {
+      color: rgba(255,215,0,0.4);
+    }
+    .chain-step-icon {
+      font-size: 1.6rem;
+      flex-shrink: 0;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,255,255,0.06);
+      border-radius: 10px;
+      transition: transform 0.35s ease, background 0.35s ease;
+    }
+    .chain-step:hover .chain-step-icon {
+      background: rgba(255,255,255,0.14);
+      transform: scale(1.08);
+    }
+    .chain-step--final .chain-step-icon {
+      background: rgba(255,215,0,0.1);
+    }
+    .chain-step--final:hover .chain-step-icon {
+      background: rgba(255,215,0,0.2);
+    }
+    .chain-step-body { padding-top: 8px; }
+    .chain-step-body h3 {
+      color: white;
+      font-size: 1rem;
+      margin-bottom: 3px;
+    }
+    .chain-step-body p {
+      color: rgba(255,255,255,0.72);
+      font-size: 0.85rem;
+      line-height: 1.5;
+      margin: 0;
+    }
+    /* Connecting line */
+    .chain-connector {
+      width: 2px;
+      height: 24px;
+      background: rgba(255,255,255,0.15);
+      position: relative;
+    }
+    .chain-connector span {
+      display: block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.3);
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .chain-note {
+      text-align: center;
+      margin-top: 36px;
+      position: relative;
+      z-index: 1;
+    }
+    .chain-note p {
+      display: inline-block;
+      background: rgba(255,255,255,0.06);
+      padding: 8px 24px;
+      border-radius: 10px;
+      color: rgba(255,255,255,0.7);
+      font-size: 0.85rem;
+      margin: 0;
+      line-height: 1.5;
+    }
+    .chain-note strong { color: rgba(255,255,255,0.9); }
+
+    /* ========== PROGRAM ========== */
+    .section-programs {
+      padding: 60px 0;
+      background: var(--color-surface);
+    }
+    .section-programs .section-label {
+      background: color-mix(in srgb, var(--color-accent-primary) 15%, transparent);
+      color: var(--color-accent-primary);
+    }
+    .programs-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .programs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 28px;
+    }
+    .program-card {
+      border-radius: 16px;
+      overflow: hidden;
+      background: var(--color-surface-elevated);
+      border: 1px solid var(--color-border-primary);
+      box-shadow: 0 4px 6px rgba(0,0,0,0.04);
+      transition: all 0.4s cubic-bezier(0.22,1,0.36,1);
+      display: flex;
+      flex-direction: column;
+    }
+    .program-card:hover {
+      transform: translateY(-4px);
+    }
+    .program-card-top {
+      padding: 24px 28px 0;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .program-card-top h3 {
+      font-size: 1.1rem;
+      margin: 2px 0 0;
+      color: var(--color-text-primary);
+      transition: color 0.3s;
+    }
+    .program-card:hover .program-card-top h3 {
+      color: var(--color-accent-primary);
+    }
+    .program-icon-wrap {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      flex-shrink: 0;
+      transition: transform 0.4s ease;
+    }
+    .program-card:hover .program-icon-wrap {
+      transform: scale(1.12) rotate(-4deg);
+    }
+    .program-card--edu .program-icon-wrap { background: color-mix(in srgb, var(--color-primary-500) 18%, transparent); }
+    .program-card--religion .program-icon-wrap { background: color-mix(in srgb, #f59e0b 18%, transparent); }
+    .program-card--social .program-icon-wrap { background: color-mix(in srgb, var(--color-accent-primary) 18%, transparent); }
+    .program-category {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    .program-card--edu .program-category { color: var(--color-primary-500); }
+    .program-card--religion .program-category { color: #d97706; }
+    .program-card--social .program-category { color: var(--color-accent-primary); }
+    .program-card-divider {
+      height: 1px;
+      margin: 16px 28px 0;
+      background: var(--color-border-primary);
+      opacity: 0.4;
+    }
+    .program-card-body {
+      padding: 16px 28px 28px;
+      flex: 1;
+    }
+    .program-card-body p {
+      color: var(--color-text-secondary);
+      margin-bottom: 14px;
+      line-height: 1.6;
+      font-size: 0.95rem;
+    }
+    .program-card-body ul {
+      list-style: none;
+      padding: 0;
+    }
+    .program-card-body li {
+      padding: 4px 0 4px 22px;
+      position: relative;
+      color: var(--color-text-primary);
+      font-size: 0.88rem;
+    }
+    .program-card-body li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--color-accent-primary);
+      font-weight: bold;
+    }
+    .program-card--edu { border-top: 4px solid var(--color-primary-500); }
+    .program-card--religion { border-top: 4px solid #f59e0b; }
+    .program-card--social { border-top: 4px solid var(--color-accent-primary); }
+
+    /* Smooth entire border tint and soft colored glow on hover */
+    .program-card--edu:hover {
+      border-color: var(--color-primary-500);
+      box-shadow: 0 16px 40px color-mix(in srgb, var(--color-primary-500) 8%, transparent);
+    }
+    .program-card--religion:hover {
+      border-color: #f59e0b;
+      box-shadow: 0 16px 40px color-mix(in srgb, #f59e0b 8%, transparent);
+    }
+    .program-card--social:hover {
+      border-color: var(--color-accent-primary);
+      box-shadow: 0 16px 40px color-mix(in srgb, var(--color-accent-primary) 8%, transparent);
+    }
+
+    /* ========== CERITA DAMPAK ========== */
+    .section-story {
+      padding: 70px 0;
+      background: var(--color-surface-secondary);
+      position: relative;
+      overflow: hidden;
+    }
+    .section-story::after {
+      content: '';
+      position: absolute;
+      width: 300px; height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, color-mix(in srgb, var(--color-accent-primary) 6%, transparent) 0%, transparent 70%);
+      top: -80px; left: -80px;
+      pointer-events: none;
+    }
+    .story-layout {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 50px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+    .story-visual {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .story-ring {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--color-accent-primary) 0%, var(--color-primary-500) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+      transition: transform 0.6s cubic-bezier(0.22,1,0.36,1), box-shadow 0.6s ease;
+    }
+    .story-ring::before {
+      content: '';
+      position: absolute;
+      inset: -8px;
+      border-radius: 50%;
+      border: 2px solid var(--color-accent-primary);
+      opacity: 0.15;
+    }
+    .story-ring:hover {
+      transform: scale(1.06);
+      box-shadow: 0 30px 70px color-mix(in srgb, var(--color-accent-primary) 20%, transparent);
+    }
+    .story-ring-inner {
+      text-align: center;
+    }
+    .story-circle-emoji { font-size: 4.5rem; display: block; line-height: 1; }
+    .story-text { padding-right: 20px; }
+    .section-label--light {
+      background: color-mix(in srgb, var(--color-accent-primary) 15%, transparent);
+      color: var(--color-accent-primary);
+    }
+    .story-text h2 {
+      text-align: left;
+      margin-bottom: 20px;
+    }
+    .story-quote {
+      font-size: 1.15rem;
+      line-height: 1.8;
+      color: var(--color-text-primary);
+      font-style: italic;
+      margin: 0 0 20px;
+      padding: 32px 36px;
+      background: var(--color-surface-elevated);
+      border-radius: 16px;
+      border: 1px solid var(--color-border-primary);
+      position: relative;
+      overflow: hidden;
+    }
+    .story-quote::before {
+      content: "“";
+      position: absolute;
+      top: -10px;
+      left: 16px;
+      font-size: 8rem;
+      font-family: "Georgia", serif;
+      color: var(--color-accent-primary);
+      opacity: 0.12;
+      line-height: 1;
+      pointer-events: none;
+    }
+    .story-attribution {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .story-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--color-accent-primary);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .story-attribution div strong {
+      display: block;
+      color: var(--color-text-primary);
+      font-size: 0.9rem;
+    }
+    .story-attribution div span {
+      display: block;
+      color: var(--color-text-secondary);
+      font-size: 0.8rem;
+    }
+    .story-note {
+      color: var(--color-text-secondary);
+      font-size: 0.92rem;
+      line-height: 1.6;
+      margin: 0;
+      padding-top: 12px;
+      border-top: 1px solid var(--color-border-primary);
+    }
+
+    /* ========== CTA ========== */
+    .section-cta {
+      padding: 60px 0;
+      background: linear-gradient(135deg, var(--color-surface-primary) 0%, color-mix(in srgb, var(--color-surface-primary) 85%, black) 100%);
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+    .section-cta::after {
+      content: '';
+      position: absolute;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,0.03) 0%, transparent 70%);
+      top: -200px; left: 50%;
+      transform: translateX(-50%);
+      pointer-events: none;
+    }
+    .cta-box {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      position: relative;
+      z-index: 1;
+    }
+    .cta-box h2 { color: white; }
+    .cta-box p { color: rgba(255,255,255,0.82); font-size: 1.1rem; margin-bottom: 30px; }
+    .cta-links { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
+    .section-cta .btn-primary {
+      background: white; color: var(--color-surface-primary);
+    }
+    .section-cta .btn-primary:hover {
+      background: rgba(255,255,255,0.92);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+    }
+    .section-cta .btn-outline {
+      color: white;
+      border-color: rgba(255,255,255,0.7);
+    }
+    .section-cta .btn-outline:hover {
+      background: white;
+      color: var(--color-surface-primary);
+      border-color: white;
+    }
+
+    /* ========== RESPONSIVE ========== */
+
+    /* Extra small devices (≤380px) — iPhone SE / Galaxy Fold class */
+    @media (max-width: 380px) {
+      .container { padding-left: 14px; padding-right: 14px; overflow-wrap: break-word; }
+
+      .dampak-hero { min-height: 280px; }
+      .dampak-hero h1 { font-size: 1.35rem; }
+      .tagline { font-size: 0.92rem; margin-bottom: 14px; }
+      .description { font-size: 0.85rem; max-width: 100%; margin-bottom: 20px; }
+
+      .hero-stat { min-width: calc(50% - 6px); padding: 8px 10px 6px; }
+      .hero-stat-number { font-size: 0.88rem; }
+      .hero-stat-label { font-size: 0.6rem; }
+      .hero-stat-micro { font-size: 0.55rem; }
+
+      h2 { font-size: 1.35rem; }
+      .section-subtitle { font-size: 0.85rem; margin-bottom: 28px; }
+
+      .section-chain, .section-programs, .section-story,
+      .section-cta { padding: 28px 0; }
+
+      .btn { max-width: 100%; }
+      .btn-large { padding: 14px 20px; font-size: 1rem; }
+
+      .chain-intro { margin-bottom: 28px; }
+      .chain-step { gap: 10px; padding: 12px; }
+      .chain-step-icon { width: 30px; height: 30px; font-size: 1rem; }
+      .chain-step-body { padding-top: 4px; }
+      .chain-step-body h3 { font-size: 0.85rem; }
+      .chain-step-body p { font-size: 0.75rem; }
+      .chain-connector { height: 12px; }
+
+      .programs-grid { gap: 18px; }
+      .program-card-top { padding: 14px 14px 0; gap: 10px; }
+      .program-card-top h3 { font-size: 0.95rem; }
+      .program-icon-wrap { width: 38px; height: 38px; font-size: 1.1rem; }
+      .program-category { font-size: 0.65rem; }
+      .program-card-divider { margin: 10px 14px 0; }
+      .program-card-body { padding: 10px 14px 18px; }
+      .program-card-body p { font-size: 0.83rem; }
+      .program-card-body li { font-size: 0.78rem; padding: 2px 0 2px 16px; }
+
+      .story-layout { gap: 24px; }
+      .story-ring { width: 100px; height: 100px; }
+      .story-ring::before { inset: -6px; }
+      .story-circle-emoji { font-size: 2.2rem; }
+      .story-quote { font-size: 0.92rem; padding: 18px 16px; }
+      .story-quote::before { font-size: 4rem; top: -2px; left: 6px; }
+      .story-attribution { gap: 8px; }
+      .story-avatar { width: 36px; height: 36px; font-size: 0.65rem; }
+      .story-note { font-size: 0.82rem; }
+
+      .cta-box { padding: 16px 0; }
+      .cta-box p { font-size: 0.92rem; }
+    }
+
+    /* Small phones (≤480px) — grid overflow fix */
+    @media (max-width: 480px) {
+      .programs-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Mobile & tablets (≤768px) */
+    @media (max-width: 768px) {
+      .dampak-hero h1 { font-size: 1.8rem; }
+      .tagline { font-size: 1.15rem; }
+      .description { font-size: 0.95rem; max-width: 100%; }
+      .hero-stats { gap: 8px; }
+      .hero-stat { min-width: 100px; padding: 10px 14px 8px; }
+      .hero-stat-number { font-size: 1rem; }
+      .hero-cta, .cta-links { flex-direction: column; align-items: center; }
+      .btn { width: 100%; max-width: 320px; }
+      .section-chain, .section-programs, .section-story,
+      .section-cta { padding: 40px 0; }
+
+      .chain-flow { max-width: 100%; }
+      .chain-step { padding: 14px 16px; gap: 12px; }
+      .chain-step-icon { font-size: 1.3rem; width: 36px; height: 36px; }
+      .chain-step-body h3 { font-size: 0.95rem; }
+      .chain-step-body p { font-size: 0.82rem; }
+      .chain-connector { height: 18px; }
+
+      .story-layout { grid-template-columns: 1fr; gap: 30px; }
+      .story-ring { width: 130px; height: 130px; }
+      .story-circle-emoji { font-size: 3rem; }
+      .story-text { padding-right: 0; }
+      .story-text h2 { text-align: center; }
+      .story-quote { font-size: 1rem; padding: 24px 20px; }
+    }
+
+    /* Tablet landscape (≥769px and ≤1024px) */
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .story-layout { grid-template-columns: 1fr; gap: 40px; text-align: center; max-width: 580px; margin: 0 auto; }
+      .story-text h2 { text-align: center; }
+      .story-text .section-label { display: inline-block; }
+      .story-visual { max-width: 160px; margin: 0 auto; }
+    }
+  </style>
+</BaseLayout>
