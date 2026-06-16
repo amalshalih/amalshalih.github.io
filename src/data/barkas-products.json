@@ -1,0 +1,156 @@
+{
+	"products": [
+		{
+			"id": "barkas-001",
+			"name": "Meja Belajar Kayu Jati - Bekas Layak Pakai",
+			"description": "Meja belajar kayu jati solid, kondisi 85% bagus. Minor goresan正常使用. Ukuran: 100x60x75cm. Cocok untuk anak sekolah atau kerja dari rumah. Sudah dibersihkan dan dipoles ulang.",
+			"category": "furniture",
+			"price": 350000,
+			"originalPrice": 1500000,
+			"condition": "used-good",
+			"status": "available",
+			"images": ["/images/barkas/meja-jati-01.jpg", "/images/barkas/meja-jati-02.jpg"],
+			"donor": "Bapak Ahmad, Bantul",
+			"acquiredDate": "2026-06-10",
+			"tags": ["meja", "kayu jati", "furniture", "belajar"]
+		},
+		{
+			"id": "barkas-002",
+			"name": "Laptop Lenovo ThinkPad T450 - Bekas Kantor",
+			"description": "Laptop bekas kantor, spesifikasi: Intel Core i5-5300U, RAM 8GB, SSD 256GB. Baterai tahan 3-4 jam. Layar 14 inch HD. Keyboard backlight. Windows 10 Pro original. Cocok untuk kerja, kuliah, atau programming.",
+			"category": "electronics",
+			"price": 2500000,
+			"originalPrice": 12000000,
+			"condition": "used-good",
+			"status": "available",
+			"images": [
+				"/images/barkas/thinkpad-t450-01.jpg",
+				"/images/barkas/thinkpad-t450-02.jpg",
+				"/images/barkas/thinkpad-t450-03.jpg"
+			],
+			"donor": "PT. Tech Solutions Yogyakarta",
+			"acquiredDate": "2026-06-12",
+			"tags": ["laptop", "lenovo", "thinkpad", "electronics"]
+		},
+		{
+			"id": "barkas-003",
+			"name": "Paket Buku Anak & Remaja (50 Ekor)",
+			"description": "Paket 50 buku anak dan remaja berbagai genre: cerita rakyat, sains, matematika, bahasa Inggris. Kondisi 90% bagus, halaman lengkap. Cocok untuk perpustakaan sekolah atau taman bacaan masyarakat.",
+			"category": "books",
+			"price": 500000,
+			"originalPrice": 2500000,
+			"condition": "used-excellent",
+			"status": "available",
+			"images": ["/images/barkas/paket-buku-anak-01.jpg"],
+			"donor": "Ibu Sari, Sleman",
+			"acquiredDate": "2026-06-08",
+			"tags": ["buku", "anak", "pendidikan", "paket"]
+		},
+		{
+			"id": "barkas-004",
+			"name": "Sepeda Gunung Polygon - Bekas Pakai",
+			"description": "Sepeda gunung Polygon model 2020. Frame aluminium, suspensi depan. Rem cakram depan-belakang. Gear Shimano 21 speed. Ban 26 inch. Kondisi mesin bagus, siap pakai. Minor cat terkelupas di beberapa titik.",
+			"category": "vehicles",
+			"price": 1200000,
+			"originalPrice": 4500000,
+			"condition": "used-good",
+			"status": "reserved",
+			"images": ["/images/barkas/polygon-mt-01.jpg", "/images/barkas/polygon-mt-02.jpg"],
+			"donor": "Kak Rizky, Yogyakarta",
+			"acquiredDate": "2026-06-14",
+			"tags": ["sepeda", "polygon", "mountain bike", "olahraga"]
+		},
+		{
+			"id": "barkas-005",
+			"name": "Kursi Kantor Ergonomis - Hitam",
+			"description": "Kursi kantor ergonomis dengan sandaran kepala dan lengan. Material mesh breathable. Height adjustable. Recline function. Kondisi busa masih empuk, kain bersih. Cocok untuk kerja dari rumah atau kantor.",
+			"category": "furniture",
+			"price": 450000,
+			"originalPrice": 2000000,
+			"condition": "used-good",
+			"status": "available",
+			"images": ["/images/barkas/kursi-kantor-01.jpg", "/images/barkas/kursi-kantor-02.jpg"],
+			"donor": "CV. Mandiri Jaya, Bantul",
+			"acquiredDate": "2026-06-11",
+			"tags": ["kursi", "kantor", "ergonomis", "furniture"]
+		},
+		{
+			"id": "barkas-006",
+			"name": "Al-Qur'an Mushaf Utsmani - Ukuran Besar",
+			"description": "Al-Qur'an ukuran besar (28x40cm), mushaf utsmani. Terjemahan per ayat. Tajwid warna. Cover kulit sintetis. Kondisi sangat baik, halaman lengkap. Cocok untuk masjid, musholla, atau hadiah.",
+			"category": "religious",
+			"price": 150000,
+			"originalPrice": 450000,
+			"condition": "used-excellent",
+			"status": "available",
+			"images": ["/images/barkas/alquran-besar-01.jpg"],
+			"donor": "Hj. Fatimah, Bantul",
+			"acquiredDate": "2026-06-13",
+			"tags": ["al-qur'an", " mushaf", "islami", "ibadah"]
+		}
+	],
+	"categories": [
+		{
+			"id": "furniture",
+			"name": "Furniture",
+			"description": "Meja, kursi, lemari, dan perabot rumah tangga lainnya"
+		},
+		{
+			"id": "electronics",
+			"name": "Elektronik",
+			"description": "Laptop, komputer, HP, TV, dan peralatan elektronik"
+		},
+		{
+			"id": "books",
+			"name": "Buku & Al-Qur'an",
+			"description": "Buku pelajaran, cerita, novel, dan kitab suci"
+		},
+		{
+			"id": "vehicles",
+			"name": "Kendaraan",
+			"description": "Sepeda, motor, dan aksesoris kendaraan"
+		},
+		{
+			"id": "religious",
+			"name": "Perlengkapan Ibadah",
+			"description": "Al-Qur'an, mukena, sarung, dan perlengkapan ibadah"
+		},
+		{
+			"id": "clothing",
+			"name": "Pakaian",
+			"description": "Pakaian layak pakai untuk dewasa dan anak-anak"
+		}
+	],
+	"programInfo": {
+		"name": "BARKAS",
+		"fullName": "Barang Bekas Berkah ASIB",
+		"tagline": "Barang Bekas Menjadi Berkah",
+		"description": "Program penghimpunan dan pemanfaatan barang bekas untuk mendukung kegiatan sosial, pendidikan, dakwah, dan operasional Yayasan Amal Shalih Insan Bantul.",
+		"howToDonate": {
+			"title": "Cara Donasi Barang Bekas",
+			"steps": [
+				"Hubungi kami via WhatsApp di 08xx-xxxx-xxxx",
+				"Jelaskan jenis barang yang akan didonasikan",
+				"Jadwalkan pengambilan atau antar langsung",
+				"Tim kami akan melakukan sortir dan pendataan",
+				"Barang akan disalurkan atau dijual untuk program sosial",
+				"Laporan hasil pengelolaan akan dipublikasikan berkala"
+			],
+			"acceptedItems": [
+				"Pakaian layak pakai",
+				"Buku dan Al-Qur'an",
+				"Elektronik bekas",
+				"Furniture dan perabot",
+				"Peralatan rumah tangga",
+				"Mainan anak",
+				"Perlengkapan sekolah",
+				"Besi tua dan logam bekas"
+			]
+		},
+		"contact": {
+			"whatsapp": "08xx-xxxx-xxxx",
+			"email": "barkas@amalshalih.or.id",
+			"address": "Yayasan Amal Shalih Insan Bantul, Jalan.xxx, Bantul, Yogyakarta"
+		}
+	}
+}
