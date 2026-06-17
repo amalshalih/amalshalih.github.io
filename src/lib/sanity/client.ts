@@ -22,45 +22,75 @@ import type {
 } from './types'
 
 export async function getKegiatanList(): Promise<SanityKegiatan[]> {
-	return cachedFetch({
-		key: sanityCacheKey(kegiatanListQuery),
-		fetcher: () => sanityClient.fetch(kegiatanListQuery),
-	})
+	try {
+		return await cachedFetch({
+			key: sanityCacheKey(kegiatanListQuery),
+			fetcher: () => sanityClient.fetch(kegiatanListQuery),
+		})
+	} catch (error) {
+		console.error('[Sanity] Failed to fetch kegiatan list:', error)
+		return []
+	}
 }
 
 export async function getKegiatanItem(slug: string): Promise<SanityKegiatan | null> {
-	return cachedFetch({
-		key: sanityCacheKey(kegiatanItemQuery, { slug }),
-		fetcher: () => sanityClient.fetch(kegiatanItemQuery, { slug }),
-	})
+	try {
+		return await cachedFetch({
+			key: sanityCacheKey(kegiatanItemQuery, { slug }),
+			fetcher: () => sanityClient.fetch(kegiatanItemQuery, { slug }),
+		})
+	} catch (error) {
+		console.error('[Sanity] Failed to fetch kegiatan item:', error)
+		return null
+	}
 }
 
 export async function getProgramList(): Promise<SanityProgram[]> {
-	return cachedFetch({
-		key: sanityCacheKey(programListQuery),
-		fetcher: () => sanityClient.fetch(programListQuery),
-	})
+	try {
+		return await cachedFetch({
+			key: sanityCacheKey(programListQuery),
+			fetcher: () => sanityClient.fetch(programListQuery),
+		})
+	} catch (error) {
+		console.error('[Sanity] Failed to fetch program list:', error)
+		return []
+	}
 }
 
 export async function getBankDonasi(): Promise<SanityBankDonasi[]> {
-	return cachedFetch({
-		key: sanityCacheKey(bankDonasiQuery),
-		fetcher: () => sanityClient.fetch(bankDonasiQuery),
-	})
+	try {
+		return await cachedFetch({
+			key: sanityCacheKey(bankDonasiQuery),
+			fetcher: () => sanityClient.fetch(bankDonasiQuery),
+		})
+	} catch (error) {
+		console.error('[Sanity] Failed to fetch bank donasi:', error)
+		return []
+	}
 }
 
 export async function getPengurus(): Promise<SanityPengurus[]> {
-	return cachedFetch({
-		key: sanityCacheKey(pengurusQuery),
-		fetcher: () => sanityClient.fetch(pengurusQuery),
-	})
+	try {
+		return await cachedFetch({
+			key: sanityCacheKey(pengurusQuery),
+			fetcher: () => sanityClient.fetch(pengurusQuery),
+		})
+	} catch (error) {
+		console.error('[Sanity] Failed to fetch pengurus:', error)
+		return []
+	}
 }
 
 export async function getSiteSettings(): Promise<SanitySiteSettings | null> {
-	return cachedFetch({
-		key: sanityCacheKey(siteSettingsQuery),
-		fetcher: () => sanityClient.fetch(siteSettingsQuery),
-	})
+	try {
+		return await cachedFetch({
+			key: sanityCacheKey(siteSettingsQuery),
+			fetcher: () => sanityClient.fetch(siteSettingsQuery),
+		})
+	} catch (error) {
+		console.error('[Sanity] Failed to fetch site settings:', error)
+		return null
+	}
 }
 
 export async function getFaqList(): Promise<SanityFaq[] | null> {
@@ -74,15 +104,25 @@ export async function getFaqList(): Promise<SanityFaq[] | null> {
 }
 
 export async function getBlogPostList(): Promise<SanityBlogPost[]> {
-	return cachedFetch({
-		key: sanityCacheKey(blogPostListQuery),
-		fetcher: () => sanityClient.fetch(blogPostListQuery),
-	})
+	try {
+		return await cachedFetch({
+			key: sanityCacheKey(blogPostListQuery),
+			fetcher: () => sanityClient.fetch(blogPostListQuery),
+		})
+	} catch (error) {
+		console.error('[Sanity] Failed to fetch blog post list:', error)
+		return []
+	}
 }
 
 export async function getBlogPost(slug: string): Promise<SanityBlogPost | null> {
-	return cachedFetch({
-		key: sanityCacheKey(blogPostItemQuery, { slug }),
-		fetcher: () => sanityClient.fetch(blogPostItemQuery, { slug }),
-	})
+	try {
+		return await cachedFetch({
+			key: sanityCacheKey(blogPostItemQuery, { slug }),
+			fetcher: () => sanityClient.fetch(blogPostItemQuery, { slug }),
+		})
+	} catch (error) {
+		console.error('[Sanity] Failed to fetch blog post:', error)
+		return null
+	}
 }

@@ -2,6 +2,7 @@
 import PageHeader from '@components/sections/PageHeader.astro'
 import Button from '@components/ui/Button.astro'
 import Container from '@components/ui/Container.astro'
+import Heading from '@components/ui/Heading.astro'
 import Icon from '@components/ui/Icon.astro'
 import { CONTACT, SITE } from '@data/site'
 import BaseLayout from '@layouts/BaseLayout.astro'
@@ -26,24 +27,24 @@ import BaseLayout from '@layouts/BaseLayout.astro'
 			</p>
 
 			<section class="space-y-4">
-				<h2 class="flex items-center gap-3 text-2xl font-bold text-warm-900 dark:text-warm-100">
+				<Heading level="h2" size="2xl" class="flex items-center gap-3 text-warm-900 dark:text-warm-100">
 					<span class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary-50 dark:bg-primary-900 text-primary-700 dark:text-primary-300">
 						<Icon name="book" size={4} />
 					</span>
 					Penerimaan Ketentuan
-				</h2>
+				</Heading>
 				<p>
 					Dengan mengakses atau menggunakan situs web ini, Anda menyatakan bahwa Anda telah membaca, memahami, dan menyetujui untuk terikat oleh syarat dan ketentuan ini. Ketentuan ini berlaku untuk semua pengunjung, pengguna, donatur, dan pihak lain yang mengakses atau menggunakan layanan kami.
 				</p>
 			</section>
 
 			<section class="space-y-4">
-				<h2 class="flex items-center gap-3 text-2xl font-bold text-warm-900 dark:text-warm-100">
+				<Heading level="h2" size="2xl" class="flex items-center gap-3 text-warm-900 dark:text-warm-100">
 					<span class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary-50 dark:bg-primary-900 text-primary-700 dark:text-primary-300">
 						<Icon name="book" size={4} />
 					</span>
 					Penggunaan Situs Web
-				</h2>
+				</Heading>
 				<p>Anda setuju untuk menggunakan situs web ini hanya untuk tujuan yang sah dan sesuai dengan ketentuan berikut:</p>
 				<ul class="list-disc space-y-2 pl-6">
 					<li>Tidak menggunakan situs web ini untuk tujuan ilegal atau dilarang oleh hukum yang berlaku</li>
@@ -54,12 +55,12 @@ import BaseLayout from '@layouts/BaseLayout.astro'
 			</section>
 
 			<section class="space-y-4">
-				<h2 class="flex items-center gap-3 text-2xl font-bold text-warm-900 dark:text-warm-100">
+				<Heading level="h2" size="2xl" class="flex items-center gap-3 text-warm-900 dark:text-warm-100">
 					<span class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary-50 dark:bg-primary-900 text-primary-700 dark:text-primary-300">
 						<Icon name="book" size={4} />
 					</span>
 					Ketentuan Donasi
-				</h2>
+				</Heading>
 				<p>Dengan melakukan donasi melalui situs web ini, Anda menyetujui ketentuan berikut:</p>
 				<ul class="list-disc space-y-2 pl-6">
 					<li>Semua donasi bersifat sukarela dan tidak dapat ditarik kembali, kecuali terjadi kesalahan teknis yang diverifikasi oleh yayasan</li>
@@ -71,12 +72,12 @@ import BaseLayout from '@layouts/BaseLayout.astro'
 			</section>
 
 			<section class="space-y-4">
-				<h2 class="flex items-center gap-3 text-2xl font-bold text-warm-900 dark:text-warm-100">
+				<Heading level="h2" size="2xl" class="flex items-center gap-3 text-warm-900 dark:text-warm-100">
 					<span class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary-50 dark:bg-primary-900 text-primary-700 dark:text-primary-300">
 						<Icon name="book" size={4} />
 					</span>
 					Hak Kekayaan Intelektual
-				</h2>
+				</Heading>
 				<p>
 					Seluruh konten di situs web ini — termasuk teks, gambar, logo, video, dan materi lainnya — adalah milik {SITE.name} atau digunakan dengan izin dari pemilik hak cipta yang sah. Konten tersebut dilindungi oleh undang-undang hak cipta dan kekayaan intelektual Republik Indonesia.
 				</p>
@@ -89,60 +90,60 @@ import BaseLayout from '@layouts/BaseLayout.astro'
 			</section>
 
 			<section class="space-y-4">
-				<h2 class="flex items-center gap-3 text-2xl font-bold text-warm-900 dark:text-warm-100">
+				<Heading level="h2" size="2xl" class="flex items-center gap-3 text-warm-900 dark:text-warm-100">
 					<span class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary-50 dark:bg-primary-900 text-primary-700 dark:text-primary-300">
 						<Icon name="book" size={4} />
 					</span>
 					Batasan Tanggung Jawab
-				</h2>
+				</Heading>
 				<p>
 					{SITE.name} tidak bertanggung jawab atas kerugian langsung, tidak langsung, insidental, atau konsekuensial yang timbul dari penggunaan atau ketidakmampuan menggunakan situs web ini. Informasi yang disajikan di situs web ini disediakan &ldquo;apa adanya&rdquo; tanpa jaminan apa pun, tersurat maupun tersirat.
 				</p>
 			</section>
 
 			<section class="space-y-4">
-				<h2 class="flex items-center gap-3 text-2xl font-bold text-warm-900 dark:text-warm-100">
+				<Heading level="h2" size="2xl" class="flex items-center gap-3 text-warm-900 dark:text-warm-100">
 					<span class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary-50 dark:bg-primary-900 text-primary-700 dark:text-primary-300">
 						<Icon name="book" size={4} />
 					</span>
 					Tautan ke Situs Pihak Ketiga
-				</h2>
+				</Heading>
 				<p>
 					Situs web kami dapat berisi tautan ke situs web pihak ketiga (seperti platform donasi, media sosial, dan peta). Kami tidak mengontrol dan tidak bertanggung jawab atas konten, praktik privasi, atau kebijakan situs-situs tersebut. Penggunaan situs pihak ketiga sepenuhnya merupakan risiko Anda.
 				</p>
 			</section>
 
 			<section class="space-y-4">
-				<h2 class="flex items-center gap-3 text-2xl font-bold text-warm-900 dark:text-warm-100">
+				<Heading level="h2" size="2xl" class="flex items-center gap-3 text-warm-900 dark:text-warm-100">
 					<span class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary-50 dark:bg-primary-900 text-primary-700 dark:text-primary-300">
 						<Icon name="book" size={4} />
 					</span>
 					Perubahan Ketentuan
-				</h2>
+				</Heading>
 				<p>
 					Kami berhak untuk mengubah syarat dan ketentuan ini sewaktu-waktu. Perubahan akan efektif segera setelah dipublikasikan di halaman ini. Dengan terus menggunakan situs web setelah perubahan, Anda dianggap menyetujui ketentuan yang telah diperbarui.
 				</p>
 			</section>
 
 			<section class="space-y-4">
-				<h2 class="flex items-center gap-3 text-2xl font-bold text-warm-900 dark:text-warm-100">
+				<Heading level="h2" size="2xl" class="flex items-center gap-3 text-warm-900 dark:text-warm-100">
 					<span class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary-50 dark:bg-primary-900 text-primary-700 dark:text-primary-300">
 						<Icon name="book" size={4} />
 					</span>
 					Hukum yang Berlaku
-				</h2>
+				</Heading>
 				<p>
 					Syarat dan ketentuan ini diatur oleh dan ditafsirkan sesuai dengan hukum Republik Indonesia. Setiap sengketa yang timbul akan diselesaikan melalui musyawarah mutakat, dan jika tidak tercapai, melalui pengadilan yang berwenang di wilayah Yogyakarta.
 				</p>
 			</section>
 
 			<section class="space-y-4">
-				<h2 class="flex items-center gap-3 text-2xl font-bold text-warm-900 dark:text-warm-100">
+				<Heading level="h2" size="2xl" class="flex items-center gap-3 text-warm-900 dark:text-warm-100">
 					<span class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary-50 dark:bg-primary-900 text-primary-700 dark:text-primary-300">
 						<Icon name="book" size={4} />
 					</span>
 					Kontak
-				</h2>
+				</Heading>
 				<p>Jika Anda memiliki pertanyaan tentang syarat dan ketentuan ini, silakan hubungi:</p>
 				<div class="rounded-xl bg-warm-50 dark:bg-warm-900 p-5 text-sm text-warm-700 dark:text-warm-300 space-y-1">
 					<p class="font-semibold text-warm-900 dark:text-warm-100">{SITE.shortName}</p>
@@ -178,9 +179,9 @@ import BaseLayout from '@layouts/BaseLayout.astro'
 			<div class="absolute top-6 left-[22%] w-1.5 h-1.5 rotate-45 rounded-[1px] bg-white/15" aria-hidden="true"></div>
 
 			<Container as="div" class="relative z-10 py-5 sm:py-6 lg:py-8 text-center">
-				<h2 class="text-xl sm:text-2xl lg:text-3xl font-bold text-white tracking-tight font-display">
+				<Heading level="h2" size="xl" class="text-white tracking-tight">
 					Siap Berdonasi?
-				</h2>
+				</Heading>
 				<p class="mx-auto mt-2 max-w-xl text-sm sm:text-base text-primary-200/80">
 					Setiap donasi Anda membawa manfaat besar bagi mereka yang membutuhkan.
 				</p>

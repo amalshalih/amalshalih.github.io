@@ -4,6 +4,7 @@ import LikeButton from '@components/gallery/LikeButton.astro'
 import MasonryGrid from '@components/gallery/MasonryGrid.astro'
 import PageHeader from '@components/sections/PageHeader.astro'
 import Container from '@components/ui/Container.astro'
+import Heading from '@components/ui/Heading.astro'
 import Icon from '@components/ui/Icon.astro'
 import { fetchGalleryBySlug, type GalleryEntry } from '@data/galleries'
 import BaseLayout from '@layouts/BaseLayout.astro'
@@ -134,11 +135,11 @@ const coverImage =
           }
           return (
             <section>
-              <h2 class="text-lg font-semibold text-warm-900 dark:text-warm-100 mb-4 flex items-center gap-2">
+              <Heading level="h2" size="lg" class="text-warm-900 dark:text-warm-100 mb-4 flex items-center gap-2">
                 <Icon name="calendar" size={4} aria-hidden="true" />
                 <time>{date}</time>
                 <span class="text-sm font-normal text-warm-500 dark:text-warm-400">({imgs.length} foto)</span>
-              </h2>
+              </Heading>
               <MasonryGrid images={imgs} gallerySlug={gallery.slug} startIndex={startIndex} />
             </section>
           );
@@ -149,7 +150,7 @@ const coverImage =
         <div class="mb-3 rounded-full bg-warm-50 dark:bg-warm-800 p-4 sm:p-6 text-warm-500 dark:text-warm-400">
           <Icon name="image" size={10} class="sm:size-16" aria-hidden="true" />
         </div>
-        <h2 class="text-lg sm:text-xl font-bold text-warm-900 dark:text-warm-100">Belum Ada Foto</h2>
+        <Heading level="h2" size="lg" class="text-warm-900 dark:text-warm-100">Belum Ada Foto</Heading>
         <p class="mt-2 max-w-xs text-sm sm:text-base text-warm-600 dark:text-warm-300">
           Foto dokumentasi untuk kegiatan ini akan segera ditambahkan oleh tim media.
         </p>

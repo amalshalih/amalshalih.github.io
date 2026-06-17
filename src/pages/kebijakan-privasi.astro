@@ -1,6 +1,7 @@
 ---
 import PageHeader from '@components/sections/PageHeader.astro'
 import Container from '@components/ui/Container.astro'
+import Heading from '@components/ui/Heading.astro'
 import Icon from '@components/ui/Icon.astro'
 import { CONTACT } from '@data/site'
 import BaseLayout from '@layouts/BaseLayout.astro'
@@ -25,12 +26,12 @@ import BaseLayout from '@layouts/BaseLayout.astro'
 			</p>
 
 			<section class="space-y-4">
-				<h2 class="flex items-center gap-3 text-2xl font-bold text-warm-900 dark:text-warm-100">
+				<Heading level="h2" size="2xl" class="flex items-center gap-3 text-warm-900 dark:text-warm-100">
 					<span class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary-50 dark:bg-primary-900 text-primary-700 dark:text-primary-300">
 						<Icon name="check-circle" size={4} />
 					</span>
 					Data yang Kami Kumpulkan
-				</h2>
+				</Heading>
 				<p>Kami dapat mengumpulkan informasi berikut ketika Anda berinteraksi dengan situs web kami:</p>
 				<ul class="list-disc space-y-2 pl-6">
 					<li><strong>Informasi Identitas Pribadi:</strong> Nama lengkap, alamat email, nomor telepon, dan alamat yang Anda berikan secara sukarela melalui formulir kontak, donasi, atau pendaftaran program.</li>
@@ -41,12 +42,12 @@ import BaseLayout from '@layouts/BaseLayout.astro'
 			</section>
 
 			<section class="space-y-4">
-				<h2 class="flex items-center gap-3 text-2xl font-bold text-warm-900 dark:text-warm-100">
+				<Heading level="h2" size="2xl" class="flex items-center gap-3 text-warm-900 dark:text-warm-100">
 					<span class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary-50 dark:bg-primary-900 text-primary-700 dark:text-primary-300">
 						<Icon name="check-circle" size={4} />
 					</span>
 					Penggunaan Data
-				</h2>
+				</Heading>
 				<p>Data yang kami kumpulkan digunakan untuk:</p>
 				<ul class="list-disc space-y-2 pl-6">
 					<li>Memproses dan mengonfirmasi donasi Anda</li>
@@ -58,24 +59,24 @@ import BaseLayout from '@layouts/BaseLayout.astro'
 			</section>
 
 			<section class="space-y-4">
-				<h2 class="flex items-center gap-3 text-2xl font-bold text-warm-900 dark:text-warm-100">
+				<Heading level="h2" size="2xl" class="flex items-center gap-3 text-warm-900 dark:text-warm-100">
 					<span class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary-50 dark:bg-primary-900 text-primary-700 dark:text-primary-300">
 						<Icon name="check-circle" size={4} />
 					</span>
 					Perlindungan Data
-				</h2>
+				</Heading>
 				<p>
 					Kami menerapkan langkah-langkah keamanan teknis dan organisasional yang memadai untuk melindungi data pribadi Anda dari akses tidak sah, perubahan, pengungkapan, atau perusakan. Data donasi dan informasi sensitif lainnya dikirimkan melalui koneksi terenkripsi (HTTPS/SSL).
 				</p>
 			</section>
 
 			<section class="space-y-4">
-				<h2 class="flex items-center gap-3 text-2xl font-bold text-warm-900 dark:text-warm-100">
+				<Heading level="h2" size="2xl" class="flex items-center gap-3 text-warm-900 dark:text-warm-100">
 					<span class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary-50 dark:bg-primary-900 text-primary-700 dark:text-primary-300">
 						<Icon name="check-circle" size={4} />
 					</span>
 					Berbagi Data dengan Pihak Ketiga
-				</h2>
+				</Heading>
 				<p>
 					Kami tidak menjual, memperdagangkan, atau menyewakan data pribadi Anda kepada pihak ketiga. Kami dapat membagikan data Anda dengan:
 				</p>
@@ -86,12 +87,12 @@ import BaseLayout from '@layouts/BaseLayout.astro'
 			</section>
 
 			<section class="space-y-4">
-				<h2 class="flex items-center gap-3 text-2xl font-bold text-warm-900 dark:text-warm-100">
+				<Heading level="h2" size="2xl" class="flex items-center gap-3 text-warm-900 dark:text-warm-100">
 					<span class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary-50 dark:bg-primary-900 text-primary-700 dark:text-primary-300">
 						<Icon name="check-circle" size={4} />
 					</span>
 					Hak Anda
-				</h2>
+				</Heading>
 				<p>Anda berhak untuk:</p>
 				<ul class="list-disc space-y-2 pl-6">
 					<li>Mengakses data pribadi yang kami simpan</li>
@@ -105,24 +106,24 @@ import BaseLayout from '@layouts/BaseLayout.astro'
 			</section>
 
 			<section class="space-y-4">
-				<h2 class="flex items-center gap-3 text-2xl font-bold text-warm-900 dark:text-warm-100">
+				<Heading level="h2" size="2xl" class="flex items-center gap-3 text-warm-900 dark:text-warm-100">
 					<span class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary-50 dark:bg-primary-900 text-primary-700 dark:text-primary-300">
 						<Icon name="check-circle" size={4} />
 					</span>
 					Perubahan Kebijakan
-				</h2>
+				</Heading>
 				<p>
 					Kebijakan privasi ini dapat diperbarui sewaktu-waktu. Perubahan akan diumumkan melalui halaman ini dengan tanggal revisi terbaru yang tercantum. Kami mendorong Anda untuk meninjau halaman ini secara berkala.
 				</p>
 			</section>
 
 			<section class="space-y-4">
-				<h2 class="flex items-center gap-3 text-2xl font-bold text-warm-900 dark:text-warm-100">
+				<Heading level="h2" size="2xl" class="flex items-center gap-3 text-warm-900 dark:text-warm-100">
 					<span class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary-50 dark:bg-primary-900 text-primary-700 dark:text-primary-300">
 						<Icon name="check-circle" size={4} />
 					</span>
 					Kontak
-				</h2>
+				</Heading>
 				<p>
 					Jika Anda memiliki pertanyaan, kekhawatiran, atau permintaan terkait kebijakan privasi ini, silakan hubungi kami:
 				</p>
@@ -160,9 +161,9 @@ import BaseLayout from '@layouts/BaseLayout.astro'
 			<div class="absolute bottom-12 left-[28%] w-2 h-2 rotate-45 rounded-[1px] bg-gold-300/15" aria-hidden="true"></div>
 
 			<Container as="div" class="relative z-10 py-5 sm:py-6 lg:py-8 text-center">
-				<h2 class="text-xl sm:text-2xl lg:text-3xl font-bold text-white tracking-tight font-display">
+				<Heading level="h2" size="xl" class="text-white tracking-tight">
 					Ada Pertanyaan?
-				</h2>
+				</Heading>
 				<p class="mx-auto mt-2 max-w-xl text-sm sm:text-base text-primary-200/80">
 					Hubungi kami jika ada yang kurang jelas atau jika Anda ingin mengetahui lebih lanjut.
 				</p>

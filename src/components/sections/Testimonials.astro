@@ -76,7 +76,20 @@ const {
 		</div>
 
 		<!-- Testimonials Carousel Wrapper -->
-		<div class="relative group">
+		<div class="relative group" role="region" aria-label="Testimoni Donatur" aria-live="polite">
+			<!-- Pause/Play Button (for accessibility control) -->
+			<div class="absolute top-0 right-0 z-30 mb-2">
+				<button
+					id="testimonial-pause"
+					class="hidden md:flex items-center gap-2 px-3 py-1.5 text-xs font-semibold rounded-lg bg-surface-elevated dark:bg-surface-secondary border border-border-primary dark:border-border-inverse text-text-primary hover:bg-primary-50 dark:hover:bg-primary-950 transition-all focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-surface-secondary"
+					aria-label="Pause testimonials"
+					title="Pause auto-scroll"
+				>
+					<Icon name="pause" size={3.5} />
+					<span>Pause</span>
+				</button>
+			</div>
+			
 			<!-- Prev Button -->
 			<button
 				id="testimonial-prev"

@@ -1,0 +1,86 @@
+---
+/**
+ * Image Component
+ *
+ * Responsive image with lazy loading, aspect ratio enforcement, and proper width/height.
+ * Prevents layout shift (CLS) by requiring explicit dimensions or aspect ratio.
+ *
+ * @src - Required. Image URL
+ * @alt - Required. Alt text for accessibility
+ * @width - Width in pixels (for intrinsic size)
+ * @height - Height in pixels (for intrinsic size)
+ * @aspect - Aspect ratio class (e.g., 'aspect-video', 'aspect-square', 'aspect-[4/3]')
+ * @loading - 'lazy' | 'eager' (default: 'lazy')
+ * @decoding - 'async' | 'sync' (default: 'async')
+ * @class - Additional Tailwind classes
+ */
+interface Props {
+	src: string
+	alt: string
+	width?: number
+	height?: number
+	aspect?: string
+	loading?: 'lazy' | 'eager'
+	decoding?: 'async' | 'sync'
+	class?: string
+	sizes?: string
+	srcset?: string
+}
+
+const {
+	src,
+	alt,
+	width,
+	height,
+	aspect,
+	loading = 'lazy',
+	decoding = 'async',
+	class: className,
+	sizes,
+	srcset,
+} = Astro.props
+
+// Aspect ratio wrapper classes
+const aspectClasses = aspect || ''
+
+// Image classes
+const imgClasses = [
+	aspect ? 'absolute inset-0 w-full h-full object-cover' : 'w-full h-auto',
+	className,
+]
+	.filter(Boolean)
+	.join(' ')
+
+// Wrapper needed for aspect ratio
+const needsWrapper = !!aspect
+---
+
+{
+	needsWrapper ? (
+		<div class={`relative ${aspectClasses}`}>
+			<img
+				src={src}
+				alt={alt}
+				width={width}
+				height={height}
+				loading={loading}
+				decoding={decoding}
+				sizes={sizes}
+				srcset={srcset}
+				class:list={imgClasses}
+			/>
+		</div>
+	) : (
+		<img
+			src={src}
+			alt={alt}
+			width={width}
+			height={height}
+			loading={loading}
+			decoding={decoding}
+			sizes={sizes}
+			srcset={srcset}
+			class:list={imgClasses}
+		/>
+	)
+}

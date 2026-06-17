@@ -81,12 +81,21 @@
 	--color-text-gold: var(--color-text-gold);
 	--color-text-sold: var(--color-text-sold);
 
+	--color-text-alert: var(--color-text-alert);
+
 	--color-badge-primary-bg: var(--color-badge-primary-bg);
 	--color-badge-primary-text: var(--color-badge-primary-text);
 	--color-badge-gold-bg: var(--color-badge-gold-bg);
 	--color-badge-gold-text: var(--color-badge-gold-text);
 	--color-badge-alert-bg: var(--color-badge-alert-bg);
 	--color-badge-alert-text: var(--color-badge-alert-text);
+
+	/* Shadow tokens */
+	--color-shadow-elevated: var(--color-shadow-elevated);
+	--color-shadow-elevated-hover: var(--color-shadow-elevated-hover);
+	--color-shadow-card-hover: var(--color-shadow-card-hover);
+	--color-shadow-image-hover: var(--color-shadow-image-hover);
+	--color-shadow-accent-hover: var(--color-shadow-accent-hover);
 
 	--color-surface-placeholder: var(--color-surface-placeholder);
 	--color-surface-hover: var(--color-surface-hover);
@@ -310,6 +319,72 @@
 .delay-4 { animation-delay: 0.4s; }
 .delay-5 { animation-delay: 0.5s; }
 .delay-6 { animation-delay: 0.6s; }
+
+/* Tab panel fade-in (program.astro) */
+@keyframes tabpanel-in {
+	from { opacity: 0; transform: translateY(6px); }
+	to { opacity: 1; transform: translateY(0); }
+}
+
+/* Accordion reveal (tentang.astro, barkas faq) */
+@keyframes accordion-reveal {
+	from { opacity: 0; transform: translateY(-6px); }
+	to { opacity: 1; transform: translateY(0); }
+}
+
+/* FAQ reveal (faq.astro) */
+@keyframes faq-reveal {
+	from { opacity: 0; transform: translateY(-4px); }
+	to { opacity: 1; transform: translateY(0); }
+}
+
+/* Wakaf float — organic bobbing (index.astro) */
+@keyframes wakaf-float {
+	0%, 100% { transform: translateY(0) rotate(0deg); }
+	50% { transform: translateY(-10px) rotate(2deg); }
+}
+
+@keyframes wakaf-pulse-glow {
+	0%, 100% { box-shadow: 0 0 0 0px rgba(251, 191, 36, 0.35); }
+	50% { box-shadow: 0 0 0 8px rgba(251, 191, 36, 0); }
+}
+
+@keyframes wakaf-shimmer {
+	0% { transform: translateX(-120%) skewX(-12deg); }
+	100% { transform: translateX(250%) skewX(-12deg); }
+}
+
+@keyframes wakaf-gold-shine {
+	0% { background-position: -200% center; }
+	100% { background-position: 200% center; }
+}
+
+/* Frieze — infinite marquee (Partners.astro) */
+@keyframes frieze-slide {
+	from { transform: translateX(0); }
+	to { transform: translateX(-50%); }
+}
+
+@keyframes frieze-sheen {
+	0% { left: -150%; }
+	100% { left: 150%; }
+}
+
+/* Background slow zoom (various heros) */
+@keyframes bg-breath {
+	0%, 100% { opacity: 0.3; transform: scale(1); }
+	50% { opacity: 0.5; transform: scale(1.05); }
+}
+
+.animate-tabpanel-in {
+	animation: tabpanel-in 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.accordion-reveal {
+	animation: accordion-reveal 0.25s ease-out;
+}
+.faq-reveal {
+	animation: faq-reveal 0.2s ease-out;
+}
 
 /* ---------- Blossom Breath — slow organic pulse ---------- */
 @keyframes blossom-breath-1 {

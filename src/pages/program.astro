@@ -1,12 +1,15 @@
 ---
 import PageHeader from '@components/sections/PageHeader.astro'
+import Badge from '@components/ui/Badge.astro'
 import Button from '@components/ui/Button.astro'
 import Card from '@components/ui/Card.astro'
 import Container from '@components/ui/Container.astro'
+import Heading from '@components/ui/Heading.astro'
 import Icon from '@components/ui/Icon.astro'
 import BaseLayout from '@layouts/BaseLayout.astro'
 import { getProgramList } from '@lib/sanity/client'
 import type { SanityProgram } from '@lib/sanity/types'
+import { withFallback } from '@lib/with-fallback'
 
 type Item = {
 	title: string
@@ -140,27 +143,23 @@ const FALLBACK: Record<string, Item[]> = {
 
 let programsByCategory: Record<string, Item[]> = {}
 
-try {
-	const sanityData: SanityProgram[] = await getProgramList()
-	if (sanityData && sanityData.length > 0) {
-		programsByCategory = sanityData.reduce<Record<string, Item[]>>((acc, p) => {
-			const cat = p.category
-			if (!acc[cat]) acc[cat] = []
-			acc[cat].push({
-				title: p.title,
-				badge: p.badge,
-				description: p.shortDesc ?? '',
-				variant: (p.cardVariant as 'default' | 'overflow') || 'default',
-				stats: p.stats?.map((s: { number: string; label: string }) => ({
-					number: s.number,
-					label: s.label,
-				})),
-			})
-			return acc
-		}, {})
-	}
-} catch (error) {
-	console.error('[Program] Sanity programList fetch failed:', error)
+const sanityData = await withFallback(() => getProgramList(), [], 'Program list fetch')
+if (sanityData && sanityData.length > 0) {
+	programsByCategory = sanityData.reduce<Record<string, Item[]>>((acc, p) => {
+		const cat = p.category
+		if (!acc[cat]) acc[cat] = []
+		acc[cat].push({
+			title: p.title,
+			badge: p.badge,
+			description: p.shortDesc ?? '',
+			variant: (p.cardVariant as 'default' | 'overflow') || 'default',
+			stats: p.stats?.map((s: { number: string; label: string }) => ({
+				number: s.number,
+				label: s.label,
+			})),
+		})
+		return acc
+	}, {})
 }
 
 if (Object.keys(programsByCategory).length === 0) {
@@ -212,23 +211,6 @@ const tabLabels: Record<string, string> = {
 	description="Program Yayasan Amal Shalih Insan Bantul — Pendidikan Islam, Keagamaan, dan Sosial Kemanusiaan. PKBM, PAUD, Tahfidz, Wakaf, Santunan, dan banyak lagi."
 	currentPage="/program"
 >
-	<style>
-		/* Animasi transisi halus (Lift Fade-In) saat berganti tab panel */
-		[role="tabpanel"] {
-			animation: panelFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-		}
-		@keyframes panelFadeIn {
-			from {
-				opacity: 0;
-				transform: translateY(6px);
-			}
-			to {
-				opacity: 1;
-				transform: translateY(0);
-			}
-		}
-	</style>
-
 	<PageHeader
 		label="Program"
 		title="Program &amp; Kegiatan"
@@ -269,14 +251,14 @@ const tabLabels: Record<string, string> = {
 					id={`panel-${section.id}`}
 					aria-labelledby={`tab-${section.id}`}
 					data-panel={section.id}
-					class:list={['mt-8 sm:mt-12', i !== 0 && 'hidden']}
+					class:list={['animate-tabpanel-in mt-8 sm:mt-12', i !== 0 && 'hidden']}
 				>
 					<div class="mb-6 sm:mb-8 flex items-center gap-3.5">
 						<div class="icon-box shadow-sm shrink-0">
 							<Icon name={section.icon} size={7} aria-hidden="true" />
 						</div>
 						<div>
-							<h2 class="text-xl sm:text-2xl lg:text-3xl font-bold text-text-primary leading-tight">{section.title}</h2>
+							<Heading level="h2" size="xl" class="leading-tight">{section.title}</Heading>
 							<p class="mt-1 text-sm sm:text-base text-text-secondary">{section.subtitle}</p>
 						</div>
 					</div>
@@ -287,11 +269,11 @@ const tabLabels: Record<string, string> = {
 							item.variant === 'overflow' ? (
 								<Card variant="overflow" class="h-full flex flex-col">
 									<div class="rounded-t-xl sm:rounded-t-2xl bg-primary-700 p-4 sm:p-5 text-white shrink-0">
-										<h3 class="text-base sm:text-lg font-bold text-white">{item.title}</h3>
+										<Heading level="h3" size="md" class="text-white">{item.title}</Heading>
 									</div>
 									<div class="p-5 sm:p-6 flex-1 flex flex-col justify-between">
 										<div class="flex-1">
-											{item.badge && <span class="inline-block rounded-full bg-primary-50 dark:bg-primary-900/40 px-3 py-1 text-xs font-medium text-primary-700 dark:text-primary-400">{item.badge}</span>}
+											{item.badge && <Badge variant="subtle" size="sm">{item.badge}</Badge>}
 											<p class="mt-3.5 text-sm leading-relaxed text-text-secondary" set:html={item.description} />
 										</div>
 										{item.stats && item.stats.length > 0 && item.stats.map(s => (
@@ -306,9 +288,9 @@ const tabLabels: Record<string, string> = {
 								<Card variant="default" class="h-full flex flex-col justify-between">
 									<div class="flex-1">
 										<!-- Unifikasi ukuran & layout judul (keagamaan tetap warna netral, tapi ukurannya konsisten besar) -->
-										<h3 class:list={['font-bold text-lg sm:text-xl', section.id === 'keagamaan' ? 'text-text-primary' : 'text-primary-700 dark:text-primary-400']}>
+										<Heading level="h3" size="lg" class:list={[section.id === 'keagamaan' ? 'text-text-primary' : 'text-primary-700 dark:text-primary-400']}>
 											{item.title}
-										</h3>
+										</Heading>
 										{item.badge && <span class="mt-2.5 inline-block rounded-full bg-primary-50 dark:bg-primary-900/40 px-3 py-1 text-xs font-medium text-primary-700 dark:text-primary-400">{item.badge}</span>}
 										<p class="mt-3.5 text-sm leading-relaxed text-text-secondary" set:html={item.description} />
 									</div>
@@ -358,9 +340,9 @@ const tabLabels: Record<string, string> = {
 			<div class="absolute bottom-8 right-[38%] w-2 h-2 rotate-45 rounded-[1px] bg-white/10" aria-hidden="true"></div>
 
 			<Container as="div" class="relative z-10 py-5 sm:py-6 lg:py-8 text-center">
-				<h2 class="text-xl sm:text-2xl lg:text-3xl font-bold text-white tracking-tight font-display">
+				<Heading level="h2" size="xl" class="text-white tracking-tight">
 					Dukung Program Kami
-				</h2>
+				</Heading>
 				<p class="mx-auto mt-2 max-w-xl text-sm sm:text-base text-primary-200/80">
 					Setiap donasi Anda, sekecil apapun, berarti besar bagi mereka yang membutuhkan.
 				</p>

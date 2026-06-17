@@ -30,6 +30,12 @@ const { images, gallerySlug, startIndex = 0 } = Astro.props
         data-index={startIndex + index}
         aria-label={`View ${image.name}`}
       >
+        <!-- Skeleton Loading State -->
+        <div
+          class="absolute inset-0 bg-warm-200 dark:bg-warm-800 animate-pulse skeleton-loader"
+          aria-hidden="true"
+        />
+        
         <img
           src={image.thumbnailUrl}
           alt={image.name}
@@ -38,8 +44,10 @@ const { images, gallerySlug, startIndex = 0 } = Astro.props
           loading={isPriority ? "eager" : "lazy"}
           decoding="async"
           fetchpriority={isPriority ? "high" : "low"}
-          class="gallery-image h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+          class="gallery-image h-full w-full object-cover transition-opacity duration-300 opacity-0"
+          onload="this.classList.add('opacity-100'); this.previousElementSibling?.classList.add('hidden')"
         />
+        
         <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         <div class="absolute bottom-2 left-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
           <p class="text-white text-xs sm:text-sm font-medium truncate">{image.name.replace(/\.[^/.]+$/, '').replace(/[_-]/g, ' ')}</p>

@@ -3,10 +3,12 @@ import FAQ from '@components/sections/FAQ.astro'
 import PageHeader from '@components/sections/PageHeader.astro'
 import Button from '@components/ui/Button.astro'
 import Container from '@components/ui/Container.astro'
+import Heading from '@components/ui/Heading.astro'
 import Icon from '@components/ui/Icon.astro'
 import { CONTACT } from '@data/site'
 import BaseLayout from '@layouts/BaseLayout.astro'
 import { getSiteSettings } from '@lib/sanity/client'
+import { withFallback } from '@lib/with-fallback'
 
 // Hybrid: try Sanity first, fall back to local data
 let address = { ...CONTACT.address }
@@ -17,21 +19,17 @@ let email = CONTACT.email
 let mapsUrl = CONTACT.address.mapsUrl
 let hours = { ...CONTACT.hours }
 
-try {
-	const sanitySettings = await getSiteSettings()
-	if (sanitySettings) {
-		if (sanitySettings.address) address = { ...address, ...sanitySettings.address }
-		if (sanitySettings.phone) phone = sanitySettings.phone
-		if (sanitySettings.email) email = sanitySettings.email
-		if (sanitySettings.emails)
-			email = sanitySettings.emails.info || sanitySettings.emails.gmail || email
-		if (sanitySettings.mapsUrl) mapsUrl = sanitySettings.mapsUrl
-		if (sanitySettings.operatingHoursDetail) {
-			hours = { ...hours, ...sanitySettings.operatingHoursDetail }
-		}
+const sanitySettings = await withFallback(() => getSiteSettings(), null, 'Site settings fetch')
+if (sanitySettings) {
+	if (sanitySettings.address) address = { ...address, ...sanitySettings.address }
+	if (sanitySettings.phone) phone = sanitySettings.phone
+	if (sanitySettings.email) email = sanitySettings.email
+	if (sanitySettings.emails)
+		email = sanitySettings.emails.info || sanitySettings.emails.gmail || email
+	if (sanitySettings.mapsUrl) mapsUrl = sanitySettings.mapsUrl
+	if (sanitySettings.operatingHoursDetail) {
+		hours = { ...hours, ...sanitySettings.operatingHoursDetail }
 	}
-} catch (error) {
-	console.error('[Kontak] Sanity siteSettings fetch failed:', error)
 }
 ---
 
@@ -59,15 +57,27 @@ try {
 			<!-- Contact Form — primary action, first on mobile, right column on desktop (60% / 3 cols) -->
 			<div class="lg:order-2 lg:col-span-3">
 				<div class="rounded-xl sm:rounded-2xl bg-surface-elevated dark:bg-surface-secondary p-5 sm:p-8 shadow-sm">
-					<h2 class="text-xl sm:text-2xl font-bold text-text-primary">Kirim Pesan</h2>
+					<Heading level="h2" size="lg">Kirim Pesan</Heading>
 					<p class="mt-1 text-sm text-text-secondary">
 						Isi formulir di bawah ini dan kami akan merespons secepatnya.
 					</p>
+
+					<!-- Error Summary -->
+					<div id="form-error-summary" class="hidden rounded-lg border border-red-300 bg-red-50 p-4 dark:border-red-800 dark:bg-red-950/50" role="alert" aria-live="polite" aria-atomic="true">
+						<h3 class="text-sm font-semibold text-red-800 dark:text-red-200 flex items-center gap-2">
+							<svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+								<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
+							</svg>
+							Periksa formulir Anda
+						</h3>
+						<ul id="error-list" class="mt-2 text-sm text-red-700 dark:text-red-300 list-disc list-inside space-y-1"></ul>
+					</div>
 
 					<form
 						id="contact-form"
 						class="mt-5 space-y-4"
 						novalidate
+						aria-describedby="form-error-summary"
 					>
 						<div class="grid gap-4 sm:gap-5 md:grid-cols-2">
 							<div>
@@ -80,10 +90,13 @@ try {
 									name="nama"
 									required
 									aria-required="true"
+									aria-invalid="false"
+									aria-describedby="nama-error"
 									autocomplete="name"
-									class="mt-1.5 block w-full rounded-lg border border-primary-200 dark:border-primary-800 bg-white dark:bg-surface-secondary px-4 py-2.5 text-sm text-text-primary placeholder:text-text-muted focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 transition-colors"
+									class="mt-1.5 block w-full rounded-lg border border-primary-200 dark:border-primary-800 bg-white dark:bg-surface-secondary px-4 py-2.5 text-sm text-text-primary placeholder:text-text-muted focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 transition-colors invalid:border-red-500 invalid:focus:border-red-500 invalid:focus:ring-red-500/20"
 									placeholder="Nama Anda…"
 								/>
+								<p id="nama-error" class="mt-1 text-sm text-red-600 dark:text-red-400 hidden" role="alert"></p>
 							</div>
 							<div>
 								<label for="telepon" class="block text-sm font-medium text-text-secondary">
@@ -93,10 +106,14 @@ try {
 									type="tel"
 									id="telepon"
 									name="telepon"
+									aria-invalid="false"
+									aria-describedby="telepon-error"
 									autocomplete="tel"
-									class="mt-1.5 block w-full rounded-lg border border-primary-200 dark:border-primary-800 bg-white dark:bg-surface-secondary px-4 py-2.5 text-sm text-text-primary placeholder:text-text-muted focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 transition-colors"
+									class="mt-1.5 block w-full rounded-lg border border-primary-200 dark:border-primary-800 bg-white dark:bg-surface-secondary px-4 py-2.5 text-sm text-text-primary placeholder:text-text-muted focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 transition-colors invalid:border-red-500 invalid:focus:border-red-500 invalid:focus:ring-red-500/20"
 									placeholder="0812-3456-7890…"
+									pattern="[0-9\-\+\(\) ]+"
 								/>
+								<p id="telepon-error" class="mt-1 text-sm text-red-600 dark:text-red-400 hidden" role="alert"></p>
 							</div>
 						</div>
 
@@ -110,10 +127,13 @@ try {
 								name="email"
 								required
 								aria-required="true"
+								aria-invalid="false"
+								aria-describedby="email-error"
 								autocomplete="email"
-								class="mt-1.5 block w-full rounded-lg border border-primary-200 dark:border-primary-800 bg-white dark:bg-surface-secondary px-4 py-2.5 text-sm text-text-primary placeholder:text-text-muted focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 transition-colors"
+								class="mt-1.5 block w-full rounded-lg border border-primary-200 dark:border-primary-800 bg-white dark:bg-surface-secondary px-4 py-2.5 text-sm text-text-primary placeholder:text-text-muted focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 transition-colors invalid:border-red-500 invalid:focus:border-red-500 invalid:focus:ring-red-500/20"
 								placeholder="nama@email.com…"
 							/>
+							<p id="email-error" class="mt-1 text-sm text-red-600 dark:text-red-400 hidden" role="alert"></p>
 						</div>
 
 						<div>
@@ -121,51 +141,51 @@ try {
 							<p class="text-sm text-text-muted mb-3">Pilih topik yang sesuai dengan keperluan Anda.</p>
 
 							<div role="radiogroup" aria-label="Pilih topik pesan" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3" id="subjek-group">
-								<button type="button" role="radio" aria-checked="false" data-value="donasi" class="subjek-card relative flex flex-col items-center gap-1.5 rounded-xl border-2 border-warm-200 dark:border-warm-800 bg-white dark:bg-surface-secondary p-4 transition-all hover:border-primary-300 dark:hover:border-primary-600 hover:bg-primary-50/40 dark:hover:bg-primary-900/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500/20 cursor-pointer" aria-describedby="desc-donasi">
-									<div class="subjek-check absolute top-2 right-2 hidden text-primary-600 dark:text-primary-400" aria-hidden="true">
+								<button type="button" role="radio" aria-checked="false" data-value="donasi" class="subjek-card relative flex flex-col items-center gap-1.5 rounded-xl border-2 border-warm-200 dark:border-warm-800 bg-white dark:bg-surface-secondary p-4 transition-all hover:border-primary-300 dark:hover:border-primary-600 hover:bg-primary-50/40 dark:hover:bg-primary-900/30 data-[selected=true]:border-primary-800 data-[selected=true]:bg-primary-50 dark:data-[selected=true]:border-primary-500 dark:data-[selected=true]:bg-primary-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500/20 cursor-pointer" aria-describedby="desc-donasi">
+									<div class="subjek-check absolute top-2 right-2 hidden data-[selected=true]:block text-primary-600 dark:text-primary-400" aria-hidden="true">
 										<svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
 									</div>
-									<Icon name="heart" size={5} class="subjek-icon text-warm-400 dark:text-warm-500" aria-hidden="true" />
+									<Icon name="heart" size={5} class="subjek-icon text-warm-400 dark:text-warm-500 data-[selected=true]:text-primary-600 dark:data-[selected=true]:text-primary-400" aria-hidden="true" />
 									<span class="text-sm font-semibold text-text-primary">Konfirmasi Donasi</span>
 									<span id="desc-donasi" class="text-xs text-text-muted leading-tight">Laporan &amp; konfirmasi transfer donasi</span>
 								</button>
-								<button type="button" role="radio" aria-checked="false" data-value="program" class="subjek-card relative flex flex-col items-center gap-1.5 rounded-xl border-2 border-warm-200 dark:border-warm-800 bg-white dark:bg-surface-secondary p-4 transition-all hover:border-primary-300 dark:hover:border-primary-600 hover:bg-primary-50/40 dark:hover:bg-primary-900/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500/20 cursor-pointer" aria-describedby="desc-program">
-									<div class="subjek-check absolute top-2 right-2 hidden text-primary-600 dark:text-primary-400" aria-hidden="true">
+								<button type="button" role="radio" aria-checked="false" data-value="program" class="subjek-card relative flex flex-col items-center gap-1.5 rounded-xl border-2 border-warm-200 dark:border-warm-800 bg-white dark:bg-surface-secondary p-4 transition-all hover:border-primary-300 dark:hover:border-primary-600 hover:bg-primary-50/40 dark:hover:bg-primary-900/30 data-[selected=true]:border-primary-800 data-[selected=true]:bg-primary-50 dark:data-[selected=true]:border-primary-500 dark:data-[selected=true]:bg-primary-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500/20 cursor-pointer" aria-describedby="desc-program">
+									<div class="subjek-check absolute top-2 right-2 hidden data-[selected=true]:block text-primary-600 dark:text-primary-400" aria-hidden="true">
 										<svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
 									</div>
-									<Icon name="book" size={5} class="subjek-icon text-warm-400 dark:text-warm-500" aria-hidden="true" />
+									<Icon name="book" size={5} class="subjek-icon text-warm-400 dark:text-warm-500 data-[selected=true]:text-primary-600 dark:data-[selected=true]:text-primary-400" aria-hidden="true" />
 									<span class="text-sm font-semibold text-text-primary">Informasi Program</span>
 									<span id="desc-program" class="text-xs text-text-muted leading-tight">Tanya tentang program &amp; kegiatan</span>
 								</button>
-								<button type="button" role="radio" aria-checked="false" data-value="kerjasama" class="subjek-card relative flex flex-col items-center gap-1.5 rounded-xl border-2 border-warm-200 dark:border-warm-800 bg-white dark:bg-surface-secondary p-4 transition-all hover:border-primary-300 dark:hover:border-primary-600 hover:bg-primary-50/40 dark:hover:bg-primary-900/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500/20 cursor-pointer" aria-describedby="desc-kerjasama">
-									<div class="subjek-check absolute top-2 right-2 hidden text-primary-600 dark:text-primary-400" aria-hidden="true">
+								<button type="button" role="radio" aria-checked="false" data-value="kerjasama" class="subjek-card relative flex flex-col items-center gap-1.5 rounded-xl border-2 border-warm-200 dark:border-warm-800 bg-white dark:bg-surface-secondary p-4 transition-all hover:border-primary-300 dark:hover:border-primary-600 hover:bg-primary-50/40 dark:hover:bg-primary-900/30 data-[selected=true]:border-primary-800 data-[selected=true]:bg-primary-50 dark:data-[selected=true]:border-primary-500 dark:data-[selected=true]:bg-primary-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500/20 cursor-pointer" aria-describedby="desc-kerjasama">
+									<div class="subjek-check absolute top-2 right-2 hidden data-[selected=true]:block text-primary-600 dark:text-primary-400" aria-hidden="true">
 										<svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
 									</div>
-									<Icon name="globe" size={5} class="subjek-icon text-warm-400 dark:text-warm-500" aria-hidden="true" />
+									<Icon name="globe" size={5} class="subjek-icon text-warm-400 dark:text-warm-500 data-[selected=true]:text-primary-600 dark:data-[selected=true]:text-primary-400" aria-hidden="true" />
 									<span class="text-sm font-semibold text-text-primary">Kerja Sama</span>
 									<span id="desc-kerjasama" class="text-xs text-text-muted leading-tight">Ajukan kerja sama atau kolaborasi</span>
 								</button>
-								<button type="button" role="radio" aria-checked="false" data-value="pendaftaran" class="subjek-card relative flex flex-col items-center gap-1.5 rounded-xl border-2 border-warm-200 dark:border-warm-800 bg-white dark:bg-surface-secondary p-4 transition-all hover:border-primary-300 dark:hover:border-primary-600 hover:bg-primary-50/40 dark:hover:bg-primary-900/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500/20 cursor-pointer" aria-describedby="desc-pendaftaran">
-									<div class="subjek-check absolute top-2 right-2 hidden text-primary-600 dark:text-primary-400" aria-hidden="true">
+								<button type="button" role="radio" aria-checked="false" data-value="pendaftaran" class="subjek-card relative flex flex-col items-center gap-1.5 rounded-xl border-2 border-warm-200 dark:border-warm-800 bg-white dark:bg-surface-secondary p-4 transition-all hover:border-primary-300 dark:hover:border-primary-600 hover:bg-primary-50/40 dark:hover:bg-primary-900/30 data-[selected=true]:border-primary-800 data-[selected=true]:bg-primary-50 dark:data-[selected=true]:border-primary-500 dark:data-[selected=true]:bg-primary-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500/20 cursor-pointer" aria-describedby="desc-pendaftaran">
+									<div class="subjek-check absolute top-2 right-2 hidden data-[selected=true]:block text-primary-600 dark:text-primary-400" aria-hidden="true">
 										<svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
 									</div>
-									<Icon name="star" size={5} class="subjek-icon text-warm-400 dark:text-warm-500" aria-hidden="true" />
+									<Icon name="star" size={5} class="subjek-icon text-warm-400 dark:text-warm-500 data-[selected=true]:text-primary-600 dark:data-[selected=true]:text-primary-400" aria-hidden="true" />
 									<span class="text-sm font-semibold text-text-primary">Pendaftaran Santri</span>
 									<span id="desc-pendaftaran" class="text-xs text-text-muted leading-tight">Daftarkan anak sebagai santri</span>
 								</button>
-								<button type="button" role="radio" aria-checked="false" data-value="kritik" class="subjek-card relative flex flex-col items-center gap-1.5 rounded-xl border-2 border-warm-200 dark:border-warm-800 bg-white dark:bg-surface-secondary p-4 transition-all hover:border-primary-300 dark:hover:border-primary-600 hover:bg-primary-50/40 dark:hover:bg-primary-900/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500/20 cursor-pointer" aria-describedby="desc-kritik">
-									<div class="subjek-check absolute top-2 right-2 hidden text-primary-600 dark:text-primary-400" aria-hidden="true">
+								<button type="button" role="radio" aria-checked="false" data-value="kritik" class="subjek-card relative flex flex-col items-center gap-1.5 rounded-xl border-2 border-warm-200 dark:border-warm-800 bg-white dark:bg-surface-secondary p-4 transition-all hover:border-primary-300 dark:hover:border-primary-600 hover:bg-primary-50/40 dark:hover:bg-primary-900/30 data-[selected=true]:border-primary-800 data-[selected=true]:bg-primary-50 dark:data-[selected=true]:border-primary-500 dark:data-[selected=true]:bg-primary-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500/20 cursor-pointer" aria-describedby="desc-kritik">
+									<div class="subjek-check absolute top-2 right-2 hidden data-[selected=true]:block text-primary-600 dark:text-primary-400" aria-hidden="true">
 										<svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
 									</div>
-									<Icon name="email" size={5} class="subjek-icon text-warm-400 dark:text-warm-500" aria-hidden="true" />
+									<Icon name="email" size={5} class="subjek-icon text-warm-400 dark:text-warm-500 data-[selected=true]:text-primary-600 dark:data-[selected=true]:text-primary-400" aria-hidden="true" />
 									<span class="text-sm font-semibold text-text-primary">Kritik &amp; Saran</span>
 									<span id="desc-kritik" class="text-xs text-text-muted leading-tight">Sampaikan kritik, saran, atau masukan</span>
 								</button>
-								<button type="button" role="radio" aria-checked="false" data-value="lainnya" class="subjek-card relative flex flex-col items-center gap-1.5 rounded-xl border-2 border-warm-200 dark:border-warm-800 bg-white dark:bg-surface-secondary p-4 transition-all hover:border-primary-300 dark:hover:border-primary-600 hover:bg-primary-50/40 dark:hover:bg-primary-900/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500/20 cursor-pointer" aria-describedby="desc-lainnya">
-									<div class="subjek-check absolute top-2 right-2 hidden text-primary-600 dark:text-primary-400" aria-hidden="true">
+								<button type="button" role="radio" aria-checked="false" data-value="lainnya" class="subjek-card relative flex flex-col items-center gap-1.5 rounded-xl border-2 border-warm-200 dark:border-warm-800 bg-white dark:bg-surface-secondary p-4 transition-all hover:border-primary-300 dark:hover:border-primary-600 hover:bg-primary-50/40 dark:hover:bg-primary-900/30 data-[selected=true]:border-primary-800 data-[selected=true]:bg-primary-50 dark:data-[selected=true]:border-primary-500 dark:data-[selected=true]:bg-primary-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500/20 cursor-pointer" aria-describedby="desc-lainnya">
+									<div class="subjek-check absolute top-2 right-2 hidden data-[selected=true]:block text-primary-600 dark:text-primary-400" aria-hidden="true">
 										<svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
 									</div>
-									<Icon name="check-circle" size={5} class="subjek-icon text-warm-400 dark:text-warm-500" aria-hidden="true" />
+									<Icon name="check-circle" size={5} class="subjek-icon text-warm-400 dark:text-warm-500 data-[selected=true]:text-primary-600 dark:data-[selected=true]:text-primary-400" aria-hidden="true" />
 									<span class="text-sm font-semibold text-text-primary">Lainnya</span>
 									<span id="desc-lainnya" class="text-xs text-text-muted leading-tight">Pesan atau pertanyaan lainnya</span>
 								</button>
@@ -184,9 +204,12 @@ try {
 								rows="5"
 								required
 								aria-required="true"
-								class="mt-1.5 block w-full rounded-lg border border-primary-200 dark:border-primary-800 bg-white dark:bg-surface-secondary px-4 py-2.5 text-sm text-text-primary placeholder:text-text-muted focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 transition-colors resize-y"
+								aria-invalid="false"
+								aria-describedby="pesan-error"
+								class="mt-1.5 block w-full rounded-lg border border-primary-200 dark:border-primary-800 bg-white dark:bg-surface-secondary px-4 py-2.5 text-sm text-text-primary placeholder:text-text-muted focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 transition-colors resize-y invalid:border-red-500 invalid:focus:border-red-500 invalid:focus:ring-red-500/20"
 								placeholder="Tulis pesan Anda di sini…"
 							></textarea>
+							<p id="pesan-error" class="mt-1 text-sm text-red-600 dark:text-red-400 hidden" role="alert"></p>
 						</div>
 
 						<!-- Honeypot — hidden from humans, visible to bots -->
@@ -218,6 +241,8 @@ try {
 						class="absolute inset-0 w-full h-full object-cover"
 						loading="lazy"
 						decoding="async"
+						width="640"
+						height="360"
 					/>
 					<div class="absolute inset-0 bg-gradient-to-t from-primary-900/40 to-transparent lg:bg-gradient-to-b lg:from-primary-900/20 lg:to-transparent"></div>
 				</div>
@@ -227,7 +252,7 @@ try {
 					<div class="mb-2 icon-box-sm">
 						<Icon name="location" size={5} aria-hidden="true" />
 					</div>
-					<h2 class="font-bold text-text-primary text-base sm:text-lg">Alamat Kantor</h2>
+					<Heading level="h2" size="md">Alamat Kantor</Heading>
 					<p class="mt-1.5 text-sm leading-relaxed text-text-secondary">
 						{address.street}, {address.village}, {address.district}<br />
 						{address.city}, {address.province}<br />
@@ -249,7 +274,7 @@ try {
 					<div class="mb-2 icon-box-sm">
 						<Icon name="phone" size={5} aria-hidden="true" />
 					</div>
-					<h2 class="font-bold text-text-primary text-base sm:text-lg">Telepon &amp; WhatsApp</h2>
+					<Heading level="h2" size="md">Telepon &amp; WhatsApp</Heading>
 					<p class="mt-1.5 text-sm text-text-secondary">
 						<a href={phoneUrl} class="text-primary-700 dark:text-primary-400 hover:underline">{phone}</a>
 					</p>
@@ -264,7 +289,7 @@ try {
 					<div class="mb-2 icon-box-sm">
 						<Icon name="email" size={5} aria-hidden="true" />
 					</div>
-					<h2 class="font-bold text-text-primary text-base sm:text-lg">Email</h2>
+					<Heading level="h2" size="md">Email</Heading>
 					<div class="mt-1.5 space-y-2 text-sm">
 						<div>
 							<span class="text-xs font-semibold uppercase tracking-wider text-primary-500 dark:text-primary-400">Kontak Umum</span>
@@ -302,7 +327,7 @@ try {
 					<div class="mb-2 icon-box-sm">
 						<Icon name="clock" size={5} aria-hidden="true" />
 					</div>
-					<h2 class="font-bold text-text-primary text-base sm:text-lg">Jam Operasional</h2>
+					<Heading level="h2" size="md">Jam Operasional</Heading>
 					<div class="mt-2.5 space-y-2 text-sm text-text-secondary">
 						<div class="flex justify-between">
 							<span>Senin–Jumat</span>
@@ -324,15 +349,184 @@ try {
 	</section>
 
 <script>
-	const form = document.getElementById('contact-form') as HTMLFormElement | null;
-	if (!form) throw new Error('Form not found');
+		const form = document.getElementById('contact-form') as HTMLFormElement | null;
+		if (!form) throw new Error('Form not found');
 
-	const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement | null;
-	const submitText = document.getElementById('submit-text') as HTMLSpanElement | null;
-	const submitSpinner = document.getElementById('submit-spinner') as HTMLElement | null;
-	const feedback = document.getElementById('form-feedback') as HTMLDivElement | null;
+		const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement | null;
+		const submitText = document.getElementById('submit-text') as HTMLSpanElement | null;
+		const submitSpinner = document.getElementById('submit-spinner') as HTMLElement | null;
+		const feedback = document.getElementById('form-feedback') as HTMLDivElement | null;
+		const errorSummary = document.getElementById('form-error-summary') as HTMLDivElement | null;
+		const errorList = document.getElementById('error-list') as HTMLUListElement | null;
 
-	// --- Card selector for subjek ---
+		// Form fields
+		const namaInput = document.getElementById('nama') as HTMLInputElement;
+		const teleponInput = document.getElementById('telepon') as HTMLInputElement;
+		const emailInput = document.getElementById('email') as HTMLInputElement;
+		const pesanInput = document.getElementById('pesan') as HTMLTextAreaElement;
+
+		// Error elements
+		const namaError = document.getElementById('nama-error') as HTMLParagraphElement;
+		const teleponError = document.getElementById('telepon-error') as HTMLParagraphElement;
+		const emailError = document.getElementById('email-error') as HTMLParagraphElement;
+		const pesanError = document.getElementById('pesan-error') as HTMLParagraphElement;
+
+		// Validation functions
+		function validateEmail(email: string): boolean {
+			const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+			return emailRegex.test(email);
+		}
+
+		function validateTelepon(tel: string): boolean {
+			if (!tel) return true; // Optional field
+			const telRegex = /^[0-9\-\+\(\) ]+$/;
+			return telRegex.test(tel) && tel.replace(/\D/g, '').length >= 10;
+		}
+
+		function clearErrors() {
+			errorSummary?.classList.add('hidden');
+			if (errorList) errorList.innerHTML = '';
+			
+			[namaInput, teleponInput, emailInput, pesanInput].forEach(input => {
+				input.setAttribute('aria-invalid', 'false');
+			});
+			
+			[namaError, teleponError, emailError, pesanError].forEach(errorEl => {
+				errorEl.classList.add('hidden');
+				errorEl.textContent = '';
+			});
+		}
+
+		function showFieldError(input: HTMLInputElement | HTMLTextAreaElement, errorEl: HTMLParagraphElement, message: string) {
+			input.setAttribute('aria-invalid', 'true');
+			errorEl.textContent = message;
+			errorEl.classList.remove('hidden');
+		}
+
+		function showErrors(errors: Array<{ field: string; message: string }>) {
+			if (!errorList) return;
+			
+			clearErrors();
+			
+			if (errors.length === 0) return;
+
+			errorSummary?.classList.remove('hidden');
+			
+			errors.forEach(({ field, message }) => {
+				const li = document.createElement('li');
+				li.textContent = message;
+				errorList.appendChild(li);
+
+				switch (field) {
+					case 'nama':
+						showFieldError(namaInput, namaError, message);
+						break;
+					case 'telepon':
+						showFieldError(teleponInput, teleponError, message);
+						break;
+					case 'email':
+						showFieldError(emailInput, emailError, message);
+						break;
+					case 'pesan':
+						showFieldError(pesanInput, pesanError, message);
+						break;
+				}
+			});
+
+			// Focus first invalid field
+			const firstInvalidField = errors[0].field;
+			document.getElementById(firstInvalidField)?.focus();
+		}
+
+		function validateForm(): boolean {
+			const errors: Array<{ field: string; message: string }> = [];
+
+			// Validate nama
+			const nama = namaInput.value.trim();
+			if (!nama) {
+				errors.push({ field: 'nama', message: 'Nama lengkap wajib diisi' });
+			} else if (nama.length < 3) {
+				errors.push({ field: 'nama', message: 'Nama minimal 3 karakter' });
+			}
+
+			// Validate email
+			const email = emailInput.value.trim();
+			if (!email) {
+				errors.push({ field: 'email', message: 'Email wajib diisi' });
+			} else if (!validateEmail(email)) {
+				errors.push({ field: 'email', message: 'Format email tidak valid' });
+			}
+
+			// Validate telepon (optional but must be valid if filled)
+			const telepon = teleponInput.value.trim();
+			if (telepon && !validateTelepon(telepon)) {
+				errors.push({ field: 'telepon', message: 'Format nomor telepon tidak valid (min. 10 digit)' });
+			}
+
+			// Validate pesan
+			const pesan = pesanInput.value.trim();
+			if (!pesan) {
+				errors.push({ field: 'pesan', message: 'Pesan wajib diisi' });
+			} else if (pesan.length < 10) {
+				errors.push({ field: 'pesan', message: 'Pesan minimal 10 karakter' });
+			}
+
+			if (errors.length > 0) {
+				showErrors(errors);
+				return false;
+			}
+
+			return true;
+		}
+
+		// Real-time validation on blur
+		namaInput.addEventListener('blur', () => {
+			const nama = namaInput.value.trim();
+			if (!nama) {
+				showFieldError(namaInput, namaError, 'Nama wajib diisi');
+			} else if (nama.length < 3) {
+				showFieldError(namaInput, namaError, 'Nama minimal 3 karakter');
+			} else {
+				namaInput.setAttribute('aria-invalid', 'false');
+				namaError.classList.add('hidden');
+			}
+		});
+
+		emailInput.addEventListener('blur', () => {
+			const email = emailInput.value.trim();
+			if (!email) {
+				showFieldError(emailInput, emailError, 'Email wajib diisi');
+			} else if (!validateEmail(email)) {
+				showFieldError(emailInput, emailError, 'Format email tidak valid');
+			} else {
+				emailInput.setAttribute('aria-invalid', 'false');
+				emailError.classList.add('hidden');
+			}
+		});
+
+		teleponInput.addEventListener('blur', () => {
+			const telepon = teleponInput.value.trim();
+			if (telepon && !validateTelepon(telepon)) {
+				showFieldError(teleponInput, teleponError, 'Format nomor telepon tidak valid');
+			} else {
+				teleponInput.setAttribute('aria-invalid', 'false');
+				teleponError.classList.add('hidden');
+			}
+		});
+
+		pesanInput.addEventListener('blur', () => {
+			const pesan = pesanInput.value.trim();
+			if (!pesan) {
+				showFieldError(pesanInput, pesanError, 'Pesan wajib diisi');
+			} else if (pesan.length < 10) {
+				showFieldError(pesanInput, pesanError, 'Pesan minimal 10 karakter');
+			} else {
+				pesanInput.setAttribute('aria-invalid', 'false');
+				pesanError.classList.add('hidden');
+			}
+		});
+
+		// --- Card selector for subjek ---
 	const subjekCards = document.querySelectorAll('.subjek-card') as NodeListOf<HTMLButtonElement>;
 	const subjekInput = document.getElementById('subjek') as HTMLInputElement;
 	const subjekGroup = document.getElementById('subjek-group') as HTMLDivElement;
@@ -387,20 +581,22 @@ try {
 
 		if (!feedback || !submitBtn || !submitText || !submitSpinner) return;
 
+		// Clear previous errors
+		clearErrors();
 		feedback.classList.add('hidden');
 		feedback.textContent = '';
 
-		const nama = (document.getElementById('nama') as HTMLInputElement).value.trim();
-		const email = (document.getElementById('email') as HTMLInputElement).value.trim();
-		const telepon = (document.getElementById('telepon') as HTMLInputElement).value.trim();
-		const subjek = (document.getElementById('subjek') as HTMLInputElement).value;
-		const pesan = (document.getElementById('pesan') as HTMLTextAreaElement).value.trim();
-		const honeypot = (document.getElementById('_website') as HTMLInputElement).value.trim();
-
-		if (!nama || !email || !pesan) {
-			showFeedback('error', 'Harap isi semua field yang wajib diisi.');
+		// Validate form
+		if (!validateForm()) {
 			return;
 		}
+
+		const nama = namaInput.value.trim();
+		const email = emailInput.value.trim();
+		const telepon = teleponInput.value.trim();
+		const subjek = (document.getElementById('subjek') as HTMLInputElement).value;
+		const pesan = pesanInput.value.trim();
+		const honeypot = (document.getElementById('_website') as HTMLInputElement).value.trim();
 
 		submitText.textContent = 'Mengirim...';
 		submitSpinner.classList.remove('hidden');
@@ -447,28 +643,6 @@ try {
 	}
 </script>
 
-<style>
-	.subjek-card[data-selected="true"] {
-		border-color: var(--color-primary-800);
-		background-color: var(--color-primary-50);
-	}
-	.subjek-card[data-selected="true"] .subjek-icon {
-		color: var(--color-primary-600);
-	}
-	.subjek-card[data-selected="true"] .subjek-check {
-		display: block;
-	}
-	@media (prefers-color-scheme: dark) {
-		.subjek-card[data-selected="true"] {
-			border-color: var(--color-primary-500);
-			background-color: var(--color-primary-950);
-		}
-		.subjek-card[data-selected="true"] .subjek-icon {
-			color: var(--color-primary-400);
-		}
-	}
-	</style>
-	
 	<!-- FAQ Section -- moved from beranda -->
 	<FAQ />
 </BaseLayout>

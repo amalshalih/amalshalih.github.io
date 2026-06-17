@@ -3,10 +3,12 @@ import PageHeader from '@components/sections/PageHeader.astro'
 import Button from '@components/ui/Button.astro'
 import Card from '@components/ui/Card.astro'
 import Container from '@components/ui/Container.astro'
+import Heading from '@components/ui/Heading.astro'
 import Icon from '@components/ui/Icon.astro'
 import { CONTACT, DONATION } from '@data/site'
 import BaseLayout from '@layouts/BaseLayout.astro'
 import { getBankDonasi, getSiteSettings } from '@lib/sanity/client'
+import { withFallback } from '@lib/with-fallback'
 
 // Hybrid: try Sanity first, fall back to local data
 let banks = DONATION.banks.map((b) => ({ ...b }))
@@ -15,26 +17,25 @@ let linktreeUrl = DONATION.linktree.url
 let contactPhone = CONTACT.phone
 let contactWhatsapp = CONTACT.whatsapp
 
-try {
-	const [sanityBanks, sanitySettings] = await Promise.all([getBankDonasi(), getSiteSettings()])
+const [sanityBanks, sanitySettings] = await Promise.all([
+	withFallback(() => getBankDonasi(), [], 'Bank donasi fetch'),
+	withFallback(() => getSiteSettings(), null, 'Site settings fetch'),
+])
 
-	if (sanityBanks && sanityBanks.length > 0) {
-		const localFullNames = new Map(DONATION.banks.map((b) => [b.name, b.fullName]))
-		banks = sanityBanks.map((b) => ({
-			name: b.bankName,
-			fullName: localFullNames.get(b.bankName) ?? b.bankName,
-			accountNumber: b.accountNumber,
-			accountName: b.accountName,
-		}))
-	}
+if (sanityBanks && sanityBanks.length > 0) {
+	const localFullNames = new Map(DONATION.banks.map((b) => [b.name, b.fullName]))
+	banks = sanityBanks.map((b) => ({
+		name: b.bankName,
+		fullName: localFullNames.get(b.bankName) ?? b.bankName,
+		accountNumber: b.accountNumber,
+		accountName: b.accountName,
+	}))
+}
 
-	if (sanitySettings) {
-		if (sanitySettings.qrisImageUrl) qrisImage = sanitySettings.qrisImageUrl
-		if (sanitySettings.linktree) linktreeUrl = sanitySettings.linktree
-		if (sanitySettings.phone) contactPhone = sanitySettings.phone
-	}
-} catch (error) {
-	console.error('[Donasi] Sanity bankDonasi/siteSettings fetch failed:', error)
+if (sanitySettings) {
+	if (sanitySettings.qrisImageUrl) qrisImage = sanitySettings.qrisImageUrl
+	if (sanitySettings.linktree) linktreeUrl = sanitySettings.linktree
+	if (sanitySettings.phone) contactPhone = sanitySettings.phone
 }
 ---
 
@@ -62,7 +63,7 @@ try {
 				<div class="mb-3 icon-box hidden sm:inline-flex">
 					<Icon name="qrcode" size={7} aria-hidden="true" />
 				</div>
-				<h2 class="text-lg sm:text-xl font-bold text-text-primary">QRIS</h2>
+				<Heading level="h2" size="lg">QRIS</Heading>
 				<p class="mt-2 text-sm text-text-secondary">
 					Scan kode QRIS berikut menggunakan aplikasi mobile banking atau e-wallet Anda.
 				</p>
@@ -91,7 +92,7 @@ try {
 				<div class="mb-3 icon-box hidden sm:inline-flex">
 					<Icon name="credit-card" size={7} aria-hidden="true" />
 				</div>
-				<h2 class="text-lg sm:text-xl font-bold text-text-primary">Transfer Bank</h2>
+				<Heading level="h2" size="lg">Transfer Bank</Heading>
 				<p class="mt-2 text-sm text-text-secondary">Salurkan donasi melalui rekening resmi Yayasan ASIB di bawah ini.</p>
 
 				<!-- Pilih Bank via Dropdown -->
@@ -162,7 +163,7 @@ try {
 				<div class="mb-3 icon-box hidden sm:inline-flex">
 					<Icon name="globe" size={7} aria-hidden="true" />
 				</div>
-				<h2 class="text-lg sm:text-xl font-bold text-text-primary">Donasi Online</h2>
+				<Heading level="h2" size="lg">Donasi Online</Heading>
 				<p class="mt-2 text-sm text-text-secondary">
 					Kunjungi platform donasi online kami melalui link berikut.
 				</p>
@@ -184,7 +185,7 @@ try {
 					</a>
 				</div>
 				<div class="mt-4 rounded-lg sm:rounded-xl bg-warm-50 dark:bg-warm-900/30 p-4 sm:p-5">
-					<h3 class="font-semibold text-text-primary">Butuh bantuan?</h3>
+					<Heading level="h3" size="sm">Butuh bantuan?</Heading>
 					<p class="mt-1 text-sm text-text-secondary">
 						Hubungi admin kami melalui WhatsApp:
 					</p>

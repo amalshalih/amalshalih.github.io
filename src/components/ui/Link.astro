@@ -1,0 +1,75 @@
+---
+/**
+ * Link Component
+ *
+ * Unified link wrapper for internal and external links.
+ * Automatically adds rel="noopener noreferrer" for external links.
+ * Handles smooth scroll for anchor links.
+ *
+ * @href - Required. URL for the link
+ * @external - If true, forces external link behavior (opens in new tab)
+ * @variant - 'default' | 'underline' | 'none' - controls underline behavior
+ * @class - Additional Tailwind classes
+ */
+interface Props {
+	href: string
+	external?: boolean
+	variant?: 'default' | 'underline' | 'none'
+	class?: string
+	target?: string
+	rel?: string
+	'aria-label'?: string
+}
+
+const {
+	href,
+	external = false,
+	variant = 'default',
+	class: className,
+	target,
+	rel,
+	['aria-label']: ariaLabel,
+} = Astro.props
+
+// Determine if link is external
+const isExternal = href.startsWith('http') || href.startsWith('//')
+const isOpenInNewTab = external || isExternal
+
+// Default rel for external links
+const defaultRel = isOpenInNewTab ? 'noopener noreferrer' : ''
+const finalRel = rel ? `${defaultRel} ${rel}`.trim() : defaultRel || undefined
+
+// Variant styles
+const variants: Record<string, string> = {
+	default: 'text-text-primary hover:text-accent-primary transition-colors',
+	underline:
+		'text-text-primary hover:text-accent-primary underline underline-offset-2 hover:decoration-accent-primary transition-colors',
+	none: 'text-text-primary hover:text-accent-primary transition-colors no-underline',
+}
+
+const classes = [variants[variant], className].filter(Boolean).join(' ')
+---
+
+{
+	isOpenInNewTab ? (
+		<a
+			href={href}
+			target="_blank"
+			rel={finalRel}
+			class:list={classes}
+			aria-label={ariaLabel}
+		>
+			<slot />
+		</a>
+	) : (
+		<a
+			href={href}
+			target={target}
+			rel={finalRel}
+			class:list={classes}
+			aria-label={ariaLabel}
+		>
+			<slot />
+		</a>
+	)
+}

@@ -1,12 +1,16 @@
 ---
 import { getCollection, render } from 'astro:content'
+import Badge from '@components/ui/Badge.astro'
 import Card from '@components/ui/Card.astro'
+import Container from '@components/ui/Container.astro'
+import Heading from '@components/ui/Heading.astro'
 import Icon from '@components/ui/Icon.astro'
 import { CONTACT, SITE } from '@data/site'
 import BaseLayout from '@layouts/BaseLayout.astro'
 import { KATEGORI_LABELS } from '@lib/constants'
 import { getKegiatanItem, getKegiatanList, getSiteSettings } from '@lib/sanity/client'
 import { renderPortableText } from '@lib/sanity/render'
+import { withNull } from '@lib/with-fallback'
 
 // SSR mode for Cloudflare Workers (not static prerender)
 export const prerender = false
@@ -30,16 +34,12 @@ let pageData: PageData | null = null
 let crumbLabels: Record<string, string> = {}
 let kategoriLabels: Record<string, string> = {}
 
-try {
-	const settings = await getSiteSettings()
-	if (settings?.breadcrumbLabels) {
-		crumbLabels = settings.breadcrumbLabels
-	}
-	if (settings?.kategoriLabels) {
-		kategoriLabels = { ...KATEGORI_LABELS, ...settings.kategoriLabels }
-	}
-} catch (error) {
-	console.error('[Kegiatan Detail] Site settings fetch failed:', error)
+const settings = await withNull(() => getSiteSettings(), 'Kegiatan detail site settings fetch')
+if (settings?.breadcrumbLabels) {
+	crumbLabels = settings.breadcrumbLabels
+}
+if (settings?.kategoriLabels) {
+	kategoriLabels = { ...KATEGORI_LABELS, ...settings.kategoriLabels }
 }
 
 let Content = null
@@ -228,11 +228,11 @@ const breadcrumbJsonLd = {
 				
 				<!-- Content overlay at bottom of hero -->
 				<div class="absolute bottom-0 left-0 right-0 p-4 sm:p-8 lg:p-12 pb-8 sm:pb-12 lg:pb-16">
-					<div class="mx-auto max-w-3xl">
+<div class="mx-auto max-w-3xl">
 						<div class="mb-2 sm:mb-3 flex flex-wrap items-center gap-2 sm:gap-3">
-							<span class="inline-block rounded-full bg-primary-500/20 backdrop-blur-sm px-2.5 sm:px-3 py-0.5 sm:py-1 text-[10px] sm:text-xs font-semibold text-primary-200 ring-1 ring-inset ring-primary-400/30 drop-shadow-md text-shadow-sm hero-badge">
+							<Badge variant="primary" size="sm" class="backdrop-blur-sm text-[10px] sm:text-xs text-primary-200 ring-1 ring-inset ring-primary-400/30 drop-shadow-md text-shadow-sm hero-badge">
 								{kategoriLabels[kategori] || KATEGORI_LABELS[kategori] || kategori}
-							</span>
+							</Badge>
 							<time datetime={date.toISOString()} class="text-[10px] sm:text-xs text-primary-300/80 drop-shadow-md font-medium tracking-wide text-shadow-sm drop-shadow-lg" itemprop="datePublished">
 								{formattedDate}
 							</time>
@@ -250,7 +250,7 @@ const breadcrumbJsonLd = {
 						<Icon name="book" size={6} class="text-primary-300" aria-hidden="true" />
 					</div>
 					<p class="text-[10px] sm:text-xs font-medium uppercase tracking-widest text-primary-400">Arsip Kegiatan</p>
-					<h1 class="mt-2 text-lg sm:text-xl font-bold text-white">{title}</h1>
+					<Heading level="h1" size="lg" class="text-white mt-2">{title}</Heading>
 				</div>
 </div>
   )}
@@ -264,7 +264,7 @@ const breadcrumbJsonLd = {
 		<!-- Article Content -->
 	<article class="mx-auto max-w-3xl px-4 sm:px-6" itemscope itemtype="https://schema.org/Article">
 		<!-- Breadcrumb Navigation -->
-		<nav class="py-3 sm:py-6 text-sm" aria-label="Breadcrumb">
+		<Container class="py-3 sm:py-6 text-sm" as="nav" aria-label="Breadcrumb">
 			<ol class="flex items-center gap-2 text-text-muted overflow-x-auto whitespace-nowrap">
 				<li><a href="/" class="hover:text-primary-600 dark:hover:text-primary-400 transition-colors">{crumbBeranda}</a></li>
 				<li class="text-text-muted">/</li>
@@ -358,7 +358,7 @@ const breadcrumbJsonLd = {
 				<div class="mx-auto mb-2 sm:mb-3 flex h-10 w-10 sm:h-14 sm:w-14 items-center justify-center rounded-full bg-white/15">
 					<Icon name="heart" size={6} class="text-gold-300 sm:size-7" aria-hidden="true" />
 				</div>
-				<h2 class="text-lg sm:text-xl lg:text-3xl font-bold text-white">Dukung Program Kami</h2>
+				<Heading level="h2" size="lg" class="text-white">Dukung Program Kami</Heading>
 				<p class="mx-auto mt-2 max-w-md text-xs sm:text-sm lg:text-base leading-relaxed text-primary-100">
 					Setiap donasi Anda membantu kami menjangkau lebih banyak penerima manfaat dan mewujudkan dampak nyata bagi umat.
 				</p>
@@ -386,15 +386,15 @@ const breadcrumbJsonLd = {
 		<!-- Related Articles -->
 		{relatedItems.length > 0 && (
 			<section class="mt-10 sm:mt-16 mb-6 sm:mb-8">
-				<h2 class="mb-2 text-xl sm:text-2xl font-bold text-text-primary">Arsip Kegiatan Terkait</h2>
+				<Heading level="h2" size="xl" class="mb-2">Arsip Kegiatan Terkait</Heading>
 				<p class="mb-6 sm:mb-8 text-xs sm:text-sm text-text-muted">Dokumen kegiatan lain yang mungkin relevan</p>
 				<div class="grid gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
 					{relatedItems.map((related) => (
 						<Card variant="hover" href={`/kegiatan/${related.slug}`}>
 							<div class="mb-2 sm:mb-3 flex items-center gap-2 sm:gap-3">
-								<span class="inline-block rounded-full bg-primary-50 dark:bg-primary-900/40 px-2 py-0.5 text-[10px] sm:text-xs font-medium text-primary-700 dark:text-primary-200">
+								<Badge variant="subtle" size="sm" class="px-2 py-0.5">
 									{kategoriLabels[related.kategori] || KATEGORI_LABELS[related.kategori] || related.kategori}
-								</span>
+								</Badge>
 								<time datetime={related.date.toISOString()} class="text-[10px] sm:text-xs text-text-muted">
 									{related.date.toLocaleDateString('id-ID', {
 										year: 'numeric',
@@ -403,9 +403,9 @@ const breadcrumbJsonLd = {
 									})}
 								</time>
 							</div>
-							<h3 class="text-sm sm:text-base font-bold leading-snug text-text-primary group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors line-clamp-2">
+							<Heading level="h3" size="sm" class="leading-snug group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors line-clamp-2">
 								{related.title}
-							</h3>
+							</Heading>
 							<p class="mt-1.5 sm:mt-2 text-xs sm:text-sm leading-relaxed text-text-secondary line-clamp-2">
 								{related.description}
 							</p>

@@ -1,11 +1,14 @@
 ---
 import { getCollection } from 'astro:content'
 import PageHeader from '@components/sections/PageHeader.astro'
+import Badge from '@components/ui/Badge.astro'
 import Card from '@components/ui/Card.astro'
 import Container from '@components/ui/Container.astro'
+import Heading from '@components/ui/Heading.astro'
 import Icon from '@components/ui/Icon.astro'
 import BaseLayout from '@layouts/BaseLayout.astro'
 import { getBlogPostList } from '@lib/sanity/client'
+import { withFallback } from '@lib/with-fallback'
 
 interface BlogPost {
 	id: string
@@ -21,22 +24,18 @@ interface BlogPost {
 let posts: BlogPost[] = []
 
 // Try Sanity first
-try {
-	const sanityPosts = await getBlogPostList()
-	if (sanityPosts && sanityPosts.length > 0) {
-		posts = sanityPosts.map((post) => ({
-			id: post.slug,
-			data: {
-				title: post.title,
-				description: post.excerpt ?? '',
-				date: new Date(post.date),
-				image: post.imageUrl,
-				category: post.category,
-			},
-		}))
-	}
-} catch (error) {
-	console.error('[Blog Index] Sanity blog fetch failed:', error)
+const sanityPosts = await withFallback(() => getBlogPostList(), [], 'Blog post list fetch')
+if (sanityPosts && sanityPosts.length > 0) {
+	posts = sanityPosts.map((post) => ({
+		id: post.slug,
+		data: {
+			title: post.title,
+			description: post.excerpt ?? '',
+			date: new Date(post.date),
+			image: post.imageUrl,
+			category: post.category,
+		},
+	}))
 }
 
 // Fall back to markdown collection
@@ -85,9 +84,9 @@ const sortedPosts = posts.sort((a, b) => b.data.date.valueOf() - a.data.date.val
 								loading="lazy"
 							/>
 							<div class="absolute top-4 left-4">
-								<span class="rounded-full bg-white/90 dark:bg-primary-950/90 backdrop-blur-sm px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-primary-800 dark:text-primary-300 shadow-sm ring-1 ring-inset ring-primary-600/20">
+								<Badge variant="subtle" size="sm" class="backdrop-blur-sm uppercase tracking-wider text-[10px] font-bold ring-1 ring-inset ring-primary-600/20">
 									{post.data.category || 'Umum'}
-								</span>
+								</Badge>
 							</div>
 						</div>
 					)}
@@ -96,9 +95,9 @@ const sortedPosts = posts.sort((a, b) => b.data.date.valueOf() - a.data.date.val
 							<Icon name="calendar" size={3.5} class="shrink-0" />
 							{post.data.date.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}
 						</div>
-						<h3 class="mb-2 text-xl font-bold text-warm-900 dark:text-warm-100 line-clamp-2 group-hover:text-primary-700 dark:group-hover:text-primary-400 transition-colors leading-snug">
+						<Heading level="h3" size="xl" class="text-warm-900 dark:text-warm-100 mb-2 line-clamp-2 group-hover:text-primary-700 dark:group-hover:text-primary-400 transition-colors">
 							{post.data.title}
-						</h3>
+						</Heading>
 						<p class="mb-4 text-sm text-warm-600 dark:text-warm-300 line-clamp-3 leading-relaxed opacity-90">
 							{post.data.description}
 						</p>

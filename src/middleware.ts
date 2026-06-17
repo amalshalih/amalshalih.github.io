@@ -13,17 +13,33 @@ export const onRequest = defineMiddleware(async (context, next) => {
 	const response = await next()
 	const headers = new Headers(response.headers)
 
-	// Content-Security-Policy-Report-Only — production safety monitoring
+	// Content-Security-Policy — ENFORCEMENT (production security)
 	// Covers: Google Fonts, Sanity CMS, Sentry, Resend, Google Drive, social embeds
+	headers.set(
+		'Content-Security-Policy',
+		"default-src 'self'; " +
+			"script-src 'self' 'unsafe-inline' https://*.sentry.io; " +
+			"style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " +
+			"font-src 'self' https://fonts.gstatic.com https://fonts.googleapis.com; " +
+			"img-src 'self' data: blob: https://cdn.sanity.io https://images.unsplash.com https://unsplash.com https://amalshalih.or.id https://facebook.com https://instagram.com https://youtube.com https://tiktok.com https://wa.me https://www.google.com/maps https://linktr.ee https://www.googleapis.com; " +
+			"connect-src 'self' https://*.ingest.us.sentry.io https://api.resend.com https://www.googleapis.com https://fonts.googleapis.com https://fonts.gstatic.com; " +
+			"frame-src 'self' https://www.youtube.com https://youtube.com https://facebook.com https://instagram.com https://linktr.ee https://wa.me; " +
+			"frame-ancestors 'none'; " +
+			"form-action 'self' https://api.resend.com; " +
+			"base-uri 'self'; media-src 'self'; object-src 'none'; worker-src 'self';",
+	)
+
+	// Content-Security-Policy-Report-Only — monitoring (optional, for testing new policies)
 	headers.set(
 		'Content-Security-Policy-Report-Only',
 		"default-src 'self'; " +
 			"script-src 'self' 'unsafe-inline' https://*.sentry.io; " +
 			"style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " +
 			"font-src 'self' https://fonts.gstatic.com https://fonts.googleapis.com; " +
-			"img-src 'self' data: blob: https://cdn.sanity.io https://images.unsplash.com https://unsplash.com https://facebook.com https://instagram.com https://youtube.com https://tiktok.com https://wa.me https://www.google.com/maps https://linktr.ee https://www.googleapis.com; " +
+			"img-src 'self' data: blob: https://cdn.sanity.io https://images.unsplash.com https://unsplash.com https://amalshalih.or.id https://facebook.com https://instagram.com https://youtube.com https://tiktok.com https://wa.me https://www.google.com/maps https://linktr.ee https://www.googleapis.com; " +
 			"connect-src 'self' https://*.ingest.us.sentry.io https://api.resend.com https://www.googleapis.com https://fonts.googleapis.com https://fonts.gstatic.com; " +
 			"frame-src 'self' https://www.youtube.com https://youtube.com https://facebook.com https://instagram.com https://linktr.ee https://wa.me; " +
+			"frame-ancestors 'none'; " +
 			"form-action 'self' https://api.resend.com; " +
 			"base-uri 'self'; media-src 'self'; object-src 'none'; worker-src 'self';",
 	)

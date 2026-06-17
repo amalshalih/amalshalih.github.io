@@ -12,9 +12,6 @@ if (!product) {
 	return Astro.redirect('/404')
 }
 
-const isDev = import.meta.env.DEV
-const imageBaseUrl = isDev ? '' : 'https://amalshalih.or.id'
-
 const categoryName = categories.find((c) => c.id === product.category)?.name || ''
 
 const conditionLabels: Record<string, string> = {
@@ -35,7 +32,7 @@ const productSchema = {
 	'@type': 'Product',
 	name: product.name,
 	description: product.description,
-	image: product.images.map((img) => `${imageBaseUrl}${img}`),
+	image: product.images.map((img) => `https://amalshalih.or.id${img}`),
 	sku: product.id,
 	category: categoryName,
 	condition:
@@ -59,17 +56,15 @@ const productSchema = {
 	},
 }
 
-const imageUrls = product.images.map((img) => `${imageBaseUrl}${img}`)
-const barkasPath = '/barkas'
-
 const lightboxImages = product.images.map((img, index) => ({
 	id: `${product.id}-${index}`,
 	name: `${product.name} - Foto ${index + 1}`,
-	thumbnailUrl: `${imageBaseUrl}${img}`,
-	fullUrl: `${imageBaseUrl}${img}`,
+	thumbnailUrl: `https://amalshalih.or.id${img}`,
+	fullUrl: `https://amalshalih.or.id${img}`,
 }))
 
 const whatsappUrl = `https://wa.me/${programInfo.contact.whatsapp.replace(/-/g, '')}?text=Halo%20ASIB,%20saya%20ingin%20membeli%20${encodeURIComponent(product.name)}%20(Rp%20${product.price.toLocaleString('id-ID')})`
+const barkasPath = '/barkas'
 ---
 
 <BaseLayout title={`${product.name} - ${programInfo.fullName}`} description={product.description} currentPage={barkasPath}>
@@ -78,8 +73,8 @@ const whatsappUrl = `https://wa.me/${programInfo.contact.whatsapp.replace(/-/g, 
 
   <main class="product-detail-page">
     <!-- Hero / Breadcrumb -->
-    <section class="detail-hero -mt-[70px] sm:-mt-[82px] min-h-[200px] sm:min-h-[240px] lg:min-h-[280px]" style="background-image: url('https://images.unsplash.com/photo-1610701596007-11502861dcfa?w=1400&q=75'); background-size: cover; background-position: center 50%;">
-      <div class="container pt-[90px] sm:pt-[110px] pb-4 sm:pb-8 lg:pb-10 relative z-1">
+    <section class="detail-hero -mt-[70px] sm:-mt-[82px] min-h-[200px] sm:min-h-[240px] lg:min-h-[280px]">
+      <div class="container pt-[90px] sm:pt-[110px] pb-4 sm:pb-8 lg:pb-10">
         <nav class="breadcrumb" aria-label="Breadcrumb">
           <a href="/barkas">BARKAS</a>
           <span class="separator" aria-hidden="true">›</span>
@@ -98,7 +93,7 @@ const whatsappUrl = `https://wa.me/${programInfo.contact.whatsapp.replace(/-/g, 
         <div class="product-grid-detail">
           <!-- Left: Gallery -->
           <div class="product-gallery">
-            <div class="main-image" id="main-image-wrapper">
+            <div class="main-image" id="main-image-wrapper" onclick="openLightbox(window.__currentImageIndex || 0)">
               <img
                 id="main-product-image"
                 src={product.images[0]}
@@ -112,9 +107,10 @@ const whatsappUrl = `https://wa.me/${programInfo.contact.whatsapp.replace(/-/g, 
               <div class="thumbnail-grid" role="list" aria-label="Image thumbnails">
                 {product.images.map((img, index) => (
                   <button
-                    class={`thumbnail ${index === 0 ? 'active' : ''}`}
+                    class="thumbnail${index === 0 ? ' active' : ''}"
                     role="listitem"
                     aria-label={`Product image ${index + 1}`}
+                    onclick={`swapProductImage(${index})`}
                   >
                     <img src={img} alt="" loading="lazy" />
                   </button>
@@ -271,42 +267,19 @@ const whatsappUrl = `https://wa.me/${programInfo.contact.whatsapp.replace(/-/g, 
 
   <Lightbox images={lightboxImages} />
 
-  <script is:inline define:vars={{ images: imageUrls }}>
-    // CSP-compliant image gallery interactions
-    document.addEventListener('DOMContentLoaded', () => {
-      const mainImageWrapper = document.getElementById('main-image-wrapper')
-      const mainImage = document.getElementById('main-product-image')
-      const thumbnails = document.querySelectorAll('.thumbnail')
-      
-      window.__currentImageIndex = 0
-      
-      // Open lightbox on main image click
-      if (mainImageWrapper) {
-        mainImageWrapper.addEventListener('click', () => {
-          // Call window.openLightbox directly (exposed by Lightbox component)
-          if (window.openLightbox) {
-            window.openLightbox(window.__currentImageIndex)
-          }
-        })
-      }
-      
-      // Swap image on thumbnail click with fade animation
-      window.swapProductImage = function(index) {
-        if (!mainImage || index === window.__currentImageIndex) return
-        
-        mainImage.style.opacity = '0'
-        setTimeout(() => {
-          mainImage.src = images[index]
-          mainImage.style.opacity = '1'
-        }, 200)
-        
-        thumbnails.forEach((thumb, i) => {
-          thumb.classList.toggle('active', i === index)
-        })
-        
-        window.__currentImageIndex = index
-      }
-    })
+  <script is:inline define:vars={{ images: product.images }}>
+  (() => {
+    const mainImage = document.getElementById('main-product-image');
+    const thumbnails = document.querySelectorAll('.thumbnail');
+    window.__currentImageIndex = 0;
+
+    window.swapProductImage = function(index) {
+      if (!mainImage || index === window.__currentImageIndex) return;
+      window.__currentImageIndex = index;
+      mainImage.src = images[index];
+      thumbnails.forEach((el, i) => el.classList.toggle('active', i === index));
+    };
+  })();
   </script>
 
   <style>
@@ -325,6 +298,7 @@ const whatsappUrl = `https://wa.me/${programInfo.contact.whatsapp.replace(/-/g, 
     /* Detail Hero (gradient + breadcrumb + title) */
     .detail-hero {
       position: relative;
+      background-image: url('https://images.unsplash.com/photo-1553413077-190dd305c5ab?w=1400&q=75');
       background-size: cover;
       background-position: center 50%;
       overflow: hidden;
@@ -333,18 +307,9 @@ const whatsappUrl = `https://wa.me/${programInfo.contact.whatsapp.replace(/-/g, 
     .detail-hero::before {
       content: '';
       position: absolute;
-      top: -70px;
-      left: 0;
-      right: 0;
-      bottom: 0;
+      inset: 0;
       background: linear-gradient(135deg, rgba(0,40,15,0.88) 0%, rgba(0,25,8,0.78) 50%, rgba(0,0,0,0.5) 100%);
       pointer-events: none;
-    }
-    
-    @media (min-width: 640px) {
-      .detail-hero::before {
-        top: -82px;
-      }
     }
 
     .breadcrumb {

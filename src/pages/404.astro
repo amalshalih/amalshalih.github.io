@@ -1,30 +1,29 @@
 ---
 import Button from '@components/ui/Button.astro'
+import Container from '@components/ui/Container.astro'
+import Heading from '@components/ui/Heading.astro'
 import BaseLayout from '@layouts/BaseLayout.astro'
 import { getSiteSettings } from '@lib/sanity/client'
+import { withFallback } from '@lib/with-fallback'
 
 let notFoundTitle = 'Halaman Tidak Ditemukan'
 let notFoundDescription = 'Maaf, halaman yang Anda cari tidak tersedia atau telah dipindahkan.'
 
-try {
-	const ss = await getSiteSettings()
-	if (ss?.notFoundTitle) notFoundTitle = ss.notFoundTitle
-	if (ss?.notFoundDescription) notFoundDescription = ss.notFoundDescription
-} catch (error) {
-	console.error('[404] Sanity fetch failed:', error)
-}
+const ss = await withFallback(() => getSiteSettings(), null, '404 page settings fetch')
+if (ss?.notFoundTitle) notFoundTitle = ss.notFoundTitle
+if (ss?.notFoundDescription) notFoundDescription = ss.notFoundDescription
 ---
 
 <BaseLayout
 	title={notFoundTitle}
 	description={notFoundDescription}
 >
-	<section class="flex flex-1 items-center justify-center px-4 py-20 sm:py-32">
+	<Container class="flex flex-1 items-center justify-center px-4 py-20 sm:py-32" as="section">
 		<div class="text-center">
 			<p class="text-6xl sm:text-8xl font-extrabold text-primary-200">404</p>
-			<h1 class="mt-3 text-2xl sm:text-3xl lg:text-4xl font-bold text-text-primary">
+			<Heading level="h1" size="2xl" class="mt-3">
 				{notFoundTitle}
-			</h1>
+			</Heading>
 			<p class="mt-3 mx-auto max-w-md text-text-secondary">
 				{notFoundDescription}
 			</p>
@@ -33,5 +32,5 @@ try {
 				<Button variant="outline" href="/donasi">Donasi</Button>
 			</div>
 		</div>
-	</section>
+	</Container>
 </BaseLayout>

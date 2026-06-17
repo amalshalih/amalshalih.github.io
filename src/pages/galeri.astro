@@ -1,13 +1,17 @@
 ---
 import { env } from 'cloudflare:workers'
 import PageHeader from '@components/sections/PageHeader.astro'
+import Badge from '@components/ui/Badge.astro'
 import Container from '@components/ui/Container.astro'
+import Heading from '@components/ui/Heading.astro'
 import Icon from '@components/ui/Icon.astro'
+import Image from '@components/ui/Image.astro'
 import type { GalleryEntry } from '@data/galleries'
 import { fetchAllGalleries, filterPublishedGalleries } from '@data/galleries'
 import BaseLayout from '@layouts/BaseLayout.astro'
 import { KATEGORI_LABELS } from '@lib/constants'
 import { getSiteSettings } from '@lib/sanity/client'
+import { withFallback } from '@lib/with-fallback'
 
 // SSR - Real-time data fetching (Cloudflare Workers compatible)
 export const prerender = false
@@ -142,9 +146,10 @@ try {
 					<a href={`/galeri/${gallery.slug}`} class="group block rounded-xl sm:rounded-2xl bg-surface-elevated dark:bg-warm-900 shadow-sm dark:shadow-surface-inverse/20 transition-all duration-300 ease-out border border-border-secondary/60 dark:border-white/5 hover:-translate-y-1.5 hover:shadow-lg hover:shadow-primary-500/5 dark:hover:shadow-primary-500/5 hover:border-primary-500/30 dark:hover:border-primary-400/20 overflow-hidden">
 						<div class={`relative aspect-[4/3] w-full overflow-hidden ${coverThumbUrl ? '' : `bg-gradient-to-br ${kategoriGradients[gallery.category] || 'from-primary-400 to-primary-600'}`}`}>
 							{coverThumbUrl ? (
-								<img
+								<Image
 									src={coverThumbUrl}
 									alt={gallery.title}
+									aspect="aspect-[4/3]"
 									class="h-full w-full object-cover transition-all duration-700 ease-out group-hover:scale-105"
 									data-cover-image={gallery.slug}
 									loading="lazy"
@@ -161,14 +166,14 @@ try {
 
 							<!-- Top: Category & Photo Count -->
 							<div class="absolute top-4 left-4 right-4 flex items-start justify-between gap-2">
-								<span class="inline-flex items-center gap-1.5 rounded-full bg-white/95 dark:bg-primary-950/90 px-3 py-1.5 text-xs font-semibold uppercase tracking-wide text-primary-700 dark:text-primary-300 shadow-sm backdrop-blur-sm">
+								<Badge variant="subtle" size="sm" class="backdrop-blur-sm gap-1.5 uppercase tracking-wide">
 									<Icon name={(kategoriIcons[gallery.category] ?? 'book') as 'book' | 'home' | 'heart' | 'globe'} size={3.5} aria-hidden="true" />
 									{kategoriLabels[gallery.category] || KATEGORI_LABELS[gallery.category] || gallery.category}
-								</span>
-								<span class="inline-flex items-center gap-1 rounded-full bg-black/60 px-2.5 py-1 text-xs font-medium text-white backdrop-blur-sm">
+								</Badge>
+								<Badge variant="outline" size="sm" class="backdrop-blur-sm text-white">
 									<Icon name="image" size={3} aria-hidden="true" />
 									{gallery.totalImages} foto
-								</span>
+								</Badge>
 							</div>
 
 							<!-- Bottom: Date -->
@@ -196,9 +201,9 @@ try {
 
 						<!-- Content Section -->
 						<div class="p-5 sm:p-6 bg-white dark:bg-warm-900">
-							<h2 class="text-lg sm:text-xl font-bold text-warm-900 dark:text-warm-100 leading-tight line-clamp-2 group-hover:text-primary-700 dark:group-hover:text-primary-400 transition-colors duration-300">
+							<Heading level="h2" size="lg" class="text-warm-900 dark:text-warm-100 leading-tight line-clamp-2 group-hover:text-primary-700 dark:group-hover:text-primary-400 transition-colors duration-300">
 								{gallery.title}
-							</h2>
+							</Heading>
 							<p class="mt-2 text-sm text-warm-600 dark:text-warm-300 leading-relaxed line-clamp-2">
 								{gallery.description}
 							</p>
@@ -234,7 +239,7 @@ try {
 				<div class="mb-3 rounded-full bg-warm-50 p-4 sm:p-6 text-warm-500">
 					<Icon name="image" size={10} class="sm:size-16" aria-hidden="true" />
 				</div>
-				<h2 class="text-lg sm:text-xl font-bold text-warm-900">Belum Ada Galeri</h2>
+				<Heading level="h2" size="lg" class="text-warm-900">Belum Ada Galeri</Heading>
 				<p class="mt-2 max-w-xs text-sm sm:text-base text-warm-600">Galeri dokumentasi akan diperbarui secara berkala oleh tim yayasan.</p>
 			</div>
 		) : (
@@ -246,7 +251,7 @@ try {
 			<div class="mb-3 rounded-full bg-warm-50 p-4 sm:p-6 text-warm-500 inline-block">
 				<Icon name="image" size={10} class="sm:size-16" aria-hidden="true" />
 			</div>
-			<h3 class="text-lg sm:text-xl font-bold text-warm-900">Tidak Ada Galeri Ditemukan</h3>
+			<Heading level="h3" size="lg" class="text-warm-900">Tidak Ada Galeri Ditemukan</Heading>
 			<p class="mt-2 text-sm sm:text-base text-warm-600">
 				Belum ada galeri untuk kategori ini. Silakan pilih kategori lain atau lihat semua galeri.
 			</p>
@@ -260,30 +265,6 @@ try {
 		</div>
 	</Container>
 </BaseLayout>
-
-<style>
-	.gallery-item.hidden-item {
-		display: none;
-	}
-	
-	.gallery-item.fade-out {
-		opacity: 0;
-		transform: scale(0.9);
-	}
-
-	.gallery-item.fade-in {
-		opacity: 1;
-		transform: scale(1);
-	}
-	
-	/* No results message */
-	.filter-no-results {
-		display: none;
-	}
-	.filter-no-results.visible {
-		display: block;
-	}
-</style>
 
 <script is:inline>
 (() => {
@@ -313,17 +294,17 @@ try {
 
 				if (matches) {
 					visibleCount++;
-					item.classList.remove('hidden-item');
+					item.classList.remove('hidden');
 					setTimeout(() => {
-						item.classList.remove('fade-out');
-						item.classList.add('fade-in');
+						item.classList.remove('opacity-0', 'scale-90');
+						item.classList.add('opacity-100', 'scale-100');
 					}, 10);
 				} else {
-					item.classList.add('fade-out');
-					item.classList.remove('fade-in');
+					item.classList.add('opacity-0', 'scale-90');
+					item.classList.remove('opacity-100', 'scale-100');
 					setTimeout(() => {
-						if (item.classList.contains('fade-out')) {
-							item.classList.add('hidden-item');
+						if (item.classList.contains('opacity-0')) {
+							item.classList.add('hidden');
 						}
 					}, 300);
 				}
@@ -332,9 +313,9 @@ try {
 			// Show/hide no results message
 			if (noResultsMsg) {
 				if (visibleCount === 0 && filter !== 'all') {
-					noResultsMsg.classList.add('visible');
+					noResultsMsg.classList.remove('hidden');
 				} else {
-					noResultsMsg.classList.remove('visible');
+					noResultsMsg.classList.add('hidden');
 				}
 			}
 		});
