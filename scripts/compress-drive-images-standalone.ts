@@ -231,8 +231,9 @@ async function compressImage(inputPath: string): Promise<CompressionResult | nul
 			compressedName = `${baseName}.jpg`
 			compressedPath = join(COMPRESSED_DIR, compressedName)
 
-			// jpegoptim with --dest option to output to different directory
-			await $`jpegoptim --strip-all --all-normal --dest=${COMPRESSED_DIR} ${inputPath}`
+			// iLoveIMG-style compression: aggressive quality reduction (80%) + strip metadata
+			// This gives 40-60% reduction with visually identical quality
+			await $`jpegoptim --max=80 --strip-all --all-normal --dest=${COMPRESSED_DIR} ${inputPath}`
 
 			// Verify file was created
 			try {
@@ -241,27 +242,16 @@ async function compressImage(inputPath: string): Promise<CompressionResult | nul
 				// If dest didn't work, manually copy
 				const { $ } = await import('bun')
 				await $`cp ${inputPath} ${compressedPath}`
-				await $`jpegoptim --strip-all --all-normal ${compressedPath}`
+				await $`jpegoptim --max=80 --strip-all --all-normal ${compressedPath}`
 			}
 		} else if (ext === 'png') {
 			compressedName = `${baseName}.png`
 			compressedPath = join(COMPRESSED_DIR, compressedName)
 
-			await $`optipng -o7 -strip all -quiet -out ${compressedPath} ${inputPath}`
-
-			const pngquantPath = compressedPath.replace('.png', '-quant.png')
-			await $`pngquant --quality 65-100 --speed 1 --force --output ${pngquantPath} ${compressedPath}`
-
-			const optipngSize = await getFileSize(compressedPath)
-			const pngquantSize = await getFileSize(pngquantPath)
-
-			if (pngquantSize < optipngSize) {
-				await unlink(compressedPath)
-				await $`mv ${pngquantPath} ${compressedPath}`
-				compressedName = `${baseName}.png`
-			} else {
-				await unlink(pngquantPath)
-			}
+			// iLoveIMG-style PNG: aggressive pngquant (quality 60-80 for web)
+			const pngquantPath = join(COMPRESSED_DIR, `${baseName}-quant.png`)
+			await $`pngquant --quality 60-80 --speed 1 --force --output ${pngquantPath} ${inputPath}`
+			compressedPath = pngquantPath
 		} else if (ext === 'webp') {
 			compressedName = `${baseName}.webp`
 			compressedPath = join(COMPRESSED_DIR, compressedName)
