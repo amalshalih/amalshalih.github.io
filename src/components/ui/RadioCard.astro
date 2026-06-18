@@ -15,11 +15,11 @@
  *   <RadioCard value="info" icon="book"
  *     label="Informasi Program" description="Tanya tentang program" />
  */
-import Icon from '@components/ui/Icon.astro'
+import Icon, { type IconName } from '@components/ui/Icon.astro'
 
 interface Props {
 	value: string
-	icon: string
+	icon: IconName
 	label: string
 	description: string
 	/** id for aria-describedby on the button; also used on the description <span> */
