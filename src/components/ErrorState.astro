@@ -27,9 +27,9 @@ const icons = {
 
 const iconPaths = icons[icon]
 const colors = {
-	'alert-circle': 'text-red-600 bg-red-50',
-	info: 'text-blue-600 bg-blue-50',
-	'x-circle': 'text-red-600 bg-red-50',
+	'alert-circle': 'text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-950',
+	info: 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950',
+	'x-circle': 'text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-950',
 }
 const iconColor = colors[icon]
 ---
@@ -47,6 +47,6 @@ const iconColor = colors[icon]
 			{iconPaths}
 		</svg>
 	</div>
-	<h2 class="text-xl font-bold text-warm-900 mb-2">{title}</h2>
-	<p class="text-warm-600 max-w-md mx-auto">{message}</p>
+	<h2 class="text-xl font-bold text-warm-900 dark:text-warm-100 mb-2">{title}</h2>
+	<p class="text-warm-600 dark:text-warm-400 max-w-md mx-auto">{message}</p>
 </div>

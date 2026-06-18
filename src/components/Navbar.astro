@@ -137,6 +137,26 @@ if (ss?.navItems && ss.navItems.length > 0) {
 						)
 					})}
 				</div>
+				<!-- Theme Toggle (Desktop) -->
+				<button
+					id="theme-toggle"
+					type="button"
+					class={`mx-1 p-2 rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 cursor-pointer ${
+						isHomepage
+							? 'text-white hover:bg-white/10 focus-visible:ring-white focus-visible:ring-offset-primary-900'
+							: isBlogDetail
+								? 'text-warm-900 dark:text-white hover:bg-warm-100 dark:hover:bg-white/10 focus-visible:ring-warm-900 dark:focus-visible:ring-white focus-visible:ring-offset-2 dark:focus-visible:ring-offset-warm-950'
+								: 'text-primary-800 dark:text-warm-200 hover:bg-primary-50 dark:hover:bg-warm-800 focus-visible:ring-primary-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-warm-950'
+					}`}
+					aria-label="Ubah tema"
+				>
+					<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 sun-icon hidden dark:block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+						<path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-12.728l.707.707m12.728 12.728l.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z" />
+					</svg>
+					<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 moon-icon block dark:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+						<path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+					</svg>
+				</button>
 				<Button
 					href="/donasi"
 					variant="primary"
@@ -146,24 +166,48 @@ if (ss?.navItems && ss.navItems.length > 0) {
 				</Button>
 			</div>
 
-			<!-- Mobile Menu Button -->
-			<button
-				id="mobile-menu-button"
-				type="button"
-				class={`sm:hidden p-1.5 rounded-lg transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ${
-					isHomepage
-						? 'text-white hover:bg-white/10 focus-visible:ring-white focus-visible:ring-offset-primary-900'
-						: isBlogDetail
-							? 'text-warm-900 dark:text-white hover:bg-warm-100 dark:hover:bg-white/10 focus-visible:ring-warm-900 dark:focus-visible:ring-white focus-visible:ring-offset-2 dark:focus-visible:ring-offset-warm-950'
-							: 'text-primary-800 dark:text-warm-200 hover:bg-primary-50 dark:hover:bg-warm-800 focus-visible:ring-primary-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-warm-950'
-				}`}
-				aria-expanded="false"
-				aria-controls="mobile-menu"
-				aria-label="Buka menu navigasi"
-			>
-				<Icon name="menu" size={5} class="menu-icon" aria-hidden="true" />
-				<Icon name="close" size={5} class="close-icon hidden" aria-hidden="true" />
-			</button>
+			<!-- Mobile Actions Wrapper -->
+			<div class="flex items-center gap-1.5 sm:hidden">
+				<!-- Theme Toggle (Mobile) -->
+				<button
+					id="theme-toggle-mobile"
+					type="button"
+					class={`p-1.5 rounded-lg transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 cursor-pointer ${
+						isHomepage
+							? 'text-white hover:bg-white/10 focus-visible:ring-white focus-visible:ring-offset-primary-900'
+							: isBlogDetail
+								? 'text-warm-900 dark:text-white hover:bg-warm-100 dark:hover:bg-white/10 focus-visible:ring-warm-900 dark:focus-visible:ring-white focus-visible:ring-offset-2 dark:focus-visible:ring-offset-warm-950'
+								: 'text-primary-800 dark:text-warm-200 hover:bg-primary-50 dark:hover:bg-warm-800 focus-visible:ring-primary-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-warm-950'
+					}`}
+					aria-label="Ubah tema"
+				>
+					<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 sun-icon hidden dark:block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+						<path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-12.728l.707.707m12.728 12.728l.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z" />
+					</svg>
+					<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 moon-icon block dark:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+						<path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+					</svg>
+				</button>
+
+				<!-- Mobile Menu Button -->
+				<button
+					id="mobile-menu-button"
+					type="button"
+					class={`p-1.5 rounded-lg transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ${
+						isHomepage
+							? 'text-white hover:bg-white/10 focus-visible:ring-white focus-visible:ring-offset-primary-900'
+							: isBlogDetail
+								? 'text-warm-900 dark:text-white hover:bg-warm-100 dark:hover:bg-white/10 focus-visible:ring-warm-900 dark:focus-visible:ring-white focus-visible:ring-offset-2 dark:focus-visible:ring-offset-warm-950'
+								: 'text-primary-800 dark:text-warm-200 hover:bg-primary-50 dark:hover:bg-warm-800 focus-visible:ring-primary-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-warm-950'
+					}`}
+					aria-expanded="false"
+					aria-controls="mobile-menu"
+					aria-label="Buka menu navigasi"
+				>
+					<Icon name="menu" size={5} class="menu-icon" aria-hidden="true" />
+					<Icon name="close" size={5} class="close-icon hidden" aria-hidden="true" />
+				</button>
+			</div>
 		</nav>
 
 		<!-- Mobile Nav Drawer -->

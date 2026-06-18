@@ -31,7 +31,7 @@ const { images, gallerySlug, startIndex = 0 } = Astro.props
     
     return (
       <button
-        class="gallery-item group relative overflow-hidden rounded-lg sm:rounded-xl bg-warm-100 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2"
+        class="gallery-item group relative overflow-hidden rounded-lg sm:rounded-xl bg-warm-100 dark:bg-warm-900 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2"
         style={`aspect-ratio: ${aspectRatio};`}
         data-index={startIndex + index}
         aria-label={`View ${image.name}`}

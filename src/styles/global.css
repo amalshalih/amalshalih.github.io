@@ -116,6 +116,7 @@
 			radial-gradient(ellipse 900px 700px at 12% 8%, rgba(74, 222, 128, 0.06) 0%, transparent 65%),
 			radial-gradient(ellipse 700px 800px at 88% 65%, rgba(251, 191, 36, 0.05) 0%, transparent 60%);
 		@apply text-warm-800 font-sans antialiased;
+		transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 	}
 
 	h1,
@@ -123,6 +124,7 @@
 	h3,
 	h4 {
 		@apply font-display font-bold tracking-tight text-warm-900;
+		transition: color 0.3s ease;
 	}
 
 	*:focus-visible {
@@ -172,6 +174,41 @@
 			--tw-prose-th-borders: var(--color-warm-700);
 			--tw-prose-td-borders: var(--color-warm-800);
 		}
+	}
+
+	html.dark body {
+		background-color: #0c0a09;
+		background-image:
+			radial-gradient(ellipse 800px 600px at 12% 8%, rgba(74, 222, 128, 0.08) 0%, transparent 60%),
+			radial-gradient(ellipse 600px 700px at 88% 65%, rgba(251, 191, 36, 0.06) 0%, transparent 55%),
+			radial-gradient(circle at 50% 0%, #171412 0%, transparent 100%);
+		background-attachment: fixed;
+		color: var(--color-warm-200, #e7e5e4);
+	}
+
+	html.dark h1,
+	html.dark h2,
+	html.dark h3,
+	html.dark h4 {
+		color: var(--color-warm-50, #fafaf9);
+	}
+
+	html.dark .prose {
+		--tw-prose-body: var(--color-warm-200);
+		--tw-prose-headings: var(--color-warm-50);
+		--tw-prose-links: var(--color-primary-400);
+		--tw-prose-bold: var(--color-warm-100);
+		--tw-prose-counters: var(--color-warm-400);
+		--tw-prose-bullets: var(--color-warm-500);
+		--tw-prose-hr: var(--color-warm-800);
+		--tw-prose-quotes: var(--color-warm-200);
+		--tw-prose-quote-borders: var(--color-primary-500);
+		--tw-prose-captions: var(--color-warm-400);
+		--tw-prose-code: var(--color-primary-300);
+		--tw-prose-pre-code: var(--color-warm-100);
+		--tw-prose-pre-bg: var(--color-warm-900);
+		--tw-prose-th-borders: var(--color-warm-700);
+		--tw-prose-td-borders: var(--color-warm-800);
 	}
 
 	@media (prefers-reduced-motion: reduce) {

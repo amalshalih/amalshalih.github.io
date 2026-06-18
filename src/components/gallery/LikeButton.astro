@@ -16,12 +16,12 @@ const { gallerySlug } = Astro.props
   <button
     type="button"
     data-like-button
-    class="group inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 shadow-sm ring-1 ring-warm-200 transition-all hover:shadow-md hover:ring-warm-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
+    class="group inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 shadow-sm ring-1 ring-warm-200 dark:ring-warm-300 transition-all hover:shadow-md hover:ring-warm-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
     aria-label="Sukai galeri ini"
   >
     <!-- Loading Spinner -->
     <svg
-      class="loading-spinner hidden h-5 w-5 text-warm-500 animate-spin"
+      class="loading-spinner hidden h-5 w-5 text-warm-500 dark:text-warm-400 animate-spin"
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
@@ -40,7 +40,7 @@ const { gallerySlug } = Astro.props
       stroke-width="2"
       stroke-linecap="round"
       stroke-linejoin="round"
-      class="heart-icon h-5 w-5 text-warm-500 transition-colors group-hover:text-rose-600 group-data-[liked=true]:fill-rose-500 group-data-[liked=true]:text-rose-500 group-data-[liked=true]:animate-pulse"
+      class="heart-icon h-5 w-5 text-warm-500 dark:text-warm-400 transition-colors group-hover:text-rose-600 group-data-[liked=true]:fill-rose-500 group-data-[liked=true]:text-rose-500 group-data-[liked=true]:animate-pulse"
       data-heart-icon
       aria-hidden="true"
     >

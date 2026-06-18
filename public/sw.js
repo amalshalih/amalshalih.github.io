@@ -75,7 +75,7 @@ self.addEventListener('fetch', (event) => {
 			caches.match(request, { cacheName: HERO_CACHE }).then((response) => {
 				if (response) return response
 				return fetch(request).then((response) => {
-					if (!response || response.status !== 200 || response.type !== 'basic') return response
+					if (response?.status !== 200 || response.type !== 'basic') return response
 					const responseClone = response.clone()
 					caches.open(HERO_CACHE).then((cache) => cache.put(request, responseClone))
 					return response
@@ -90,7 +90,7 @@ self.addEventListener('fetch', (event) => {
 		event.respondWith(
 			fetch(request)
 				.then((response) => {
-					if (!response || response.status !== 200 || response.type !== 'basic') return response
+					if (response?.status !== 200 || response.type !== 'basic') return response
 					const responseClone = response.clone()
 					caches.open(HERO_CACHE).then((cache) => cache.put(request, responseClone))
 					return response

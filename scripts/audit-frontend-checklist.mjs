@@ -360,7 +360,7 @@ function printReport(report, failures) {
 				? colors.yellow
 				: colors.red
 
-	console.log('\n' + '═'.repeat(60))
+	console.log(`\n${'═'.repeat(60)}`)
 	console.log(`${colors.cyan}${colors.bold}  FRONT-END CHECKLIST AUDIT v4${colors.reset}`)
 	console.log('═'.repeat(60))
 
@@ -408,7 +408,7 @@ function printReport(report, failures) {
 
 			const byFile = {}
 			for (const i of issues) {
-				const rel = i.file.replace(process.cwd() + '/', '')
+				const rel = i.file.replace(`${process.cwd()}/`, '')
 				if (!byFile[rel]) byFile[rel] = []
 				byFile[rel].push(i)
 			}
@@ -422,9 +422,9 @@ function printReport(report, failures) {
 		}
 	}
 
-	console.log('\n' + '═'.repeat(60))
+	console.log(`\n${'═'.repeat(60)}`)
 	console.log(`  ${colors.green}✅ Audit complete${colors.reset}`)
-	console.log('═'.repeat(60) + '\n')
+	console.log(`${'═'.repeat(60)}\n`)
 }
 
 // ─── MAIN ────────────────────────────────────────────────────────────

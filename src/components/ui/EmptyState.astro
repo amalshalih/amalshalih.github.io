@@ -23,7 +23,7 @@ const { title, description, icon, emoji, action } = Astro.props
 
 <div class="flex flex-col items-center justify-center py-16 sm:py-24 text-center">
 	{icon && (
-		<div class="mb-3 rounded-full bg-warm-50 p-4 sm:p-6 text-warm-500">
+		<div class="mb-3 rounded-full bg-warm-50 dark:bg-warm-900 p-4 sm:p-6 text-warm-500 dark:text-warm-400">
 			<Icon name={icon as 'image' | 'book' | 'heart' | 'globe'} size={10} class="sm:size-16" aria-hidden="true" />
 		</div>
 	)}
@@ -37,7 +37,7 @@ const { title, description, icon, emoji, action } = Astro.props
 			) : (
 				<button
 					type="button"
-					class="inline-flex items-center gap-2 rounded-lg bg-primary-700 px-6 py-3 text-sm font-semibold text-white hover:bg-primary-800 transition-colors shadow-sm"
+					class="inline-flex items-center gap-2 rounded-lg bg-primary-700 dark:bg-primary-500 px-6 py-3 text-sm font-semibold text-white hover:bg-primary-800 dark:hover:bg-primary-400 transition-colors shadow-sm"
 					data-filter={action.datasetFilter}
 				>
 					<Icon name="globe" size={4} aria-hidden="true" />

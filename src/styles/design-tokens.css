@@ -159,7 +159,7 @@
 }
 
 
-/* ========== DARK THEME (prefers-color-scheme: dark) ========== */
+/* ========== DARK THEME (prefers-color-scheme: dark & html.dark) ========== */
 @media (prefers-color-scheme: dark) {
   :root {
     /* =========================================
@@ -280,6 +280,126 @@
     /** Green accent glow — brighter in dark mode */
     --color-shadow-accent-hover: color-mix(in srgb, var(--color-primary-400) 25%, transparent);
   }
+}
+
+html.dark {
+  /* =========================================
+     SURFACE COLORS (Dark Mode)
+     ========================================= */
+  
+   /** Main page background — slightly translucent for blossom show-through */
+  --color-surface: rgba(12, 10, 9, 0.88);
+  
+  /** Elevated surfaces (cards) — nearly opaque */
+  --color-surface-elevated: rgba(28, 25, 23, 0.92);
+  
+  /** Primary brand surfaces - adjusted for dark mode */
+  --color-surface-primary: var(--color-primary-950);
+  
+  /** Secondary surfaces */
+  --color-surface-secondary: rgba(12, 10, 9, 0.88);
+  
+  /** Inverse surface (for contrast elements) */
+  --color-surface-inverse: var(--color-warm-50);
+  
+  /** Subtle surface variations */
+  --color-surface-subtle: color-mix(in srgb, rgba(20, 83, 45, 0.88) 50%, transparent);
+  
+
+  /* =========================================
+     TEXT COLORS (Dark Mode)
+     ========================================= */
+  
+  /** Primary text - warm-50 (off-white) */
+  --color-text-primary: var(--color-warm-50);
+  
+  /** Secondary text - warm-300 */
+  --color-text-secondary: var(--color-warm-300);
+  
+  /** Muted text - warm-400 */
+  --color-text-muted: var(--color-warm-400);
+  
+  /** Inverse text (on light surfaces) - warm-900 */
+  --color-text-inverse: var(--color-warm-900);
+  
+  /** Text on primary surfaces - still white */
+  --color-text-on-primary: #ffffff;
+  
+  /** Accent text - brighter gold for dark mode */
+  --color-text-accent: var(--color-gold-400);
+  
+  /** Accent text - red alerts for dark mode */
+  --color-text-alert: var(--color-red-400);
+  
+
+  /* =========================================
+     BADGE / TAG COLORS (Dark Mode)
+     ========================================= */
+  
+  /** Primary badge — translucent green on dark bg, brighter text */
+  --color-badge-primary-bg: color-mix(in srgb, var(--color-primary-800) 40%, transparent);
+  --color-badge-primary-text: var(--color-primary-300);
+  
+  /** Gold badge — translucent gold on dark bg, brighter text */
+  --color-badge-gold-bg: color-mix(in srgb, var(--color-gold-800) 40%, transparent);
+  --color-badge-gold-text: var(--color-gold-300);
+  
+  /** Alert badge — translucent red on dark bg, brighter text */
+  --color-badge-alert-bg: color-mix(in srgb, var(--color-red-800) 40%, transparent);
+  --color-badge-alert-text: var(--color-red-300);
+  
+  /* =========================================
+     SURFACE VARIANTS (Dark Mode)
+     ========================================= */
+  
+  /** Image placeholder — dark gray instead of light */
+  --color-surface-placeholder: var(--color-warm-800);
+  
+  /** Hover state — subtle bright green tint */
+  --color-surface-hover: color-mix(in srgb, var(--color-primary-800) 25%, transparent);
+
+
+  /* =========================================
+     BORDER COLORS (Dark Mode)
+     ========================================= */
+  
+  /** Primary border - warm-800 */
+  --color-border-primary: var(--color-warm-800);
+  
+  /** Secondary border - warm-700 */
+  --color-border-secondary: var(--color-warm-700);
+  
+  /** Border on light surfaces */
+  --color-border-inverse: var(--color-primary-200);
+  
+  /** Accent borders - gold */
+  --color-border-accent: var(--color-gold-400);
+
+  /* =========================================
+     TEXT ACCENT VARIANTS (Dark Mode)
+     ========================================= */
+
+  /** Green accent text — bright for contrast on dark bg */
+  --color-text-accent-primary: var(--color-primary-400);
+
+  /** Gold status text — bright for contrast on dark bg */
+  --color-text-gold: var(--color-gold-400);
+
+  /** Red alert/sold text — bright for contrast on dark bg */
+  --color-text-sold: var(--color-red-400);
+
+  /* =========================================
+     SHADOW COLORS (Dark Mode)
+     ========================================= */
+
+  /** Higher opacity so shadows remain visible on dark bg */
+  --color-shadow-elevated: rgba(0, 0, 0, 0.3);
+  --color-shadow-elevated-hover: rgba(0, 0, 0, 0.5);
+  --color-shadow-card-hover: rgba(0, 0, 0, 0.5);
+  --color-shadow-image-hover: rgba(0, 0, 0, 0.5);
+
+  /** Green accent glow — brighter in dark mode */
+  --color-shadow-accent-hover: color-mix(in srgb, var(--color-primary-400) 25%, transparent);
 }
 
 

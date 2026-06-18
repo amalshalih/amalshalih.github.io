@@ -25,6 +25,19 @@ export default [
 		},
 	},
 	{
+		files: ['public/sw.js'],
+		languageOptions: {
+			globals: {
+				self: 'readonly',
+				fetch: 'readonly',
+				caches: 'readonly',
+				URL: 'readonly',
+				Response: 'readonly',
+				console: 'readonly',
+			},
+		},
+	},
+	{
 		rules: {
 			'@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
 			'@typescript-eslint/no-explicit-any': 'warn',

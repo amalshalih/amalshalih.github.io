@@ -105,7 +105,7 @@ const coverImage =
 
     <!-- Cover photo: most liked photo or latest added -->
     {images.length > 0 && (
-      <div class="relative mb-8 overflow-hidden rounded-xl sm:rounded-2xl bg-warm-100" data-cover-container>
+      <div class="relative mb-8 overflow-hidden rounded-xl sm:rounded-2xl bg-warm-100 dark:bg-warm-900" data-cover-container>
         <img
           src={images[images.length - 1].thumbnailUrl.replace('size=400', 'size=800')}
           alt={images[images.length - 1].name}
