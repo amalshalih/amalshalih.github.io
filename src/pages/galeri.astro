@@ -1,8 +1,10 @@
 ---
 import { env } from 'cloudflare:workers'
+import ErrorState from '@components/ErrorState.astro'
 import PageHeader from '@components/sections/PageHeader.astro'
 import Badge from '@components/ui/Badge.astro'
 import Container from '@components/ui/Container.astro'
+import EmptyState from '@components/ui/EmptyState.astro'
 import Heading from '@components/ui/Heading.astro'
 import Icon from '@components/ui/Icon.astro'
 import Image from '@components/ui/Image.astro'
@@ -11,19 +13,17 @@ import { fetchAllGalleries, filterPublishedGalleries } from '@data/galleries'
 import BaseLayout from '@layouts/BaseLayout.astro'
 import { KATEGORI_LABELS } from '@lib/constants'
 import { getSiteSettings } from '@lib/sanity/client'
-import { withFallback } from '@lib/with-fallback'
+import { withNull } from '@lib/with-fallback'
 
 // SSR - Real-time data fetching (Cloudflare Workers compatible)
 export const prerender = false
 
 // Direct function call for Cloudflare Workers SSR compatibility
-let galleries: GalleryEntry[] | null = null
+const allGalleries = await withNull(() => fetchAllGalleries(), 'Gallery list fetch')
+let galleries: GalleryEntry[] | null = allGalleries ? filterPublishedGalleries(allGalleries) : null
 
-try {
-	const allGalleries = await fetchAllGalleries()
-	galleries = filterPublishedGalleries(allGalleries)
-
-	// Server-side like pre-fetching to avoid client-side N+1 fetch
+// Server-side like pre-fetching to avoid client-side N+1 fetch
+if (galleries) {
 	try {
 		const likes = env.LIKES
 		if (likes) {
@@ -64,9 +64,6 @@ try {
 	} catch (e) {
 		console.error('[Galeri] Failed to prefetch likes for covers:', e)
 	}
-} catch (error) {
-	const message = error instanceof Error ? error.message : String(error)
-	console.error('Error fetching galleries:', message)
 }
 
 const DEFAULT_GRADIENTS: Record<string, string> = {
@@ -88,27 +85,23 @@ let kategoriGradients: Record<string, string> = DEFAULT_GRADIENTS
 let kategoriIcons: Record<string, string> = DEFAULT_ICONS
 let kategoriLabels: Record<string, string> = {}
 
-try {
-	const ss = await getSiteSettings()
-	if (ss?.galleryCategoryGradients && ss.galleryCategoryGradients.length > 0) {
-		const merged = { ...DEFAULT_GRADIENTS }
-		for (const item of ss.galleryCategoryGradients) {
-			if (item.category && item.gradient) merged[item.category] = item.gradient
-		}
-		kategoriGradients = merged
+const ss = await withNull(() => getSiteSettings(), 'Galeri site settings fetch')
+if (ss?.galleryCategoryGradients && ss.galleryCategoryGradients.length > 0) {
+	const merged = { ...DEFAULT_GRADIENTS }
+	for (const item of ss.galleryCategoryGradients) {
+		if (item.category && item.gradient) merged[item.category] = item.gradient
 	}
-	if (ss?.galleryCategoryIcons && ss.galleryCategoryIcons.length > 0) {
-		const merged = { ...DEFAULT_ICONS }
-		for (const item of ss.galleryCategoryIcons) {
-			if (item.category && item.icon) merged[item.category] = item.icon
-		}
-		kategoriIcons = merged
+	kategoriGradients = merged
+}
+if (ss?.galleryCategoryIcons && ss.galleryCategoryIcons.length > 0) {
+	const merged = { ...DEFAULT_ICONS }
+	for (const item of ss.galleryCategoryIcons) {
+		if (item.category && item.icon) merged[item.category] = item.icon
 	}
-	if (ss?.kategoriLabels) {
-		kategoriLabels = { ...KATEGORI_LABELS, ...ss.kategoriLabels }
-	}
-} catch (error) {
-	console.error('[Galeri] Sanity siteSettings fetch failed:', error)
+	kategoriIcons = merged
+}
+if (ss?.kategoriLabels) {
+	kategoriLabels = { ...KATEGORI_LABELS, ...ss.kategoriLabels }
 }
 ---
 
@@ -221,47 +214,26 @@ try {
 		</div>
 
 		{galleries === null ? (
-			<!-- Loading Skeleton -->
-			<div class="grid gap-5 sm:gap-6 lg:gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-				{[1, 2, 3, 4, 5, 6].map(() => (
-					<div class="animate-pulse">
-						<div class="aspect-[4/3] w-full bg-warm-200 dark:bg-warm-800 rounded-xl sm:rounded-2xl" />
-						<div class="mt-5 space-y-3">
-							<div class="h-5 bg-warm-200 dark:bg-warm-800 rounded w-3/4" />
-							<div class="h-4 bg-warm-200 dark:bg-warm-800 rounded w-1/2" />
-						</div>
-					</div>
-				))}
-			</div>
+			<ErrorState
+				title="Gagal Memuat Data"
+				message="Galeri tidak dapat dimuat. Silakan coba lagi nanti."
+			/>
 		) : galleries.length === 0 ? (
-			<!-- Empty State -->
-			<div class="flex flex-col items-center justify-center py-16 sm:py-24 text-center">
-				<div class="mb-3 rounded-full bg-warm-50 p-4 sm:p-6 text-warm-500">
-					<Icon name="image" size={10} class="sm:size-16" aria-hidden="true" />
-				</div>
-				<Heading level="h2" size="lg" class="text-warm-900">Belum Ada Galeri</Heading>
-				<p class="mt-2 max-w-xs text-sm sm:text-base text-warm-600">Galeri dokumentasi akan diperbarui secara berkala oleh tim yayasan.</p>
-			</div>
-		) : (
-			<!-- Gallery Grid (already rendered above) -->
-		)}
+			<EmptyState
+				icon="image"
+				title="Belum Ada Galeri"
+				description="Galeri dokumentasi akan diperbarui secara berkala oleh tim yayasan."
+			/>
+		) : null}
 		
 		<!-- No Results Message (shown when filter has no matches) -->
-		<div class="filter-no-results text-center py-16">
-			<div class="mb-3 rounded-full bg-warm-50 p-4 sm:p-6 text-warm-500 inline-block">
-				<Icon name="image" size={10} class="sm:size-16" aria-hidden="true" />
-			</div>
-			<Heading level="h3" size="lg" class="text-warm-900">Tidak Ada Galeri Ditemukan</Heading>
-			<p class="mt-2 text-sm sm:text-base text-warm-600">
-				Belum ada galeri untuk kategori ini. Silakan pilih kategori lain atau lihat semua galeri.
-			</p>
-			<button 
-				class="mt-6 inline-flex items-center gap-2 rounded-lg bg-primary-700 px-6 py-3 text-sm font-semibold text-white hover:bg-primary-800 transition-colors shadow-sm"
-				data-filter="all"
-			>
-				<Icon name="globe" size={4} aria-hidden="true" />
-				Lihat Semua Galeri
-			</button>
+		<div class="filter-no-results hidden">
+			<EmptyState
+				icon="image"
+				title="Tidak Ada Galeri Ditemukan"
+				description="Belum ada galeri untuk kategori ini. Silakan pilih kategori lain atau lihat semua galeri."
+				action={{ label: "Lihat Semua Galeri", datasetFilter: "all" }}
+			/>
 		</div>
 	</Container>
 </BaseLayout>

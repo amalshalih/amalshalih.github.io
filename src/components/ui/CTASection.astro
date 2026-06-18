@@ -1,0 +1,36 @@
+---
+/**
+ * CTASection — Gradient CTA wrapper
+ *
+ * Slots:
+ *   default: heading + description (auto-rendered via props)
+ *   decorations: decorative elements (stars, diamonds, glows)
+ *   actions: action buttons
+ */
+import Container from '@components/ui/Container.astro'
+import Heading from '@components/ui/Heading.astro'
+
+interface Props {
+	title: string
+	description: string
+	class?: string
+}
+
+const { title, description, class: className } = Astro.props
+---
+
+<section
+	class:list={[
+		'relative overflow-hidden bg-gradient-to-b from-primary-800 via-primary-900 to-primary-950 text-white',
+		className,
+	]}
+>
+	<slot name="decorations" />
+	<Container as="div" class="relative z-10 py-5 sm:py-6 lg:py-8 text-center">
+		<Heading level="h2" size="xl" class="text-white tracking-tight">{title}</Heading>
+		<p class="mx-auto mt-2 max-w-xl text-sm sm:text-base text-primary-200/80">{description}</p>
+		<div class="mt-4 sm:mt-5 flex flex-wrap justify-center gap-3">
+			<slot name="actions" />
+		</div>
+	</Container>
+</section>

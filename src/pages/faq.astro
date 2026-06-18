@@ -3,6 +3,7 @@ import PageHeader from '@components/sections/PageHeader.astro'
 import Accordion from '@components/ui/Accordion.astro'
 import Button from '@components/ui/Button.astro'
 import Container from '@components/ui/Container.astro'
+import CTASection from '@components/ui/CTASection.astro'
 import Heading from '@components/ui/Heading.astro'
 import Icon from '@components/ui/Icon.astro'
 import { CONTACT, SITE } from '@data/site'
@@ -212,39 +213,35 @@ if (sanityFaq && sanityFaq.length > 0) {
   </Container>
 
   <Fragment slot="after-main">
-    <section class="relative overflow-hidden bg-gradient-to-b from-primary-800 via-primary-900 to-primary-950 text-white">
-      <div class="absolute top-1/2 left-1/4 h-36 w-36 -translate-y-1/2 rounded-full bg-gold-500/8 blur-3xl" aria-hidden="true"></div>
-      <div class="absolute top-6 right-[14%] w-2 h-2 rotate-45 rounded-[1px] bg-gold-400/25" aria-hidden="true"></div>
-      <div class="absolute top-10 right-[18%] w-1.5 h-1.5 rotate-45 rounded-[1px] bg-white/15" aria-hidden="true"></div>
-      <div class="absolute bottom-8 left-[16%] w-2 h-2 rotate-45 rounded-[1px] bg-gold-400/20" aria-hidden="true"></div>
-
-      <Container as="div" class="relative z-10 py-5 sm:py-6 lg:py-8 text-center">
-        <Heading level="h2" size="xl" class="text-white tracking-tight">
-          Tidak Menemukan Jawaban?
-        </Heading>
-        <p class="mx-auto mt-2 max-w-xl text-sm sm:text-base text-primary-200/80">
-          Hubungi kami langsung — tim kami siap membantu menjawab pertanyaan Anda.
-        </p>
-        <div class="mt-4 sm:mt-5 flex flex-wrap justify-center gap-3">
-          <Button
-            variant="gold"
-            size="md"
-            href="/kontak"
-            class="shadow-lg shadow-primary-950/30 hover:shadow-xl hover:shadow-gold-500/20 hover:-translate-y-0.5 transition-all duration-300"
-          >
-            <Icon name="whatsapp" size={4} aria-hidden="true" />
-            Hubungi Kami
-          </Button>
-          <Button
-            variant="outline-light"
-            size="md"
-            href="/donasi"
-            class="border-white/20 bg-white/5 hover:bg-white/10 hover:border-white/30 backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5"
-          >
-            Donasi Sekarang
-          </Button>
-        </div>
-      </Container>
-    </section>
+    <CTASection
+      title="Tidak Menemukan Jawaban?"
+      description="Hubungi kami langsung — tim kami siap membantu menjawab pertanyaan Anda."
+    >
+      <Fragment slot="decorations">
+        <div class="absolute top-1/2 left-1/4 h-36 w-36 -translate-y-1/2 rounded-full bg-gold-500/8 blur-3xl" aria-hidden="true"></div>
+        <div class="absolute top-6 right-[14%] w-2 h-2 rotate-45 rounded-[1px] bg-gold-400/25" aria-hidden="true"></div>
+        <div class="absolute top-10 right-[18%] w-1.5 h-1.5 rotate-45 rounded-[1px] bg-white/15" aria-hidden="true"></div>
+        <div class="absolute bottom-8 left-[16%] w-2 h-2 rotate-45 rounded-[1px] bg-gold-400/20" aria-hidden="true"></div>
+      </Fragment>
+      <Fragment slot="actions">
+        <Button
+          variant="gold"
+          size="md"
+          href="/kontak"
+          class="shadow-lg shadow-primary-950/30 hover:shadow-xl hover:shadow-gold-500/20 hover:-translate-y-0.5 transition-all duration-300"
+        >
+          <Icon name="whatsapp" size={4} aria-hidden="true" />
+          Hubungi Kami
+        </Button>
+        <Button
+          variant="outline-light"
+          size="md"
+          href="/donasi"
+          class="border-white/20 bg-white/5 hover:bg-white/10 hover:border-white/30 backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5"
+        >
+          Donasi Sekarang
+        </Button>
+      </Fragment>
+    </CTASection>
   </Fragment>
 </BaseLayout>

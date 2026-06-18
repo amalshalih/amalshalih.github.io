@@ -4,11 +4,11 @@ import Badge from '@components/ui/Badge.astro'
 import Button from '@components/ui/Button.astro'
 import Card from '@components/ui/Card.astro'
 import Container from '@components/ui/Container.astro'
+import CTASection from '@components/ui/CTASection.astro'
 import Heading from '@components/ui/Heading.astro'
 import Icon from '@components/ui/Icon.astro'
 import BaseLayout from '@layouts/BaseLayout.astro'
 import { getProgramList } from '@lib/sanity/client'
-import type { SanityProgram } from '@lib/sanity/types'
 import { withFallback } from '@lib/with-fallback'
 
 type Item = {
@@ -315,58 +315,54 @@ const tabLabels: Record<string, string> = {
 
 	<Fragment slot="after-main">
 		<!-- Constellation Night Sky — organic asymmetric star field -->
-		<section class="relative overflow-hidden bg-gradient-to-b from-primary-800 via-primary-900 to-primary-950 text-white">
-			<!-- Soft bottom nebula glow -->
-			<div class="absolute bottom-0 left-1/2 h-48 w-96 -translate-x-1/2 translate-y-1/3 rounded-full bg-primary-700/20 blur-3xl" aria-hidden="true"></div>
+		<CTASection
+			title="Dukung Program Kami"
+			description="Setiap donasi Anda, sekecil apapun, berarti besar bagi mereka yang membutuhkan."
+		>
+			<Fragment slot="decorations">
+				<!-- Soft bottom nebula glow -->
+				<div class="absolute bottom-0 left-1/2 h-48 w-96 -translate-x-1/2 translate-y-1/3 rounded-full bg-primary-700/20 blur-3xl" aria-hidden="true"></div>
 
-			<!-- Scattered constellation stars — asymmetric, organic, varying sizes & opacities -->
-			<div class="absolute top-4 left-[12%] text-gold-300/20" aria-hidden="true"><Icon name="star" size={4} /></div>
-			<div class="absolute top-8 left-[22%] text-gold-400/10" aria-hidden="true"><Icon name="star" size={2.5} /></div>
-			<div class="absolute top-6 right-[18%] text-white/10" aria-hidden="true"><Icon name="star" size={3} /></div>
-			<div class="absolute top-3 right-[35%] text-gold-300/15" aria-hidden="true"><Icon name="star" size={5} /></div>
-			<div class="absolute top-10 right-[8%] text-gold-400/8" aria-hidden="true"><Icon name="star" size={2} /></div>
-			<div class="absolute top-[45%] left-[6%] text-gold-300/12" aria-hidden="true"><Icon name="star" size={3.5} /></div>
-			<div class="absolute top-[38%] right-[5%] text-white/8" aria-hidden="true"><Icon name="star" size={2.5} /></div>
-			<div class="absolute bottom-14 left-[18%] text-gold-400/15" aria-hidden="true"><Icon name="star" size={4} /></div>
-			<div class="absolute bottom-10 right-[22%] text-gold-300/10" aria-hidden="true"><Icon name="star" size={3} /></div>
-			<div class="absolute bottom-16 right-[12%] text-white/8" aria-hidden="true"><Icon name="star" size={2} /></div>
-			<div class="absolute bottom-6 left-[40%] text-gold-400/10" aria-hidden="true"><Icon name="star" size={2.5} /></div>
+				<!-- Scattered constellation stars -->
+				<div class="absolute top-4 left-[12%] text-gold-300/20" aria-hidden="true"><Icon name="star" size={4} /></div>
+				<div class="absolute top-8 left-[22%] text-gold-400/10" aria-hidden="true"><Icon name="star" size={2.5} /></div>
+				<div class="absolute top-6 right-[18%] text-white/10" aria-hidden="true"><Icon name="star" size={3} /></div>
+				<div class="absolute top-3 right-[35%] text-gold-300/15" aria-hidden="true"><Icon name="star" size={5} /></div>
+				<div class="absolute top-10 right-[8%] text-gold-400/8" aria-hidden="true"><Icon name="star" size={2} /></div>
+				<div class="absolute top-[45%] left-[6%] text-gold-300/12" aria-hidden="true"><Icon name="star" size={3.5} /></div>
+				<div class="absolute top-[38%] right-[5%] text-white/8" aria-hidden="true"><Icon name="star" size={2.5} /></div>
+				<div class="absolute bottom-14 left-[18%] text-gold-400/15" aria-hidden="true"><Icon name="star" size={4} /></div>
+				<div class="absolute bottom-10 right-[22%] text-gold-300/10" aria-hidden="true"><Icon name="star" size={3} /></div>
+				<div class="absolute bottom-16 right-[12%] text-white/8" aria-hidden="true"><Icon name="star" size={2} /></div>
+				<div class="absolute bottom-6 left-[40%] text-gold-400/10" aria-hidden="true"><Icon name="star" size={2.5} /></div>
 
-			<!-- Interspersed diamond "planets" -->
-			<div class="absolute top-5 left-[32%] w-2 h-2 rotate-45 rounded-[1px] bg-gold-400/20" aria-hidden="true"></div>
-			<div class="absolute top-12 right-[28%] w-1.5 h-1.5 rotate-45 rounded-[1px] bg-white/15" aria-hidden="true"></div>
-			<div class="absolute bottom-12 left-[28%] w-2 h-2 rotate-45 rounded-[1px] bg-gold-300/15" aria-hidden="true"></div>
-			<div class="absolute top-[35%] left-[15%] w-1.5 h-1.5 rotate-45 rounded-[1px] bg-gold-400/12" aria-hidden="true"></div>
-			<div class="absolute bottom-8 right-[38%] w-2 h-2 rotate-45 rounded-[1px] bg-white/10" aria-hidden="true"></div>
-
-			<Container as="div" class="relative z-10 py-5 sm:py-6 lg:py-8 text-center">
-				<Heading level="h2" size="xl" class="text-white tracking-tight">
-					Dukung Program Kami
-				</Heading>
-				<p class="mx-auto mt-2 max-w-xl text-sm sm:text-base text-primary-200/80">
-					Setiap donasi Anda, sekecil apapun, berarti besar bagi mereka yang membutuhkan.
-				</p>
-				<div class="mt-4 sm:mt-5 flex flex-wrap justify-center gap-3">
-					<Button
-						variant="gold"
-						size="md"
-						href="/donasi"
-						class="shadow-lg shadow-primary-950/30 hover:shadow-xl hover:shadow-gold-500/20 hover:-translate-y-0.5 transition-all duration-300"
-					>
-						<Icon name="heart" size={4} aria-hidden="true" />
-						Donasi Sekarang
-					</Button>
-					<Button
-						variant="outline-light"
-						size="md"
-						href="/tentang"
-						class="border-white/20 bg-white/5 hover:bg-white/10 hover:border-white/30 backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5"
-					>
-						Tentang Kami
-					</Button>
-				</div>
-			</Container>
-		</section>
+				<!-- Interspersed diamond "planets" -->
+				<div class="absolute top-5 left-[32%] w-2 h-2 rotate-45 rounded-[1px] bg-gold-400/20" aria-hidden="true"></div>
+				<div class="absolute top-12 right-[28%] w-1.5 h-1.5 rotate-45 rounded-[1px] bg-white/15" aria-hidden="true"></div>
+				<div class="absolute bottom-12 left-[28%] w-2 h-2 rotate-45 rounded-[1px] bg-gold-300/15" aria-hidden="true"></div>
+				<div class="absolute top-[35%] left-[15%] w-1.5 h-1.5 rotate-45 rounded-[1px] bg-gold-400/12" aria-hidden="true"></div>
+				<div class="absolute bottom-8 right-[38%] w-2 h-2 rotate-45 rounded-[1px] bg-white/10" aria-hidden="true"></div>
+			</Fragment>
+			<Fragment slot="actions">
+				<Button
+					variant="gold"
+					size="md"
+					href="/donasi"
+					class="shadow-lg shadow-primary-950/30 hover:shadow-xl hover:shadow-gold-500/20 hover:-translate-y-0.5 transition-all duration-300"
+				>
+					<Icon name="heart" size={4} aria-hidden="true" />
+					Donasi Sekarang
+				</Button>
+				<Button
+					variant="outline-light"
+					size="md"
+					href="/tentang"
+					class="border-white/20 bg-white/5 hover:bg-white/10 hover:border-white/30 backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5"
+				>
+					Tentang Kami
+				</Button>
+			</Fragment>
+		</CTASection>
 	</Fragment>
 </BaseLayout>
 

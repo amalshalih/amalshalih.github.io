@@ -1,0 +1,79 @@
+---
+/**
+ * FormField — Reusable input/textarea with label, validation state, and error display
+ *
+ * Renders an `<input>` or `<textarea>` depending on `type` prop.
+ * Includes label with optional required marker, consistent styling,
+ * error message container with proper aria bindings.
+ *
+ * @example
+ *   <FormField type="text" id="nama" name="nama" label="Nama Lengkap" required autocomplete="name" />
+ *   <FormField type="email" id="email" name="email" label="Email" required autocomplete="email" />
+ *   <FormField type="textarea" id="pesan" name="pesan" label="Pesan" required rows={5} />
+ *   <FormField type="tel" id="telepon" name="telepon" label="Telepon" pattern="[0-9\-+() ]+" />
+ */
+interface Props {
+	type: 'text' | 'email' | 'tel' | 'textarea'
+	id: string
+	name: string
+	label: string
+	required?: boolean
+	placeholder?: string
+	pattern?: string
+	autocomplete?: string
+	/** Only for textarea */
+	rows?: number
+	class?: string
+}
+
+const {
+	type,
+	id,
+	name,
+	label,
+	required = false,
+	placeholder,
+	pattern,
+	autocomplete,
+	rows = 4,
+	class: className,
+} = Astro.props
+
+const inputClass =
+	'mt-1.5 block w-full rounded-lg border border-primary-200 dark:border-primary-800 bg-white dark:bg-surface-secondary px-4 py-2.5 text-sm text-text-primary placeholder:text-text-muted focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 dark:focus:ring-primary-400/30 transition-colors invalid:border-red-500 dark:invalid:border-red-400 invalid:focus:border-red-500 dark:invalid:focus:border-red-400 invalid:focus:ring-red-500/20 dark:invalid:focus:ring-red-400/30'
+const textareaClass = `${inputClass} resize-y`
+---
+
+<div class={className}>
+	<label for={id} class="block text-sm font-medium text-text-secondary">
+		{label}{required && <span class="text-red-600 dark:text-red-400"> *</span>}
+	</label>
+
+	{type === 'textarea' ? (
+		<textarea
+			id={id}
+			name={name}
+			rows={rows}
+			{...(required ? { required: true, 'aria-required': 'true' } : {})}
+			aria-invalid="false"
+			aria-describedby={`${id}-error`}
+			placeholder={placeholder}
+			class={textareaClass}
+		></textarea>
+	) : (
+		<input
+			type={type}
+			id={id}
+			name={name}
+			{...(required ? { required: true, 'aria-required': 'true' } : {})}
+			aria-invalid="false"
+			aria-describedby={`${id}-error`}
+			{...(autocomplete ? { autocomplete } : {})}
+			{...(pattern ? { pattern } : {})}
+			placeholder={placeholder}
+			class={inputClass}
+		/>
+	)}
+
+	<p id={`${id}-error`} class="mt-1 text-sm text-red-600 dark:text-red-400 hidden" role="alert"></p>
+</div>

@@ -4,10 +4,12 @@ import LikeButton from '@components/gallery/LikeButton.astro'
 import MasonryGrid from '@components/gallery/MasonryGrid.astro'
 import PageHeader from '@components/sections/PageHeader.astro'
 import Container from '@components/ui/Container.astro'
+import EmptyState from '@components/ui/EmptyState.astro'
 import Heading from '@components/ui/Heading.astro'
 import Icon from '@components/ui/Icon.astro'
 import { fetchGalleryBySlug, type GalleryEntry } from '@data/galleries'
 import BaseLayout from '@layouts/BaseLayout.astro'
+import { withNull } from '@lib/with-fallback'
 
 // SSR - Real-time data fetching
 export const prerender = false
@@ -34,13 +36,9 @@ const { slug } = Astro.params
 let gallery: GalleryWithImages | null = null
 
 if (slug) {
-	try {
-		const fetched = await fetchGalleryBySlug(slug)
-		if (fetched) {
-			gallery = fetched as GalleryWithImages
-		}
-	} catch (e) {
-		console.error('Error fetching gallery:', e)
+	const fetched = await withNull(() => fetchGalleryBySlug(slug), 'Gallery detail fetch')
+	if (fetched) {
+		gallery = fetched as GalleryWithImages
 	}
 }
 
@@ -146,19 +144,12 @@ const coverImage =
         })}
       </div>
     ) : (
-      <div class="flex flex-col items-center justify-center py-16 sm:py-24 text-center">
-        <div class="mb-3 rounded-full bg-warm-50 dark:bg-warm-800 p-4 sm:p-6 text-warm-500 dark:text-warm-400">
-          <Icon name="image" size={10} class="sm:size-16" aria-hidden="true" />
-        </div>
-        <Heading level="h2" size="lg" class="text-warm-900 dark:text-warm-100">Belum Ada Foto</Heading>
-        <p class="mt-2 max-w-xs text-sm sm:text-base text-warm-600 dark:text-warm-300">
-          Foto dokumentasi untuk kegiatan ini akan segera ditambahkan oleh tim media.
-        </p>
-        <a href="/galeri" class="mt-6 inline-flex items-center gap-2 rounded-lg bg-primary-700 px-4 py-2 text-sm font-semibold text-white hover:bg-primary-800 transition-colors">
-          <Icon name="arrow-left" size={4} aria-hidden="true" />
-          <span>Lihat Galeri Lainnya</span>
-        </a>
-      </div>
+      <EmptyState
+        icon="image"
+        title="Belum Ada Foto"
+        description="Foto dokumentasi untuk kegiatan ini akan segera ditambahkan oleh tim media."
+        action={{ label: "Lihat Galeri Lainnya", href: "/galeri" }}
+      />
     )}
   </Container>
 
@@ -171,7 +162,7 @@ const coverImage =
   const coverCaption = document.querySelector('[data-cover-caption]');
   if (!coverImg) return;
 
-  let coverUpdateTimeout;
+  let coverUpdateTimeout = null;
 
   function updateCover(data) {
     if (!data || typeof data !== 'object') return;

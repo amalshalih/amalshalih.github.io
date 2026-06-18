@@ -3,8 +3,10 @@ import FAQ from '@components/sections/FAQ.astro'
 import PageHeader from '@components/sections/PageHeader.astro'
 import Button from '@components/ui/Button.astro'
 import Container from '@components/ui/Container.astro'
+import FormField from '@components/ui/FormField.astro'
 import Heading from '@components/ui/Heading.astro'
 import Icon from '@components/ui/Icon.astro'
+import RadioCard from '@components/ui/RadioCard.astro'
 import { CONTACT } from '@data/site'
 import BaseLayout from '@layouts/BaseLayout.astro'
 import { getSiteSettings } from '@lib/sanity/client'
@@ -56,7 +58,7 @@ if (sanitySettings) {
 			<div class="grid gap-6 sm:gap-8 lg:grid-cols-5 lg:gap-10">
 			<!-- Contact Form — primary action, first on mobile, right column on desktop (60% / 3 cols) -->
 			<div class="lg:order-2 lg:col-span-3">
-				<div class="rounded-xl sm:rounded-2xl bg-surface-elevated dark:bg-surface-secondary p-5 sm:p-8 shadow-sm">
+				<div class="rounded-xl sm:rounded-2xl bg-surface-elevated p-5 sm:p-8 shadow-sm">
 					<Heading level="h2" size="lg">Kirim Pesan</Heading>
 					<p class="mt-1 text-sm text-text-secondary">
 						Isi formulir di bawah ini dan kami akan merespons secepatnya.
@@ -80,137 +82,29 @@ if (sanitySettings) {
 						aria-describedby="form-error-summary"
 					>
 						<div class="grid gap-4 sm:gap-5 md:grid-cols-2">
-							<div>
-								<label for="nama" class="block text-sm font-medium text-text-secondary">
-									Nama Lengkap <span class="text-red-600 dark:text-red-400">*</span>
-								</label>
-								<input
-									type="text"
-									id="nama"
-									name="nama"
-									required
-									aria-required="true"
-									aria-invalid="false"
-									aria-describedby="nama-error"
-									autocomplete="name"
-									class="mt-1.5 block w-full rounded-lg border border-primary-200 dark:border-primary-800 bg-white dark:bg-surface-secondary px-4 py-2.5 text-sm text-text-primary placeholder:text-text-muted focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 transition-colors invalid:border-red-500 invalid:focus:border-red-500 invalid:focus:ring-red-500/20"
-									placeholder="Nama Anda…"
-								/>
-								<p id="nama-error" class="mt-1 text-sm text-red-600 dark:text-red-400 hidden" role="alert"></p>
-							</div>
-							<div>
-								<label for="telepon" class="block text-sm font-medium text-text-secondary">
-									Nomor Telepon
-								</label>
-								<input
-									type="tel"
-									id="telepon"
-									name="telepon"
-									aria-invalid="false"
-									aria-describedby="telepon-error"
-									autocomplete="tel"
-									class="mt-1.5 block w-full rounded-lg border border-primary-200 dark:border-primary-800 bg-white dark:bg-surface-secondary px-4 py-2.5 text-sm text-text-primary placeholder:text-text-muted focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 transition-colors invalid:border-red-500 invalid:focus:border-red-500 invalid:focus:ring-red-500/20"
-									placeholder="0812-3456-7890…"
-									pattern="[0-9\-\+\(\) ]+"
-								/>
-								<p id="telepon-error" class="mt-1 text-sm text-red-600 dark:text-red-400 hidden" role="alert"></p>
-							</div>
+							<FormField type="text" id="nama" name="nama" label="Nama Lengkap" required autocomplete="name" placeholder="Nama Anda…" />
+							<FormField type="tel" id="telepon" name="telepon" label="Nomor Telepon" autocomplete="tel" placeholder="0812-3456-7890…" pattern="[0-9\-+() ]+" />
 						</div>
 
-						<div>
-							<label for="email" class="block text-sm font-medium text-text-secondary">
-								Email <span class="text-red-600 dark:text-red-400">*</span>
-							</label>
-							<input
-								type="email"
-								id="email"
-								name="email"
-								required
-								aria-required="true"
-								aria-invalid="false"
-								aria-describedby="email-error"
-								autocomplete="email"
-								class="mt-1.5 block w-full rounded-lg border border-primary-200 dark:border-primary-800 bg-white dark:bg-surface-secondary px-4 py-2.5 text-sm text-text-primary placeholder:text-text-muted focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 transition-colors invalid:border-red-500 invalid:focus:border-red-500 invalid:focus:ring-red-500/20"
-								placeholder="nama@email.com…"
-							/>
-							<p id="email-error" class="mt-1 text-sm text-red-600 dark:text-red-400 hidden" role="alert"></p>
-						</div>
+						<FormField type="email" id="email" name="email" label="Email" required autocomplete="email" placeholder="nama@email.com…" />
 
 						<div>
 							<label class="block text-sm font-medium text-text-secondary mb-1">Pilih Topik Pesan</label>
 							<p class="text-sm text-text-muted mb-3">Pilih topik yang sesuai dengan keperluan Anda.</p>
 
 							<div role="radiogroup" aria-label="Pilih topik pesan" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3" id="subjek-group">
-								<button type="button" role="radio" aria-checked="false" data-value="donasi" class="subjek-card relative flex flex-col items-center gap-1.5 rounded-xl border-2 border-warm-200 dark:border-warm-800 bg-white dark:bg-surface-secondary p-4 transition-all hover:border-primary-300 dark:hover:border-primary-600 hover:bg-primary-50/40 dark:hover:bg-primary-900/30 data-[selected=true]:border-primary-800 data-[selected=true]:bg-primary-50 dark:data-[selected=true]:border-primary-500 dark:data-[selected=true]:bg-primary-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500/20 cursor-pointer" aria-describedby="desc-donasi">
-									<div class="subjek-check absolute top-2 right-2 hidden data-[selected=true]:block text-primary-600 dark:text-primary-400" aria-hidden="true">
-										<svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-									</div>
-									<Icon name="heart" size={5} class="subjek-icon text-warm-400 dark:text-warm-500 data-[selected=true]:text-primary-600 dark:data-[selected=true]:text-primary-400" aria-hidden="true" />
-									<span class="text-sm font-semibold text-text-primary">Konfirmasi Donasi</span>
-									<span id="desc-donasi" class="text-xs text-text-muted leading-tight">Laporan &amp; konfirmasi transfer donasi</span>
-								</button>
-								<button type="button" role="radio" aria-checked="false" data-value="program" class="subjek-card relative flex flex-col items-center gap-1.5 rounded-xl border-2 border-warm-200 dark:border-warm-800 bg-white dark:bg-surface-secondary p-4 transition-all hover:border-primary-300 dark:hover:border-primary-600 hover:bg-primary-50/40 dark:hover:bg-primary-900/30 data-[selected=true]:border-primary-800 data-[selected=true]:bg-primary-50 dark:data-[selected=true]:border-primary-500 dark:data-[selected=true]:bg-primary-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500/20 cursor-pointer" aria-describedby="desc-program">
-									<div class="subjek-check absolute top-2 right-2 hidden data-[selected=true]:block text-primary-600 dark:text-primary-400" aria-hidden="true">
-										<svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-									</div>
-									<Icon name="book" size={5} class="subjek-icon text-warm-400 dark:text-warm-500 data-[selected=true]:text-primary-600 dark:data-[selected=true]:text-primary-400" aria-hidden="true" />
-									<span class="text-sm font-semibold text-text-primary">Informasi Program</span>
-									<span id="desc-program" class="text-xs text-text-muted leading-tight">Tanya tentang program &amp; kegiatan</span>
-								</button>
-								<button type="button" role="radio" aria-checked="false" data-value="kerjasama" class="subjek-card relative flex flex-col items-center gap-1.5 rounded-xl border-2 border-warm-200 dark:border-warm-800 bg-white dark:bg-surface-secondary p-4 transition-all hover:border-primary-300 dark:hover:border-primary-600 hover:bg-primary-50/40 dark:hover:bg-primary-900/30 data-[selected=true]:border-primary-800 data-[selected=true]:bg-primary-50 dark:data-[selected=true]:border-primary-500 dark:data-[selected=true]:bg-primary-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500/20 cursor-pointer" aria-describedby="desc-kerjasama">
-									<div class="subjek-check absolute top-2 right-2 hidden data-[selected=true]:block text-primary-600 dark:text-primary-400" aria-hidden="true">
-										<svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-									</div>
-									<Icon name="globe" size={5} class="subjek-icon text-warm-400 dark:text-warm-500 data-[selected=true]:text-primary-600 dark:data-[selected=true]:text-primary-400" aria-hidden="true" />
-									<span class="text-sm font-semibold text-text-primary">Kerja Sama</span>
-									<span id="desc-kerjasama" class="text-xs text-text-muted leading-tight">Ajukan kerja sama atau kolaborasi</span>
-								</button>
-								<button type="button" role="radio" aria-checked="false" data-value="pendaftaran" class="subjek-card relative flex flex-col items-center gap-1.5 rounded-xl border-2 border-warm-200 dark:border-warm-800 bg-white dark:bg-surface-secondary p-4 transition-all hover:border-primary-300 dark:hover:border-primary-600 hover:bg-primary-50/40 dark:hover:bg-primary-900/30 data-[selected=true]:border-primary-800 data-[selected=true]:bg-primary-50 dark:data-[selected=true]:border-primary-500 dark:data-[selected=true]:bg-primary-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500/20 cursor-pointer" aria-describedby="desc-pendaftaran">
-									<div class="subjek-check absolute top-2 right-2 hidden data-[selected=true]:block text-primary-600 dark:text-primary-400" aria-hidden="true">
-										<svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-									</div>
-									<Icon name="star" size={5} class="subjek-icon text-warm-400 dark:text-warm-500 data-[selected=true]:text-primary-600 dark:data-[selected=true]:text-primary-400" aria-hidden="true" />
-									<span class="text-sm font-semibold text-text-primary">Pendaftaran Santri</span>
-									<span id="desc-pendaftaran" class="text-xs text-text-muted leading-tight">Daftarkan anak sebagai santri</span>
-								</button>
-								<button type="button" role="radio" aria-checked="false" data-value="kritik" class="subjek-card relative flex flex-col items-center gap-1.5 rounded-xl border-2 border-warm-200 dark:border-warm-800 bg-white dark:bg-surface-secondary p-4 transition-all hover:border-primary-300 dark:hover:border-primary-600 hover:bg-primary-50/40 dark:hover:bg-primary-900/30 data-[selected=true]:border-primary-800 data-[selected=true]:bg-primary-50 dark:data-[selected=true]:border-primary-500 dark:data-[selected=true]:bg-primary-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500/20 cursor-pointer" aria-describedby="desc-kritik">
-									<div class="subjek-check absolute top-2 right-2 hidden data-[selected=true]:block text-primary-600 dark:text-primary-400" aria-hidden="true">
-										<svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-									</div>
-									<Icon name="email" size={5} class="subjek-icon text-warm-400 dark:text-warm-500 data-[selected=true]:text-primary-600 dark:data-[selected=true]:text-primary-400" aria-hidden="true" />
-									<span class="text-sm font-semibold text-text-primary">Kritik &amp; Saran</span>
-									<span id="desc-kritik" class="text-xs text-text-muted leading-tight">Sampaikan kritik, saran, atau masukan</span>
-								</button>
-								<button type="button" role="radio" aria-checked="false" data-value="lainnya" class="subjek-card relative flex flex-col items-center gap-1.5 rounded-xl border-2 border-warm-200 dark:border-warm-800 bg-white dark:bg-surface-secondary p-4 transition-all hover:border-primary-300 dark:hover:border-primary-600 hover:bg-primary-50/40 dark:hover:bg-primary-900/30 data-[selected=true]:border-primary-800 data-[selected=true]:bg-primary-50 dark:data-[selected=true]:border-primary-500 dark:data-[selected=true]:bg-primary-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500/20 cursor-pointer" aria-describedby="desc-lainnya">
-									<div class="subjek-check absolute top-2 right-2 hidden data-[selected=true]:block text-primary-600 dark:text-primary-400" aria-hidden="true">
-										<svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-									</div>
-									<Icon name="check-circle" size={5} class="subjek-icon text-warm-400 dark:text-warm-500 data-[selected=true]:text-primary-600 dark:data-[selected=true]:text-primary-400" aria-hidden="true" />
-									<span class="text-sm font-semibold text-text-primary">Lainnya</span>
-									<span id="desc-lainnya" class="text-xs text-text-muted leading-tight">Pesan atau pertanyaan lainnya</span>
-								</button>
+								<RadioCard value="donasi" icon="heart" label="Konfirmasi Donasi" description="Laporan &amp; konfirmasi transfer donasi" describedBy="desc-donasi" />
+								<RadioCard value="program" icon="book" label="Informasi Program" description="Tanya tentang program &amp; kegiatan" describedBy="desc-program" />
+								<RadioCard value="kerjasama" icon="globe" label="Kerja Sama" description="Ajukan kerja sama atau kolaborasi" describedBy="desc-kerjasama" />
+								<RadioCard value="pendaftaran" icon="star" label="Pendaftaran Santri" description="Daftarkan anak sebagai santri" describedBy="desc-pendaftaran" />
+								<RadioCard value="kritik" icon="email" label="Kritik &amp; Saran" description="Sampaikan kritik, saran, atau masukan" describedBy="desc-kritik" />
+								<RadioCard value="lainnya" icon="check-circle" label="Lainnya" description="Pesan atau pertanyaan lainnya" describedBy="desc-lainnya" />
 							</div>
 
 							<input type="hidden" id="subjek" name="subjek" value="" />
 						</div>
 
-						<div>
-							<label for="pesan" class="block text-sm font-medium text-text-secondary">
-								Pesan <span class="text-red-600 dark:text-red-400">*</span>
-							</label>
-							<textarea
-								id="pesan"
-								name="pesan"
-								rows="5"
-								required
-								aria-required="true"
-								aria-invalid="false"
-								aria-describedby="pesan-error"
-								class="mt-1.5 block w-full rounded-lg border border-primary-200 dark:border-primary-800 bg-white dark:bg-surface-secondary px-4 py-2.5 text-sm text-text-primary placeholder:text-text-muted focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 transition-colors resize-y invalid:border-red-500 invalid:focus:border-red-500 invalid:focus:ring-red-500/20"
-								placeholder="Tulis pesan Anda di sini…"
-							></textarea>
-							<p id="pesan-error" class="mt-1 text-sm text-red-600 dark:text-red-400 hidden" role="alert"></p>
-						</div>
+						<FormField type="textarea" id="pesan" name="pesan" label="Pesan" required placeholder="Tulis pesan Anda di sini…" rows={5} />
 
 						<!-- Honeypot — hidden from humans, visible to bots -->
 						<div aria-hidden="true" style="position: absolute; left: -9999px;">
@@ -234,7 +128,7 @@ if (sanitySettings) {
 			<!-- Info Cards — secondary, below form on mobile, left column on desktop (40% / 2 cols) -->
 			<div class="lg:order-1 lg:col-span-2 space-y-4 sm:space-y-5 md:grid md:grid-cols-2 md:gap-6 md:space-y-0 lg:block lg:space-y-5">
 				<!-- Card 1: Featured Image — Islamic charity visual, top of sidebar in desktop, hidden on mobile & tablet -->
-				<div class="hidden lg:block rounded-lg sm:rounded-xl bg-surface-elevated dark:bg-surface-secondary overflow-hidden shadow-sm h-48 sm:h-56 lg:h-64 md:col-span-2 lg:col-span-1 relative">
+				<div class="hidden lg:block rounded-lg sm:rounded-xl bg-surface-elevated overflow-hidden shadow-sm h-48 sm:h-56 lg:h-64 md:col-span-2 lg:col-span-1 relative">
 					<img
 						src="/images/charity-contact.webp"
 						alt="Tangan memberikan kurma — ilustrasi kebaikan, berbagi, dan kedermawanan dalam Islam"
@@ -244,11 +138,11 @@ if (sanitySettings) {
 						width="640"
 						height="360"
 					/>
-					<div class="absolute inset-0 bg-gradient-to-t from-primary-900/40 to-transparent lg:bg-gradient-to-b lg:from-primary-900/20 lg:to-transparent"></div>
+					<div class="absolute inset-0 bg-gradient-to-t from-primary-900/40 to-transparent lg:bg-gradient-to-b lg:from-primary-900/20 lg:to-transparent dark:from-black/60 dark:lg:from-black/40"></div>
 				</div>
 
 				<!-- Card 2: Alamat Kantor -->
-				<div class="rounded-lg sm:rounded-xl bg-surface-elevated dark:bg-surface-secondary p-5 sm:p-8 shadow-sm">
+				<div class="rounded-lg sm:rounded-xl bg-surface-elevated p-5 sm:p-8 shadow-sm">
 					<div class="mb-2 icon-box-sm">
 						<Icon name="location" size={5} aria-hidden="true" />
 					</div>
@@ -270,7 +164,7 @@ if (sanitySettings) {
 				</div>
 
 				<!-- Card 3: Telepon & WhatsApp -->
-				<div class="rounded-lg sm:rounded-xl bg-surface-elevated dark:bg-surface-secondary p-5 sm:p-8 shadow-sm">
+				<div class="rounded-lg sm:rounded-xl bg-surface-elevated p-5 sm:p-8 shadow-sm">
 					<div class="mb-2 icon-box-sm">
 						<Icon name="phone" size={5} aria-hidden="true" />
 					</div>
@@ -285,7 +179,7 @@ if (sanitySettings) {
 				</div>
 
 				<!-- Card 4: Email -->
-				<div class="rounded-lg sm:rounded-xl bg-surface-elevated dark:bg-surface-secondary p-5 sm:p-8 shadow-sm">
+				<div class="rounded-lg sm:rounded-xl bg-surface-elevated p-5 sm:p-8 shadow-sm">
 					<div class="mb-2 icon-box-sm">
 						<Icon name="email" size={5} aria-hidden="true" />
 					</div>
@@ -323,7 +217,7 @@ if (sanitySettings) {
 				</div>
 
 				<!-- Card 5: Jam Operasional -->
-				<div class="rounded-lg sm:rounded-xl bg-surface-elevated dark:bg-surface-secondary p-5 sm:p-8 shadow-sm">
+				<div class="rounded-lg sm:rounded-xl bg-surface-elevated p-5 sm:p-8 shadow-sm">
 					<div class="mb-2 icon-box-sm">
 						<Icon name="clock" size={5} aria-hidden="true" />
 					</div>
@@ -379,7 +273,7 @@ if (sanitySettings) {
 
 		function validateTelepon(tel: string): boolean {
 			if (!tel) return true; // Optional field
-			const telRegex = /^[0-9\-\+\(\) ]+$/;
+			const telRegex = /^[0-9\-+() ]+$/;
 			return telRegex.test(tel) && tel.replace(/\D/g, '').length >= 10;
 		}
 
@@ -469,6 +363,8 @@ if (sanitySettings) {
 				errors.push({ field: 'pesan', message: 'Pesan wajib diisi' });
 			} else if (pesan.length < 10) {
 				errors.push({ field: 'pesan', message: 'Pesan minimal 10 karakter' });
+			} else if (pesan.length > 5000) {
+				errors.push({ field: 'pesan', message: 'Pesan terlalu panjang (maks. 5.000 karakter)' });
 			}
 
 			if (errors.length > 0) {
@@ -520,6 +416,8 @@ if (sanitySettings) {
 				showFieldError(pesanInput, pesanError, 'Pesan wajib diisi');
 			} else if (pesan.length < 10) {
 				showFieldError(pesanInput, pesanError, 'Pesan minimal 10 karakter');
+			} else if (pesan.length > 5000) {
+				showFieldError(pesanInput, pesanError, 'Pesan terlalu panjang (maks. 5.000 karakter)');
 			} else {
 				pesanInput.setAttribute('aria-invalid', 'false');
 				pesanError.classList.add('hidden');
