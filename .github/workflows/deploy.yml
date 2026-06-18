@@ -59,7 +59,7 @@ jobs:
       with:
         apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-        command: deploy --config wrangler.staging.jsonc
+        command: deploy --config .wrangler/configs/wrangler.staging.jsonc
 
   deploy-production:
     if: github.event.inputs.environment == 'production' || github.event.inputs.environment == ''
