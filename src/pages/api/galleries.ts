@@ -1,4 +1,5 @@
 import { fetchAllGalleries, filterPublishedGalleries } from '@data/galleries'
+import { apiErrorResponse } from '@lib/api-utils'
 import type { APIRoute } from 'astro'
 
 export const GET: APIRoute = async () => {
@@ -14,11 +15,6 @@ export const GET: APIRoute = async () => {
 			},
 		})
 	} catch (error) {
-		console.error('Error fetching galleries:', error)
-		const message = error instanceof Error ? error.message : String(error)
-		return new Response(JSON.stringify({ error: message || 'Failed to fetch galleries' }), {
-			status: 500,
-			headers: { 'Content-Type': 'application/json' },
-		})
+		return apiErrorResponse(error, 'galleries')
 	}
 }

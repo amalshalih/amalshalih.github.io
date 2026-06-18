@@ -1,3 +1,6 @@
+import { getCollection } from 'astro:content'
+import { withFallback } from './with-fallback'
+
 /**
  * Fetch content with Sanity-first strategy and markdown fallback
  *
@@ -11,9 +14,6 @@ export async function fetchContentWithFallback<T>(
 	collectionName: 'blog' | 'kegiatan',
 	context: string,
 ): Promise<T[]> {
-	const { getCollection } = await import('astro:content')
-	const { withFallback } = await import('./with-fallback')
-
 	// Try Sanity first
 	const sanityData = await withFallback(sanityFetcher, [], `${context} - Sanity fetch`)
 

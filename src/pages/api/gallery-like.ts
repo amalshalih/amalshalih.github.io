@@ -1,3 +1,4 @@
+import { apiErrorResponse } from '@lib/api-utils'
 import { getGalleryLikes, toggleGalleryLike } from '@lib/likes'
 import type { APIRoute } from 'astro'
 import { z } from 'zod'
@@ -52,9 +53,7 @@ export const GET: APIRoute = async ({ request }) => {
 			},
 		)
 	} catch (error) {
-		console.error('[API /gallery-like GET] Error:', error)
-		const message = error instanceof Error ? error.message : String(error)
-		return new Response(JSON.stringify({ error: message }), { status: 500 })
+		return apiErrorResponse(error, 'gallery-like GET')
 	}
 }
 
@@ -98,8 +97,6 @@ export const POST: APIRoute = async ({ request }) => {
 			},
 		)
 	} catch (error) {
-		console.error('[API /gallery-like POST] Error:', error)
-		const message = error instanceof Error ? error.message : String(error)
-		return new Response(JSON.stringify({ error: message }), { status: 500 })
+		return apiErrorResponse(error, 'gallery-like POST')
 	}
 }

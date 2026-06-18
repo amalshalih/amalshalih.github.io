@@ -2,7 +2,6 @@
 import { getCollection, render } from 'astro:content'
 import Badge from '@components/ui/Badge.astro'
 import Card from '@components/ui/Card.astro'
-import Container from '@components/ui/Container.astro'
 import Heading from '@components/ui/Heading.astro'
 import Icon from '@components/ui/Icon.astro'
 import { CONTACT, SITE } from '@data/site'
@@ -10,7 +9,8 @@ import BaseLayout from '@layouts/BaseLayout.astro'
 import { KATEGORI_LABELS } from '@lib/constants'
 import { getKegiatanItem, getKegiatanList, getSiteSettings } from '@lib/sanity/client'
 import { renderPortableText } from '@lib/sanity/render'
-import { withNull } from '@lib/with-fallback'
+import { articleSchema, breadcrumbSchema } from '@lib/schema'
+import { withFallback, withNull } from '@lib/with-fallback'
 
 // SSR mode for Cloudflare Workers (not static prerender)
 export const prerender = false
@@ -45,39 +45,35 @@ if (settings?.kategoriLabels) {
 let Content = null
 
 // Sanity CMS sebagai sumber utama, fallback ke static markdown jika body/image kosong
-try {
-	const sanityItem = await getKegiatanItem(slug)
-	if (sanityItem) {
-		const bodyHtml = sanityItem.body ? renderPortableText(sanityItem.body) : ''
-		let image = sanityItem.imageUrl || undefined
+const sanityItem = await withNull(() => getKegiatanItem(slug), 'Kegiatan detail fetch')
+if (sanityItem) {
+	const bodyHtml = sanityItem.body ? renderPortableText(sanityItem.body) : ''
+	let image = sanityItem.imageUrl || undefined
 
-		// Jika Sanity body atau image kosong, coba fallback ke local markdown
-		if (!bodyHtml || !image) {
-			const localItems = await getCollection('kegiatan')
-			const localItem = localItems.find((item) => item.id === slug)
-			if (localItem) {
-				if (!bodyHtml) {
-					const rendered = await render(localItem)
-					Content = rendered.Content
-				}
-				if (!image && localItem.data.image) {
-					image = localItem.data.image
-				}
+	// Jika Sanity body atau image kosong, coba fallback ke local markdown
+	if (!bodyHtml || !image) {
+		const localItems = await getCollection('kegiatan')
+		const localItem = localItems.find((item) => item.id === slug)
+		if (localItem) {
+			if (!bodyHtml) {
+				const rendered = await render(localItem)
+				Content = rendered.Content
+			}
+			if (!image && localItem.data.image) {
+				image = localItem.data.image
 			}
 		}
-
-		pageData = {
-			title: sanityItem.title,
-			description: sanityItem.excerpt ?? '',
-			date: new Date(sanityItem.date),
-			kategori: sanityItem.category,
-			image,
-			fromSanity: true,
-			bodyHtml,
-		}
 	}
-} catch (error) {
-	console.error(`[Kegiatan Detail] Sanity kegiatanItem fetch failed for slug "${slug}":`, error)
+
+	pageData = {
+		title: sanityItem.title,
+		description: sanityItem.excerpt ?? '',
+		date: new Date(sanityItem.date),
+		kategori: sanityItem.category,
+		image,
+		fromSanity: true,
+		bodyHtml,
+	}
 }
 
 if (!pageData) {
@@ -115,12 +111,8 @@ const canonicalUrl = `${SITE.url}/kegiatan/${slug}/`
 
 // Related articles (exclude current, sort by date desc, take 3)
 const allSlugs = new Set<string>()
-try {
-	const sanityItems = await getKegiatanList()
-	for (const item of sanityItems) allSlugs.add(item.slug)
-} catch (error) {
-	console.error('[Kegiatan Detail] Sanity kegiatanList fetch failed:', error)
-}
+const sanityItems = await withFallback(() => getKegiatanList(), [], 'Kegiatan detail list fetch')
+for (const item of sanityItems) allSlugs.add(item.slug)
 const localAll = await getCollection('kegiatan')
 for (const item of localAll) allSlugs.add(item.id)
 
@@ -154,48 +146,27 @@ for (const rSlug of relatedSlugs) {
 const shareUrl = encodeURIComponent(canonicalUrl)
 const shareTitle = encodeURIComponent(title)
 
-// JSON-LD structured data for Article
-const jsonLd = {
-	'@context': 'https://schema.org',
-	'@type': 'Article',
-	headline: title,
-	description: description,
-	datePublished: date.toISOString(),
-	dateModified: date.toISOString(),
-	author: {
-		'@type': 'Organization',
-		name: SITE.name,
-		url: SITE.url,
-	},
-	publisher: {
-		'@type': 'Organization',
-		name: SITE.name,
-		url: SITE.url,
-		logo: {
-			'@type': 'ImageObject',
-			url: `${SITE.url}/logo-yayasan.webp`,
-		},
-	},
-	mainEntityOfPage: {
-		'@type': 'WebPage',
-		'@id': canonicalUrl,
-	},
-	articleSection: kategoriLabels[kategori] || KATEGORI_LABELS[kategori] || kategori,
-	keywords: ['yayasan', 'amal shalih', 'insan bantul', 'kegiatan', kategori],
-}
+// JSON-LD structured data
+const jsonLd = articleSchema({
+	title,
+	description,
+	date,
+	category: kategoriLabels[kategori] || KATEGORI_LABELS[kategori] || kategori,
+	canonicalUrl,
+	siteName: SITE.name,
+	siteUrl: SITE.url,
+})
 
-// BreadcrumbList JSON-LD
 const crumbBeranda = crumbLabels.beranda || 'Beranda'
 const crumbKegiatan = crumbLabels.kegiatan || 'Kegiatan'
-const breadcrumbJsonLd = {
-	'@context': 'https://schema.org',
-	'@type': 'BreadcrumbList',
-	itemListElement: [
-		{ '@type': 'ListItem', position: 1, name: crumbBeranda, item: SITE.url },
-		{ '@type': 'ListItem', position: 2, name: crumbKegiatan, item: `${SITE.url}/kegiatan/` },
-		{ '@type': 'ListItem', position: 3, name: title, item: canonicalUrl },
+const breadcrumbJsonLd = breadcrumbSchema(
+	[
+		{ name: crumbBeranda, url: SITE.url },
+		{ name: crumbKegiatan, url: `${SITE.url}/kegiatan/` },
+		{ name: title, url: canonicalUrl },
 	],
-}
+	SITE.url,
+)
 ---
 
 <BaseLayout
@@ -264,7 +235,7 @@ const breadcrumbJsonLd = {
 		<!-- Article Content -->
 	<article class="mx-auto max-w-3xl px-4 sm:px-6" itemscope itemtype="https://schema.org/Article">
 		<!-- Breadcrumb Navigation -->
-		<Container class="py-3 sm:py-6 text-sm" as="nav" aria-label="Breadcrumb">
+		<nav class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-3 sm:py-6 text-sm" aria-label="Breadcrumb">
 			<ol class="flex items-center gap-2 text-text-muted overflow-x-auto whitespace-nowrap">
 				<li><a href="/" class="hover:text-primary-600 dark:hover:text-primary-400 transition-colors">{crumbBeranda}</a></li>
 				<li class="text-text-muted">/</li>

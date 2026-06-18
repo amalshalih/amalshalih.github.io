@@ -36,23 +36,21 @@ export function handleError(
 		}
 	}
 
-	// Send to Sentry in production
+	// Send to Sentry in production (lazy import — only loaded when error occurs)
 	if (opts.sendToSentry && typeof window !== 'undefined') {
-		try {
-			// @ts-expect-error - Sentry might not be available
-			if (window.Sentry) {
-				// @ts-expect-error - Sentry might not be available
-				window.Sentry.captureException(error, {
+		import('@sentry/astro')
+			.then((Sentry) => {
+				Sentry.captureException(error, {
 					extra: opts.context,
 					tags: {
 						source: 'client',
 						type: error instanceof Error ? error.name : 'UnknownError',
 					},
 				})
-			}
-		} catch (sentryError) {
-			console.error('[Sentry Error Logging Failed]:', sentryError)
-		}
+			})
+			.catch(() => {
+				// Sentry not available — silently ignore
+			})
 	}
 
 	// Show user-friendly message

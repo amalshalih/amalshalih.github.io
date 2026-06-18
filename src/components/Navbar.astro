@@ -1,6 +1,13 @@
 ---
+/**
+ * Navbar — Main navigation
+ *
+ * Responsive with mobile hamburger, highlights current page.
+ * Includes BARKAS link and Donasi CTA.
+ */
 import { NAV_ITEMS } from '@lib/constants'
 import { getSiteSettings } from '@lib/sanity/client'
+import { withFallback } from '@lib/with-fallback'
 import Button from './ui/Button.astro'
 import Icon from './ui/Icon.astro'
 
@@ -15,13 +22,9 @@ const isBlogDetail = currentPage?.startsWith('/blog/')
 
 let navItems = NAV_ITEMS
 
-try {
-	const ss = await getSiteSettings()
-	if (ss && ss.navItems && ss.navItems.length > 0) {
-		navItems = ss.navItems
-	}
-} catch (error) {
-	console.error('[Navbar] Sanity siteSettings fetch failed:', error)
+const ss = await withFallback(() => getSiteSettings(), null, 'Navbar site settings fetch')
+if (ss?.navItems && ss.navItems.length > 0) {
+	navItems = ss.navItems
 }
 ---
 
