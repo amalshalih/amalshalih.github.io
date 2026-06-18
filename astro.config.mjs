@@ -88,9 +88,13 @@ export default defineConfig({
 		},
 		// @ts-expect-error — Vite version mismatch between Astro bundled & project dep
 		plugins: [tailwindcss()],
-		// Exclude Sanity client and PortableText from Vite optimization - incompatible with SSR dep optimizer
+		// Exclude incompatible packages from Vite optimization - SSR dep optimizer incompatible with these
 		optimizeDeps: {
-			exclude: ['@sanity/client', '@portabletext/to-html'],
+			exclude: [
+				'@sanity/client', // SSR incompatible
+				'@portabletext/to-html', // SSR incompatible
+				'@openpanel/astro', // SSR dep optimizer incompatible
+			],
 		},
 	},
 })
