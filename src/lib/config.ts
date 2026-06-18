@@ -1,3 +1,10 @@
+/**
+ * Configuration helpers with Zod validation
+ *
+ * Reads and validates environment variables at runtime.
+ * Provides typed accessors for Google Drive, Resend, Sanity.
+ * Throws descriptive errors on misconfiguration.
+ */
 import { env } from 'cloudflare:workers'
 import { z } from 'zod'
 

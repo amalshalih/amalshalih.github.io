@@ -1,3 +1,10 @@
+/**
+ * Core Web Vitals monitoring
+ *
+ * Tracks LCP, INP, CLS, FCP, TTFB using web-vitals library.
+ * Logs to console in dev. Ready for analytics integration.
+ * Called from BaseLayout client script.
+ */
 import { onCLS, onFCP, onINP, onLCP, onTTFB } from 'web-vitals'
 
 const performanceConfig = {
@@ -33,5 +40,3 @@ export function initWebVitalsMonitoring() {
 
 	console.log('[Web Vitals] Monitoring initialized')
 }
-
-initWebVitalsMonitoring()

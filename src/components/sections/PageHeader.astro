@@ -1,4 +1,10 @@
 ---
+/**
+ * PageHeader — Page title banner
+ *
+ * Gradient background with label, title, optional description.
+ * Gradient direction: br, r, b, tl, tr, bl.
+ */
 import Container from '@components/ui/Container.astro'
 
 interface Props {
@@ -21,7 +27,7 @@ const gradientMap: Record<string, string> = {
 }
 ---
 
-<section class:list={[gradientMap[gradient], 'text-white dark:text-white', className]}>
+<section class:list={[gradientMap[gradient], 'text-white dark:text-white dark:from-primary-950 dark:to-primary-950', className]}>
 	<Container as="div" class="py-6 sm:py-8 lg:py-12">
 		<p class="mb-2 text-xs sm:text-sm font-semibold uppercase tracking-widest text-gold-300 dark:text-gold-300">
 			{label}

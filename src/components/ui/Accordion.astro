@@ -1,5 +1,6 @@
 ---
-import type Icon from './Icon.astro'
+// biome-ignore lint/style/useImportType: Icon is used in template as component
+import Icon from './Icon.astro'
 
 type IconName = Parameters<typeof Icon>[0]['name']
 

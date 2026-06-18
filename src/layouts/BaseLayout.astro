@@ -106,5 +106,13 @@ const { title, description, image, currentPage, pageType, publishedTime, modifie
 		<slot name="after-main" />
 
 		<Footer currentPage={currentPage} />
+	<!-- Client-side initialization -->
+	<script>
+		import { initWebVitalsMonitoring } from '@lib/web-vitals'
+		import { initGlobalErrorHandling } from '@lib/error-handler'
+
+		initWebVitalsMonitoring()
+		initGlobalErrorHandling()
+	</script>
 	</body>
 </html>

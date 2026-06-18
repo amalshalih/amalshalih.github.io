@@ -1,4 +1,10 @@
 ---
+/**
+ * Lightbox — Fullscreen image viewer
+ *
+ * Gallery lightbox with keyboard nav, zoom, share, like.
+ * Lazy loads via IntersectionObserver.
+ */
 interface Props {
 	images: Array<{
 		id: string
@@ -294,8 +300,8 @@ const { images } = Astro.props
   function downloadImage() { const img = images[currentIndex]; if (!img) return; const link = document.createElement('a'); link.href = img.fullUrl; link.download = img.name; document.body.appendChild(link); link.click(); document.body.removeChild(link); }
   async function shareImage() {
     const img = images[currentIndex]; if (!img) return;
-    if (navigator.share) { try { await navigator.share({ title: img.name, text: `Lihat foto ini: ${img.name}`, url: window.location.href }); } catch (err) { console.log('Share cancelled'); } }
-    else { try { await navigator.clipboard.writeText(window.location.href); alert('URL disalin ke clipboard!'); } catch (err) { console.log('Copy failed'); } }
+    if (navigator.share) { try { await navigator.share({ title: img.name, text: `Lihat foto ini: ${img.name}`, url: window.location.href }); } catch { console.log('Share cancelled'); } }
+    else { try { await navigator.clipboard.writeText(window.location.href); alert('URL disalin ke clipboard!'); } catch { console.log('Copy failed'); } }
   }
   function showHelp() { lightboxHelp?.classList.remove('hidden'); lightboxHelp?.classList.add('flex'); }
   function hideHelp() { lightboxHelp?.classList.add('hidden'); lightboxHelp?.classList.remove('flex'); }

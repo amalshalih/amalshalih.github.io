@@ -260,7 +260,7 @@ const ogImageType = image.endsWith('.png') ? 'image/png' : 'image/webp'
     <script is:inline type="text/partytown" src="https://www.googletagmanager.com/gtag/js?id=G-L3WQTPSJGN"></script>
     <script is:inline type="text/partytown">
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
+      function gtag(...args){dataLayer.push(args);}
       gtag('js', new Date());
       gtag('consent', 'default', {
         'analytics_storage': 'denied',

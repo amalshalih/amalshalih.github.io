@@ -1,4 +1,12 @@
 ---
+/**
+ * Button — Reusable button component
+ *
+ * Renders either a `<button>` or `<a>` depending on whether `href` is provided.
+ * Variants: primary (green), gold, whatsapp, outline, outline-light, secondary, ghost.
+ * Supports sizes sm/md/lg. Automatically adds `target="_blank" rel="noopener noreferrer"`
+ * for external links.
+ */
 interface Props {
 	variant?: 'primary' | 'gold' | 'whatsapp' | 'outline' | 'outline-light' | 'secondary' | 'ghost'
 	size?: 'sm' | 'md' | 'lg'
@@ -20,11 +28,10 @@ const {
 	id,
 	target,
 	rel,
-	['aria-label']: ariaLabel,
+	'aria-label': ariaLabel,
 } = Astro.props
 
-const hasClass = (pattern: string) =>
-	className && className.split(' ').some((c) => c.startsWith(pattern))
+const hasClass = (pattern: string) => className?.split(' ').some((c) => c.startsWith(pattern))
 
 const base = [
 	'inline-flex items-center justify-center gap-2 font-semibold active:scale-95',

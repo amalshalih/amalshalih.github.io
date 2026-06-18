@@ -1,3 +1,9 @@
+/**
+ * Application constants
+ *
+ * Navigation items, category labels/mappings,
+ * breadcrumb labels, gallery UI configuration.
+ */
 export const NAV_ITEMS: {
 	label: string
 	href: string

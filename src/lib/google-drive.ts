@@ -1,3 +1,9 @@
+/**
+ * Google Drive JWT authentication helper
+ *
+ * Generates RS256-signed JWT using service account credentials.
+ * Returns access token for Google Drive API v3.
+ */
 import { getGoogleDriveCredentials } from './config'
 
 export interface DriveImage {

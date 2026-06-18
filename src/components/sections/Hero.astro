@@ -32,20 +32,18 @@ const initialPhoto = photos && photos.length > 0 ? photos[0] : null
 		aria-label="Slideshow hero background featuring Yayasan ASIB activities"
 		style="-webkit-mask-image: linear-gradient(to bottom, black 0%, black 60%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, black 60%, transparent 100%);"
 	>
-		{photos && photos.length > 0 ? (
-			<>
-				<div
-					id="hero-bg-a"
-					class="absolute inset-0 bg-cover bg-center transition-all duration-1000 ease-out"
-					style={`background-image: url('${initialPhoto?.fullUrl || ''}'); background-color: var(--color-surface-primary, #14532d);`}
-					data-photos={JSON.stringify(photos?.map((p) => p.fullUrl) || [])}
-					data-current="0"
-					aria-hidden="true"
-				></div>
-				<div id="hero-bg-b" class="absolute inset-0 bg-cover bg-center opacity-0 transition-all duration-1000 ease-out" aria-hidden="true"></div>
-			</>
-		) : (
-			<!-- Fallback: Logo + dot pattern when Google Drive photos unavailable -->
+		{photos && photos.length > 0 && (
+			<div
+				id="hero-bg-a"
+				class="absolute inset-0 bg-cover bg-center transition-all duration-1000 ease-out"
+				style={`background-image: url('${initialPhoto?.fullUrl || ''}'); background-color: var(--color-surface-primary, #14532d);`}
+				data-photos={JSON.stringify(photos?.map((p) => p.fullUrl) || [])}
+				data-current="0"
+				aria-hidden="true"
+			></div>
+			<div id="hero-bg-b" class="absolute inset-0 bg-cover bg-center opacity-0 transition-all duration-1000 ease-out" aria-hidden="true"></div>
+		)}
+		{(!photos || photos.length === 0) && (
 			<div class="absolute inset-0 flex items-center justify-center">
 				<img src="/logo-yayasan.webp" alt="" class="h-32 w-32 sm:h-40 sm:w-40 opacity-10" loading="eager" />
 			</div>

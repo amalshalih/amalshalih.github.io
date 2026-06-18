@@ -35,7 +35,7 @@ export function showToast(message: string, options: ToastOptions = {}): void {
 				</div>
 				<button
 					type="button"
-					class="ml-4 inline-flex text-gray-400 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 rounded-md"
+					class="ml-4 inline-flex text-warm-400 hover:text-warm-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 rounded-md"
 					aria-label="Close notification"
 				>
 					<svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">

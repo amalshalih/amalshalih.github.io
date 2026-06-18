@@ -2,8 +2,8 @@ import { describe, expect, it } from 'vitest'
 import { KATEGORI_LABELS, NAV_ITEMS } from '../constants'
 
 describe('NAV_ITEMS', () => {
-	it('has 5 menu items with label and href', () => {
-		expect(NAV_ITEMS).toHaveLength(5)
+	it('has 8 menu items with label and href (including BARKAS with children)', () => {
+		expect(NAV_ITEMS).toHaveLength(8)
 		for (const item of NAV_ITEMS) {
 			expect(item).toHaveProperty('label')
 			expect(item).toHaveProperty('href')

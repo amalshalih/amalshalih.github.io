@@ -9,7 +9,7 @@ import Heading from '@components/ui/Heading.astro'
 import BaseLayout from '@layouts/BaseLayout.astro'
 import { KATEGORI_LABELS } from '@lib/constants'
 import { getKegiatanList, getSiteSettings } from '@lib/sanity/client'
-import { withFallback, withNull } from '@lib/with-fallback'
+import { withFallback } from '@lib/with-fallback'
 
 interface kegiatanEntry {
 	id: string
