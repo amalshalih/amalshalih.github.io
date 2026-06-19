@@ -285,6 +285,32 @@ export const siteSettingsType = defineType({
 			],
 		}),
 		defineField({
+			name: 'ctaButton',
+			title: 'Tombol CTA (Navbar)',
+			type: 'object',
+			group: 'tampilan',
+			fields: [
+				{
+					name: 'text',
+					title: 'Teks Tombol',
+					type: 'string',
+					initialValue: 'Donasi',
+				},
+				{
+					name: 'href',
+					title: 'Tautan',
+					type: 'string',
+					initialValue: '/donasi',
+				},
+				{
+					name: 'isEnabled',
+					title: 'Aktif',
+					type: 'boolean',
+					initialValue: true,
+				},
+			],
+		}),
+		defineField({
 			name: 'galleryCategoryGradients',
 			title: 'Gradients Kategori Galeri',
 			type: 'array',

@@ -145,6 +145,11 @@ export interface SanitySiteSettings {
 		label: string
 		href: string
 	}[]
+	ctaButton?: {
+		text: string
+		href: string
+		isEnabled?: boolean
+	}
 	notFoundTitle?: string
 	notFoundDescription?: string
 }
