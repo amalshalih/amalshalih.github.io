@@ -5,10 +5,10 @@ import BaseLayout from '@layouts/BaseLayout.astro'
 const { programInfo } = barkasData
 ---
 
-<BaseLayout title="Dampak BARKAS" description={programInfo.description} currentPage="/barkas">
+<BaseLayout title="Dampak BARKAS" description={programInfo.description} image="/dampak-nyata.webp" currentPage="/barkas">
   <main class="dampak-page">
     <!-- ==================== HERO ==================== -->
-    <section class="dampak-hero -mt-[70px] sm:-mt-[82px] min-h-[300px] sm:min-h-[320px] lg:min-h-[360px]" style="background-image: url('https://images.unsplash.com/photo-1593113630400-ea4288922497?w=1400&q=75'); background-size: cover; background-position: center 35%;">
+    <section class="dampak-hero -mt-[70px] sm:-mt-[82px] min-h-[160px] sm:min-h-[200px] lg:min-h-[260px]" style="background-image: url('https://images.unsplash.com/photo-1593113630400-ea4288922497?w=1400&q=75'); background-size: cover; background-position: center 35%;">
       <div class="absolute inset-0 bg-gradient-to-br from-[rgba(0,50,15,0.85)] via-[rgba(0,30,10,0.72)] to-[rgba(0,0,0,0.55)] pointer-events-none" style="top: -70px;" />
       <div class="container pt-[90px] sm:pt-[110px] pb-6 sm:pb-10 lg:pb-12">
         <div class="hero-content animate-fade-in">
@@ -781,7 +781,7 @@ const { programInfo } = barkasData
     @media (max-width: 380px) {
       .container { padding-left: 14px; padding-right: 14px; overflow-wrap: break-word; }
 
-      .dampak-hero { min-height: 280px; }
+      .dampak-hero { min-height: 140px; }
       .dampak-hero h1 { font-size: 1.35rem; }
       .tagline { font-size: 0.92rem; margin-bottom: 14px; }
       .description { font-size: 0.85rem; max-width: 100%; margin-bottom: 20px; }
