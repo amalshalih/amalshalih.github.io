@@ -6,7 +6,7 @@
  * Usage: bun run scripts/compress-drive-images-standalone.ts
  */
 
-import { mkdir, readdir, readFile, stat, unlink, writeFile } from 'node:fs/promises'
+import { mkdir, stat, unlink, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
 
 const PARENT_FOLDER_ID = '1g2ISaHQI3lRU1fh8N5U2coFVYt4sktDm'
@@ -329,7 +329,6 @@ async function processFolder(
 			const result = await compressImage(downloadedPath)
 
 			if (result) {
-				const saved = originalSize - result.compressedSize
 				console.log(`  ✅ ${result.originalName} → ${result.compressedName}`)
 				console.log(
 					`     ${formatBytes(originalSize)} → ${formatBytes(result.compressedSize)} (${result.reduction}% saved)`,

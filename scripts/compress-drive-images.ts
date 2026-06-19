@@ -192,7 +192,6 @@ async function processFolder(
 			const result = await compressImage(downloadedPath)
 
 			if (result) {
-				const saved = originalSize - result.compressedSize
 				console.log(`  ✅ ${result.originalName} → ${result.compressedName}`)
 				console.log(
 					`     ${formatBytes(originalSize)} → ${formatBytes(result.compressedSize)} (${result.reduction}% saved)`,
