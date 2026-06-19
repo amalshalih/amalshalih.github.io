@@ -69,16 +69,16 @@ const lightboxImages = product.images.map((img, index) => ({
 	fullUrl: `${imageBaseUrl}${img}`,
 }))
 
-const whatsappUrl = `https://wa.me/${programInfo.contact.whatsapp.replace(/-/g, '')}?text=Halo%20ASIB,%20saya%20ingin%20membeli%20${encodeURIComponent(product.name)}%20(Rp%20${product.price.toLocaleString('id-ID')})`
+const whatsappUrl = `https://wa.me/${programInfo.contact.whatsapp.replace(/\D/g, '')}?text=Halo%20ASIB,%20saya%20ingin%20membeli%20${encodeURIComponent(product.name)}%20(Rp%20${product.price.toLocaleString('id-ID')})`
 ---
 
-<BaseLayout title={`${product.name} - ${programInfo.fullName}`} description={product.description} currentPage={barkasPath}>
+<BaseLayout title={`${product.name} - ${programInfo.fullName}`} description={product.description} image="/logo-yayasan.webp" currentPage={barkasPath}>
   <!-- Schema.org JSON-LD -->
   <script is:inline type="application/ld+json" set:html={JSON.stringify(productSchema)} />
 
-  <main class="product-detail-page">
+  <main class="product-detail-page" id="product-detail-main">
     <!-- Hero / Breadcrumb -->
-    <section class="detail-hero -mt-[70px] sm:-mt-[82px] min-h-[200px] sm:min-h-[240px] lg:min-h-[280px]" style="background-image: url('https://images.unsplash.com/photo-1610701596007-11502861dcfa?w=1400&q=75'); background-size: cover; background-position: center 50%;">
+    <section class="detail-hero -mt-[70px] sm:-mt-[82px] min-h-[120px] sm:min-h-[160px] lg:min-h-[200px]" style="background-image: url('https://images.unsplash.com/photo-1610701596007-11502861dcfa?w=1400&q=75'); background-size: cover; background-position: center 50%;">
       <div class="container pt-[90px] sm:pt-[110px] pb-4 sm:pb-8 lg:pb-10 relative z-1">
         <nav class="breadcrumb" aria-label="Breadcrumb">
           <a href="/barkas">BARKAS</a>
@@ -93,7 +93,7 @@ const whatsappUrl = `https://wa.me/${programInfo.contact.whatsapp.replace(/-/g, 
     </section>
 
     <!-- Product Detail -->
-    <section class="product-detail">
+    <section class="product-detail" id="product-info-section">
       <div class="container">
         <div class="product-grid-detail">
           <!-- Left: Gallery -->
@@ -190,8 +190,23 @@ const whatsappUrl = `https://wa.me/${programInfo.contact.whatsapp.replace(/-/g, 
               </div>
             )}
 
+            <div class="impact-info">
+              <h3>💚 Dampak Donasi Anda</h3>
+              <p>
+                Setiap pembelian di BARKAS mendukung program sosial, pendidikan, dan dakwah
+                Yayasan Amal Shalih Insan Bantul. Barang yang sudah tidak terpakai
+                menjadi berkah bagi sesama.
+              </p>
+              <ul>
+                <li>Santunan yatim & dhuafa</li>
+                <li>Beasiswa pendidikan Islam</li>
+                <li>Program dakwah & keagamaan</li>
+                <li>Pengurangan limbah & peduli lingkungan</li>
+              </ul>
+            </div>
+
             {product.status === 'available' ? (
-              <div class="action-buttons">
+              <div class="action-buttons" id="sticky-cta-placeholder">
                 <a
                   href={whatsappUrl}
                   class="btn btn-whatsapp btn-large"
@@ -219,21 +234,6 @@ const whatsappUrl = `https://wa.me/${programInfo.contact.whatsapp.replace(/-/g, 
                 </a>
               </div>
             )}
-
-            <div class="impact-info">
-              <h3>💚 Dampak Donasi Anda</h3>
-              <p>
-                Setiap pembelian di BARKAS mendukung program sosial, pendidikan, dan dakwah
-                Yayasan Amal Shalih Insan Bantul. Barang yang sudah tidak terpakai
-                menjadi berkah bagi sesama.
-              </p>
-              <ul>
-                <li>Santunan yatim & dhuafa</li>
-                <li>Beasiswa pendidikan Islam</li>
-                <li>Program dakwah & keagamaan</li>
-                <li>Pengurangan limbah & peduli lingkungan</li>
-              </ul>
-            </div>
           </div>
         </div>
       </div>
@@ -243,27 +243,30 @@ const whatsappUrl = `https://wa.me/${programInfo.contact.whatsapp.replace(/-/g, 
     <section class="related-info">
       <div class="container">
         <div class="info-cards">
-            <div class="info-card">
-              <h3>📦 Donasi Barang</h3>
+          <a href="/barkas/donasi" class="info-card">
+            <span class="card-icon">📦</span>
+            <div class="card-body">
+              <h3>Donasi Barang</h3>
               <p>Punya barang bekas layak pakai? Donasikan untuk program sosial ASIB. Kami jemput gratis!</p>
-              <a href="/barkas/donasi" class="btn btn-primary">
-                Cara Donasi
-              </a>
             </div>
-            <div class="info-card">
-              <h3>🌿 Dampak BARKAS</h3>
+            <span class="card-arrow">→</span>
+          </a>
+          <a href="/barkas/dampak" class="info-card">
+            <span class="card-icon">🌿</span>
+            <div class="card-body">
+              <h3>Dampak BARKAS</h3>
               <p>Setiap pembelian dan donasi Anda mendukung program sosial, pendidikan, dan dakwah.</p>
-              <a href="/barkas/dampak" class="btn btn-secondary">
-                Lihat Dampak
-              </a>
             </div>
-            <div class="info-card">
-              <h3>📖 Tentang BARKAS</h3>
+            <span class="card-arrow">→</span>
+          </a>
+          <a href="/barkas/tentang" class="info-card">
+            <span class="card-icon">📖</span>
+            <div class="card-body">
+              <h3>Tentang BARKAS</h3>
               <p>Pelajari lebih lanjut tentang program Barang Bekas Berkah ASIB dan cara kerjanya.</p>
-              <a href="/barkas/tentang" class="btn btn-secondary">
-                Pelajari
-              </a>
             </div>
+            <span class="card-arrow">→</span>
+          </a>
         </div>
       </div>
     </section>
@@ -306,6 +309,31 @@ const whatsappUrl = `https://wa.me/${programInfo.contact.whatsapp.replace(/-/g, 
         
         window.__currentImageIndex = index
       }
+      
+      // Attach click handlers to thumbnails
+      thumbnails.forEach((thumb, i) => {
+        thumb.addEventListener('click', () => {
+          window.swapProductImage(i)
+        })
+      })
+
+      // Dynamic calculation for mobile sticky buttons height to prevent footer overlap
+      const updateMobileCtaHeight = () => {
+        if (window.innerWidth <= 768) {
+          const actionButtons = document.getElementById('sticky-cta-placeholder')
+          const soldOutNotice = document.querySelector('.sold-out-notice')
+          const el = actionButtons || soldOutNotice
+          if (el) {
+            const height = el.offsetHeight
+            document.documentElement.style.setProperty('--mobile-cta-height', `${height + 4}px`)
+            return
+          }
+        }
+        document.documentElement.style.removeProperty('--mobile-cta-height')
+      }
+
+      updateMobileCtaHeight()
+      window.addEventListener('resize', updateMobileCtaHeight)
     })
   </script>
 
@@ -328,6 +356,8 @@ const whatsappUrl = `https://wa.me/${programInfo.contact.whatsapp.replace(/-/g, 
       background-size: cover;
       background-position: center 50%;
       overflow: hidden;
+      /* Mobile compression */
+      min-height: 120px;
     }
 
     .detail-hero::before {
@@ -414,15 +444,17 @@ const whatsappUrl = `https://wa.me/${programInfo.contact.whatsapp.replace(/-/g, 
     .main-image {
       background: var(--color-surface-placeholder);
       border-radius: 12px;
+      border: 1px solid var(--color-border-secondary);
       overflow: hidden;
       margin-bottom: 20px;
       aspect-ratio: 1;
-      transition: box-shadow 0.4s;
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
       cursor: pointer;
     }
 
     .main-image:hover {
       box-shadow: 0 8px 30px var(--color-shadow-image-hover);
+      border-color: var(--color-border-accent);
     }
 
     .main-image img {
@@ -514,16 +546,19 @@ const whatsappUrl = `https://wa.me/${programInfo.contact.whatsapp.replace(/-/g, 
 
     /* Product Info */
     .product-info-detail {
-      padding: 20px;
+      padding: 24px;
       background: var(--color-surface-elevated);
       border-radius: 12px;
-      box-shadow: 0 4px 6px var(--color-shadow-elevated);
+      border: 1px solid var(--color-border-secondary);
+      box-shadow: 0 4px 12px var(--color-shadow-elevated);
       animation: fade-in-up 0.5s ease-out 0.2s both;
-      transition: box-shadow 0.4s;
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .product-info-detail:hover {
-      box-shadow: 0 8px 25px var(--color-shadow-elevated-hover);
+      box-shadow: 0 8px 28px var(--color-shadow-elevated-hover);
+      border-color: var(--color-border-accent);
+      transform: translateY(-3px);
     }
 
     .category-tag {
@@ -582,7 +617,8 @@ const whatsappUrl = `https://wa.me/${programInfo.contact.whatsapp.replace(/-/g, 
       background: var(--color-surface-subtle);
       padding: 20px;
       border-radius: 12px;
-      margin-bottom: 20px;
+      border: 1px solid var(--color-border-secondary);
+      margin-bottom: 24px;
     }
 
     .meta-item {
@@ -641,9 +677,13 @@ const whatsappUrl = `https://wa.me/${programInfo.contact.whatsapp.replace(/-/g, 
     /* Action Buttons */
     .action-buttons {
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
       gap: 15px;
+      margin-top: 24px;
       margin-bottom: 30px;
+    }
+    .action-buttons .btn {
+      flex: 1;
     }
 
     .btn-large {
@@ -657,7 +697,7 @@ const whatsappUrl = `https://wa.me/${programInfo.contact.whatsapp.replace(/-/g, 
       border-radius: 8px;
       text-decoration: none;
       font-weight: 600;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
       display: inline-block;
       border: none;
       cursor: pointer;
@@ -703,9 +743,10 @@ const whatsappUrl = `https://wa.me/${programInfo.contact.whatsapp.replace(/-/g, 
 
     .sold-out-notice {
       text-align: center;
-      padding: 30px;
+      padding: 24px;
       background: var(--color-surface-subtle);
       border-radius: 12px;
+      border: 1px solid var(--color-border-secondary);
       animation: fade-in-up 0.5s ease-out 0.3s both;
     }
 
@@ -718,13 +759,13 @@ const whatsappUrl = `https://wa.me/${programInfo.contact.whatsapp.replace(/-/g, 
     /* Impact Info */
     .impact-info {
       background: var(--color-surface-secondary);
-      padding: 30px;
-      border-radius: 16px;
+      padding: 24px;
+      border-radius: 12px;
       border: 1px solid var(--color-border-primary);
       position: relative;
       overflow: hidden;
       animation: fade-in-up 0.5s ease-out 0.3s both;
-      transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     }
     .impact-info::before {
       content: '';
@@ -735,9 +776,9 @@ const whatsappUrl = `https://wa.me/${programInfo.contact.whatsapp.replace(/-/g, 
     }
 
     .impact-info:hover {
-      transform: translateY(-2px);
+      transform: translateY(-3px);
       border-color: var(--color-accent-primary);
-      box-shadow: 0 12px 35px color-mix(in srgb, var(--color-accent-primary) 8%, transparent);
+      box-shadow: 0 8px 28px var(--color-shadow-elevated-hover);
     }
 
     .impact-info h3 {
@@ -778,8 +819,7 @@ const whatsappUrl = `https://wa.me/${programInfo.contact.whatsapp.replace(/-/g, 
 
     /* Related Info */
     .related-info {
-      padding: 60px 0;
-      background: var(--color-surface-secondary);
+      padding: 40px 0;
     }
 
     .info-cards {
@@ -790,12 +830,20 @@ const whatsappUrl = `https://wa.me/${programInfo.contact.whatsapp.replace(/-/g, 
 
     .info-card {
       background: var(--color-surface-elevated);
-      padding: 30px;
+      padding: 24px;
       border-radius: 12px;
-      box-shadow: 0 4px 6px var(--color-shadow-elevated);
+      border: 1px solid var(--color-border-secondary);
+      box-shadow: 0 4px 12px var(--color-shadow-elevated);
       text-align: center;
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
       animation: fade-in-up 0.5s ease-out both;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
     }
 
     .info-card:nth-child(1) { animation-delay: 0.3s; }
@@ -803,45 +851,384 @@ const whatsappUrl = `https://wa.me/${programInfo.contact.whatsapp.replace(/-/g, 
     .info-card:nth-child(3) { animation-delay: 0.5s; }
 
     .info-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 16px 40px var(--color-shadow-card-hover);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 28px var(--color-shadow-card-hover);
+      border-color: var(--color-border-accent);
     }
 
-    .info-card h3 {
+    .card-icon {
+      font-size: 2.2rem;
+      line-height: 1;
+    }
+
+    .card-body h3 {
       color: var(--color-text-primary);
-      margin-bottom: 15px;
+      margin-bottom: 10px;
+      font-size: 1.25rem;
     }
 
-    .info-card p {
+    .card-body p {
       color: var(--color-text-secondary);
-      margin-bottom: 20px;
+      margin-bottom: 0;
+      font-size: 0.95rem;
+      line-height: 1.5;
     }
 
-    /* Responsive */
+    .card-arrow {
+      display: none;
+    }
+
+    /* Responsive — Mobile-first native app feel */
     @media (max-width: 768px) {
+      .container {
+        padding-left: 8px !important;
+        padding-right: 8px !important;
+      }
+
       .product-grid-detail {
         grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      /* ── Hero ultra compact ── */
+      .detail-hero {
+        min-height: 100px !important;
+      }
+      .detail-hero .container {
+        padding-top: 65px !important;
+        padding-bottom: 8px !important;
+        padding-left: 12px !important;
+        padding-right: 12px !important;
+      }
+      .detail-hero h1 {
+        font-size: 1rem !important;
+        margin-bottom: 4px !important;
+      }
+      .detail-hero .breadcrumb {
+        font-size: 0.7rem !important;
+      }
+      .detail-hero-title {
+        font-size: 1.1rem !important;
+      }
+      .detail-hero-price {
+        font-size: 1.2rem !important;
+      }
+
+      /* ── Gallery: full-width, no radius ── */
+      .product-gallery {
+        position: static !important;
+        margin-bottom: 0;
+      }
+      .main-image {
+        border-radius: 0 !important;
+        height: 280px !important;
+        aspect-ratio: auto;
+      }
+      .main-image:hover,
+      .main-image:hover img {
+        box-shadow: none !important;
+        transform: none !important;
+      }
+      .thumbnail-grid {
+        padding: 6px 0;
+        gap: 6px;
+      }
+      .thumbnail-item {
+        border-radius: 4px;
+      }
+      .thumbnail:hover {
+        border-color: transparent !important;
+        transform: none !important;
+      }
+
+      /* ── Info panel: flat card, no shadow ── */
+      .product-info-detail {
+        padding: 14px;
+        border-radius: 8px;
+        border: 1px solid var(--color-border-secondary);
+        box-shadow: none !important;
+        background: var(--color-surface-elevated);
+        animation: none !important;
+        transition: none !important;
+        transform: none !important;
+      }
+      .product-info-detail:hover {
+        box-shadow: none !important;
+        border-color: var(--color-border-secondary) !important;
+        transform: none !important;
+        will-change: auto !important;
+        transition: none !important;
       }
 
       .product-title {
-        font-size: 1.5rem;
+        font-size: 1.2rem !important;
+        margin-bottom: 12px !important;
       }
 
+      .product-pricing-detail {
+        margin-bottom: 16px;
+      }
       .current-price {
-        font-size: 1.8rem;
+        font-size: 1.3rem !important;
+      }
+      .original-price {
+        font-size: 0.9rem !important;
+        margin-left: 8px !important;
       }
 
-      .thumbnail-grid {
-        grid-template-columns: repeat(4, 1fr);
+      .product-description-detail p {
+        font-size: 0.9rem !important;
+        margin-bottom: 16px !important;
+      }
+
+      .category-tag {
+        font-size: 0.75rem !important;
+        padding: 4px 10px !important;
+        margin-bottom: 10px !important;
+      }
+      .category-tag:hover {
+        transform: none !important;
+      }
+
+      /* ── Meta list: compact ── */
+      .product-meta-detail {
+        padding: 12px;
+        border-radius: 8px;
+        border: 1px solid var(--color-border-secondary);
+        margin-bottom: 12px;
+      }
+      .meta-item {
+        padding: 6px 0;
+        font-size: 0.8rem;
+        display: flex;
+        justify-content: space-between;
+      }
+      .meta-item strong {
+        font-size: 0.8rem;
+      }
+      .meta-item span {
+        font-size: 0.8rem;
+      }
+
+      .product-tags {
+        margin-bottom: 16px;
+      }
+      .tag {
+        font-size: 0.75rem !important;
+        padding: 3px 8px !important;
+      }
+
+      /* ── Sticky bottom CTA bar — Tokopedia/Shopee style ── */
+      .action-buttons {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        background: var(--color-surface-elevated, #fff);
+        padding: 8px 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        box-shadow: 0 -2px 12px rgba(0,0,0,0.1);
+        border-top: 1px solid var(--color-border-secondary, #e5e7eb);
+        margin: 0;
+        max-width: 100%;
+        border-radius: 0;
+      }
+      .action-buttons .btn {
+        margin: 0;
+        flex: 1;
+        font-size: 0.85rem;
+        padding: 10px 12px;
+        max-width: 100%;
+      }
+      .btn-whatsapp:hover {
+        transform: none !important;
+        box-shadow: none !important;
+      }
+      .btn-primary:hover {
+        transform: none !important;
+        box-shadow: none !important;
+      }
+      .btn-secondary:hover {
+        transform: none !important;
+        box-shadow: none !important;
+      }
+
+      /* Prevent content from hiding behind sticky bar (including footer) dynamically */
+      :global(body) {
+        padding-bottom: var(--mobile-cta-height, 120px) !important;
+      }
+      .product-detail {
+        padding: 24px 0;
+      }
+
+      /* ── Impact info: compact ── */
+      .impact-info {
+        padding: 16px;
+        border-radius: 8px;
+        border-color: var(--color-border-secondary);
+      }
+      .impact-info h3 {
+        font-size: 1rem !important;
+        margin-bottom: 10px !important;
+      }
+      .impact-info p {
+        font-size: 0.85rem !important;
+        margin-bottom: 10px !important;
+      }
+      .impact-info li {
+        font-size: 0.82rem;
+        padding: 4px 0;
+        padding-left: 20px;
+      }
+      .impact-info li:hover {
+        transform: none !important;
+      }
+      .impact-info:hover {
+        transform: none !important;
+        box-shadow: none !important;
+        border-color: var(--color-border-primary) !important;
+      }
+
+      /* ── Compact mobile spacing ── */
+      #product-info-section {
+        padding: 8px 0;
+        gap: 8px;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .product-donor {
+        font-size: 0.75rem !important;
+        padding: 8px 12px !important;
+        border-radius: 8px !important;
+      }
+
+      /* ── Related info: horizontal carousel (Shopee/Tokopedia style) ── */
+      .related-info {
+        padding: 20px 0;
+      }
+      .related-info .container {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+      }
+      .info-cards {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: 10px;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+        padding-left: 16px;
+        padding-right: 8px;
+        scroll-padding-left: 16px;
+      }
+      .info-cards::-webkit-scrollbar {
+        display: none;
+      }
+      .info-card {
+        flex: 0 0 72%;
+        scroll-snap-align: start;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        padding: 16px;
+        border-radius: 8px;
+        border: 1px solid var(--color-border-secondary, #e5e7eb);
+        box-shadow: none !important;
+        text-align: left;
+        text-decoration: none;
+        color: inherit;
+        cursor: pointer;
+        min-height: 130px;
+        background: var(--color-surface-elevated);
+      }
+      .info-card:hover {
+        transform: none !important;
+        box-shadow: none !important;
+        border-color: var(--color-border-secondary, #e5e7eb) !important;
+      }
+      .info-card:active {
+        transform: scale(0.98) !important;
+        transition: transform 0.15s;
+      }
+      .card-icon {
+        font-size: 1.6rem;
+        line-height: 1;
+      }
+      .card-body {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+      .card-body h3 {
+        font-size: 0.9rem !important;
+        margin: 0 !important;
+        font-weight: 600;
+        color: var(--color-text-primary);
+      }
+      .card-body p {
+        font-size: 0.75rem !important;
+        margin: 0 !important;
+        color: var(--color-text-secondary);
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        line-height: 1.4;
+      }
+      .card-arrow {
+        display: block;
+        align-self: flex-end;
+        font-size: 0.9rem;
+        color: var(--color-text-muted, #9ca3af);
+        margin-top: auto;
+      }
+
+      /* ── Sold-out notice compact ── */
+      .sold-out-notice {
+        padding: 16px;
+        border-radius: 8px;
+        border: 1px solid var(--color-border-secondary);
+      }
+      .sold-message {
+        font-size: 0.95rem !important;
+        margin-bottom: 12px !important;
+      }
+
+      /* ── Tablet override inside mobile — wider cards in carousel ── */
+      @media (min-width: 640px) {
+        .container {
+          padding-left: 16px !important;
+          padding-right: 16px !important;
+        }
+        .detail-hero .container {
+          padding-left: 16px !important;
+          padding-right: 16px !important;
+        }
+        #product-info-section {
+          padding: 12px 0;
+        }
+        .info-cards {
+          gap: 14px;
+          padding-left: 24px;
+          padding-right: 16px;
+          scroll-padding-left: 24px;
+        }
+        .info-card {
+          flex: 0 0 56%;
+          min-height: 110px;
+        }
       }
     }
 
-    @media (prefers-color-scheme: dark) {
-      /* btn-secondary switches from green outline to light outline in dark mode */
-      .btn-secondary {
-        color: var(--color-text-primary);
-        border-color: var(--color-text-primary);
-      }
+    :global(.dark) .btn-secondary {
+      color: var(--color-text-primary);
+      border-color: var(--color-text-primary);
     }
   </style>
 </BaseLayout>
