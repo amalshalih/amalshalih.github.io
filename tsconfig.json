@@ -4,6 +4,7 @@
 	"exclude": ["dist", "studio-amalshalih/dist"],
 	"compilerOptions": {
 		"strictNullChecks": true,
+		"types": ["bun-types"],
 		"baseUrl": ".",
 		"paths": {
 			"@components/*": ["src/components/*"],
