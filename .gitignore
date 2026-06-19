@@ -40,6 +40,14 @@ pnpm-debug.log*
 
 # Sisyphus runtime artifacts (not work plans)
 .sisyphus/run-continuation/
+# Sisyphus work plans — AI process documents, not project code
+.sisyphus/*.md
+
+# Performance & SEO audit artifacts
+.unlighthouse/
+gtmetrix audit/
+iloveimg-compressed/
+tmp-drive-images/
 
 # Sentry Config File
 .env.sentry-build-plugin
