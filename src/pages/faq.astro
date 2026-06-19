@@ -167,6 +167,25 @@ if (sanityFaq && sanityFaq.length > 0) {
 		},
 	]
 }
+
+// FAQPage structured data for Google rich results
+interface FaqItem {
+	q: string
+	a: string
+}
+const allFaqItems: FaqItem[] = faqData.flatMap((group) => group.items)
+const faqPageSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'FAQPage',
+	mainEntity: allFaqItems.map((item) => ({
+		'@type': 'Question',
+		name: item.q,
+		acceptedAnswer: {
+			'@type': 'Answer',
+			text: item.a,
+		},
+	})),
+}
 ---
 
 <BaseLayout
@@ -174,6 +193,9 @@ if (sanityFaq && sanityFaq.length > 0) {
   description="Pertanyaan yang sering diajukan tentang Yayasan Amal Shalih Insan Bantul."
   currentPage="/faq"
 >
+  <!-- FAQPage Structured Data for Google Rich Results -->
+  <script type="application/ld+json" set:html={JSON.stringify(faqPageSchema)} />
+
   <PageHeader
     label="FAQ"
     title="Pertanyaan Umum"

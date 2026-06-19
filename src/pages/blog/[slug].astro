@@ -6,6 +6,7 @@ import Heading from '@components/ui/Heading.astro'
 import Icon from '@components/ui/Icon.astro'
 import Image from '@components/ui/Image.astro'
 import Link from '@components/ui/Link.astro'
+import { SITE } from '@data/site'
 import BaseLayout from '@layouts/BaseLayout.astro'
 import { getBlogPost } from '@lib/sanity/client'
 import { renderPortableText } from '@lib/sanity/render'
@@ -95,6 +96,39 @@ const allPosts = await getCollection('blog')
 const relatedPosts = allPosts
 	.filter((p) => p.id !== post.id && p.data.category === post.data.category)
 	.slice(0, 3)
+
+// Article structured data for Google rich snippets
+const articleSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'Article',
+	headline: post.data.title,
+	description: post.data.description,
+	datePublished: post.data.date.toISOString(),
+	dateModified: post.data.date.toISOString(),
+	author: post.data.author
+		? {
+				'@type': 'Person',
+				name: post.data.author,
+			}
+		: {
+				'@type': 'Organization',
+				name: SITE.name,
+			},
+	publisher: {
+		'@type': 'Organization',
+		name: SITE.name,
+		url: SITE.url,
+		logo: {
+			'@type': 'ImageObject',
+			url: SITE.url + '/logo-yayasan.webp',
+		},
+	},
+	image: post.data.image ? { '@type': 'ImageObject', url: post.data.image } : undefined,
+	mainEntityOfPage: {
+		'@type': 'WebPage',
+		'@id': SITE.url + '/blog/' + post.id,
+	},
+}
 ---
 
 <BaseLayout
@@ -106,6 +140,9 @@ const relatedPosts = allPosts
 	modifiedTime={post.data.date.toISOString()}
 	currentPage={`/blog/${post.id}`}
 >
+	<!-- Article Structured Data for Google Rich Snippets -->
+	<script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+
 	<!-- Full-Width Hero Section with Overlap -->
 	<div class="relative w-full overflow-hidden -mt-[70px] sm:-mt-[82px]">
 		<!-- Full-Bleed Ambient Background Glow -->
