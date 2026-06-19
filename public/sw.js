@@ -112,7 +112,7 @@ self.addEventListener('fetch', (event) => {
 	event.respondWith(
 		caches.match(request, { cacheName: STATIC_CACHE }).then((response) => {
 			if (response) return response
-			return fetch(request)
+			return fetch(request).catch(() => new Response('', { status: 408 }))
 		}),
 	)
 })
