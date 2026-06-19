@@ -86,16 +86,24 @@ const ogImageType = image.endsWith('.png') ? 'image/png' : 'image/webp'
 <!-- Content Security Policy -->
 <meta
   http-equiv="Content-Security-Policy"
-  content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.sanity.io https://www.googletagmanager.com https://www.google-analytics.com https://www.google.com https://openpanel.dev https://*.sentry.io https://cdn.debugbear.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https://cdn.sanity.io https://images.unsplash.com https://amalshalih.or.id https://www.google-analytics.com https://www.google.com https://openpanel.dev; connect-src 'self' https://*.ingest.us.sentry.io https://www.google-analytics.com https://stats.g.doubleclick.net https://api.openpanel.dev https://cdn.sanity.io https://cdn.debugbear.com; base-uri 'self'; form-action 'self'; upgrade-insecure-requests"
+  content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.sanity.io https://www.googletagmanager.com https://www.google-analytics.com https://www.google.com https://openpanel.dev https://*.sentry.io https://cdn.debugbear.com https://analytics.ahrefs.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https://cdn.sanity.io https://images.unsplash.com https://amalshalih.or.id https://www.google-analytics.com https://www.google.com https://openpanel.dev https://analytics.ahrefs.com; connect-src 'self' https://*.ingest.us.sentry.io https://www.google-analytics.com https://stats.g.doubleclick.net https://api.openpanel.dev https://cdn.sanity.io https://cdn.debugbear.com https://analytics.ahrefs.com; base-uri 'self'; form-action 'self'; upgrade-insecure-requests"
 />
 
-<!-- Google Fonts: Inter + Plus Jakarta Sans -->
+<!-- Google Fonts: Inter + Plus Jakarta Sans (non-render-blocking) -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link
   href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&family=Plus+Jakarta+Sans:wght@700..800&display=swap"
   rel="stylesheet"
+  media="print"
+  onload="this.setAttribute('media', 'all')"
 />
+<noscript>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&family=Plus+Jakarta+Sans:wght@700..800&display=swap"
+    rel="stylesheet"
+  />
+</noscript>
 
 <!-- Web Vitals monitoring script -->
 <meta name="msapplication-TileColor" content="#052e16" />
@@ -156,7 +164,7 @@ const ogImageType = image.endsWith('.png') ? 'image/png' : 'image/webp'
 
 <script is:inline type="application/ld+json" set:html={JSON.stringify({
 	"@context": "https://schema.org",
-	"@type": "Organization",
+	"@type": "NGO",
 	"@id": `${SITE.url}/#organization`,
 	"name": SITE.name,
 	"alternateName": SITE.shortName,
@@ -164,6 +172,10 @@ const ogImageType = image.endsWith('.png') ? 'image/png' : 'image/webp'
 	"url": SITE.url,
 	"logo": `${SITE.url}/logo-yayasan.webp`,
 	"foundingDate": SITE.foundedDate,
+	"legalName": SITE.name,
+	"taxID": SITE.legal.npwp,
+	"areaServed": "ID",
+	"knowsAbout": ["Pendidikan Islam", "Keagamaan", "Sosial Kemanusiaan"],
 	"address": {
 		"@type": "PostalAddress",
 		"streetAddress": CONTACT.address.street + ', ' + CONTACT.address.village + ', ' + CONTACT.address.district,

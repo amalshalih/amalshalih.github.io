@@ -21,7 +21,11 @@ const isHomepage = currentPage === '/' || currentPage?.startsWith('/barkas')
 const isBlogDetail = currentPage?.startsWith('/blog/')
 
 let navItems = NAV_ITEMS
-let ctaButton = { text: 'Donasi', href: '/donasi', isEnabled: true } // Default fallback
+let ctaButton: { text: string; href: string; isEnabled?: boolean } = {
+	text: 'Donasi',
+	href: '/donasi',
+	isEnabled: true,
+} // Default fallback
 
 const ss = await withFallback(() => getSiteSettings(), null, 'Navbar site settings fetch')
 if (ss?.navItems && ss.navItems.length > 0) {
