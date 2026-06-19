@@ -1,6 +1,6 @@
 # Technical Knowledge Base — Website Yayasan ASIB
 
-> **Terakhir diperbarui:** 8 Juni 2026  
+> **Terakhir diperbarui:** 19 Juni 2026  
 > **Repo:** `amalshalih/amalshalih.github.io` — **hanya berisi dokumentasi teknis website**  
 > **Dokumentasi organisasi yayasan:** [`amalshalih/amalshalih/.openkb/`](https://github.com/amalshalih/amalshalih/tree/main/.openkb)
 
@@ -18,7 +18,10 @@
 │   ├── brainstorming.md              # Design system & UI/UX planning
 │   ├── CLEAN_CONFIGURATION_SUMMARY.md     # Ringkasan konfigurasi bersih
 │   ├── email-system.md               # Setup perutean email Cloudflare
+│   ├── GA4-IMPLEMENTATION-STRATEGY.md     # Strategi GA4 (Traditional vs Partytown)
+│   ├── MONITORING-DAN-ANALYTICS-OVERVIEW.md  # Overview semua monitoring & analytics
 │   ├── ROOT_LEVEL_WRANGLER_CONFIG.md # Catatan konfigurasi wrangler
+│   ├── SENTRY_SOURCE_MAP_UPLOAD.md   # Dual bundle source map Sentry
 │   ├── WORKERD_COMPATIBILITY_AUDIT.md     # Audit kompatibilitas Workerd
 │   └── WRANGLER_PREVIEW_ERROR_10015.md    # Troubleshooting error preview
 ├── 20-cms-dan-konten/                # CMS, konten
