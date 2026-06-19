@@ -39,6 +39,13 @@ export default defineConfig({
 						priority: 0.8,
 					})
 				}
+				if (/donasi/.test(item.url)) {
+					return /** @type {import('@astrojs/sitemap').SitemapItem} */ ({
+						...item,
+						changefreq: 'weekly',
+						priority: 0.9,
+					})
+				}
 				return /** @type {import('@astrojs/sitemap').SitemapItem} */ ({
 					...item,
 					changefreq: 'monthly',
