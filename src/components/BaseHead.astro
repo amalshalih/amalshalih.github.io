@@ -86,7 +86,7 @@ const ogImageType = image.endsWith('.png') ? 'image/png' : 'image/webp'
 <!-- Content Security Policy -->
 <meta
   http-equiv="Content-Security-Policy"
-  content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.sanity.io https://www.googletagmanager.com https://www.google-analytics.com https://www.google.com https://openpanel.dev https://*.sentry.io; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https://cdn.sanity.io https://images.unsplash.com https://amalshalih.or.id https://www.google-analytics.com https://www.google.com https://openpanel.dev; connect-src 'self' https://*.ingest.us.sentry.io https://www.google-analytics.com https://stats.g.doubleclick.net https://api.openpanel.dev https://cdn.sanity.io; base-uri 'self'; form-action 'self'; upgrade-insecure-requests"
+  content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.sanity.io https://www.googletagmanager.com https://www.google-analytics.com https://www.google.com https://openpanel.dev https://*.sentry.io https://cdn.debugbear.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https://cdn.sanity.io https://images.unsplash.com https://amalshalih.or.id https://www.google-analytics.com https://www.google.com https://openpanel.dev; connect-src 'self' https://*.ingest.us.sentry.io https://www.google-analytics.com https://stats.g.doubleclick.net https://api.openpanel.dev https://cdn.sanity.io https://cdn.debugbear.com; base-uri 'self'; form-action 'self'; upgrade-insecure-requests"
 />
 
 <!-- Google Fonts: Inter + Plus Jakarta Sans -->
@@ -253,27 +253,19 @@ const ogImageType = image.endsWith('.png') ? 'image/png' : 'image/webp'
   }
 </script>
 
-<!-- Google Analytics 4 via Partytown (offloaded to Web Worker for performance) -->
+<!-- Google Analytics 4 (GA4) - Basic Implementation -->
 <!-- Only load in production to avoid contaminating analytics with dev traffic -->
 {import.meta.env.PROD && (
   <>
-    <script is:inline type="text/partytown" src="https://www.googletagmanager.com/gtag/js?id=G-L3WQTPSJGN"></script>
-    <script is:inline type="text/partytown">
+    <!-- Google tag (gtag.js) -->
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-L3WQTPSJGN"></script>
+    <script is:inline>
       window.dataLayer = window.dataLayer || [];
-      function gtag(...args){dataLayer.push(args);}
+      function gtag() { dataLayer.push(arguments); }
       gtag('js', new Date());
-      gtag('consent', 'default', {
-        'analytics_storage': 'denied',
-        'ad_storage': 'denied',
-        'ad_user_data': 'denied',
-        'ad_personalization': 'denied',
-        'functionality_storage': 'granted',
-        'security_storage': 'granted',
-        'wait_for_update': 2000
-      });
       gtag('config', 'G-L3WQTPSJGN', {
-        'anonymize_ip': true,
-        'send_page_view': true
+        anonymize_ip: true,
+        send_page_view: true
       });
     </script>
     
@@ -290,4 +282,11 @@ const ogImageType = image.endsWith('.png') ? 'image/png' : 'image/webp'
       }}
     />
   </>
+)}
+
+<!-- DebugBear RUM — Real User Monitoring (production only) -->
+{import.meta.env.PROD && (
+  <script is:inline>
+    (function(){var dbpr=100;if(Math.random()*100>100-dbpr){var d="dbbRum",w=window,o=document,a=addEventListener,scr=o.createElement("script");scr.async=!0;w[d]=w[d]||[];w[d].push(["presampling",dbpr]);["error","unhandledrejection"].forEach(function(t){a(t,function(e){w[d].push([t,e])});});scr.src="https://cdn.debugbear.com/oSrCRQQlFdYm.js";o.head.appendChild(scr);}})()
+  </script>
 )}
