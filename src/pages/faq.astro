@@ -191,10 +191,11 @@ const faqPageSchema = {
 <BaseLayout
   title="FAQ"
   description="Pertanyaan yang sering diajukan tentang Yayasan Amal Shalih Insan Bantul."
+  image="/logo-yayasan.webp"
   currentPage="/faq"
 >
   <!-- FAQPage Structured Data for Google Rich Results -->
-  <script type="application/ld+json" set:html={JSON.stringify(faqPageSchema)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(faqPageSchema)} />
 
   <PageHeader
     label="FAQ"

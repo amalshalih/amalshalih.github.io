@@ -6,9 +6,10 @@ import Heading from '@components/ui/Heading.astro'
 import Icon from '@components/ui/Icon.astro'
 import Image from '@components/ui/Image.astro'
 import Link from '@components/ui/Link.astro'
+import type { IconName } from '@components/ui/types'
 import { SITE } from '@data/site'
 import BaseLayout from '@layouts/BaseLayout.astro'
-import { getBlogPost } from '@lib/sanity/client'
+import { getBlogPost, getBlogPostList } from '@lib/sanity/client'
 import { renderPortableText } from '@lib/sanity/render'
 import { withNull } from '@lib/with-fallback'
 
@@ -91,11 +92,66 @@ const formattedDate = post.data.date.toLocaleDateString('id-ID', {
 const words = post.body ? String(post.body).split(/\s+/).length : 0
 const readingTime = Math.ceil(words / 200) || 3
 
-// Fetch related posts (from markdown for now)
+// Fetch related posts from markdown + Sanity fallback
 const allPosts = await getCollection('blog')
-const relatedPosts = allPosts
+let relatedPosts: {
+	id: string
+	data: {
+		title: string
+		description: string
+		date: Date
+		image?: string
+		category?: string
+		author?: string
+	}
+}[] = allPosts
 	.filter((p) => p.id !== post.id && p.data.category === post.data.category)
 	.slice(0, 3)
+	.map((p) => ({
+		id: p.id,
+		data: { ...p.data, image: p.data.image },
+	}))
+
+// Supplement with Sanity posts if markdown has few related matches
+if (relatedPosts.length < 3 && postFromSanity) {
+	const sanityPosts = await getBlogPostList()
+	if (sanityPosts.length > 0) {
+		const excludeIds = new Set([post.id, ...allPosts.map((p) => p.id)])
+		const sanitySupplement = sanityPosts
+			.filter((p) => !excludeIds.has(p.slug) && p.category === post.data.category)
+			.slice(0, 3 - relatedPosts.length)
+			.map((p) => ({
+				id: p.slug,
+				data: {
+					title: p.title,
+					description: p.excerpt ?? '',
+					date: new Date(p.date),
+					image: p.imageUrl,
+					category: p.category,
+					author: p.author,
+				},
+			}))
+		relatedPosts = [...relatedPosts, ...sanitySupplement]
+	}
+}
+
+// Category-based cross-links to related pages
+const categoryExploreLinks: Record<string, { label: string; href: string; icon: IconName }[]> = {
+	Pendidikan: [
+		{ label: 'Program Pendidikan', href: '/program#pendidikan', icon: 'book' },
+		{ label: 'Kegiatan Terbaru', href: '/kegiatan', icon: 'calendar' },
+	],
+	Keagamaan: [
+		{ label: 'Program Keagamaan', href: '/program#keagamaan', icon: 'book' },
+		{ label: 'Kegiatan Keagamaan', href: '/kegiatan', icon: 'calendar' },
+	],
+	Sosial: [
+		{ label: 'Program Sosial', href: '/program#sosial', icon: 'book' },
+		{ label: 'Kegiatan Sosial', href: '/kegiatan', icon: 'calendar' },
+	],
+	Donasi: [{ label: 'Salurkan Donasi', href: '/donasi', icon: 'heart' }],
+}
+const exploreLinks = (post.data.category && categoryExploreLinks[post.data.category]) || []
 
 // Article structured data for Google rich snippets
 const articleSchema = {
@@ -141,7 +197,7 @@ const articleSchema = {
 	currentPage={`/blog/${post.id}`}
 >
 	<!-- Article Structured Data for Google Rich Snippets -->
-	<script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+	<script is:inline type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
 
 	<!-- Full-Width Hero Section with Overlap -->
 	<div class="relative w-full overflow-hidden -mt-[70px] sm:-mt-[82px]">
@@ -316,6 +372,34 @@ const articleSchema = {
 										<p class="text-xs text-warm-500 dark:text-warm-400 line-clamp-2 leading-relaxed">
 											{post.data.description}
 										</p>
+									</div>
+								</a>
+							))}
+						</div>
+					</div>
+				)}
+
+				<!-- Cross-Links: Halaman Terkait (by category) -->
+				{exploreLinks.length > 0 && (
+					<div class="pt-8 border-t border-warm-200 dark:border-warm-700">
+						<Heading level="h3" size="lg" class="text-warm-900 dark:text-warm-100 mb-6 flex items-center gap-3">
+							<span class="h-8 w-1 bg-gold-500 rounded-full"></span>
+							Jelajahi Lebih Lanjut
+						</Heading>
+						<div class="grid gap-4 sm:grid-cols-2">
+							{exploreLinks.map((link) => (
+								<a
+									href={link.href}
+									class="group flex items-center gap-4 rounded-2xl border border-warm-100 dark:border-warm-700 bg-white dark:bg-warm-900 p-5 hover:border-primary-200 dark:hover:border-primary-600 hover:shadow-md transition-all"
+								>
+									<div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary-50 dark:bg-primary-900/50 text-primary-700 dark:text-primary-300 group-hover:bg-primary-100 dark:group-hover:bg-primary-800/50 transition-colors">
+										<Icon name={link.icon} size={6} />
+									</div>
+									<div>
+										<span class="block text-sm font-semibold text-warm-900 dark:text-warm-100 group-hover:text-primary-700 dark:group-hover:text-primary-400 transition-colors">
+											{link.label}
+										</span>
+										<span class="text-xs text-warm-500 dark:text-warm-400 mt-0.5">{link.href}</span>
 									</div>
 								</a>
 							))}
